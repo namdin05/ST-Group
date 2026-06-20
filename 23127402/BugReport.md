@@ -10,6 +10,7 @@
 | BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
+| BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10 - 10% total` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -233,3 +234,40 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-08-screenshot.png)`
+
+---
+
+## BUG-FR09-01 - Final price is calculated incorrectly when applying SAVE10 coupon
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-09: Discount Coupons
+* **Severity:** Critical
+* **Priority:** High
+* **Environment:** Chrome v120, Web App
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When applying the `SAVE10` discount coupon, the system calculates the final price using an incorrect formula. Instead of subtracting 10% of the order total from the original total, the system appears to multiply the total by 10. For example, with an order total of `400,000 ₫`, the final amount is shown as approximately `4,000,000 ₫` instead of the correct discounted amount. This causes the payable amount to increase significantly after applying a discount coupon.
+
+### 3. Steps to Reproduce
+1. Go to the EShop cart or checkout page.
+2. Ensure the cart total is `400,000 ₫`.
+3. Enter the coupon code `SAVE10`.
+4. Apply the coupon.
+5. Observe the calculated discount and final payable amount.
+
+### 4. Expected Result
+* The system should calculate the discount as 10% of the order total.
+* For a `400,000 ₫` order, the discount should be `40,000 ₫`.
+* The final price should be `360,000 ₫`.
+* The final amount should not be greater than the original order total after applying a discount coupon.
+
+### 5. Actual Result
+* The system calculates the final price using an incorrect formula similar to `total * 10`.
+* For a `400,000 ₫` order, the displayed final amount becomes approximately `4,000,000 ₫` instead of `360,000 ₫`.
+* Applying the discount coupon increases the payable amount instead of decreasing it.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-01-screenshot.png)`
