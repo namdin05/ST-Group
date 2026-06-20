@@ -9,6 +9,7 @@
 | BUG-FR03-05 | FR-03: Forgot Password & Password Reset | Password recovery was unsuccessful the user entered the correct valid password. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -193,3 +194,42 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-07-screenshot.png)`
+
+---
+
+## BUG-FR03-08 - Password with space characters is accepted during reset
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-03: Forgot Password & Password Reset
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Chrome v120, Web App
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> During the password reset step, the system accepts a new password that contains space characters. Password validation should reject whitespace characters because they can make passwords ambiguous, difficult to enter consistently, and inconsistent with the expected password complexity rules. Instead, the reset form allows the invalid password to be submitted and processed successfully.
+
+### 3. Steps to Reproduce
+1. Go to the EShop login page.
+2. Click the forgot password option.
+3. Enter a valid registered email and request an OTP.
+4. On the reset password screen, enter a correct OTP.
+5. Enter a new password that contains a space character, for example `Abcd 123!`.
+6. Enter the same value in the confirm password field.
+7. Submit the password reset form.
+8. Observe whether the password is accepted or rejected.
+
+### 4. Expected Result
+* The system should reject passwords that contain space characters.
+* A clear validation message should be displayed, such as `Mật khẩu không được chứa khoảng trắng`.
+* The password should not be updated until the user enters a valid password without spaces.
+
+### 5. Actual Result
+* The system accepts a password that contains a space character.
+* The password reset request is processed even though the new password is invalid.
+* No clear validation message is displayed for the whitespace character.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-08-screenshot.png)`
