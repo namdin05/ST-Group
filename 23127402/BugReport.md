@@ -4,6 +4,11 @@
 | :--- | :--- | :--- | :--- |
 | BUG-FR03-01 | FR-03: Forgot Password & Password Reset | The interface does not display the Step Indicator ("Step 1/2") when the user performs the password recovery steps. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-02 | FR-03: Forgot Password & Password Reset | The system doesn't check the email format on the interface but sends the error request directly to the server, leading to the server processing incorrectly and returning a "User not found" message instead of blocking and reporting "Invalid email". | `[Insert GitHub Issue link here]` |
+| BUG-FR03-03 | FR-03: Forgot Password & Password Reset | The interface lacks a "Back to Login" button. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-04 | FR-03: Forgot Password & Password Reset | The password reset interface is missing the "Confirm password" input field. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-05 | FR-03: Forgot Password & Password Reset | Password recovery was unsuccessful the user entered the correct valid password. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `[Insert GitHub Issue link here]` |
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -76,73 +81,115 @@
 
 ---
 
-## BUG-FR01-01 - 500 Internal Server Error when registering with 12-digit phone number
+## BUG-FR03-05 - Password recovery fails with valid reset information
 
 ---
 ### 1. Metadata
-* **Feature Under Test:** FR-01: Account registration
+* **Feature Under Test:** FR-03: Forgot Password & Password Reset
 * **Severity:** Major
 * **Priority:** High
 * **Environment:** Chrome v120, Web App
 * **Reporter:** 23127402 - Truong Hoang Lam
 
 ### 2. Description
-> During account registration, submitting a phone number containing 12 digits causes the system to return a `500 Internal Server Error`. The application fails to handle the invalid phone number through client-side or server-side validation and exposes an internal server failure instead of a clear validation message.
+> During the password reset step, the system fails to recover the account even when the user enters valid reset information. According to the FR03 happy-path requirement, a correct OTP, valid new password, and matching confirmation password should update the password successfully, display a success notification, and redirect the user to the login page. Instead, the password recovery attempt is unsuccessful despite using valid input.
 
 ### 3. Steps to Reproduce
-1. Go to the EShop account registration page.
-2. Fill in all required registration fields with otherwise valid data.
-3. Input a 12-digit phone number into the phone number field, for example `012345678901`.
-4. Submit the registration form.
-5. Observe the system response.
+1. Go to the EShop login page.
+2. Click the forgot password option.
+3. Enter a valid registered email and request an OTP.
+4. On the reset password screen, enter a correct OTP.
+5. Enter a valid new password, for example `Abcd123!`.
+6. Enter the same value in the confirm password field.
+7. Submit the password reset form.
+8. Observe whether the password is updated successfully.
 
 ### 4. Expected Result
-* The system should reject the invalid phone number and display a clear validation message, such as `Số điện thoại không hợp lệ` or `Số điện thoại phải có 10 hoặc 11 chữ số`.
-* The registration request should not trigger an internal server error.
+* The password should be updated successfully when the OTP and password inputs are valid.
+* A success message or toast should be displayed.
+* The user should be redirected to the login page after the reset succeeds.
 
 ### 5. Actual Result
-* The system returns a `500 Internal Server Error` after the registration form is submitted with a 12-digit phone number.
-* No user-friendly validation message is displayed.
+* The password recovery process fails even though the user enters valid reset information.
+* The password is not updated successfully.
+* The expected success notification and redirect to the login page do not occur.
 
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr01-01-screenshot.png)`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-05-screenshot.png)`
 
 ---
 
-## BUG-FR09-01 - Expired coupon is accepted and applied during checkout
+## BUG-FR03-06 - System generates a 4-digit OTP instead of a 6-digit OTP
 
 ---
 ### 1. Metadata
-* **Feature Under Test:** FR-09: Discount coupons
+* **Feature Under Test:** FR-03: Forgot Password & Password Reset
 * **Severity:** Critical
 * **Priority:** High
 * **Environment:** Chrome v120, Web App
 * **Reporter:** 23127402 - Truong Hoang Lam
 
 ### 2. Description
-> The discount coupon feature incorrectly accepts an expired coupon code. The system applies the discount and allows checkout to proceed successfully, even though expired coupons should be rejected based on the coupon validity rules.
+> During the forgot password flow, the system generates an OTP with only 4 digits. According to the FR03 requirement and the happy-path test case, the OTP must contain exactly 6 numeric digits. Generating a 4-digit OTP creates a mismatch between the OTP generation behavior and the reset password validation rules, which can prevent users from completing password recovery successfully.
 
 ### 3. Steps to Reproduce
-1. Go to the EShop shopping cart or checkout page.
-2. Ensure the cart contains at least one product eligible for checkout.
-3. Enter an expired coupon code into the discount coupon field.
-4. Click the apply coupon button.
-5. Continue to checkout after the discount is applied.
-6. Observe the coupon validation and checkout behavior.
+1. Go to the EShop login page.
+2. Click the forgot password option.
+3. Enter a valid registered email and request an OTP.
+4. Observe the OTP generated or displayed by the system.
+5. Count the number of digits in the generated OTP.
 
 ### 4. Expected Result
-* The system should reject the expired coupon and display a clear validation message, such as `Mã giảm giá đã hết hạn sử dụng`.
-* No discount should be applied to the order total.
-* Checkout should proceed only with the original order total or require a valid coupon.
+* The system should generate an OTP with exactly 6 numeric digits.
+* The generated OTP should match the format accepted by the reset password screen.
+* The user should be able to use the generated OTP to continue the password reset process.
 
 ### 5. Actual Result
-* The expired coupon is accepted by the system.
-* The discount is applied to the order total.
-* The user can complete checkout successfully with an invalid expired coupon.
+* The system generates an OTP with only 4 digits.
+* The generated OTP does not satisfy the required 6-digit OTP format.
+* Password recovery may fail because the generated OTP does not match the expected validation rule.
 
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-01-screenshot.png)`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-06-screenshot.png)`
 
 ---
+
+## BUG-FR03-07 - OTP format is not validated during password reset
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-03: Forgot Password & Password Reset
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Chrome v120, Web App
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> During the password reset step, the system does not properly validate the OTP format before processing the reset request. According to the FR03 validation requirements, the OTP must contain exactly 6 numeric digits. Inputs with incorrect length, such as 5 or 7 digits, or inputs containing non-numeric characters should be rejected with a clear validation message. Instead, invalid OTP values are allowed to proceed or are not handled with the correct format-specific error.
+
+### 3. Steps to Reproduce
+1. Go to the EShop login page.
+2. Click the forgot password option.
+3. Enter a valid registered email and request an OTP.
+4. On the reset password screen, enter an invalid OTP format, for example `12345`, `1234567`, or `12345a`.
+5. Enter a valid new password, for example `Abcd123!`.
+6. Enter the same value in the confirm password field.
+7. Submit the password reset form.
+8. Observe the OTP validation behavior and displayed error message.
+
+### 4. Expected Result
+* The system should reject OTP values that are not exactly 6 digits.
+* The system should reject OTP values containing non-numeric characters.
+* A clear validation message should be displayed, such as `Mã OTP phải có đúng 6 chữ số` or `Mã OTP chỉ được chứa chữ số`.
+* The reset request should not be processed until the OTP format is valid.
+
+### 5. Actual Result
+* The system does not correctly validate the OTP format.
+* Invalid OTP values are allowed to proceed or are handled with an incorrect/non-specific error response.
+* The user does not receive the expected OTP format validation message.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-07-screenshot.png)`
