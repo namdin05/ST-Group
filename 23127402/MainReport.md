@@ -18,26 +18,24 @@
 
 ---
 
-# PART 1: DOMAIN TESTING REPORT (EQUIVALENCE PARTITIONING)
+## I. DOMAIN TESTING REPORT
 
-## 1. Introduction & Methodology
-Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box software testing technique designed to maximize test coverage while minimizing the number of test cases. 
+### 1. Introduction & Methodology
+Equivalence Partitioning (EP) is a black-box test design technique in which the input domain of a system under test is partitioned into classes of data from which test cases can be derived. An equivalence class is a portion of the input domain where the system is expected to behave in a similar manner.
 
-### Step-by-Step Application of Equivalence Partitioning:
-1. **Identify Input Variables:** Review the functional specifications of the EShop system to list all user inputs and system-level states for each feature.
-2. **Determine Partition Boundaries:** Group the inputs into:
-   - **Valid Partitions:** Acceptable values that should be successfully processed by the system (happy paths).
-   - **Invalid Partitions:** Unacceptable values that the system must safely reject with a clear and user-friendly error message (negative testing).
-3. **Select Representative Values:** Select a single value from each equivalence class. This is based on the premise that if one value in a partition fails/succeeds, all other values in the same partition will behave the same way.
-4. **Construct Test Cases:** Build comprehensive test scenarios covering positive validations, error-handling, security compliance, and user interface standards.
+#### Step-by-Step Application of Domain Testing (Equivalence Partitioning):
+1. **Identify Input Variables:** List the input fields, parameters, or states that affect the behavior of the feature.
+2. **Determine Partition/Equivalence Classes:** 
+   - **Valid Classes:** Inputs that are acceptable and processed normally by the system.
+   - **Invalid Classes:** Inputs that should be rejected or handled gracefully with error handling, representing out-of-boundary, wrong format, or unexpected conditions.
+3. **Select Representative Test Values:** Select one representative value from each equivalence class to minimize the number of test cases while maintaining strong coverage.
+4. **Design Test Cases:** Map out each test scenario specifying inputs, expected results, testing technique used, and pass/fail criteria.
 
----
+### 2. Feature-by-Feature Domain Testing Analysis & Test Cases
 
-## 2. Feature-by-Feature Domain Testing Analysis & Test Cases
+#### 2.1 FR-03: Forgot Password & Password Reset (Quên mật khẩu & Đặt lại mật khẩu)
 
-### 2.1 FR-03: Forgot Password & Password Reset (Quên mật khẩu & Đặt lại mật khẩu)
-
-#### 2.1.1 Analysis
+##### 2.1.1 Analysis
 * **Input Variables:**
   * `Step 1 Email`: String
   * `Step 2 OTP`: Numeric string
@@ -47,25 +45,25 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
   * **Valid:**
     * `Step 1 Email`: Registered email, valid format (`user@domain.com`).
     * `Step 2 OTP`: Correct 6-digit numeric OTP generated for the specified email.
-    * `Step 2 New Password`: Length $\ge$ 8, contains $\ge$ 1 uppercase, $\ge$ 1 lowercase, $\ge$ 1 digit, and $\ge$ 1 special character from the approved set (`@, $, !, %, *, ?, &`).
+    * `Step 2 New Password`: Length $\ge 8$, contains $\ge 1$ uppercase, $\ge 1$ lowercase, $\ge 1$ digit, and $\ge 1$ special character from the approved set (`@, $, !, %, *, ?, &`).
     * `Step 2 Confirm Password`: Identical to `New Password`.
   * **Invalid:**
     * `Step 1 Email`: Empty, invalid format (e.g. missing `@`, missing domain, spaces), or unregistered email.
-    * `Step 2 OTP`: Empty, incorrect OTP, contains non-numeric characters, or valid OTP associated with another email.
-    * `Step 2 New Password`: Empty, missing uppercase, missing lowercase, missing digit, missing special character, or contains forbidden characters (e.g. `#`).
+    * `Step 2 OTP`: Empty, invalid length, incorrect OTP, contains non-numeric characters, or valid OTP associated with another email.
+    * `Step 2 New Password`: Empty, invalid length, missing uppercase, missing lowercase, missing digit, missing special character, or contains forbidden characters (e.g. `#`).
     * `Step 2 Confirm Password`: Empty, different from `New Password`.
 
-#### 2.1.2 Domain Testing (EP) Test Cases
+##### 2.1.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR03-EP-001** | Step 1 - Request OTP with valid, registered email (Happy Path) | `Step 1 Email` = "test@eshop.com" (registered) | 6-digit OTP is generated and shown on screen. "Bước 1 / 2" Step Indicator is displayed. Form has "*" next to Email. | EP | **Pass:** OTP displayed on screen, Step 1/2 indicator is visible.<br>**Fail:** No OTP generated, no indicator, or system crashes. |
-| **TC-FR03-EP-002** | Step 1 - Request OTP with unregistered email | `Step 1 Email` = "unregistered@eshop.com" | Registration rejected. Error message "Email không tồn tại trong hệ thống" displayed ABOVE the submit button. | EP | **Pass:** Error displayed above the submit button; no OTP generated.<br>**Fail:** OTP generated or error displayed in wrong position. |
+| **TC-FR03-EP-002** | Step 1 - Request OTP with unregistered email | `Step 1 Email` = "unregistered@eshop.com" | OTP request rejected. Error message "Email không tồn tại trong hệ thống" displayed ABOVE the submit button. | EP | **Pass:** Error displayed above the submit button; no OTP generated.<br>**Fail:** OTP generated or error displayed in wrong position. |
 | **TC-FR03-EP-003** | Step 1 - HTML5 format validation check for Email field | `Step 1 Email` = "invalidemailformat" | Browser native validation blocks form submission (type="email" check). | EP | **Pass:** Browser blocks submission and displays format warning.<br>**Fail:** Form is submitted to server. |
 | **TC-FR03-EP-004** | Step 1 - Request OTP with empty email field | `Step 1 Email` = "" | Submission blocked. Error message "Vui lòng nhập Email" displayed. Email label has "*" indicator. | EP | **Pass:** Submission blocked, mandatory "*" constraint verified.<br>**Fail:** Empty field submitted without error. |
-| **TC-FR03-EP-005** | Step 1 - Back to Login functionality | Click "Quay lại đăng nhập" button | User is successfully redirected back to the Login screen. | EP | **Pass:** Redirection succeeds.<br>**Fail:** Nút "Quay lại đăng nhập" is broken. |
+| **TC-FR03-EP-005** | Step 1 - Back to Login functionality | Click "Quay lại đăng nhập" button | User is successfully redirected back to the Login screen. | EP | **Pass:** Redirection succeeds.<br>**Fail:** "Quay lại đăng nhập" button fails to redirect. |
 | **TC-FR03-EP-006** | Step 2 - Reset password with all valid inputs (Happy Path) | `Step 2 OTP` = "123456" (correct)<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Password updated successfully. Success toast displayed. Redirected to Login page. Step Indicator "Bước 2 / 2" is shown. | EP | **Pass:** Password resets successfully, redirected to login.<br>**Fail:** Password not reset or incorrect transition. |
 | **TC-FR03-EP-007** | Step 2 - Reset password with OTP containing non-numeric characters | `Step 2 OTP` = "12345a"<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP chỉ được chứa chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; alphanumeric OTP blocked.<br>**Fail:** Form submits. |
-| **TC-FR03-EP-008** | Step 2 - Reset password with valid OTP generated for another email | `Email` = "test@eshop.com"<br>`Step 2 OTP` = "654321" (valid but issued to "admin@eshop.com")<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP không khớp hoặc không hợp lệ cho email này" displayed ABOVE the submit button. | EP | **Pass:** Cross-use of OTP is blocked.<br>**Fail:** Password reset succeeds for the wrong email. |
+| **TC-FR03-EP-008** | Step 2 - Reset password with valid OTP generated for another email | `Step 1 Email` = "test@eshop.com"<br>`Step 2 OTP` = "654321" (valid but issued to "admin@eshop.com")<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP không khớp hoặc không hợp lệ cho email này" displayed ABOVE the submit button. | EP | **Pass:** Cross-use of OTP is blocked.<br>**Fail:** Password reset succeeds for the wrong email. |
 | **TC-FR03-EP-009** | Step 2 - Password complexity: Missing uppercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "abcd123!"<br>`Confirm Password` = "abcd123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ hoa" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing uppercase error.<br>**Fail:** Reset succeeds. |
 | **TC-FR03-EP-010** | Step 2 - Password complexity: Missing lowercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "ABCD123!"<br>`Confirm Password` = "ABCD123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ thường" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing lowercase error.<br>**Fail:** Reset succeeds. |
 | **TC-FR03-EP-011** | Step 2 - Password complexity: Missing numeric digit | `Step 2 OTP` = "123456"<br>`New Password` = "Abcdefgh!"<br>`Confirm Password` = "Abcdefgh!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing digit error.<br>**Fail:** Reset succeeds. |
@@ -77,9 +75,9 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
 
 ---
 
-### 2.2 FR-09: Discount Coupons (Mã Giảm Giá)
+#### 2.2 FR-09: Discount Coupons (Mã Giảm Giá)
 
-#### 2.2.1 Analysis
+##### 2.2.1 Analysis
 * **Input Variables:**
   * `Coupon Code`: String
   * `Order Total Amount`: Numeric
@@ -92,15 +90,15 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
     * `Order Total Amount`: $\ge$ Coupon's minimum threshold (`min_order_amount`).
     * `Current Date`: Date is strictly before `expired_at`.
     * `User Auth State`: Logged-in with a valid JWT Token.
-    * `User Coupon Usage Count`: $<$ `max_uses_per_user` for the current user.
+    * `User Coupon Usage Count`: $< $ `max_uses_per_user` for the current user.
   * **Invalid:**
     * `Coupon Code`: Code does not exist, is inactive (`is_active = 0`), or empty.
-    * `Order Total Amount`: $<$ Coupon's minimum threshold (`min_order_amount`).
+    * `Order Total Amount`: $< $ Coupon's minimum threshold (`min_order_amount`).
     * `Current Date`: Date is on or after `expired_at`.
     * `User Auth State`: Not logged in (Guest, no JWT Token).
     * `User Coupon Usage Count`: $\ge$ `max_uses_per_user` for the current user.
 
-#### 2.2.2 Domain Testing (EP) Test Cases
+##### 2.2.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR09-EP-001** | Apply percent coupon successfully (`SAVE10` happy path) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon applied. Discount calculated: 35,000 ₫ (10% of 350k). Final amount: 315,000 ₫. Format uses "₫" and thousands separator. | EP | **Pass:** Coupon successfully applied; formulas correctly computed.<br>**Fail:** Application rejected or incorrect math/formatting. |
@@ -112,9 +110,9 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
 
 ---
 
-### 2.3 FR-15: Product CRUD (Quản lý Sản phẩm)
+#### 2.3 FR-15: Product CRUD (Quản lý Sản phẩm)
 
-#### 2.3.1 Analysis
+##### 2.3.1 Analysis
 * **Input Variables:**
   * `Product Name`: String
   * `Product Price`: Numeric
@@ -124,14 +122,14 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
 * **Equivalence Classes:**
   * **Valid:**
     * `Product Name`: Length 1 to 255 characters.
-    * `Product Price`: Value > 0 (strictly positive).
+    * `Product Price`: Value $> 0$ (strictly positive).
     * `Category`: Existing category selected from dropdown list.
   * **Invalid:**
     * `Product Name`: Empty (length 0) or length > 255 characters.
     * `Product Price`: Value $\le 0$ (negative, zero), empty, or non-numeric.
     * `Category`: No selection (empty selection or placeholder).
 
-#### 2.3.2 Domain Testing (EP) Test Cases
+##### 2.3.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR15-EP-001** | Create product with all valid inputs (Happy Path) | `Name` = "Sản phẩm A"<br>`Price` = 150,000 ₫<br>`Category` = "Thời trang"<br>`Description` = "Mô tả sản phẩm" | Product created successfully. User is redirected to Product list. Success toast shown. Label has "*" next to Name, Price, Category. Price shows "₫" with thousands separator. Button is blue. | EP | **Pass:** Product created; standard formatting and layout verified.<br>**Fail:** Creation fails or GUI rules violated. |
@@ -145,9 +143,9 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
 
 ---
 
-### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
+#### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
 
-#### 2.4.1 Analysis
+##### 2.4.1 Analysis
 * **Input Variables:**
   * `Current Order Status`: State (`pending`, `confirmed`, `shipping`, `delivered`, `canceled`)
   * `User Role`: String (`user`, `admin`) - tested on Mobile interface for regular User.
@@ -160,7 +158,7 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
     * `Current Order Status` for regular User cancellation: `shipping`, `delivered`, `canceled`.
     * `Phone Number`: Starts with a non-zero digit, contains non-numeric characters, or is empty.
 
-#### 2.4.2 Domain Testing (EP) Test Cases
+##### 2.4.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR20-EP-001** | User cancels pending order on Mobile (Happy Path) | `Order Status` = `pending`<br>`User Role` = `user`<br>Click "Hủy đơn hàng" button | "Hủy đơn hàng" button (red) is displayed. Dialog confirmation prompts. Status updates to `canceled`. Translated to "Đã hủy" on history view. | EP | **Pass:** Order canceled; status translated to Vietnamese; dialog shown.<br>**Fail:** Order remains pending or status not updated. |
@@ -171,38 +169,35 @@ Domain Testing (utilizing Equivalence Partitioning - EP) is a core black-box sof
 | **TC-FR20-EP-006** | Mobile Password Form security constraint | Register on Mobile | Password field hides input with mask (`secureTextEntry=true` / `type="password"` equivalency). | EP | **Pass:** Text masked securely on mobile viewport.<br>**Fail:** Plaintext passwords visible. |
 
 ---
----
 
-# PART 2: BOUNDARY VALUE ANALYSIS REPORT
+## II. BOUNDARY VALUE ANALYSIS REPORT
 
-## 1. Introduction & Methodology
+### 1. Introduction & Methodology
 Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing values at the boundaries of equivalence partitions. Software systems are highly prone to "off-by-one" errors precisely at these edge limits.
 
-### Step-by-Step Application of Boundary Value Analysis:
+#### Step-by-Step Application of Boundary Value Analysis:
 1. **Identify Boundary Limits:** Select variables that have numeric ranges, string length constraints, or state boundaries.
 2. **Define Boundary Test Values:** For each boundary threshold (e.g. Min or Max):
    - **Boundary Value (on-the-boundary / On):** The exact threshold limit.
    - **Just-below (inside or outside boundary / Under):** Exactly one step lower than the limit.
    - **Just-above (inside or outside boundary / Over):** Exactly one step higher than the limit.
-3. **Execute Boundary Test Cases:** Test inputs precisely at these boundaries to ensure correct inequality check implementations (e.g., `<` vs `<=`, `>` vs `>=`).
+3. **Execute Boundary Test Cases:** Test inputs precisely at these boundaries to ensure correct inequality check implementations (e.g., `<` vs $\le$, `>` vs $\ge$).
 
----
+### 2. Feature-by-Feature Boundary Value Analysis & Test Cases
 
-## 2. Feature-by-Feature Boundary Value Analysis & Test Cases
+#### 2.1 FR-03: Forgot Password & Password Reset (Quên mật khẩu & Đặt lại mật khẩu)
 
-### 2.1 FR-03: Forgot Password & Password Reset (Quên mật khẩu & Đặt lại mật khẩu)
+##### 2.1.1 Boundary Value Identification
+* `OTP` length (exactly 6 characters):
+  * Just-below (Min-1): 5 digits (Invalid)
+  * At boundary (Min/Max): 6 digits (Valid)
+  * Just-above (Max+1): 7 digits (Invalid)
+* `New Password` length (minimum 8 characters):
+  * Just-below (Min-1): 7 characters (Invalid)
+  * At boundary (Min): 8 characters (Valid)
+  * Just-above (Min+1): 9 characters (Valid)
 
-#### 2.1.1 Boundary Value Identification
-- `OTP` length (exactly 6 characters):
-  - Just-below (Min-1): 5 digits (Invalid)
-  - At boundary (Min/Max): 6 digits (Valid)
-  - Just-above (Max+1): 7 digits (Invalid)
-- `New Password` length (minimum 8 characters):
-  - Just-below (Min-1): 7 characters (Invalid)
-  - At boundary (Min): 8 characters (Valid)
-  - Just-above (Min+1): 9 characters (Valid)
-
-#### 2.1.2 BVA Test Cases
+##### 2.1.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR03-BVA-001** | Step 2 - Reset password with OTP length at Min-1 (5 digits) | `Step 2 OTP` = "12345" (5 digits)<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP phải có đúng 6 chữ số" displayed ABOVE the submit button. | BVA | **Pass:** Rejected; error message displayed above button.<br>**Fail:** Form submits or incorrect error message. |
@@ -213,22 +208,22 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 
 ---
 
-### 2.2 FR-09: Discount Coupons (Mã Giảm Giá)
+#### 2.2 FR-09: Discount Coupons (Mã Giảm Giá)
 
-#### 2.2.1 Boundary Value Identification
-- `Order Total Amount` vs threshold limit (`SAVE10` threshold is 300,000 ₫):
-  - Just-below (Min-1): 299,999 ₫ (Invalid)
-  - At boundary (Min): 300,000 ₫ (Valid)
-  - Just-above (Min+1): 300,001 ₫ (Valid)
-- `Current Date` vs expiry date (`EXPIRED` expiry: 2020-01-01):
-  - Just-below (Current date is 2019-12-31): Valid
-  - At boundary (Current date is 2020-01-01): Invalid (must be strictly before)
-  - Just-above (Current date is 2020-01-02): Invalid
-- `User Coupon Usage Count` vs limit:
-  - For `SAVE10` (limit 1): Usage = 0 (Valid), Usage = 1 (Invalid)
-  - For `VIP100` (limit 2): Usage = 1 (Valid), Usage = 2 (Invalid)
+##### 2.2.1 Boundary Value Identification
+* `Order Total Amount` vs threshold limit (`SAVE10` threshold is 300,000 ₫):
+  * Just-below (Min-1): 299,999 ₫ (Invalid)
+  * At boundary (Min): 300,000 ₫ (Valid)
+  * Just-above (Min+1): 300,001 ₫ (Valid)
+* `Current Date` vs expiry date (`EXPIRED` expiry: 2020-01-01):
+  * Just-below (Current date is 2019-12-31): Valid
+  * At boundary (Current date is 2020-01-01): Invalid (must be strictly before)
+  * Just-above (Current date is 2020-01-02): Invalid
+* `User Coupon Usage Count` vs limit:
+  * For `SAVE10` (limit 1): Usage = 0 (Valid), Usage = 1 (Invalid)
+  * For `VIP100` (limit 2): Usage = 1 (Valid), Usage = 2 (Invalid)
 
-#### 2.2.2 BVA Test Cases
+##### 2.2.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR09-BVA-001** | Apply coupon below threshold limit (Min-1) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 299,999 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon rejected. Error "Đơn hàng chưa đạt giá trị tối thiểu 300.000 ₫" displayed. | BVA | **Pass:** Application rejected; correct error shown.<br>**Fail:** Coupon applied at 299,999 ₫. |
@@ -244,22 +239,22 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 
 ---
 
-### 2.3 FR-15: Product CRUD (Quản lý Sản phẩm)
+#### 2.3 FR-15: Product CRUD (Quản lý Sản phẩm)
 
-#### 2.3.1 Boundary Value Identification
-- `Product Name` length (mandatory, max 255 chars):
-  - Just-below (Min-1): 0 characters (Invalid)
-  - At boundary (Min): 1 character (Valid)
-  - Just-above (Min+1): 2 characters (Valid)
-  - Just-below (Max-1): 254 characters (Valid)
-  - At boundary (Max): 255 characters (Valid)
-  - Just-above (Max+1): 256 characters (Invalid)
-- `Product Price` (must be strictly $> 0$):
-  - Just-below: 0 ₫ (Invalid)
-  - At boundary (Min positive): 1 ₫ (Valid)
-  - Just-above: 2 ₫ (Valid)
+##### 2.3.1 Boundary Value Identification
+* `Product Name` length (mandatory, max 255 chars):
+  * Just-below (Min-1): 0 characters (Invalid)
+  * At boundary (Min): 1 character (Valid)
+  * Just-above (Min+1): 2 characters (Valid)
+  * Just-below (Max-1): 254 characters (Valid)
+  * At boundary (Max): 255 characters (Valid)
+  * Just-above (Max+1): 256 characters (Invalid)
+* `Product Price` (must be strictly $> 0$):
+  * Just-below: 0 ₫ (Invalid)
+  * At boundary (Min positive): 1 ₫ (Valid)
+  * Just-above: 2 ₫ (Valid)
 
-#### 2.3.2 BVA Test Cases
+##### 2.3.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR15-BVA-001** | Create product with empty Product Name (Min-1) | `Name` = ""<br>`Price` = 150,000 ₫<br>`Category` = "Thời trang" | Creation blocked. Error "Tên sản phẩm không được để trống" is displayed ABOVE the submit button. Label has "*" indicator. | BVA | **Pass:** Validation error displayed above submit button.<br>**Fail:** Created with empty name or error in wrong position. |
@@ -274,27 +269,27 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 
 ---
 
-### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
+#### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
 
-#### 2.4.1 Boundary Value Identification
-- `Current Order Status` (State transitions boundaries):
-  - Transition from `pending` to `canceled` (Allowed / State Boundary)
-  - Transition from `confirmed` to `canceled` (Allowed / State Boundary)
-  - Transition from `shipping` to `canceled` (Forbidden / State Boundary)
-  - Transition from `delivered` to `canceled` (Forbidden / State Boundary)
-  - Transition from `canceled` to `canceled` (Forbidden / State Boundary)
-- `Phone Number` string length (must be 10-11 digits):
-  - Just-below (Min-1): 9 digits (Invalid)
-  - At boundary (Min): 10 digits (Valid)
-  - At boundary (Max): 11 digits (Valid)
-  - Just-above (Max+1): 12 digits (Invalid)
+##### 2.4.1 Boundary Value Identification
+* `Current Order Status` (State transitions boundaries):
+  * Transition from `pending` to `canceled` (Allowed / State Boundary)
+  * Transition from `confirmed` to `canceled` (Allowed / State Boundary)
+  * Transition from `shipping` to `canceled` (Forbidden / State Boundary)
+  * Transition from `delivered` to `canceled` (Forbidden / State Boundary)
+  * Transition from `canceled` to `canceled` (Forbidden / State Boundary)
+* `Phone Number` string length (must be 10-11 digits):
+  * Just-below (Min-1): 9 digits (Invalid)
+  * At boundary (Min): 10 digits (Valid)
+  * At boundary (Max): 11 digits (Valid)
+  * Just-above (Max+1): 12 digits (Invalid)
 
-#### 2.4.2 BVA Test Cases
+##### 2.4.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
 | **TC-FR20-BVA-001** | Cancel shipping order on Mobile (Forbidden State Boundary) | `Order Status` = `shipping`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden or disabled. If API request is simulated, error returned indicating "Không thể hủy đơn hàng đang giao". | BVA | **Pass:** Option to cancel is unavailable on Mobile interface.<br>**Fail:** User can cancel shipping order on Mobile. |
-| **TC-FR20-BVA-002** | Cancel delivered order on Mobile (Final State Boundary) | `Order Status` = `delivered`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. delivered is a final state; any change is rejected. | BVA | **Pass:** Cancellation option is hidden and transition blocked.<br>**Fail:** User can cancel delivered order. |
-| **TC-FR20-BVA-003** | Cancel already canceled order on Mobile (Final State Boundary) | `Order Status` = `canceled`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. canceled is a final state; further status change is blocked. | BVA | **Pass:** Already canceled order cannot be edited or canceled again.<br>**Fail:** Status machine allows double cancel or transition. |
+| **TC-FR20-BVA-002** | Cancel delivered order on Mobile (Final State Boundary) | `Order Status` = `delivered`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. `delivered` is a final state; any change is rejected. | BVA | **Pass:** Cancellation option is hidden and transition blocked.<br>**Fail:** User can cancel delivered order. |
+| **TC-FR20-BVA-003** | Cancel already canceled order on Mobile (Final State Boundary) | `Order Status` = `canceled`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. `canceled` is a final state; further status change is blocked. | BVA | **Pass:** Already canceled order cannot be edited or canceled again.<br>**Fail:** Status machine allows double cancel or transition. |
 | **TC-FR20-BVA-004** | Mobile Phone Validation - Length at Min-1 (9 digits) | `Phone` = "012345678" (9 digits)<br>Update Profile | Profile update blocked. Error "Số điện thoại không hợp lệ (phải từ 10-11 chữ số)" displayed. | BVA | **Pass:** 9-digit phone is rejected; error shown.<br>**Fail:** 9-digit phone is accepted. |
 | **TC-FR20-BVA-005** | Mobile Phone Validation - Length at Min (10 digits) | `Phone` = "0123456789" (10 digits)<br>Update Profile | Profile updated successfully. Phone is stored. | BVA | **Pass:** 10-digit phone starting with 0 is accepted.<br>**Fail:** Rejected. |
 | **TC-FR20-BVA-006** | Mobile Phone Validation - Length at Max (11 digits) | `Phone` = "01234567890" (11 digits)<br>Update Profile | Profile updated successfully. Phone is stored. | BVA | **Pass:** 11-digit phone starting with 0 is accepted.<br>**Fail:** Rejected. |
