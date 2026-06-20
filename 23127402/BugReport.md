@@ -10,7 +10,9 @@
 | BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `[Insert GitHub Issue link here]` |
 | BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
-| BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10 - 10% total` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
+| BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
+| BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `[Insert GitHub Issue link here]` |
+
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -271,3 +273,41 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-01-screenshot.png)`
+
+---
+
+## BUG-FR09-02 - Coupon can be applied while user is not logged in
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-09: Discount Coupons
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Chrome v120, Web App
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When applying a discount coupon, the system accepts and applies the coupon even though the user is not logged in. According to the FR09 requirement, coupon usage requires a logged-in user with a valid JWT token so the system can validate user eligibility and usage limits. Guest users should be blocked from applying coupons and should receive a login-required validation message.
+
+### 3. Steps to Reproduce
+1. Go to the EShop cart or checkout page.
+2. Make sure the user is not logged in.
+3. Ensure the cart contains at least one product eligible for checkout.
+4. Enter a valid coupon code, for example `SAVE10`.
+5. Apply the coupon.
+6. Observe whether the coupon is accepted or rejected.
+
+### 4. Expected Result
+* The system should reject coupon application when the user is not logged in.
+* A clear validation message should be displayed, such as `Vui lòng đăng nhập để áp dụng mã giảm giá`.
+* No discount should be applied to the order total.
+* The coupon usage count should not be updated for a guest request.
+
+### 5. Actual Result
+* The system accepts and applies the coupon while the user is not logged in.
+* The discount is applied to the order total without validating user authentication.
+* The guest user can receive a coupon benefit that should be restricted to authenticated users.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-02-screenshot.png)`
