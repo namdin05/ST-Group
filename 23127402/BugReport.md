@@ -12,6 +12,7 @@
 | BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
 | BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
 | BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `[Insert GitHub Issue link here]` |
+| BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
 
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
@@ -311,3 +312,44 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-02-screenshot.png)`
+
+---
+
+## BUG-FR15-01 - System allows creating a product with a negative price
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-15: Product CRUD
+* **Severity:** Critical
+* **Priority:** High
+* **Environment:** Chrome v120, Web App (Admin)
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When an admin creates a new product, the system accepts a negative price value and creates the product successfully. According to the FR-15 specification, the price must be strictly positive (`Giá: bắt buộc, phải là số dương (> 0)`). The test case TC-FR15-EP-002 expects this input to be blocked with the error message `"Giá sản phẩm phải lớn hơn 0"`. Allowing negative prices violates the business requirement and can lead to incorrect order totals, financial discrepancies, and inventory valuation errors.
+
+### 3. Steps to Reproduce
+1. Log in to the Web Admin interface with an admin account.
+2. Navigate to the product management section.
+3. Click the "Add product" button.
+4. Enter a valid product name, for example `Test Product`.
+5. Enter a negative price value, for example `-10000`.
+6. Select an existing category from the dropdown list.
+7. Click the "Save" or "Create" button to submit the form.
+8. Observe that the product is created successfully despite having a negative price.
+
+### 4. Expected Result
+* The system should reject the product creation request when the price is negative.
+* A clear validation message should be displayed, such as `Giá sản phẩm phải lớn hơn 0`.
+* The product should not be saved to the database.
+* The form should remain on the creation page with the error message visible to the admin.
+
+### 5. Actual Result
+* The system accepts the negative price and creates the product successfully.
+* The product is saved to the database with a negative price value.
+* The product list displays the newly created product with a negative price.
+* No validation error is shown to the admin user.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-01-screenshot.png)`
