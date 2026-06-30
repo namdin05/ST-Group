@@ -26,7 +26,7 @@
 
 ---
 
-## FR-04: Quản lý hồ sơ cá nhân (Mobile) — Bước 2: Equivalence Classes
+## Bước 2: Equivalence Classes
 
   ### Biến S1: Trạng thái đăng nhập
   **Nguyên tắc áp dụng:** "Must be" (phải đã đăng nhập mới cập nhật được)
@@ -87,7 +87,7 @@
   | EC12 | ✅ Valid | API từ chối / bỏ qua khi client gửi thay đổi `role` | Must be — thỏa mãn |
   | EC13 | ❌ Invalid | API chấp nhận thay đổi `role` từ client (lỗi bảo mật) | Must be — không thỏa mãn |
 
-  ### Bảng tổng hợp (cập nhật)
+  ### Bảng tổng hợp
 
   | Nhóm | Valid ECs | Invalid ECs | Tổng |
   |---|---|---|---|
@@ -99,5 +99,60 @@
   | V1 — Họ Tên | | EC14 | 1 |
   | V3 — Địa chỉ giao hàng | | EC15 | 1 |
   | **Tổng** | **5 Valid** | **10 Invalid** | **15 ECs** |
+
+---
+
+  ## Bước 3: Lựa chọn tập Test Cases tối thiểu
+
+  ### A. Valid Test Cases (kết hợp tối đa các Valid ECs)
+
+  | TC ID | Mô tả | Precondition | Input / Thao tác | ECs bao phủ | Expected Output |
+  |---|---|---|---|---|---|
+  | **TC-V1** | Cập nhật hồ sơ thành công (Happy Path) | Đã đăng nhập, hồ sơ của chính mình | Nhập Họ Tên hợp lệ, SĐT `0912345678` (10 số, bắt đầu bằng 0), Địa chỉ hợp lệ → Bấm Lưu | EC1, EC3, EC5, EC10, EC12 | ✅ Cập nhật thành công, dữ liệu lưu đúng. Email hiển thị read-only. Role không đổi |
+
+  > **Ghi chú:** 1 test case bao phủ **5/5 Valid ECs**. EC10 và EC12 được verify như output assertions.
+
+  ### B. Invalid Test Cases (1 Invalid EC mỗi test case)
+
+  | TC ID | Mô tả | Precondition | Input / Thao tác | Invalid EC | Expected Output |
+  |---|---|---|---|---|---|
+  | **TC-I1** | Cập nhật khi chưa đăng nhập | Chưa đăng nhập | Gửi API cập nhật hồ sơ | **EC2** | Bị từ chối (401/403) |
+  | **TC-I2** | Cập nhật hồ sơ người khác | Đã đăng nhập | Gửi API cập nhật hồ sơ user khác (đổi userId) | **EC4** | Bị từ chối, hồ sơ người khác không bị thay đổi |
+  | **TC-I3** | SĐT không bắt đầu bằng 0 | Đã đăng nhập, hồ sơ mình | SĐT = `1234567890` | **EC6** | Lỗi validation |
+  | **TC-I4** | SĐT quá ngắn (< 10 số) | Đã đăng nhập, hồ sơ mình | SĐT = `012345678` (9 số) | **EC7** | Lỗi validation |
+  | **TC-I5** | SĐT quá dài (> 11 số) | Đã đăng nhập, hồ sơ mình | SĐT = `012345678901` (12 số) | **EC8** | Lỗi validation |
+  | **TC-I6** | SĐT chứa ký tự không phải số | Đã đăng nhập, hồ sơ mình | SĐT = `0123abc456` | **EC9** | Lỗi validation |
+  | **TC-I7** | Email có thể sửa trên UI | Đã đăng nhập | Kiểm tra trường Email trên giao diện | **EC11** | Email phải read-only, không cho sửa *(negative check)* |
+  | **TC-I8** | Gửi API thay đổi role | Đã đăng nhập, hồ sơ mình | Gửi payload có `role: "admin"` | **EC13** | API từ chối / bỏ qua, role không đổi *(negative check)* |
+  | **TC-I9** | Họ Tên rỗng | Đã đăng nhập, hồ sơ mình | Họ Tên = *(rỗng)*, SĐT hợp lệ, Địa chỉ hợp lệ | **EC14** | ⚠️ Spec ambiguity — cần test thực tế |
+  | **TC-I10** | Địa chỉ giao hàng rỗng | Đã đăng nhập, hồ sơ mình | Họ Tên hợp lệ, SĐT hợp lệ, Địa chỉ = *(rỗng)* | **EC15** | ⚠️ Spec ambiguity — cần test thực tế |
+
+  ### C. Ma trận bao phủ EC ↔ Test Case
+
+  | EC ID | Loại | Mô tả | Bao phủ bởi TC |
+  |---|---|---|---|
+  | EC1 | ✅ Valid | Đã đăng nhập | TC-V1 |
+  | EC2 | ❌ Invalid | Chưa đăng nhập | TC-I1 |
+  | EC3 | ✅ Valid | Hồ sơ của chính mình | TC-V1 |
+  | EC4 | ❌ Invalid | Hồ sơ người khác | TC-I2 |
+  | EC5 | ✅ Valid | SĐT hợp lệ (0, 10–11 số) | TC-V1 |
+  | EC6 | ❌ Invalid | SĐT không bắt đầu bằng 0 | TC-I3 |
+  | EC7 | ❌ Invalid | SĐT < 10 số | TC-I4 |
+  | EC8 | ❌ Invalid | SĐT > 11 số | TC-I5 |
+  | EC9 | ❌ Invalid | SĐT chứa ký tự không phải số | TC-I6 |
+  | EC10 | ✅ Valid | Email read-only | TC-V1 *(output assert)* |
+  | EC11 | ❌ Invalid | Email editable | TC-I7 *(negative check)* |
+  | EC12 | ✅ Valid | Role không đổi | TC-V1 *(output assert)* |
+  | EC13 | ❌ Invalid | Role có thể đổi | TC-I8 *(negative check)* |
+  | EC14 | ❌ Invalid | Họ Tên rỗng | TC-I9 |
+  | EC15 | ❌ Invalid | Địa chỉ rỗng | TC-I10 |
+
+  ### D. Tổng kết
+
+  | Loại | Số lượng TC | ECs bao phủ |
+  |---|---|---|
+  | Valid Test Cases | 1 | 5/5 Valid ECs ✅ |
+  | Invalid Test Cases | 10 | 10/10 Invalid ECs ✅ |
+  | **Tổng** | **11** | **15/15 (100%)** |
 
 ---
