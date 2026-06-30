@@ -16,6 +16,8 @@
 | BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
 | BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
 | BUG-FR15-03 | FR-15: Product CRUD | Product can be created with a name exceeding the maximum 255-character limit. | `[Insert GitHub Issue link here]` |
+| BUG-FR05-01 | FR-05: View Product List & Search on Mobile | Product images on Mobile are missing the `alt` attribute. | `[Insert GitHub Issue link here]` |
+| BUG-FR05-01 | FR-05: View Product List & Search | With product don't have valid image, it will not display alt text | `[Insert GitHub Issue link here]` |
 
 
 
@@ -474,3 +476,35 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-03-screenshot.png)`
+
+---
+
+## BUG-FR05-01 - Product images on Mobile are missing the `alt` attribute
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-05: View Product List & Search on Mobile
+* **Severity:** Minor
+* **Priority:** Medium
+* **Environment:** Mobile App (React Native / Expo)
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When viewing the product list on the Mobile app, product images are displayed without a non-empty `alt` attribute (or equivalent accessibility label). According to TC-FR05-EP-005, each product image must have a descriptive `alt` text that describes the product. Missing `alt` attributes violate accessibility standards (WCAG) and reduce usability for users relying on screen readers.
+
+### 3. Steps to Reproduce
+1. Open the Mobile app and navigate to the Home/Product list screen.
+2. Wait for the product grid to load.
+3. Inspect any product image element in the grid.
+4. Check for the presence and content of the `alt` attribute (or accessibility label on React Native).
+
+### 4. Expected Result
+* Each product image should have a non-empty `alt` attribute (or `accessibilityLabel` in React Native) that describes the product, e.g., `"iPhone 15"` or `"Áo thun nam"`.
+
+### 5. Actual Result
+* Product images are missing the `alt` attribute or have an empty `alt=""` value.
+* Screen readers cannot describe the product image to visually impaired users.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr05-01-screenshot.png)`
