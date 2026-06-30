@@ -14,7 +14,7 @@
 | **Group A** | FR-03 | Forgot password and password reset (two steps) |
 | **Group B** | FR-09 | Discount coupons |
 | **Group C** | FR-15 | Product management (CRUD) |
-| **Group D** | FR-20 | Mobile App (Order Cancellation & Profile Phone Validation) |
+| **Group D** | FR-05 | View Product List & Search on Mobile (Xem danh sách & Tìm kiếm trên Mobile) |
 
 ---
 
@@ -141,30 +141,33 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
 
 ---
 
-#### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
+#### 2.4 FR-05: View Product List & Search on Mobile (Xem danh sách & Tìm kiếm trên Mobile)
 
 ##### 2.4.1 Analysis
 * **Input Variables:**
-  * `Current Order Status`: State (`pending`, `confirmed`, `shipping`, `delivered`, `canceled`)
-  * `User Role`: String (`user`, `admin`) - tested on Mobile interface for regular User.
-  * `Phone Number`: String
+  * `Search Keyword`: String (entered in search bar on Mobile)
+  * `Product Data`: List of products (fetched from backend API)
+  * `Network State`: Loading / Loaded / Error
 * **Equivalence Classes:**
   * **Valid:**
-    * `Current Order Status` for regular User cancellation: `pending` or `confirmed`.
-    * `Phone Number`: Starts with `0`, has length 10 or 11.
+    * `Search Keyword`: Empty (shows all products), or matches an existing product name (partial or full match).
+    * `Product Data`: Products exist in database; displayed in grid format with image, name, and price on Mobile.
+    * `Network State`: Data loaded successfully; grid rendered on Mobile viewport.
   * **Invalid:**
-    * `Current Order Status` for regular User cancellation: `shipping`, `delivered`, `canceled`.
-    * `Phone Number`: Starts with a non-zero digit, contains non-numeric characters, or is empty.
+    * `Search Keyword`: Non-existent product name (no matching results).
+    * `Product Data`: No products in database (empty catalog).
+    * `Network State`: Loading in progress (skeleton/spinner visible instead of grid).
 
 ##### 2.4.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TC-FR20-EP-001** | User cancels pending order on Mobile (Happy Path) | `Order Status` = `pending`<br>`User Role` = `user`<br>Click "Hủy đơn hàng" button | "Hủy đơn hàng" button (red) is displayed. Dialog confirmation prompts. Status updates to `canceled`. Translated to "Đã hủy" on history view. | EP | **Pass:** Order canceled; status translated to Vietnamese; dialog shown.<br>**Fail:** Order remains pending or status not updated. |
-| **TC-FR20-EP-002** | User cancels confirmed order on Mobile (Happy Path) | `Order Status` = `confirmed`<br>`User Role` = `user`<br>Click "Hủy đơn hàng" button | "Hủy đơn hàng" button (red) is displayed. Dialog confirmation prompts. Status updates to `canceled`. | EP | **Pass:** Order canceled successfully.<br>**Fail:** Order remains confirmed or error shown. |
-| **TC-FR20-EP-003** | Mobile Phone Validation - Must start with 0 | `Phone` = "1234567890" (10 digits, starts with 1)<br>Update Profile | Profile update blocked. Error "Số điện thoại phải bắt đầu bằng số 0" displayed. | EP | **Pass:** Phone not starting with 0 is rejected; error shown.<br>**Fail:** Accepted. |
-| **TC-FR20-EP-004** | Mobile Badge and Navigation Consistency | Add 1 product to Cart on Mobile | Visual feedback (toast) displayed immediately. Cart icon/link in navigation footer updates to display badge of "1". | EP | **Pass:** Toast shown, badge increments instantly.<br>**Fail:** No toast or badge does not update. |
-| **TC-FR20-EP-005** | Mobile Empty State illustration | Open Cart page while empty | Cart shows customized empty state illustration and message "Giỏ hàng trống" with a button to go back. | EP | **Pass:** Empty state message and illustration visible.<br>**Fail:** Blank screen or raw system error. |
-| **TC-FR20-EP-006** | Mobile Password Form security constraint | Register on Mobile | Password field hides input with mask (`secureTextEntry=true` / `type="password"` equivalency). | EP | **Pass:** Text masked securely on mobile viewport.<br>**Fail:** Plaintext passwords visible. |
+| **TC-FR05-EP-001** | View all products on Mobile (Happy Path) | `Search Keyword` = "" (empty)<br>`Product Data` = multiple products exist<br>`Network State` = Loaded | All products displayed in a scrollable grid on Mobile. Each card shows product image (with alt text), name, and price formatted with ₫ and thousands separator. | EP | **Pass:** Product grid displayed with correct formatting on Mobile.<br>**Fail:** Grid not displayed, missing image/alt/price, or formatting incorrect. |
+| **TC-FR05-EP-002** | Search by existing product name on Mobile | `Search Keyword` = "phone" (partial match)<br>`Product Data` = products with "phone" in name exist<br>`Network State` = Loaded | Only products matching "phone" are displayed in filtered grid. Search keyword is displayed safely (not rendered as HTML). | EP | **Pass:** Filtered results shown; keyword displayed as plain text.<br>**Fail:** Results not filtered or HTML rendered unsafely. |
+| **TC-FR05-EP-003** | Search with non-existent keyword on Mobile | `Search Keyword` = "xyznonexistent"<br>`Product Data` = no products match<br>`Network State` = Loaded | Empty state message "Không tìm thấy sản phẩm" displayed with appropriate illustration on Mobile screen. | EP | **Pass:** Empty state with message and illustration visible.<br>**Fail:** Blank screen, unfiltered list, or no empty state shown. |
+| **TC-FR05-EP-004** | Loading state on Mobile while fetching products | `Search Keyword` = ""<br>`Product Data` = being fetched<br>`Network State` = Loading | Loading indicator (spinner or skeleton) displayed on Mobile while API request is in progress. Grid appears after data loads. | EP | **Pass:** Loading indicator visible during fetch; grid replaces it on completion.<br>**Fail:** No loading indicator or grid appears before data is ready. |
+| **TC-FR05-EP-005** | Product card format validation on Mobile | `Search Keyword` = ""<br>`Product Data` = at least one product with image, name, price<br>`Network State` = Loaded | Product image has non-empty `alt` attribute describing the product. Price displayed in format "xxx.xxx ₫" with thousands separator. | EP | **Pass:** Alt text present and non-empty; price formatted correctly.<br>**Fail:** Missing alt text, empty alt, or incorrect price format. |
+| **TC-FR05-EP-006** | Search keyword XSS safety on Mobile | `Search Keyword` = "&lt;script&gt;alert('xss')&lt;/script&gt;"<br>`Product Data` = no products match<br>`Network State` = Loaded | Search keyword displayed as plain text. HTML tags and script are NOT rendered/executed. Empty state shown safely. | EP | **Pass:** HTML tags escaped; no script execution; plain text displayed.<br>**Fail:** HTML rendered or script executes. |
+| **TC-FR05-EP-007** | Single `<h1>` tag on Mobile Home page | `Search Keyword` = ""<br>`Network State` = Loaded | Mobile Home/Product list page contains exactly one `<h1>` tag describing the page content. | EP | **Pass:** Exactly one `<h1>` tag found on Mobile page.<br>**Fail:** Zero or multiple `<h1>` tags found. |
 
 ---
 
@@ -264,28 +267,25 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 
 ---
 
-#### 2.4 FR-20: Mobile App (Phân hệ Mobile - React Native)
+#### 2.4 FR-05: View Product List & Search on Mobile (Xem danh sách & Tìm kiếm trên Mobile)
 
 ##### 2.4.1 Boundary Value Identification
-* `Current Order Status` (State transitions boundaries):
-  * Transition from `pending` to `canceled` (Allowed / State Boundary)
-  * Transition from `confirmed` to `canceled` (Allowed / State Boundary)
-  * Transition from `shipping` to `canceled` (Forbidden / State Boundary)
-  * Transition from `delivered` to `canceled` (Forbidden / State Boundary)
-  * Transition from `canceled` to `canceled` (Forbidden / State Boundary)
-* `Phone Number` string length (must be 10-11 digits):
-  * Just-below (Min-1): 9 digits (Invalid)
-  * At boundary (Min): 10 digits (Valid)
-  * At boundary (Max): 11 digits (Valid)
-  * Just-above (Max+1): 12 digits (Invalid)
+* `Search Keyword` length (string input):
+  * At boundary (Min): 0 characters / empty (Valid — shows all products)
+  * At boundary (Min+1): 1 character (Valid — partial match search)
+  * Typical value: Full or partial product name (Valid)
+* `Product Data` count (number of products rendered on Mobile):
+  * Just-below (Min-1): N/A (negative count not applicable)
+  * At boundary (Min): 0 products (Empty state — "Không tìm thấy sản phẩm" with illustration)
+  * At boundary (Min+1): 1 product (Single item in grid on Mobile)
+  * Above boundary: Many products (Scrollable grid on Mobile viewport)
 
 ##### 2.4.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
 | :--- | :--- | :--- | :--- | :--- | :--- |
-| **TC-FR20-BVA-001** | Cancel shipping order on Mobile (Forbidden State Boundary) | `Order Status` = `shipping`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden or disabled. If API request is simulated, error returned indicating "Không thể hủy đơn hàng đang giao". | BVA | **Pass:** Option to cancel is unavailable on Mobile interface.<br>**Fail:** User can cancel shipping order on Mobile. |
-| **TC-FR20-BVA-002** | Cancel delivered order on Mobile (Final State Boundary) | `Order Status` = `delivered`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. `delivered` is a final state; any change is rejected. | BVA | **Pass:** Cancellation option is hidden and transition blocked.<br>**Fail:** User can cancel delivered order. |
-| **TC-FR20-BVA-003** | Cancel already canceled order on Mobile (Final State Boundary) | `Order Status` = `canceled`<br>`User Role` = `user` | "Hủy đơn hàng" button is hidden. `canceled` is a final state; further status change is blocked. | BVA | **Pass:** Already canceled order cannot be edited or canceled again.<br>**Fail:** Status machine allows double cancel or transition. |
-| **TC-FR20-BVA-004** | Mobile Phone Validation - Length at Min-1 (9 digits) | `Phone` = "012345678" (9 digits)<br>Update Profile | Profile update blocked. Error "Số điện thoại không hợp lệ (phải từ 10-11 chữ số)" displayed. | BVA | **Pass:** 9-digit phone is rejected; error shown.<br>**Fail:** 9-digit phone is accepted. |
-| **TC-FR20-BVA-005** | Mobile Phone Validation - Length at Min (10 digits) | `Phone` = "0123456789" (10 digits)<br>Update Profile | Profile updated successfully. Phone is stored. | BVA | **Pass:** 10-digit phone starting with 0 is accepted.<br>**Fail:** Rejected. |
-| **TC-FR20-BVA-006** | Mobile Phone Validation - Length at Max (11 digits) | `Phone` = "01234567890" (11 digits)<br>Update Profile | Profile updated successfully. Phone is stored. | BVA | **Pass:** 11-digit phone starting with 0 is accepted.<br>**Fail:** Rejected. |
-| **TC-FR20-BVA-007** | Mobile Phone Validation - Length at Max+1 (12 digits) | `Phone` = "012345678901" (12 digits)<br>Update Profile | Profile update blocked. Error "Số điện thoại không hợp lệ (phải từ 10-11 chữ số)" displayed. | BVA | **Pass:** 12-digit phone is rejected; error shown.<br>**Fail:** 12-digit phone is accepted. |
+| **TC-FR05-BVA-001** | Empty search keyword on Mobile | `Search Keyword` = ""<br>`Product Data` = multiple products exist<br>`Network State` = Loaded | All products displayed in grid on Mobile. No filtering applied. | BVA | **Pass:** Full product list displayed.<br>**Fail:** Products filtered or empty state incorrectly shown. |
+| **TC-FR05-BVA-002** | Search with 1-character keyword on Mobile | `Search Keyword` = "a" (1 character)<br>`Product Data` = products with "a" in name exist<br>`Network State` = Loaded | Products whose names contain "a" are displayed. Partial match works with minimum input. | BVA | **Pass:** Matching products displayed for single-character search.<br>**Fail:** No results or search not triggered. |
+| **TC-FR05-BVA-003** | Search with long keyword on Mobile | `Search Keyword` = "verylongproductnamesearchkeyword"<br>`Product Data` = no exact match<br>`Network State` = Loaded | Search processes the long keyword without error. Empty state shown if no match. | BVA | **Pass:** Long keyword handled; no crash/truncation; empty state shown.<br>**Fail:** System crashes, truncates, or errors. |
+| **TC-FR05-BVA-004** | Product list with 0 items on Mobile (Empty catalog) | `Search Keyword` = ""<br>`Product Data` = 0 products in database<br>`Network State` = Loaded | Empty state displayed with illustration and message "Không tìm thấy sản phẩm" (or similar). No grid rendered. | BVA | **Pass:** Empty state with illustration and message visible on Mobile.<br>**Fail:** Blank screen, error, or empty grid shown. |
+| **TC-FR05-BVA-005** | Product list with 1 item on Mobile (Min grid) | `Search Keyword` = ""<br>`Product Data` = 1 product in database<br>`Network State` = Loaded | Single product displayed in grid on Mobile. Card shows image, name, and price correctly. | BVA | **Pass:** Single product card rendered with correct format on Mobile.<br>**Fail:** No product shown or layout broken. |
+| **TC-FR05-BVA-006** | Product list with many items on Mobile (Scrollable grid) | `Search Keyword` = ""<br>`Product Data` = many products (e.g., 20+)<br>`Network State` = Loaded | Grid is vertically scrollable on Mobile. All products accessible by scrolling. Performance is acceptable. | BVA | **Pass:** Grid scrollable; all products reachable on Mobile viewport.<br>**Fail:** Grid not scrollable, clipped, or performance issue. |
