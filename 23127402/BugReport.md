@@ -13,6 +13,8 @@
 | BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
 | BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `[Insert GitHub Issue link here]` |
 | BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
+| BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
+
 
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
@@ -353,3 +355,41 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-01-screenshot.png)`
+
+---
+
+## BUG-FR15-02 - All other products are changed when the product update occurs
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-15: Product CRUD
+* **Severity:** Critical
+* **Priority:** High
+* **Environment:** Chrome v120, Web App (Admin)
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When an admin updates a single product, the changes are propagated to other products in the system. According to the FR-15 specification, when editing a product, only that product should be modified — other products must remain unchanged (`Khi Sửa một sản phẩm, chỉ sản phẩm đó bị thay đổi — các sản phẩm khác giữ nguyên`). The test case TC-FR15-EP-005 expects that updating Product #1 does not affect Product #2, #3, or any other product. This defect can cause widespread data corruption across the entire product catalog.
+
+### 3. Steps to Reproduce
+1. Log in to the Web Admin interface with an admin account.
+2. Navigate to the product management section.
+3. Ensure there are at least two products in the list (e.g., Product #1 and Product #2).
+4. Click the "Edit" button for Product #1.
+5. Change the product name to `Sản phẩm A_V2` and the price to `160,000 ₫`.
+6. Click the "Save" or "Update" button to submit the changes.
+7. Observe the product list and check the details of Product #2 (and other products).
+
+### 4. Expected Result
+* Only Product #1 should be updated with the new name and price.
+* Product #2 and all other products should retain their original name, price, and other attributes unchanged.
+* The system should perform a targeted update affecting only the selected product.
+
+### 5. Actual Result
+* Product #1 is updated successfully.
+* Product #2 and other products are also modified with the same changes (e.g., their names and prices are overwritten).
+* The side-effect violates the requirement that editing one product must not alter other products.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-02-screenshot.png)`
