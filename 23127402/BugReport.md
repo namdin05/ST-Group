@@ -17,9 +17,7 @@
 | BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
 | BUG-FR15-03 | FR-15: Product CRUD | Product can be created with a name exceeding the maximum 255-character limit. | `[Insert GitHub Issue link here]` |
 | BUG-FR05-01 | FR-05: View Product List & Search on Mobile | Product images on Mobile are missing the `alt` attribute. | `[Insert GitHub Issue link here]` |
-| BUG-FR05-01 | FR-05: View Product List & Search | With product don't have valid image, it will not display alt text | `[Insert GitHub Issue link here]` |
-
-
+| BUG-FR05-02 | FR-05: View Product List & Search on Mobile | Product image scaling is inconsistent between search page and view list page on Mobile. | `[Insert GitHub Issue link here]` |
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -508,3 +506,38 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr05-01-screenshot.png)`
+
+---
+
+## BUG-FR05-02 - Product image scaling is inconsistent between search page and view list page on Mobile
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-05: View Product List & Search on Mobile
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Mobile App (React Native / Expo)
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When viewing products on the Mobile app, the product image scaling differs between the search results page and the main product list page. According to FR-05, product images must be displayed with a standard aspect ratio and consistent formatting across all views. The inconsistent scaling causes visual distortion and a poor user experience.
+
+### 3. Steps to Reproduce
+1. Open the Mobile app and navigate to the Home/Product list screen (TC-FR05-EP-001).
+2. Observe the product image size and aspect ratio in the grid.
+3. Enter a search keyword, e.g., "phone", in the search bar (TC-FR05-EP-002).
+4. Observe the product image size and aspect ratio in the search results.
+5. Compare the image scaling between the two views.
+
+### 4. Expected Result
+* Product images should maintain a consistent aspect ratio and size across the main product list and search results page.
+* Images should not be stretched, compressed, or cropped differently between views.
+
+### 5. Actual Result
+* Product images are displayed with different scaling on the search results page compared to the main product list page.
+* Images may appear stretched, distorted, or incorrectly sized in one of the views.
+* The visual inconsistency degrades the user experience on Mobile.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr05-02-screenshot.png)`
