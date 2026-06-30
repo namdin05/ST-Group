@@ -15,6 +15,7 @@
 | BUG-FR09-03 | FR-09: Discount Coupons | Coupon is rejected at the exact minimum order threshold (off-by-one error). | `[Insert GitHub Issue link here]` |
 | BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
 | BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
+| BUG-FR15-03 | FR-15: Product CRUD | Product can be created with a name exceeding the maximum 255-character limit. | `[Insert GitHub Issue link here]` |
 
 
 
@@ -432,3 +433,44 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-02-screenshot.png)`
+
+---
+
+## BUG-FR15-03 - Product can be created with a name exceeding the maximum 255-character limit
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-15: Product CRUD
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Chrome v120, Web App (Admin)
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When an admin creates a new product with a name exceeding 255 characters, the system accepts the input and creates the product successfully. According to TC-FR15-BVA-006, the system must block product names longer than 255 characters and display the error `"Tên sản phẩm tối đa 255 ký tự"` above the submit button. Accepting overly long product names violates the FR-15 specification and can lead to database truncation, display issues, and data integrity problems.
+
+### 3. Steps to Reproduce
+1. Log in to the Web Admin interface with an admin account.
+2. Navigate to the product management section.
+3. Click the "Add product" button.
+4. Enter a product name containing 256 characters.
+5. Enter a valid price, for example `150,000 ₫`.
+6. Select an existing category from the dropdown list.
+7. Click the "Save" or "Create" button to submit the form.
+8. Observe that the product is created successfully despite the name exceeding the maximum length.
+
+### 4. Expected Result
+* The system should reject the product creation request when the name exceeds 255 characters.
+* A clear validation message should be displayed, such as `"Tên sản phẩm tối đa 255 ký tự"`.
+* The error should appear ABOVE the submit button.
+* The product should not be saved to the database.
+
+### 5. Actual Result
+* The system accepts the product name with 256 characters and creates the product successfully.
+* The product is saved to the database with the overly long name.
+* No validation error is shown to the admin user.
+* The product list displays the newly created product despite the invalid name length.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-03-screenshot.png)`
