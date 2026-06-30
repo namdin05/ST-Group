@@ -12,6 +12,7 @@
 | BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
 | BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
 | BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `[Insert GitHub Issue link here]` |
+| BUG-FR09-03 | FR-09: Discount Coupons | Coupon is rejected at the exact minimum order threshold (off-by-one error). | `[Insert GitHub Issue link here]` |
 | BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
 | BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
 
@@ -314,6 +315,44 @@
 ### 6. Evidence
 * **GitHub Issue Link:** `[Insert GitHub Issue link here]`
 * **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-02-screenshot.png)`
+
+---
+
+## BUG-FR09-03 - Coupon is rejected at the exact minimum order threshold (off-by-one error)
+
+---
+### 1. Metadata
+* **Feature Under Test:** FR-09: Discount Coupons
+* **Severity:** Major
+* **Priority:** High
+* **Environment:** Chrome v120, Web App
+* **Reporter:** 23127402 - Truong Hoang Lam
+
+### 2. Description
+> When applying the `SAVE10` coupon with an order total exactly at the minimum threshold of 300,000 ₫, the system rejects the coupon instead of accepting it. According to TC-FR09-BVA-002, the coupon should be applied successfully when the order total is exactly 300,000 ₫ (the boundary value). The system appears to use `>` (strictly greater than) instead of `>=` (greater than or equal to) when comparing the order total against the minimum threshold, causing an off-by-one error at the boundary.
+
+### 3. Steps to Reproduce
+1. Log in to the EShop web application with a valid user account.
+2. Add products to the cart so that the order total is exactly 300,000 ₫.
+3. Enter the coupon code `SAVE10` in the coupon input field.
+4. Click the apply button to submit the coupon.
+5. Observe that the coupon is rejected.
+
+### 4. Expected Result
+* The `SAVE10` coupon should be applied successfully when the order total is exactly 300,000 ₫ (the minimum threshold).
+* The discount should be calculated as 30,000 ₫ (10% of 300,000 ₫).
+* The final payable amount should be 270,000 ₫.
+* No validation error should be displayed.
+
+### 5. Actual Result
+* The system rejects the `SAVE10` coupon when the order total is exactly 300,000 ₫.
+* An error message similar to `"Đơn hàng chưa đạt giá trị tối thiểu 300.000 ₫"` is displayed.
+* The coupon is not applied, and the order total remains unchanged.
+* This off-by-one error indicates the system uses a strict greater-than (`>`) comparison instead of greater-than-or-equal (`>=`) when validating the minimum order threshold.
+
+### 6. Evidence
+* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
+* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-03-screenshot.png)`
 
 ---
 
