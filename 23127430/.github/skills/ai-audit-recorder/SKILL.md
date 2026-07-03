@@ -1,41 +1,44 @@
-# SKILL: Automated AI Audit Log Extractor (High-Density & Structured Version)
+# SKILL: Automated Verbatim AI Audit Logger
 
-## Role & Objective
-You act as an objective, strict QA Audit Agent for a university software testing assignment. Your job is to monitor the current conversation, track the testing techniques applied (Domain Testing or Boundary Value Analysis), and format the historical interactions of the current session into a highly structured Markdown log.
+## Purpose
+Automatically scan the active chat session history to extract the most recent interaction (User Prompt and AI Response) and format it verbatim into a structured row for the AI Audit Report, leaving evaluation fields open for subsequent manual human review.
 
-## Strict Output Strategy (No Over-Reduction)
-When summarizing AI Outputs, you MUST NOT wipe out the core engineering data. 
-- **DO NOT** summarize the entire output into a single prose paragraph.
-- **DO KEEP:** All identified input variables, exact partition boundaries (e.g., Min=8), valid/invalid partition IDs, representative values, and the exact names/IDs of the generated test cases.
-- **DO CONDENSE:** Long theoretical explanations, repetitive step-by-step setup instructions (e.g., "Open browser", "Navigate to URL"), and redundant markdown table rows if they exceed 10+ rows (keep the key rows and summarize the pattern).
-
-## Required Output Structure
-Output a Markdown block exactly following this schema (output as raw markdown structure):
-
-### Session: [Feature ID - Feature Name]
-- **AI Tool:** GitHub Copilot Chat (Inline/Sidebar)
-- **Date and Time:** [Leave a placeholder: YYYY-MM-DD HH:MM]
-- **Technique applied:** [Domain Testing / Boundary Value Analysis / Both]
-
-#### Prompts & AI Outputs Log:
-
-##### Interaction [X] - Domain Testing / BVA Design
-- **Prompt:** [Exact or precisely summarized core intent of the user's prompt]
-- **AI Output:** 
-  * **Input Variables & Constraints:** [List the inputs, e.g., Full Name, Email, Password, and explicit constraints like Length >= 8]
-  * **Equivalence Partitions / Boundaries Identified:**
-    * *Partition/Boundary 1:* [e.g., Password Length: <8 (Invalid), >=8 (Valid). Boundary values tested: 7, 8, 9]
-    * *Partition/Boundary 2:* [e.g., Email Format: Valid regex, Missing @, Missing domain]
-  * **Generated Test Cases Structural Summary:** [List the exact IDs and Objectives of the main test cases generated, e.g., TC-FR01-01 (Happy Path), TC-FR01-02 (Password Too Short)].
-  *(Detailed step-by-step navigation steps are omitted for brevity, adhering to standard EShop form interaction rules).*
-
-##### Interaction [Y] - AI Gap Analysis / Bug Templates
-- **Prompt:** [Exact or precisely summarized core intent of the user's prompt]
-- **AI Output:** [Provide a high-density, bulleted summary of the specific gaps, risks, or template fields generated. Do not compress these into a single vague sentence].
+## Strict Restrictions (Core Compliance)
+- **Verbatim Preservation:** You MUST extract and output the user's prompt and the AI's response completely verbatim. Never paraphrase, summarize, shorten, or clean up the technical text.
+- **No Timestamp Fabrication:** Set the timestamp to the current real date format `2026-07-03` with a placeholder for exact hours `[HH:MM]`.
+- **No Self-Generated Verdicts:** Do NOT evaluate your own output. You must set the Student Verdict field to a pending status and leave placeholders `[ ]` for the student to fill in manually later.
+- **Single Interaction Scope:** One trigger command extracts exactly ONE interaction block.
 
 ---
 
-## Operational Instructions
-1. **Trigger Phrase:** Respond to this skill whenever the user says: `Generate Audit Log`, `Xuất Audit Log`, hoặc `@SKILL.md`.
-2. **Context Scope:** Only include the prompts and answers relevant to the *current feature* being discussed in the active session.
-3. **Accuracy:** Do not invent prompts that the user did not say.
+## Required Automated Row Output Schema
+Whenever the user triggers this skill, immediately generate the following Markdown block (ready to be appended directly to `ai_logs/ai_critique_&_audit.md`):
+
+### Audit Record: [Feature ID / Task Name - Auto-Generated]
+- **Timestamp:** 2026-07-03 [HH:MM - Please adjust exact minutes if needed]
+- **AI Tool & Interface:** GitHub Copilot Chat (Sidebar/Inline)
+- **Student Verdict:** [ ] VALID  |  [ ] INVALID  |  [ ] INCOMPLETE *(Mark 'X' manually in markdown later)*
+
+#### Raw Logs (Verbatim)
+- **User Prompt:**
+```text
+[Insert EXACT verbatim user prompt from the current session here]
+```
+- **AI Raw Output:**
+```text
+[Insert EXACT verbatim AI output from the current session here]
+```
+
+#### Student Review & Interventions (For Manual Entry)
+- **Student Reasoning:** 
+  > *[Type your manual analysis here: Why was this output valid, invalid, or incomplete? What did the AI miss?]*
+- **Human Corrections Made:**
+  - [ ] No changes needed.
+  - [ ] Manually refined existing test cases (Specify: _____________)
+  - [ ] Manually added new test cases / fixed boundaries (Specify: _____________)
+
+---
+
+## Trigger Commands
+- **Command:** `Extract Session Row`, `Xuất Audit Log`, hoặc `@SKILL.md Auto-Record`
+- **Expected Action:** Instantly look at the immediate previous prompt and response, inject them into the raw text blocks above, and output the result. Do not ask follow-up questions.
