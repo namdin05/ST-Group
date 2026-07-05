@@ -2,22 +2,22 @@
 
 | Bug ID | Feature | Bug Title | GitHub Issue |
 | :--- | :--- | :--- | :--- |
-| BUG-FR03-01 | FR-03: Forgot Password & Password Reset | The interface does not display the Step Indicator ("Step 1/2") when the user performs the password recovery steps. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-02 | FR-03: Forgot Password & Password Reset | The system doesn't check the email format on the interface but sends the error request directly to the server, leading to the server processing incorrectly and returning a "User not found" message instead of blocking and reporting "Invalid email". | `[Insert GitHub Issue link here]` |
-| BUG-FR03-03 | FR-03: Forgot Password & Password Reset | The interface lacks a "Back to Login" button. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-04 | FR-03: Forgot Password & Password Reset | The password reset interface is missing the "Confirm password" input field. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-05 | FR-03: Forgot Password & Password Reset | Password recovery was unsuccessful the user entered the correct valid password. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `[Insert GitHub Issue link here]` |
-| BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `[Insert GitHub Issue link here]` |
-| BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `[Insert GitHub Issue link here]` |
-| BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `[Insert GitHub Issue link here]` |
-| BUG-FR09-03 | FR-09: Discount Coupons | Coupon is rejected at the exact minimum order threshold (off-by-one error). | `[Insert GitHub Issue link here]` |
-| BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `[Insert GitHub Issue link here]` |
-| BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `[Insert GitHub Issue link here]` |
-| BUG-FR15-03 | FR-15: Product CRUD | Product can be created with a name exceeding the maximum 255-character limit. | `[Insert GitHub Issue link here]` |
-| BUG-FR05-01 | FR-05: View Product List & Search on Mobile | Product images on Mobile are missing the `alt` attribute. | `[Insert GitHub Issue link here]` |
-| BUG-FR05-02 | FR-05: View Product List & Search on Mobile | Product image scaling is inconsistent between search page and view list page on Mobile. | `[Insert GitHub Issue link here]` |
+| BUG-FR03-01 | FR-03: Forgot Password & Password Reset | The interface does not display the Step Indicator ("Step 1/2") when the user performs the password recovery steps. | `https://github.com/namdin05/ST-Group/issues/1` |
+| BUG-FR03-02 | FR-03: Forgot Password & Password Reset | The system doesn't check the email format on the interface but sends the error request directly to the server, leading to the server processing incorrectly and returning a "User not found" message instead of blocking and reporting "Invalid email". | `https://github.com/namdin05/ST-Group/issues/2` |
+| BUG-FR03-03 | FR-03: Forgot Password & Password Reset | The interface lacks a "Back to Login" button. | `https://github.com/namdin05/ST-Group/issues/3` |
+| BUG-FR03-04 | FR-03: Forgot Password & Password Reset | The password reset interface is missing the "Confirm password" input field. | `https://github.com/namdin05/ST-Group/issues/4` |
+| BUG-FR03-05 | FR-03: Forgot Password & Password Reset | Password recovery was unsuccessful the user entered the correct valid password. | `https://github.com/namdin05/ST-Group/issues/5` |
+| BUG-FR03-06 | FR-03: Forgot Password & Password Reset | The system generates a 4-digit OTP instead of the required 6-digit OTP. | `https://github.com/namdin05/ST-Group/issues/6` |
+| BUG-FR03-07 | FR-03: Forgot Password & Password Reset | The system does not check the OTP format. | `https://github.com/namdin05/ST-Group/issues/7` |
+| BUG-FR03-08 | FR-03: Forgot Password & Password Reset | The system accepts invalid passwords that contain space characters. | `https://github.com/namdin05/ST-Group/issues/8` |
+| BUG-FR09-01 | FR-09: Discount Coupons | The system incorrectly calculates the final price as `total * 10` when applying the SAVE10 discount code. | `https://github.com/namdin05/ST-Group/issues/9` |
+| BUG-FR09-02 | FR-09: Discount Coupons | The system allows a coupon to be applied while the user is not logged in. | `https://github.com/namdin05/ST-Group/issues/10` |
+| BUG-FR09-03 | FR-09: Discount Coupons | Coupon is rejected at the exact minimum order threshold (off-by-one error). | `https://github.com/namdin05/ST-Group/issues/11` |
+| BUG-FR15-01 | FR-15: Product CRUD | The system can create a product with negative price | `https://github.com/namdin05/ST-Group/issues/12` |
+| BUG-FR15-02 | FR-15: Product CRUD | All other products are changed when the product update occurs. | `https://github.com/namdin05/ST-Group/issues/13` |
+| BUG-FR15-03 | FR-15: Product CRUD | Product can be created with a name exceeding the maximum 255-character limit. | `https://github.com/namdin05/ST-Group/issues/14` |
+| BUG-FR05-01 | FR-05: View Product List & Search on Mobile | Product images on Mobile are missing the `alt` attribute. | `https://github.com/namdin05/ST-Group/issues/15` |
+| BUG-FR05-02 | FR-05: View Product List & Search on Mobile | Product image scaling is inconsistent between search page and view list page on Mobile. | `https://github.com/namdin05/ST-Group/issues/16` |
 
 ## BUG-FR03-01 - Missing step indicator during password recovery flow
 
@@ -47,10 +47,6 @@
 ### 5. Actual Result
 * The password recovery screens do not display the required step indicator.
 * Users can proceed through the flow, but the UI does not clearly communicate the current step.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-01-screenshot.png)`
 
 ---
 
@@ -83,10 +79,6 @@
 * The invalid email format is submitted to the server.
 * The server handles the invalid value as an account lookup request.
 * The interface displays a misleading `User not found` message instead of an invalid email format error.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-02-screenshot.png)`
 
 ---
 
@@ -123,10 +115,6 @@
 * The password is not updated successfully.
 * The expected success notification and redirect to the login page do not occur.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-05-screenshot.png)`
-
 ---
 
 ## BUG-FR03-06 - System generates a 4-digit OTP instead of a 6-digit OTP
@@ -158,10 +146,6 @@
 * The system generates an OTP with only 4 digits.
 * The generated OTP does not satisfy the required 6-digit OTP format.
 * Password recovery may fail because the generated OTP does not match the expected validation rule.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-06-screenshot.png)`
 
 ---
 
@@ -199,10 +183,6 @@
 * Invalid OTP values are allowed to proceed or are handled with an incorrect/non-specific error response.
 * The user does not receive the expected OTP format validation message.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-07-screenshot.png)`
-
 ---
 
 ## BUG-FR03-08 - Password with space characters is accepted during reset
@@ -238,10 +218,6 @@
 * The password reset request is processed even though the new password is invalid.
 * No clear validation message is displayed for the whitespace character.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr03-08-screenshot.png)`
-
 ---
 
 ## BUG-FR09-01 - Final price is calculated incorrectly when applying SAVE10 coupon
@@ -274,10 +250,6 @@
 * The system calculates the final price using an incorrect formula similar to `total * 10`.
 * For a `400,000 ₫` order, the displayed final amount becomes approximately `4,000,000 ₫` instead of `360,000 ₫`.
 * Applying the discount coupon increases the payable amount instead of decreasing it.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-01-screenshot.png)`
 
 ---
 
@@ -313,10 +285,6 @@
 * The discount is applied to the order total without validating user authentication.
 * The guest user can receive a coupon benefit that should be restricted to authenticated users.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-02-screenshot.png)`
-
 ---
 
 ## BUG-FR09-03 - Coupon is rejected at the exact minimum order threshold (off-by-one error)
@@ -350,10 +318,6 @@
 * An error message similar to `"Đơn hàng chưa đạt giá trị tối thiểu 300.000 ₫"` is displayed.
 * The coupon is not applied, and the order total remains unchanged.
 * This off-by-one error indicates the system uses a strict greater-than (`>`) comparison instead of greater-than-or-equal (`>=`) when validating the minimum order threshold.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr09-03-screenshot.png)`
 
 ---
 
@@ -392,10 +356,6 @@
 * The product list displays the newly created product with a negative price.
 * No validation error is shown to the admin user.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-01-screenshot.png)`
-
 ---
 
 ## BUG-FR15-02 - All other products are changed when the product update occurs
@@ -429,10 +389,6 @@
 * Product #1 is updated successfully.
 * Product #2 and other products are also modified with the same changes (e.g., their names and prices are overwritten).
 * The side-effect violates the requirement that editing one product must not alter other products.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-02-screenshot.png)`
 
 ---
 
@@ -471,10 +427,6 @@
 * No validation error is shown to the admin user.
 * The product list displays the newly created product despite the invalid name length.
 
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr15-03-screenshot.png)`
-
 ---
 
 ## BUG-FR05-01 - Product images on Mobile are missing the `alt` attribute
@@ -502,10 +454,6 @@
 ### 5. Actual Result
 * Product images are missing the `alt` attribute or have an empty `alt=""` value.
 * Screen readers cannot describe the product image to visually impaired users.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr05-01-screenshot.png)`
 
 ---
 
@@ -537,7 +485,3 @@
 * Product images are displayed with different scaling on the search results page compared to the main product list page.
 * Images may appear stretched, distorted, or incorrectly sized in one of the views.
 * The visual inconsistency degrades the user experience on Mobile.
-
-### 6. Evidence
-* **GitHub Issue Link:** `[Insert GitHub Issue link here]`
-* **Screenshot/Video:** `![Bug Screenshot](path/to/bug-fr05-02-screenshot.png)`
