@@ -42,16 +42,26 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
   * `Step 2 New Password`: String
   * `Step 2 Confirm Password`: String
 * **Equivalence Classes:**
-  * **Valid:**
-    * `Step 1 Email`: Registered email, valid format (`user@domain.com`).
-    * `Step 2 OTP`: Correct 6-digit numeric OTP generated for the specified email.
-    * `Step 2 New Password`: Length $\ge 8$, contains $\ge 1$ uppercase, $\ge 1$ lowercase, $\ge 1$ digit, and $\ge 1$ special character from the approved set (`@, $, !, %, *, ?, &`).
-    * `Step 2 Confirm Password`: Identical to `New Password`.
-  * **Invalid:**
-    * `Step 1 Email`: Empty, invalid format (e.g. missing `@`, missing domain, spaces), or unregistered email.
-    * `Step 2 OTP`: Empty, invalid length, incorrect OTP, contains non-numeric characters, or valid OTP associated with another email.
-    * `Step 2 New Password`: Empty, invalid length, missing uppercase, missing lowercase, missing digit, missing special character, or contains forbidden characters (e.g. `#`, ` `).
-    * `Step 2 Confirm Password`: Empty, different from `New Password`.
+  | # | Variable | Condition | Classification |
+  |---|---|---|---|
+  | EC1 | Step 1 Email | Registered email with valid format (`user@domain.com`) | Valid |
+  | EC2 | Step 1 Email | Empty | Invalid |
+  | EC3 | Step 1 Email | Invalid format (missing `@`, missing domain, spaces) | Invalid |
+  | EC4 | Step 1 Email | Unregistered email | Invalid |
+  | EC5 | Step 2 OTP | Correct 6-digit OTP generated for the specified email | Valid |
+  | EC6 | Step 2 OTP | Empty | Invalid |
+  | EC7 | Step 2 OTP | Invalid length (not 6 digits) | Invalid |
+  | EC8 | Step 2 OTP | Contains non-numeric characters | Invalid |
+  | EC9 | Step 2 OTP | Valid OTP but associated with another email | Invalid |
+  | EC10 | Step 2 New Password | Length $\ge 8$, has uppercase, lowercase, digit, approved special char (`@, $, !, %, *, ?, &`) | Valid |
+  | EC11 | Step 2 New Password | Missing uppercase letter | Invalid |
+  | EC12 | Step 2 New Password | Missing lowercase letter | Invalid |
+  | EC13 | Step 2 New Password | Missing digit | Invalid |
+  | EC14 | Step 2 New Password | Missing special character | Invalid |
+  | EC15 | Step 2 New Password | Contains forbidden character (e.g. `#`, ` `) | Invalid |
+  | EC16 | Step 2 Confirm Password | Identical to New Password | Valid |
+  | EC17 | Step 2 Confirm Password | Empty | Invalid |
+  | EC18 | Step 2 Confirm Password | Different from New Password | Invalid |
 
 ##### 2.1.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
@@ -60,18 +70,16 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
 | **TC-FR03-EP-002** | Step 1 - Request OTP with unregistered email | `Step 1 Email` = "unregistered@eshop.com" | The OTP code request was rejected. The alert message displayed was "lỗi: User not found". | EP | **Pass:** alert message is displayed; no OTP generated.<br>**Fail:** OTP generated or alert message is not displayed. |
 | **TC-FR03-EP-003** | Step 1 - HTML5 format validation check for Email field | `Step 1 Email` = "invalidemailformat" | Browser native validation blocks form submission (type="email" check). | EP | **Pass:** Browser blocks submission and displays format warning.<br>**Fail:** Form is submitted to server. |
 | **TC-FR03-EP-004** | Step 1 - Request OTP with empty email field | `Step 1 Email` = "" | Submission blocked. Error message "Vui lòng nhập Email" displayed. Email label has "*" indicator. | EP | **Pass:** Submission blocked, mandatory "*" constraint verified.<br>**Fail:** Empty field submitted without error. |
-| **TC-FR03-EP-005** | Step 1 - Back to Login functionality | Click "Quay lại đăng nhập" button | User is successfully redirected back to the Login screen. | EP | **Pass:** Redirection succeeds.<br>**Fail:** "Quay lại đăng nhập" button fails to redirect. |
-| **TC-FR03-EP-006** | Step 2 - Reset password with all valid inputs (Happy Path) | `Step 2 OTP` = "123456" (correct)<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Password updated successfully. Success toast displayed. Redirected to Login page. Step Indicator "Bước 2 / 2" is shown. | EP | **Pass:** Password resets successfully, redirected to login.<br>**Fail:** Password not reset or incorrect transition. |
-| **TC-FR03-EP-007** | Step 2 - Reset password with OTP containing non-numeric characters | `Step 2 OTP` = "12345a"<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP chỉ được chứa chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; alphanumeric OTP blocked.<br>**Fail:** Form submits. |
-| **TC-FR03-EP-008** | Step 2 - Reset password with valid OTP generated for another email | `Step 1 Email` = "test@eshop.com"<br>`Step 2 OTP` = "654321" (valid but issued to "admin@eshop.com")<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP không khớp hoặc không hợp lệ cho email này" displayed ABOVE the submit button. | EP | **Pass:** Cross-use of OTP is blocked.<br>**Fail:** Password reset succeeds for the wrong email. |
-| **TC-FR03-EP-009** | Step 2 - Password complexity: Missing uppercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "abcd123!"<br>`Confirm Password` = "abcd123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ hoa" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing uppercase error.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-010** | Step 2 - Password complexity: Missing lowercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "ABCD123!"<br>`Confirm Password` = "ABCD123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ thường" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing lowercase error.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-011** | Step 2 - Password complexity: Missing numeric digit | `Step 2 OTP` = "123456"<br>`New Password` = "Abcdefgh!"<br>`Confirm Password` = "Abcdefgh!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing digit error.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-012** | Step 2 - Password complexity: Missing special character | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd1234"<br>`Confirm Password` = "Abcd1234" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing special char error.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-013** | Step 2 - Password complexity: Forbidden special character | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd123 " (forbidden ` `  char)<br>`Confirm Password` = "Abcd123 " | Reset rejected. Error "Mật khẩu chứa ký tự đặc biệt không hợp lệ" displayed ABOVE the submit button. | EP | **Pass:** Rejected due to forbidden special character.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-014** | Step 2 - Confirm Password mismatch | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123?" | Reset rejected. Error "Mật khẩu xác nhận không khớp" displayed ABOVE the submit button. | EP | **Pass:** Mismatch rejected; error displayed above submit button.<br>**Fail:** Reset succeeds. |
-| **TC-FR03-EP-015** | Step 2 - Fields visibility (Security check) | Input `New Password` and `Confirm Password` | Input text is masked (dots or stars) on screen (`type="password"` check). | EP | **Pass:** Password text is masked.<br>**Fail:** Plaintext passwords are visible. |
-| **TC-FR03-EP-016** | Step 2 - Empty mandatory fields submit | `Step 2 OTP` = ""<br>`New Password` = ""<br>`Confirm Password` = "" | Submission blocked. Error message displayed ABOVE the submit button. Labels have "*" indicator next to them. | EP | **Pass:** Empty form rejected; labels contain "*".<br>**Fail:** Empty form submitted. |
+| **TC-FR03-EP-005** | Step 2 - Reset password with all valid inputs (Happy Path) | `Step 2 OTP` = "123456" (correct)<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Password updated successfully. Success toast displayed. Redirected to Login page. Step Indicator "Bước 2 / 2" is shown. | EP | **Pass:** Password resets successfully, redirected to login.<br>**Fail:** Password not reset or incorrect transition. |
+| **TC-FR03-EP-006** | Step 2 - Reset password with OTP containing non-numeric characters | `Step 2 OTP` = "12345a"<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP chỉ được chứa chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; alphanumeric OTP blocked.<br>**Fail:** Form submits. |
+| **TC-FR03-EP-007** | Step 2 - Reset password with valid OTP generated for another email | `Step 1 Email` = "test@eshop.com"<br>`Step 2 OTP` = "654321" (valid but issued to "admin@eshop.com")<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Reset rejected. Error "Mã OTP không khớp hoặc không hợp lệ cho email này" displayed ABOVE the submit button. | EP | **Pass:** Cross-use of OTP is blocked.<br>**Fail:** Password reset succeeds for the wrong email. |
+| **TC-FR03-EP-008** | Step 2 - Password complexity: Missing uppercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "abcd123!"<br>`Confirm Password` = "abcd123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ hoa" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing uppercase error.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-009** | Step 2 - Password complexity: Missing lowercase letter | `Step 2 OTP` = "123456"<br>`New Password` = "ABCD123!"<br>`Confirm Password` = "ABCD123!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ thường" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing lowercase error.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-010** | Step 2 - Password complexity: Missing numeric digit | `Step 2 OTP` = "123456"<br>`New Password` = "Abcdefgh!"<br>`Confirm Password` = "Abcdefgh!" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 chữ số" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing digit error.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-011** | Step 2 - Password complexity: Missing special character | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd1234"<br>`Confirm Password` = "Abcd1234" | Reset rejected. Error "Mật khẩu phải chứa ít nhất 1 ký tự đặc biệt" displayed ABOVE the submit button. | EP | **Pass:** Rejected; displays missing special char error.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-012** | Step 2 - Password complexity: Forbidden special character | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd123 " (forbidden ` `  char)<br>`Confirm Password` = "Abcd123 " | Reset rejected. Error "Mật khẩu chứa ký tự đặc biệt không hợp lệ" displayed ABOVE the submit button. | EP | **Pass:** Rejected due to forbidden special character.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-013** | Step 2 - Confirm Password mismatch | `Step 2 OTP` = "123456"<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123?" | Reset rejected. Error "Mật khẩu xác nhận không khớp" displayed ABOVE the submit button. | EP | **Pass:** Mismatch rejected; error displayed above submit button.<br>**Fail:** Reset succeeds. |
+| **TC-FR03-EP-014** | Step 2 - Empty OTP field (single invalid class) | `Step 2 OTP` = ""<br>`New Password` = "Abcd123!"<br>`Confirm Password` = "Abcd123!" | Submission blocked. Error message displayed ABOVE the submit button. Labels have "*" indicator next to them. | EP | **Pass:** Empty OTP rejected; error displayed above button.<br>**Fail:** Empty OTP submitted. |
 
 ---
 
@@ -85,18 +93,20 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
   * `User Auth State`: Boolean (JWT token status)
   * `User Coupon Usage Count`: Integer
 * **Equivalence Classes:**
-  * **Valid:**
-    * `Coupon Code`: Exists in database and is active (`is_active = 1`).
-    * `Order Total Amount`: $\ge$ Coupon's minimum threshold (`min_order_amount`).
-    * `Current Date`: Date is strictly before `expired_at`.
-    * `User Auth State`: Logged-in with a valid JWT Token.
-    * `User Coupon Usage Count`: $< $ `max_uses_per_user` for the current user.
-  * **Invalid:**
-    * `Coupon Code`: Code does not exist, is inactive (`is_active = 0`), or empty.
-    * `Order Total Amount`: $< $ Coupon's minimum threshold (`min_order_amount`).
-    * `Current Date`: Date is on or after `expired_at`.
-    * `User Auth State`: Not logged in (Guest, no JWT Token).
-    * `User Coupon Usage Count`: $\ge$ `max_uses_per_user` for the current user.
+  | # | Variable | Condition | Classification |
+  |---|---|---|---|
+  | EC1 | Coupon Code | Exists in database and is active (`is_active = 1`) | Valid |
+  | EC2 | Coupon Code | Does not exist in database | Invalid |
+  | EC3 | Coupon Code | Exists but is inactive (`is_active = 0`) | Invalid |
+  | EC4 | Coupon Code | Empty | Invalid |
+  | EC5 | Order Total Amount | $\ge$ Coupon's minimum threshold (`min_order_amount`) | Valid |
+  | EC6 | Order Total Amount | $<$ Coupon's minimum threshold (`min_order_amount`) | Invalid |
+  | EC7 | Current Date | Strictly before `expired_at` | Valid |
+  | EC8 | Current Date | On or after `expired_at` | Invalid |
+  | EC9 | User Auth State | Logged-in with a valid JWT Token | Valid |
+  | EC10 | User Auth State | Not logged in (Guest, no JWT Token) | Invalid |
+  | EC11 | User Coupon Usage Count | $<$ `max_uses_per_user` for the current user | Valid |
+  | EC12 | User Coupon Usage Count | $\ge$ `max_uses_per_user` for the current user | Invalid |
 
 ##### 2.2.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
@@ -120,14 +130,17 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
   * `Description`: String (Optional)
   * `Image URL`: String (Optional)
 * **Equivalence Classes:**
-  * **Valid:**
-    * `Product Name`: Length 1 to 255 characters.
-    * `Product Price`: Value $> 0$ (strictly positive).
-    * `Category`: Existing category selected from dropdown list.
-  * **Invalid:**
-    * `Product Name`: Empty (length 0) or length > 255 characters.
-    * `Product Price`: Value $\le 0$ (negative, zero), empty, or non-numeric.
-    * `Category`: No selection (empty selection or placeholder).
+  | # | Variable | Condition | Classification |
+  |---|---|---|---|
+  | EC1 | Product Name | Length 1 to 255 characters | Valid |
+  | EC2 | Product Name | Empty (length 0) | Invalid |
+  | EC3 | Product Name | Length > 255 characters | Invalid |
+  | EC4 | Product Price | Value $> 0$ (strictly positive) | Valid |
+  | EC5 | Product Price | Value $\le 0$ (negative or zero) | Invalid |
+  | EC6 | Product Price | Empty | Invalid |
+  | EC7 | Product Price | Non-numeric | Invalid |
+  | EC8 | Category | Existing category selected from dropdown list | Valid |
+  | EC9 | Category | No selection (empty or placeholder) | Invalid |
 
 ##### 2.3.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
@@ -136,8 +149,6 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
 | **TC-FR15-EP-002** | Create product with negative Price | `Name` = "Sản phẩm A"<br>`Price` = -10,000 ₫<br>`Category` = "Điện thoại" | Creation blocked. Error "Giá sản phẩm phải lớn hơn 0" is displayed ABOVE the submit button. | EP | **Pass:** Rejected; price error displayed.<br>**Fail:** Product created with negative price. |
 | **TC-FR15-EP-003** | Create product with non-numeric Price | `Name` = "Sản phẩm A"<br>`Price` = "abc"<br>`Category` = "Điện thoại" | Creation blocked. Error "Giá sản phẩm phải là một số hợp lệ" is displayed ABOVE the submit button. | EP | **Pass:** Non-numeric price blocked.<br>**Fail:** Form submitted. |
 | **TC-FR15-EP-004** | Create product with empty Category selection | `Name` = "Sản phẩm A"<br>`Price` = 150,000 ₫<br>`Category` = "" (default placeholder) | Creation blocked. Error "Vui lòng chọn danh mục" is displayed ABOVE the submit button. Label has "*" next to Category. | EP | **Pass:** Creation blocked; mandatory category validated.<br>**Fail:** Product created without a category. |
-| **TC-FR15-EP-005** | Edit product details successfully (Side-effect check) | Modify `Name` to "Sản phẩm A_V2" & `Price` to 160,000 ₫ for Product #1 | Product #1 is updated successfully. Viewing Product #1 shows new details. Other products (Product #2, #3, etc.) are NOT modified. | EP | **Pass:** Modified product successfully updated; side effects absent.<br>**Fail:** Update fails or other products are altered. |
-| **TC-FR15-EP-006** | Delete product successfully | Click "Xóa" button (red) for Product #1 | Product #1 is permanently deleted. It is removed from the list. | EP | **Pass:** Product successfully deleted; red button styling present.<br>**Fail:** Product not deleted. |
 
 ---
 
@@ -147,16 +158,14 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
 * **Input Variables:**
   * `Search Keyword`: String (entered in search bar on Mobile)
   * `Product Data`: List of products (fetched from backend API)
-  * `Network State`: Loading / Loaded / Error
 * **Equivalence Classes:**
-  * **Valid:**
-    * `Search Keyword`: Empty (shows all products), or matches an existing product name (partial or full match).
-    * `Product Data`: Products exist in database; displayed in grid format with image, name, and price on Mobile.
-    * `Network State`: Data loaded successfully; grid rendered on Mobile viewport.
-  * **Invalid:**
-    * `Search Keyword`: Non-existent product name (no matching results).
-    * `Product Data`: No products in database (empty catalog).
-    * `Network State`: Loading in progress (skeleton/spinner visible instead of grid).
+  | # | Variable | Condition | Classification |
+  |---|---|---|---|
+  | EC1 | Search Keyword | Empty (shows all products) | Valid |
+  | EC2 | Search Keyword | Matches an existing product name (partial or full match) | Valid |
+  | EC3 | Search Keyword | Non-existent product name (no matching results) | Invalid |
+  | EC4 | Product Data | Products exist in the database | Valid |
+  | EC5 | Product Data | No products in database (empty catalog) | Invalid |
 
 ##### 2.4.2 Domain Testing (EP) Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
@@ -164,10 +173,6 @@ Equivalence Partitioning (EP) is a black-box test design technique in which the 
 | **TC-FR05-EP-001** | View all products on Mobile (Happy Path) | `Search Keyword` = "" (empty)<br>`Product Data` = multiple products exist<br>`Network State` = Loaded | All products displayed in a scrollable grid on Mobile. Each card shows product image (with alt text), name, and price formatted with ₫ and thousands separator. | EP | **Pass:** Product grid displayed with correct formatting on Mobile.<br>**Fail:** Grid not displayed, missing image/alt/price, or formatting incorrect. |
 | **TC-FR05-EP-002** | Search by existing product name on Mobile | `Search Keyword` = "phone" (partial match)<br>`Product Data` = products with "phone" in name exist<br>`Network State` = Loaded | Only products matching "phone" are displayed in filtered grid. Search keyword is displayed safely (not rendered as HTML). | EP | **Pass:** Filtered results shown; keyword displayed as plain text.<br>**Fail:** Results not filtered or HTML rendered unsafely. |
 | **TC-FR05-EP-003** | Search with non-existent keyword on Mobile | `Search Keyword` = "xyznonexistent"<br>`Product Data` = no products match<br>`Network State` = Loaded | Empty state message "Không tìm thấy sản phẩm" displayed with appropriate illustration on Mobile screen. | EP | **Pass:** Empty state with message and illustration visible.<br>**Fail:** Blank screen, unfiltered list, or no empty state shown. |
-| **TC-FR05-EP-004** | Loading state on Mobile while fetching products | `Search Keyword` = ""<br>`Product Data` = being fetched<br>`Network State` = Loading | Loading indicator (spinner or skeleton) displayed on Mobile while API request is in progress. Grid appears after data loads. | EP | **Pass:** Loading indicator visible during fetch; grid replaces it on completion.<br>**Fail:** No loading indicator or grid appears before data is ready. |
-| **TC-FR05-EP-005** | Product card format validation on Mobile | `Search Keyword` = ""<br>`Product Data` = at least one product with image, name, price<br>`Network State` = Loaded | Product image has non-empty `alt` attribute describing the product. Price displayed in format "xxx.xxx ₫" with thousands separator. | EP | **Pass:** Alt text present and non-empty; price formatted correctly.<br>**Fail:** Missing alt text, empty alt, or incorrect price format. |
-| **TC-FR05-EP-006** | Search keyword XSS safety on Mobile | `Search Keyword` = "&lt;script&gt;alert('xss')&lt;/script&gt;"<br>`Product Data` = no products match<br>`Network State` = Loaded | Search keyword displayed as plain text. HTML tags and script are NOT rendered/executed. Empty state shown safely. | EP | **Pass:** HTML tags escaped; no script execution; plain text displayed.<br>**Fail:** HTML rendered or script executes. |
-| **TC-FR05-EP-007** | Single `<h1>` tag on Mobile Home page | `Search Keyword` = ""<br>`Network State` = Loaded | Mobile Home/Product list page contains exactly one `<h1>` tag describing the page content. | EP | **Pass:** Exactly one `<h1>` tag found on Mobile page.<br>**Fail:** Zero or multiple `<h1>` tags found. |
 
 ---
 
@@ -216,13 +221,17 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
   * Just-below (Min-1): 299,999 ₫ (Invalid)
   * At boundary (Min): 300,000 ₫ (Valid)
   * Just-above (Min+1): 300,001 ₫ (Valid)
-* `Current Date` vs expiry date (`EXPIRED` expiry: 2020-01-01):
-  * Just-below (Current date is 2019-12-31): Valid
-  * At boundary (Current date is 2020-01-01): Invalid (must be strictly before)
-  * Just-above (Current date is 2020-01-02): Invalid
-* `User Coupon Usage Count` vs limit:
-  * For `SAVE10` (limit 1): Usage = 0 (Valid), Usage = 1 (Invalid)
-  * For `VIP100` (limit 2): Usage = 1 (Valid), Usage = 2 (Invalid)
+* `Current Date` vs expiry date (must be strictly before `expired_at`; e.g., `EXPIRED` expiry = 2020-01-01):
+  * Just-below (Max-1): 2019-12-31 (Valid)
+  * At boundary (Max): 2020-01-01 (Invalid — must be strictly before)
+  * Just-above (Max+1): 2020-01-02 (Invalid)
+* `User Coupon Usage Count` (must be < `max_uses_per_user`):
+  * For `SAVE10` (limit = 1):
+    * Just-below (Max-1): 0 uses (Valid)
+    * At boundary (Max): 1 use (Invalid)
+  * For `VIP100` (limit = 2):
+    * Just-below (Max-1): 1 use (Valid)
+    * At boundary (Max): 2 uses (Invalid)
 
 ##### 2.2.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |
@@ -230,6 +239,9 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 | **TC-FR09-BVA-001** | Apply coupon below threshold limit (Min-1) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 299,999 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon rejected. Error "Đơn hàng chưa đạt giá trị tối thiểu 300.000 ₫" displayed. | BVA | **Pass:** Application rejected; correct error shown.<br>**Fail:** Coupon applied at 299,999 ₫. |
 | **TC-FR09-BVA-002** | Apply coupon at exact threshold limit (Min) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 300,000 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon applied. Discount: 30,000 ₫. Final amount: 270,000 ₫. | BVA | **Pass:** Coupon successfully applied at exactly 300,000 ₫.<br>**Fail:** Coupon rejected. |
 | **TC-FR09-BVA-003** | Apply coupon just above threshold limit (Min+1) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 300,001 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon applied. Discount: 30,000 ₫ (rounded down) or 30,000.1 ₫. Final amount adjusted. | BVA | **Pass:** Coupon successfully applied.<br>**Fail:** Coupon rejected. |
+| **TC-FR09-BVA-004** | Apply coupon on date just before expiry (Max-1) | `Coupon Code` = "EXPIRED"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2019-12-31 (1 day before expiry)<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon applied successfully. Discount calculated and applied. | BVA | **Pass:** Coupon applied on valid date before expiry.<br>**Fail:** Coupon rejected despite being before expiry. |
+| **TC-FR09-BVA-005** | Apply coupon on exact expiry date (Max) | `Coupon Code` = "EXPIRED"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2020-01-01 (expiry date)<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon rejected. Error "Mã giảm giá đã hết hạn sử dụng" displayed. | BVA | **Pass:** Rejected; expiry error displayed.<br>**Fail:** Coupon applied on expiry date. |
+| **TC-FR09-BVA-006** | Apply coupon on date just after expiry (Max+1) | `Coupon Code` = "EXPIRED"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2020-01-02 (1 day after expiry)<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 | Coupon rejected. Error "Mã giảm giá đã hết hạn sử dụng" displayed. | BVA | **Pass:** Rejected; expiry error displayed.<br>**Fail:** Coupon applied after expiry. |
 | **TC-FR09-BVA-007** | Apply coupon with usage count below limit (0 uses, limit 1) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 0 (below 1) | Coupon applied successfully. Discount: 35,000 ₫. | BVA | **Pass:** Coupon successfully applied.<br>**Fail:** Rejected. |
 | **TC-FR09-BVA-008** | Apply coupon with usage count at limit (1 use, limit 1) | `Coupon Code` = "SAVE10"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 1 (at limit) | Coupon rejected. Error "Bạn đã sử dụng hết lượt dùng mã giảm giá này" displayed. | BVA | **Pass:** Application blocked; limit error displayed.<br>**Fail:** Coupon applied over the usage limit. |
 | **TC-FR09-BVA-009** | Apply coupon with usage count below limit (1 use, limit 2) | `Coupon Code` = "VIP100"<br>`Order Total Amount` = 350,000 ₫<br>`Current Date` = 2026-06-17<br>`User Auth State` = Logged-in (JWT)<br>`Usage Count` = 1 (below 2) | Coupon applied successfully. Discount: 100,000 ₫. Final: 250,000 ₫. | BVA | **Pass:** Coupon successfully applied.<br>**Fail:** Rejected on the second use. |
@@ -270,15 +282,13 @@ Boundary Value Analysis (BVA) complements Equivalence Partitioning by testing va
 #### 2.4 FR-05: View Product List & Search on Mobile (Xem danh sách & Tìm kiếm trên Mobile)
 
 ##### 2.4.1 Boundary Value Identification
-* `Search Keyword` length (string input):
-  * At boundary (Min): 0 characters / empty (Valid — shows all products)
-  * At boundary (Min+1): 1 character (Valid — partial match search)
-  * Typical value: Full or partial product name (Valid)
-* `Product Data` count (number of products rendered on Mobile):
+* `Search Keyword` length (optional string, no upper limit):
+  * At boundary (Min): 0 characters (Valid — shows all products)
+  * Just-above (Min+1): 1 character (Valid — partial match)
+* `Product Data` count (non-negative integer, no upper bound):
   * Just-below (Min-1): N/A (negative count not applicable)
-  * At boundary (Min): 0 products (Empty state — "Không tìm thấy sản phẩm" with illustration)
-  * At boundary (Min+1): 1 product (Single item in grid on Mobile)
-  * Above boundary: Many products (Scrollable grid on Mobile viewport)
+  * At boundary (Min): 0 products (Valid — empty state)
+  * Just-above (Min+1): 1 product (Valid)
 
 ##### 2.4.2 BVA Test Cases
 | Test Case ID | Scenario / Description | Test Inputs | Expected Result | Testing Technique (EP / BVA) | Pass/Fail Criteria |

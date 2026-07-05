@@ -26,7 +26,7 @@
 | **AI tool(s) used:** | DeepSeek (via opencode AI agent) |
 | **AI Disclosure:** | [X] Yes  [ ] No |
 | **Bloom-AI Level targeted:** | G9.2 (Apply) & G9.3 (Analyse) |
-| **Total AI sessions referenced:** | 12 sessions (h7fm1xAN, 1mYUxv4k, O2TZthDY, CjtOfZQ1, 16I9Iafl, bfldgYK5, XckI6MpF, nYLIyz5B, oALhtJ1W, K8Bsdpuj, 07RDufkD) |
+| **Total AI sessions referenced:** | 13 sessions (h7fm1xAN, 1mYUxv4k, O2TZthDY, CjtOfZQ1, 16I9Iafl, bfldgYK5, XckI6MpF, nYLIyz5B, oALhtJ1W, K8Bsdpuj, 07RDufkD, sKILlEP01, sKILlBVA02) |
 | **Git commits audited:** | 15 commits (98bbf8d → 702072e) |
 
 ---
@@ -45,16 +45,16 @@
 
 ## 3. Executive Summary
 
-This report audits **10 AI-generated artifacts** produced across **12 AI interaction sessions** during HW02. The artifacts span four features (FR-03, FR-09, FR-15, FR-05/FR-20) and include test case design (EP & BVA), bug reporting, GitHub issue formatting, and reusable skill development.
+This report audits **12 AI-generated artifacts** produced across **13 AI interaction sessions** during HW02. The artifacts span four features (FR-03, FR-09, FR-15, FR-05/FR-20) and include test case design (EP & BVA), bug reporting, GitHub issue formatting, and reusable skill development.
 
 | Metric | Count | Percentage |
 | :---- | :---- | :---- |
-| **Total AI-generated artifacts audited** | 10 | 100% |
-| **VALID (correct, accepted as-is)** | 7 | 70% |
-| **INCOMPLETE (acceptable after edits)** | 3 | 30% |
+| **Total AI-generated artifacts audited** | 12 | 100% |
+| **VALID (correct, accepted as-is)** | 9 | 75% |
+| **INCOMPLETE (acceptable after edits)** | 3 | 25% |
 | **INVALID (wrong; rejected)** | 0 | 0% |
 
-**Key finding:** AI performed reliably at structured test-case generation (70% fully accepted) but showed recurrent blind spots in (a) completeness of optional-field partitions, (b) UI-element requirements not explicit in input-domain definitions, and (c) initial bug-report coverage that required substantial human supplementation (+600% more bugs identified by student review).
+**Key finding:** AI performed reliably at structured test-case generation (75% fully accepted) but showed recurrent blind spots in (a) completeness of optional-field partitions, (b) UI-element requirements not explicit in input-domain definitions, and (c) initial bug-report coverage that required substantial human supplementation (+600% more bugs identified by student review).
 
 ---
 
@@ -197,7 +197,7 @@ This report audits **10 AI-generated artifacts** produced across **12 AI interac
 
 ---
 
-### Artifact #10 — Bug Analysis Skill (skills/analysisBug.md)
+### Artifact #10 — Bug Analysis Skill (skills/analysisBug/SKILL.md)
 
 | Field | Content |
 | :---- | :---- |
@@ -205,9 +205,39 @@ This report audits **10 AI-generated artifacts** produced across **12 AI interac
 | **Commit** | Not yet committed (working file as of 05/07/2026) |
 | **Tool** | DeepSeek (via opencode) |
 | **Prompt (verbatim)** | "Create a reusable Agent Skill file for bug analysis workflow. Define: Workflow steps (open BugReport.md, search test cases, add to summary table, write detailed section, verify formatting), Bug Section Template (Metadata with Feature Under Test, Severity: Critical/Major/Minor, Priority: High/Medium/Low, Environment, Reporter: 23127402 - Truong Hoang Lam, Description citing violated test case, Steps to Reproduce, Expected Result, Actual Result, Evidence), Severity Guide with definitions, Priority Guide with definitions, Writing Rules (consistent BUG-FRxx-yy ID format, Vietnamese error messages, lowercase screenshot filenames), and a concrete Example (BUG-FR03-08: Password with space characters accepted during reset)." |
-| **AI Output** | `skills/analysisBug.md` — complete reuseable skill file with workflow, template, guides, rules, and a worked example. |
+| **AI Output** | `skills/analysisBug/SKILL.md` — complete reuseable skill file with workflow, template, guides, rules, and a worked example. |
 | **Verdict** | **VALID** ✅ |
 | **Reasoning (ISTQB)** | The skill correctly encapsulates ISTQB FL §5.4 defect reporting workflow into a reusable prompt. This aligns with HW02 Section 7's directive to build reusable Agent Skills. The template captures all mandatory defect report fields per ISTQB standards. |
+| **Student Fix** | None required. |
+
+---
+
+### Artifact #11 — Equivalence Analysis Skill (skills/equivalence_analysis/SKILL.md)
+
+| Field | Content |
+| :---- | :---- |
+| **Session ID** | `sKILlEP01` |
+| **Commit** | Not yet committed (working file as of 05/07/2026) |
+| **Tool** | DeepSeek (via opencode) |
+| **Prompt (verbatim)** | "Create a reusable Agent Skill file for Equivalence Partitioning (Domain Testing) analysis following the methodology from documents/S04_Domain_Testing.md. The skill should be used when writing or updating the Domain Testing (EP) sections in MainReport.md. Define: Purpose (explain when to use this skill), Workflow with 4 steps — Step 1: Identify Input & Output Variables (list all input fields, parameters, states), Step 2: Identify Equivalence Classes (partition valid and invalid classes using the S04 table format for range, set, must-be, and boolean conditions with examples), Step 3: Select Test Cases (combine multiple valid classes into one TC, test each invalid class separately), Step 4: Boundary Value Analysis overview (reference LB-1, LB, LB+1, UB-1, UB, UB+1 positions). Include example tables from S04. Add an 'Apply to MainReport.md' section showing the exact markdown structure for Analysis and EP Test Cases sections. Add Naming Conventions (TC-FRxx-EP-xxx, 3-digit sequence). Add Writing Rules (use exact feature IDs, Vietnamese error messages, ₫ formatting). Add Source section referencing S04 lecture slides." |
+| **AI Output** | `skills/equivalence_analysis/SKILL.md` — complete skill file (191 lines) with 4-step workflow, S04 examples, Apply section with markdown templates, naming conventions, writing rules, and source references. |
+| **Verdict** | **VALID** ✅ |
+| **Reasoning (ISTQB)** | The skill correctly captures ISTQB FL §4.2 Equivalence Partitioning methodology. The workflow follows the S04 lecture's step-by-step process. Valid-class combination and invalid-class isolation rules are accurately documented per ISTQB best practices. |
+| **Student Fix** | None required. |
+
+---
+
+### Artifact #12 — Boundary Value Analysis Skill (skills/boundary_analysis/SKILL.md)
+
+| Field | Content |
+| :---- | :---- |
+| **Session ID** | `sKILlBVA02` |
+| **Commit** | Not yet committed (working file as of 05/07/2026) |
+| **Tool** | DeepSeek (via opencode) |
+| **Prompt (verbatim)** | "Create a reusable Agent Skill file for Boundary Value Analysis following the methodology from documents/S04_Domain_Testing.md. The skill should be used when writing or updating the BVA sections in MainReport.md after the EP sections. Define: Purpose (explain why BVA catches off-by-one errors — inequalities mis-specified, boundary value mistyped). Add a 'Why BVA?' section explaining that programs fail at boundaries and boundary values catch errors that non-boundary values miss. Workflow with 4 steps — Step 1: Identify Boundary Limits (LB, UB, single bound), Step 2: Define Boundary Test Values (LB-1, LB, LB+1, UB-1, UB, UB+1 with classification table, separate examples for single-bound and two-sided range), Step 3: Write Boundary Value Identification Section (bullet-point format with Just-below/At boundary/Just-above), Step 4: Write BVA Test Case Table (columns: Test Case ID, Scenario, Test Inputs, Expected Result, Testing Technique=BVA, Pass/Fail Criteria). Include example tables from S04. Add an 'Apply to MainReport.md' section showing exact markdown structure. Add Naming Conventions (TC-FRxx-BVA-xxx, 3-digit sequence). Add Writing Rules (exact feature IDs, ₫ formatting). Add Source section." |
+| **AI Output** | `skills/boundary_analysis/SKILL.md` — complete skill file (155 lines) with 4-step workflow, Why BVA rationale, boundary position tables, Apply section with markdown templates, naming conventions, writing rules, and source references. |
+| **Verdict** | **VALID** ✅ |
+| **Reasoning (ISTQB)** | The skill accurately follows ISTQB FL §4.3 Boundary Value Analysis methodology. The LB-1/LB/LB+1/UB-1/UB/UB+1 positions are correctly defined. The distinction between single-bound and two-sided range scenarios aligns with S04 lecture material. |
 | **Student Fix** | None required. |
 
 ---
@@ -216,9 +246,9 @@ This report audits **10 AI-generated artifacts** produced across **12 AI interac
 
 | Metric | Count | Percentage |
 | :---- | :---- | :---- |
-| **Total AI-generated artifacts audited** | 10 | 100% |
-| **VALID (correct, accepted as-is)** | 7 | 70% |
-| **INCOMPLETE (acceptable after edits)** | 3 | 30% |
+| **Total AI-generated artifacts audited** | 12 | 100% |
+| **VALID (correct, accepted as-is)** | 9 | 75% |
+| **INCOMPLETE (acceptable after edits)** | 3 | 25% |
 | **INVALID (wrong; rejected)** | 0 | 0% |
 
 **Breakdown by artifact type:**
@@ -229,8 +259,8 @@ This report audits **10 AI-generated artifacts** produced across **12 AI interac
 | Main report formatting | 2 | 2 | 0 | 0 |
 | Bug identification & reporting | 4 | 1 | 3 | 0 |
 | GitHub Issues formatting | 1 | 1 | 0 | 0 |
-| Agent Skill development | 1 | 1 | 0 | 0 |
-| **Total** | **10** | **7** | **3** | **0** |
+| Agent Skill development | 3 | 3 | 0 | 0 |
+| **Total** | **12** | **9** | **3** | **0** |
 
 ---
 
