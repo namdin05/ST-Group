@@ -1,113 +1,77 @@
-# SKILL: AI Audit Record Generator (HW02 Compliant)
+# SKILL: AI Audit Appendix Generator (HW02 Section 9)
 
 ## Purpose
 
-Generate a structured AI Audit Report entry from a provided AI interaction.
+Generate an AI Audit Appendix entry that matches Section 9 of the HW02 assignment.
 
-This skill is intended for HW02 evidence collection and audit documentation.
-
-The goal is to preserve the original AI interaction as evidence and leave all evaluation activities to the student.
+This skill is for documentation only. It records the AI interaction as evidence and does not assess the correctness of the content.
 
 ---
 
-## Core Compliance Rules
+## Section 9 Alignment
 
-### Rule 1 – No Self-Evaluation
+The generated audit text must support the following assignment requirement:
 
-The AI must NEVER:
+- If AI was used, the report must state: "I use AI tools for the following tasks,"
+- Each interaction must include:
+	- the AI tool name
+	- the date and time
+	- the prompt
+	- the AI output
 
-- decide whether the output is VALID
-- decide whether the output is INVALID
-- decide whether the output is INCOMPLETE
-- suggest likely verdicts
+When generating a report appendix, include the declaration line above the interaction log if the user asks for a full appendix structure.
 
-The verdict section must remain untouched for manual student review.
-
----
-
-### Rule 2 – Verbatim Preservation
-
-The AI must preserve all provided prompts and outputs exactly as received.
-
-The AI must NEVER:
-
-- paraphrase
-- summarize
-- simplify
-- clean formatting
-- remove content
-- rewrite wording
-
-If exact content is unavailable:
-
-```text
-[VERBATIM CONTENT NOT AVAILABLE]
-```
-
-must be used.
-
-Never reconstruct missing content.
-
----
-
-### Rule 3 – No Fabricated Metadata
-
-The AI must NEVER invent:
-
-- timestamps
-- feature IDs
-- bug IDs
-- requirement IDs
-- verdicts
-- corrections
-
-If information is unavailable:
+If the user did not provide one of these items, use the placeholder:
 
 ```text
 [TO BE FILLED BY STUDENT]
 ```
 
-must be used.
-
 ---
 
-### Rule 4 – Human Ownership
+## Core Rules
 
-The following sections are reserved exclusively for the student:
+### Rule 1 - No Evaluation
 
-- Verdict
-- Reasoning
-- Corrections
-- Final Assessment
+Do not decide whether the AI output is valid, invalid, complete, or incomplete.
 
-The AI must not populate them.
+Do not add verdicts, reasoning, corrections, or final assessments.
 
----
+### Rule 2 - Verbatim Preservation
 
-### Rule 5 – Long Output Handling
+Preserve the supplied prompt and output exactly as received.
 
-If the supplied AI output exceeds model limitations:
+Do not paraphrase, summarize, clean up, or rewrite the content.
 
-Preserve:
+If the exact prompt or output is unavailable, use:
 
-1. beginning section verbatim
-2. ending section verbatim
+```text
+[VERBATIM CONTENT NOT AVAILABLE]
+```
 
-Insert:
+### Rule 3 - No Invented Metadata
+
+Do not invent timestamps, feature names, tool names, or any other metadata.
+
+Only reuse metadata that was supplied by the user.
+
+### Rule 4 - Long Output Handling
+
+If the provided AI output is too long to preserve fully, keep the beginning and ending verbatim and insert:
 
 ```text
 [CONTENT TRUNCATED DUE TO MODEL LIMIT]
 ```
 
-between them.
+in the middle.
 
 Do not summarize omitted content.
 
 ---
 
-# Expected Input Format
+## Expected Input Format
 
-When invoking this skill, provide:
+When invoked, the skill should receive three blocks in this order:
 
 Prompt:
 
@@ -124,21 +88,23 @@ Output:
 Optional Metadata:
 
 ```text
-Feature: FR-01 Web Registration
+Feature: FR-06 Mobile Product Detail
 Tool: GitHub Copilot Chat
-Date: 2026-07-03
+Date: 2026-07-05 14:30
 ```
 
 ---
 
-# Required Output Template
+## Required Output Template
+
+I use AI tools for the following tasks,
 
 ## AI Audit Record
 
 ### Metadata
 
 | Field | Value |
-|---------|---------|
+|---|---|
 | Feature | [TO BE FILLED BY STUDENT] |
 | Tool | [TO BE FILLED BY STUDENT] |
 | Timestamp | [TO BE FILLED BY STUDENT] |
@@ -161,35 +127,7 @@ Date: 2026-07-03
 
 ---
 
-### Student Review
-
-#### Verdict
-
-- [ ] VALID
-- [ ] INVALID
-- [ ] INCOMPLETE
-
-#### Student Reasoning
-
-> [TO BE FILLED BY STUDENT]
-
-#### Human Corrections
-
-> [TO BE FILLED BY STUDENT]
-
----
-
-### Compliance Checklist
-
-- [ ] Prompt preserved verbatim
-- [ ] Output preserved verbatim
-- [ ] No AI-generated verdict
-- [ ] No AI-generated correction
-- [ ] Human review completed
-
----
-
-# Trigger Commands
+## Trigger Commands
 
 Accepted trigger phrases:
 
@@ -203,7 +141,7 @@ Expected action:
 
 1. Read the supplied Prompt block.
 2. Read the supplied Output block.
-3. Generate the audit record template.
-4. Preserve content verbatim.
-5. Leave all review fields empty.
+3. Generate the audit record template in English.
+4. Preserve the prompt and output verbatim.
+5. Leave all review fields for the student.
 6. Do not perform any evaluation.

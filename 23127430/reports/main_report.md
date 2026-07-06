@@ -15,7 +15,7 @@
 | A | FR-01 Web Registration |
 | B | FR-07 Shopping Cart |
 | C | FR-13 Admin Dashboard |
-| D | FR-01 Mobile Registration |
+| D | FR-06 Mobile Product Detail |
 
 
 ## 3 FR-01 Web Registration
@@ -123,23 +123,3 @@ Note: the specification does not define any maximum length for Full Name, Email,
 | BVA-08 | Password length boundary - just above minimum | Name: Nguyen Van A; Email: newuser01@eshop.com; Password: Abc1!d789; Confirm Password: Abc1!d789 | 1. Open registration page. 2. Enter the test data. 3. Submit. | Registration succeeds if password complexity and all other fields are valid. | NOT RUN | AI Created |
 | BVA-09 | Confirm Password boundary - exact match | Name: Nguyen Van A; Email: newuser01@eshop.com; Password: Password123!; Confirm Password: Password123! | 1. Open registration page. 2. Enter the test data. 3. Submit. | Registration succeeds if all other fields are valid. | NOT RUN | AI Created |
 | BVA-10 | Confirm Password boundary - one character mismatch | Name: Nguyen Van A; Email: newuser01@eshop.com; Password: Password123!; Confirm Password: Password124! | 1. Open registration page. 2. Enter the test data. 3. Submit. | Registration is blocked because Confirm Password does not match Password. | NOT RUN | AI Created |
-
-### 3.3 AI Gap Analysis (FR-01: Account Registration)
-#### 3.3.1 Gaps in Domain Testing
-
-- **Locale and Input Normalization Omissions:** The AI generated standard ASCII values (`Nguyen Van A`) but completely ignored Vietnamese-specific data behaviors. It missed partitions for accented characters (`Nguyễn Văn Á`), complex Unicode normalization forms (NFC vs. NFD), double spaces, and leading/trailing whitespaces in fields like `Full Name` and `Email`.  
-- **Security & Vulnerability Blind Spots:** The automated suite treats inputs as clean text values. It completely missed data domains for adversarial testing, such as Cross-Site Scripting (XSS) payloads in `Full Name` (e.g., `<script>alert(1)</script>`) or SQL Injection strings in input fields.  
-- **Workflow & State Abuse Neglect:** AI assumes a clean, single-action desktop session. It omitted domain partitions for race conditions and structural multi-click abuse (e.g., clicking the "Register" button rapidly multiple times, resubmitting during a partial server delay, or attempting registration while already authenticated in another tab).  
-- **E-Commerce Context Ignorance:** The domain analysis treated registration as an isolated form. In a real e-commerce system like EShop, registration triggers secondary domain dependencies (e.g., initializing a Shopping Cart ID, mapping default guest session states, or issuing initial welcome coupons), none of which were covered.  
-
-#### 3.3.2 Gaps in Boundary Value Analysis
-
-- **Conceptual Confusion Between Techniques:** The AI miscategorized pure equivalence partitions (such as structural email regex components and password complexity character classes) as BVA boundaries. BVA requires testing along a measurable, discrete numeric continuum.  
-- **Missing Implicit / System-Level Boundaries:** Because the specification lacks explicit maximum limits, the AI strictly tested the minimum bounds and refused to probe unstated upper edges. It missed structural architectural limits like the standard database field constraint (e.g., 255 characters for `VARCHAR` fields) or the RFC 5321 maximum length limit for email processing (254 characters).  
-- **Whitespace Boundary Handling:** The BVA overlooked boundary behavior regarding trailing spaces. For example, a password consisting of 7 characters followed by a single space equals 8 characters in length; the AI failed to verify whether the system handles or trims this edge value correctly.  
-
-#### 3.3.3 Root Cause of AI Failures
-
-- **Over-Reliance on Explicit Specifications:** The model strictly optimizes for stated criteria to avoid hallucination, making it blind to hidden operational, database, and backend-enforcement constraints.  
-- **Lack of Adversarial Bias:** AI naturally generates deterministic, "happy-path" test designs instead of thinking like a malicious user or stress-testing the application's boundaries and infrastructure. 
-
