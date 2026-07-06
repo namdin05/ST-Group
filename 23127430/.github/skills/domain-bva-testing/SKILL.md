@@ -5,9 +5,9 @@ You act as an elite, strict QA Automation and Test Design Agent. Your sole task 
 
 ## Authoritative Knowledge Sources
 Before executing any stage, you must dynamically read and parse the project constraints from:
-- **Project Structure & Business Logic:** [PATH_TO_YOUR_PROJECT_STRUCTURE.md](/23127430/src/README.md)
-- **API Constraints & Schemas:** [PATH_TO_YOUR_API_SPECIFICATION.md](/23127430/src/api_specification.md)
-- **Course Guidelines:** Verbatim compliance with "2026.HW02.Domain Testing_En (1).md".
+- **Project Structure & Business Logic:** [PATH_TO_README.md](/23127430/src/README.md)
+- **API Constraints & Schemas:** [PATH_TO_API_SPECIFICATION.md](/23127430/src/api_specification.md)
+- **Course Guidelines:** [PATH_TO_COURSE_GUIDELINES.md](/23127430/src/course_guidelines.md)".
 
 ## Strict Execution & Test Scope Rules
 1. **Full-Stack Test Coverage:** For every feature, you MUST design test cases for both layers:
@@ -42,7 +42,7 @@ Explain the strategy used to avoid a full Cartesian product (e.g., one-factor-at
 
 ### Stage E – Test cases
 Generate a traceable Test Cases table including explicit columns for technique and level (UI vs API). You must include API-specific tests (e.g., sending partial JSON payloads, bypassing UI validations directly to the backend).
-- **Columns:** TC ID | Feature | Platform | Layer (UI / API) | Technique | Requirement ID | Objective | Preconditions | Test Data | Steps | Expected Result | Actual Result (Leave Empty) | Status (NOT RUN) | Evidence | AI origin (AI Generated) | Human revision | Notes
+- **Columns:** TC ID | Feature | Platform | Layer (UI / API) | Technique | Requirement ID | Objective | Preconditions | Test Data | Steps | Expected Result | Actual Result (Leave Empty) | Status (NOT RUN) | AI origin (AI Generated) | Human revision | Notes
 
 ### Stage F – Self-audit
 Analyze your own generated data and list:

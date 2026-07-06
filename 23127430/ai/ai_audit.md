@@ -1,5 +1,99 @@
 I use AI tools for the following tasks,
 
+# AI Audit Record
+
+### Metadata
+
+| Field | Value |
+| --- | --- |
+| Feature | Agent Skill – AI Audit Appendix Generator |
+| Tool | ChatGPT |
+| Timestamp | 03/07/2026 12:02 |
+
+---
+
+### Original Prompt (Verbatim)
+
+```text
+Tôi cần chỉnh sửa lại phần AI Audit Skill này, hiện tại output chưa ra đúng,
+AI vẫn đang rút gọn output nên tôi muốn điều chỉnh lại.
+
+Hãy cho tôi bản đã điều chỉnh skill này.
+```
+
+---
+
+### AI Output (Verbatim)
+
+```text
+The skill was redesigned to:
+
+- Remove automatic session scanning.
+- Preserve prompts and outputs verbatim.
+- Prevent AI self-evaluation.
+- Prevent fabrication of metadata.
+- Add handling for long outputs.
+- Reserve all verdict and correction sections for human review.
+
+Generated artifact:
+
+SKILL: AI Audit Record Generator (HW02 Compliant)
+
+Main sections:
+- Purpose
+- Core Compliance Rules
+- Verbatim Preservation
+- No Self-Evaluation
+- No Fabricated Metadata
+- Human Ownership
+- Long Output Handling
+- Expected Input Format
+- Required Output Template
+- Trigger Commands
+```
+
+---
+
+### Generated Artifact
+
+```text
+SKILL.md
+```
+
+Purpose:
+
+```text
+Standardize AI audit evidence collection for HW02 while ensuring
+that prompts and outputs are preserved exactly and that all
+evaluation remains the responsibility of the student.
+```
+
+---
+
+### Student Notes
+
+```text
+The initial version of the skill attempted to automatically extract
+content from chat history and occasionally produced shortened outputs.
+
+The revised version was created to enforce verbatim preservation,
+prevent AI-generated verdicts, and improve compliance with HW02
+AI audit requirements.
+```
+
+---
+
+### Usage Outcome
+
+```text
+The generated skill was stored as:
+
+.github/skills/AI_AUDIT/SKILL.md
+
+and will be used to generate standardized AI Audit entries
+throughout the HW02 workflow.
+```
+
 ## AI Audit Record
 
 ### Metadata
@@ -8,7 +102,7 @@ I use AI tools for the following tasks,
 |---------|---------|
 | Feature | FR-01 Web Registration |
 | Tool | GitHub Copilot Chat |
-| Timestamp | [TO BE FILLED BY STUDENT] |
+| Timestamp | 04/07/2026 10:37 |
 
 ---
 
@@ -41,6 +135,65 @@ Apply Domain Testing for FR-01 Account Registration and structure the result int
 * **Generated Test Cases Structural Summary:** TC-01 (Happy Path), TC-02 (Blank Full Name), TC-03 (Invalid Email Format), TC-04 (Duplicate Email), TC-05 (Password Too Short), TC-06 (No Uppercase), TC-07 (No Lowercase), TC-08 (No Digit), TC-09 (No Special Character), TC-10 (Confirm Password Mismatch).
 ```
 
+## AI-002 – Skill Refinement and Compliance Improvement
+
+### Metadata
+
+| Field | Value |
+|---------|---------|
+| Feature | Agent Skill – Domain & BVA Testing |
+| Tool | GitHub Copilot Chat |
+| Timestamp | 05/07/2026 08:10 |
+
+### Purpose
+
+Improve the AI Audit Skill after observing that generated audit records occasionally summarized or truncated AI outputs.
+
+### Interaction Summary
+
+The student reviewed the initial version of the AI Audit Skill and identified the following issues:
+
+- AI outputs were sometimes shortened.
+- Verbatim preservation was not guaranteed.
+- The skill relied on automatic session extraction.
+- The skill could encourage AI-generated evaluations.
+
+The student requested improvements to strengthen compliance with HW02 AI audit requirements.
+
+### AI Contribution
+
+The AI proposed:
+
+- Explicit verbatim-preservation rules.
+- Prohibition of AI-generated verdicts.
+- Human-owned review sections.
+- Long-output handling procedures.
+- A standardized audit record template.
+
+### Human Review
+
+The student reviewed the proposal and selected the following changes:
+
+- Remove automatic session scanning.
+- Require manual Prompt/Output input.
+- Keep verdict and correction sections empty.
+- Add compliance checklist items.
+- Strengthen anti-fabrication requirements.
+
+### Resulting Artifact
+
+Generated file:
+
+.github/skills/AI_AUDIT/SKILL.md
+
+Purpose:
+
+Provide a reusable workflow for documenting AI interactions while ensuring that final evaluation remains the responsibility of the student.
+
+### Outcome
+
+The revised skill was adopted for subsequent AI audit activities in HW02.
+
 ---
 
 ## AI Audit Record
@@ -51,7 +204,7 @@ Apply Domain Testing for FR-01 Account Registration and structure the result int
 |---------|---------|
 | Feature | FR-06 Mobile Product Detail |
 | Tool | GitHub Copilot Chat |
-| Timestamp | [TO BE FILLED BY STUDENT] |
+| Timestamp | 05/07/2026 10:50 |
 
 ---
 
@@ -189,7 +342,7 @@ The API test set uses a small decision table instead of combining every product,
 |---------|---------|
 | Feature | FR-07 Shopping Cart |
 | Tool | GitHub Copilot Chat |
-| Timestamp | [TO BE FILLED BY STUDENT] |
+| Timestamp | 05/07/2026 13:21 |
 
 ---
 
@@ -288,6 +441,9 @@ For API coverage, the baseline is a valid JWT and a complete item payload. The k
 - Cases requiring API-level testing: TC-FR07-API-01 through TC-FR07-API-07, especially the invalid header, malformed payload, duplicate-add, and isolation checks.
 - Cases requiring a real mobile device: none for this FR-07 report because the selected platform is Web.
 ````
+```
+
+---
 
 ## AI Audit Record
 
@@ -295,9 +451,9 @@ For API coverage, the baseline is a valid JWT and a complete item payload. The k
 
 | Field | Value |
 |---|---|
-| Feature | [TO BE FILLED BY STUDENT] |
+| Feature | Rewrite feature |
 | Tool | GitHub Copilot Chat |
-| Timestamp | [TO BE FILLED BY STUDENT] |
+| Timestamp | 06/07/2026 12:04|
 
 ---
 
@@ -305,9 +461,6 @@ For API coverage, the baseline is a valid JWT and a complete item payload. The k
 
 ```text
 bạn cũng hãy dùng @file:SKILL.md để ghi lại hoạt động rewrite và sửa này lại
-```
-
----
 
 ### AI Output (Verbatim)
 
@@ -327,7 +480,7 @@ Nội dung của các block `Original Prompt` và `AI Output` vẫn được gi�
 |---|---|
 | Feature | FR-01 Account Registration |
 | Tool | GitHub Copilot Chat |
-| Timestamp | [TO BE FILLED BY STUDENT] |
+| Timestamp | 06/07/2026 19:34|
 
 ---
 
@@ -345,7 +498,6 @@ Test design for FR-01
 I filled reports/fr01.md with the full FR-01 six-stage test design, scoped to the web registration page and the backend `/api/register` flow. It includes domain variables, equivalence partitions, boundary analysis, combination strategy, traceable UI/API test cases, and a self-audit, all wrapped in the required raw markdown fence and with `Actual Result` left blank and `Status` set to `NOT RUN`.
 
 I also verified the saved content by reading it back. If you want, I can do the same for the next feature report.
-```
 ```
 
 
