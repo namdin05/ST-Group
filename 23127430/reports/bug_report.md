@@ -186,6 +186,32 @@
 | **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/45 |
 | **Environment** | Web Frontend |
 
+### BUG-006 – API allows duplicate items in cart array instead of merging and incrementing quantity
+
+| Field | Details |
+| :--- | :--- |
+| **Bug ID** | BUG-006 |
+| **Severity** | High |
+| **Priority** | High |
+| **Steps to reproduce** | 1. Gửi request `POST /api/cart` lần thứ nhất với payload chứa thông tin Sản phẩm A (Ví dụ: `id: 1`, `name: "iPhone 15 Pro Max"`).<br>2. Tiếp tục gửi request `POST /api/cart` lần thứ hai với chính payload của Sản phẩm A đó để cố tình thêm trùng lặp.<br>3. Gửi request `GET /api/cart` để lấy về cấu trúc mảng dữ liệu giỏ hàng hiện tại và quan sát Response JSON. |
+| **Actual result** | Hệ thống không hề gộp sản phẩm mà trả về một mảng chứa phần tử `null` và phân tách sản phẩm trùng lặp thành 2 object riêng biệt có cùng ID nằm trên 2 dòng dữ liệu khác nhau:<br>`[null,{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1}]` |
+| **Expected result** | Mảng dữ liệu trả về từ API bắt buộc phải xử lý gộp logic (Data normalization). Chỉ duy nhất một logical item của sản phẩm đó được giữ lại trong danh sách và trường `quantity` phải được tự động cộng dồn tăng lên thành `2` thay vì tạo dòng mới rác dữ liệu. |
+| **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/50 |
+| **Environment** | Backend API Testing (Postman) |
+
+### BUG-007 – Backend API accepts malformed and missing field payloads in cart mutation
+
+| Field | Details |
+| :--- | :--- |
+| **Bug ID** | BUG-007 |
+| **Severity** | High |
+| **Priority** | High |
+| **Steps to reproduce** | 1. Gửi request `POST /api/cart` với payload sai tên thuộc tính (Ví dụ: truyền `"nameee"` thay vì `"name"`).<br>2. Tiếp tục gửi một request `POST /api/cart` khác với payload thiếu hoàn toàn trường bắt buộc (Ví dụ: không truyền trường `"quantity"`).<br>3. Gửi request `GET /api/cart` để kiểm tra cấu trúc mảng dữ liệu hiện tại của giỏ hàng. |
+| **Actual result** | Backend không hề kiểm tra tính hợp lệ của dữ liệu đầu vào (Missing request body validation). Hệ thống vẫn chấp nhận xử lý, làm biến đổi trạng thái giỏ hàng và trả về một mảng chứa cả phần tử rác, thuộc tính sai, lẫn object thiếu trường dữ liệu:<br>`[null,{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":1,"name":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":1,"nameee":"iPhone 15 Pro Max","price":30000000,"quantity":1},{"id":1,"name":"iPhone 15 Pro Max","price":30000000}]` |
+| **Expected result** | Hệ thống bắt buộc phải từ chối các request có payload không hợp lệ (Missing quantity, non-numeric quantity, quantity $\le$ 0, hoặc malformed fields). API phải trả về mã lỗi thích hợp (Ví dụ: `400 Bad Request`) và đảm bảo trạng thái dữ liệu giỏ hàng trên server không bị biến đổi (Cart is not mutated). |
+| **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/51 |
+| **Environment** | Backend API Testing (Postman) |
+
 ## FR-13: Dashboard Admin
 
 ### BUG-001 – Dashboard calculates Total Revenue incorrectly (revenue is doubled)
@@ -202,3 +228,41 @@
 | **Environment** | Web Admin Dashboard / Backend API Analytics |
 
 ## FR-06: Mobile Product Detail
+
+### BUG-001 – System allows adding a product to the cart with a quantity of zero (0)
+
+| Field | Details |
+| :--- | :--- |
+| **Bug ID** | BUG-001 |
+| **Severity** | High |
+| **Priority** | High |
+| **Steps to reproduce** | 1. Truy cập vào trang chi tiết sản phẩm (Product Detail page).<br>2. Tại ô nhập số lượng (Quantity field), tiến hành nhập giá trị `0`.<br>3. Nhấn vào nút **Thêm vào giỏ hàng** (Add to cart).<br>4. Điều hướng tới trang Giỏ hàng để kiểm tra trạng thái. |
+| **Actual result** | Hệ thống hoàn toàn không có cơ chế chặn hoặc chuẩn hóa dữ liệu đầu vào. Sản phẩm vẫn được thêm vào giỏ hàng thành công với số lượng bằng `0`, gây sai lệch logic tính toán tổng tiền và luồng thanh toán (Checkout flow). |
+| **Expected result** | Hệ thống bắt buộc phải từ chối hành vi này. Hệ thống phải chặn đứng hành động thêm vào giỏ (hiển thị thông báo lỗi) hoặc tự động chuẩn hóa (normalize) giá trị về số lượng tối thiểu hợp lệ là `1`. |
+| **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/47 |
+| **Environment** | Mobile App |
+
+### BUG-002 – Input field allows pasting/entering invalid quantity (negative number)
+
+| Field | Details |
+| :--- | :--- |
+| **Bug ID** | BUG-002 |
+| **Severity** | High |
+| **Priority** | High |
+| **Steps to reproduce** | 1. Sao chép một số có giá trị nhỏ hơn 1 (Ví dụ: -1).<br>2. Thực hiện hành động dán (Paste) giá trị này vào ô nhập số lượng trong giỏ hàng (hoặc dùng các ký tự đặc biệt để gõ số âm nếu giao diện sót lỗi).<br>3. Nhấn nút cập nhật số lượng hoặc tiến hành lưu thông tin. |
+| **Actual result** | Ô nhập liệu vẫn ghi nhận giá trị âm mà không hề có cảnh báo lỗi, cho phép luồng nghiệp vụ tiếp tục chạy với dữ liệu sai trái. |
+| **Expected result** | Hệ thống phải thực hiện validate giá trị biên dưới (Boundary Check). Nếu người dùng cố tình dán hoặc nhập số lượng âm, hệ thống bắt buộc phải tự động đưa giá trị về mức tối thiểu hợp lệ là `1` hoặc hiển thị thông báo lỗi chặn không cho thực thi hành động. |
+| **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/48 |
+| **Environment** | Mobile App |
+
+### BUG-003 – Input field allows pasting non-numeric text breaking data validation
+
+| Field | Details |
+| :--- | :--- |
+| **Severity** | Medium |
+| **Priority** | High |
+| **Steps to reproduce** | 1. Sao chép (Copy) một đoạn văn bản (chữ thuần) bất kỳ từ bên ngoài.<br>2. Truy cập vào giao diện nhập số lượng mặt hàng.<br>3. Sử dụng tổ hợp phím `Ctrl + V` (hoặc chuột phải chọn Paste) để dán đoạn văn bản đó vào ô nhập số lượng.<br>4. Quan sát giá trị hiển thị trong ô nhập và nhấn nút thực thi hành động (ví dụ: Cập nhật hoặc Thêm vào giỏ). |
+| **Actual result** | Ô nhập liệu vẫn chấp nhận và hiển thị chuỗi ký tự chữ thuần vừa dán, hệ thống không tự động lọc bỏ ký tự lạ hoặc chặn hành vi dán dữ liệu sai kiểu, dẫn đến nguy cơ làm gãy logic tính toán số và lỗi hệ thống phía sau. |
+| **Expected result** | Hệ thống phải thực hiện kiểm tra dữ liệu khi dán (Paste validation). Ô nhập liệu bắt buộc phải từ chối chuỗi văn bản không phải là số (hoặc tự động xóa bỏ hoàn toàn các ký tự không phải số ngay khi vừa dán vào). |
+| **GitHub Issue link** | https://github.com/namdin05/ST-Group/issues/49 |
+| **Environment** | Mobile App |
