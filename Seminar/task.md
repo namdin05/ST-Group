@@ -16,9 +16,7 @@
 
 - Study Mock, Stub, Fake and Test Double concepts in automation testing.
 - Research API mocking capabilities in Playwright.
-- Analyze EShop business flows and select scenarios for automation.
 - Design initial test scenarios for:
   - Login & Account Lockout
   - Add To Cart
   - Checkout
-- Prepare seminar materials related to automation testing theory and tool implementation.

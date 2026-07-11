@@ -2,14 +2,14 @@
 
 ## FR-01: Đăng ký tài khoản
 
-- Lỗ hổng trong Phân vùng tương đương (Domain Testing Gaps)
+- **Lỗ hổng trong Phân vùng tương đương**
     - Thiếu kiểm tra bảo mật: Không có test case cho XSS, SQL Injection hoặc kiểm tra rò rỉ thông tin tài khoản qua thông báo lỗi.
     - Thiếu kiểm tra lạm dụng luồng: Bỏ sót các kịch bản spam nhiều lần nút Đăng ký hoặc đăng ký khi người dùng đã đăng nhập.
 
-- Lỗ hổng trong Phân tích giá trị biên (Boundary Value Analysis Gaps)
+- **Lỗ hổng trong Phân tích giá trị biên**
     - Biên Password chưa thực tế: Chỉ tập trung vào số lượng ký tự mà chưa kiểm tra các trường hợp gần đạt yêu cầu như thiếu đúng một loại ký tự hoặc chứa khoảng trắng.
 
-- Nguyên nhân AI bỏ sót: Tư duy bám sát đặc tả (Spec-driven bias): AI tối ưu hóa để không vi phạm tài liệu sẵn có, dẫn đến việc thiết kế các kịch bản "Happy-path" mà thiếu đi tư duy nghịch phá (Adversarial thinking) của một kiểm thử viên con người nhằm phá vỡ hệ thống.
+- **Nguyên nhân AI bỏ sót**: Tư duy bám sát đặc tả (Spec-driven bias): AI tối ưu hóa để không vi phạm tài liệu sẵn có, dẫn đến việc thiết kế các kịch bản "Happy-path" mà thiếu đi tư duy nghịch phá (Adversarial thinking) của một kiểm thử viên con người nhằm phá vỡ hệ thống.
 
 ---
 
@@ -33,11 +33,11 @@
 
 ## FR-06: Xem chi tiết sản phẩm
 
-- **Lỗ hổng trong Phân vùng tương đương (Domain Testing Gaps)**
+- **Lỗ hổng trong Phân vùng tương đương**
     - Thiếu kiểm tra ngữ cảnh Mobile: AI bỏ sót các trường hợp thay đổi mạng (WiFi, 4G, mất mạng), tải dữ liệu chậm và hiển thị trên các độ phân giải màn hình khác nhau.
     - Thiếu kiểm tra vòng đời ứng dụng: Không xem xét các tình huống gián đoạn như cuộc gọi đến, thông báo hệ thống, ứng dụng chạy nền rồi quay lại.
 
-- **Lỗ hổng trong Phân tích giá trị biên (Boundary Value Analysis Gaps)**
+- **Lỗ hổng trong Phân tích giá trị biên**
     - Thiếu biên hiển thị giao diện: Bỏ sót trường hợp tên hoặc mô tả sản phẩm quá dài gây lỗi hiển thị, tràn chữ hoặc che khuất nút chức năng.
 
-- Nguyên nhân AI bỏ sót: AI thiên về mô hình kiểm thử ứng dụng Web, nên tập trung vào dữ liệu nhập liệu và luồng chức năng cơ bản, đồng thời chưa suy luận đầy đủ các yếu tố đặc thù của Mobile như phần cứng, mạng và vòng đời ứng dụng.
+- **Nguyên nhân AI bỏ sót:** AI thiên về mô hình kiểm thử ứng dụng Web, nên tập trung vào dữ liệu nhập liệu và luồng chức năng cơ bản, đồng thời chưa suy luận đầy đủ các yếu tố đặc thù của Mobile như phần cứng, mạng và vòng đời ứng dụng.
