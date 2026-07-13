@@ -1,0 +1,131 @@
+* commit 2e94182343bcd79df599dbae3a833b958c1d4e91
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Tue Jul 7 17:31:40 2026 +0700
+| 
+|     Report bug of FR-06, FR-13 & Self assessment
+| 
+|  23127430/README.md             | 25 +++++++++------
+|  23127430/ai/ai_gap.md          | 44 +++++----------------------
+|  23127430/reports/bug_report.md | 66 +++++++++++++++++++++++++++++++++++++++-
+|  3 files changed, 88 insertions(+), 47 deletions(-)
+| 
+* commit 8e810dd7e927ffd18c21589280de3f90b456fd37
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Tue Jul 7 01:14:08 2026 +0700
+| 
+|     Bug: Report bug of FR01, FR07, FR13
+| 
+|  23127430/.github/copilot-instructions.md          |   0
+|  .../.github/skills/domain-bva-testing/SKILL.md    |   8 +-
+|  .../ai/{ai_critique_&_audit.md => ai_audit.md}    | 172 +++++++++++++++-
+|  23127430/ai/ai_critique.md                        |   9 +
+|  23127430/ai/ai_gap.md                             |  83 ++++++--
+|  23127430/reports/bug_report.md                    | 217 +++++++++++++++++---
+|  23127430/reports/fr01.md                          |  40 ++--
+|  23127430/reports/fr06.md                          |   2 +-
+|  8 files changed, 454 insertions(+), 77 deletions(-)
+| 
+* commit 8dd2e3058e07ee9eccaff1d5d41a67e9c62d640f
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Mon Jul 6 10:12:59 2026 +0700
+| 
+|     Edit skill & Rewrite FR=01
+| 
+|  .../.github/skills/ai-audit-recorder/SKILL.md     | 148 ++++-------
+|  23127430/ai/ai_critique.md                        |   0
+|  23127430/ai/ai_critique_&_audit.md                | 259 +++++++++++++-------
+|  23127430/reports/bug_report.md                    |  31 ++-
+|  23127430/reports/fr01.md                          |  95 +++++++
+|  23127430/reports/fr06.md                          | 111 +++++++++
+|  23127430/reports/main_report.md                   |  22 +-
+|  7 files changed, 449 insertions(+), 217 deletions(-)
+| 
+* commit d818b68f6e6755a11ff41b464c1b99b52baa48da
+| Merge: 247423c d41d9a5
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Sun Jul 5 15:30:08 2026 +0700
+| 
+|     Merge branch 'main' of https://github.com/namdin05/ST-Group
+| 
+* commit 247423c9db79218a1ce7dfefe9dc9fac14eb6302
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Sun Jul 5 15:28:22 2026 +0700
+| 
+|     feat: Generate FR-13: Admin Dashboard
+| 
+|  .../.github/skills/ai-audit-recorder/SKILL.md     | 221 +++++++++++++++++---
+|  23127430/ai/ai_critique_&_audit.md                | 208 ++++++++++++++++++
+|  23127430/ai/ai_gap.md                             |  28 +++
+|  23127430/reports/fr13.md                          | 116 ++++++++++
+|  4 files changed, 545 insertions(+), 28 deletions(-)
+| 
+* commit 8118e87b3d70913b6589eb56168675a448cec292
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Sat Jul 4 23:06:01 2026 +0700
+| 
+|     feat: Create skill & test with FR-07
+| 
+|  .../.github/skills/domain-bva-testing/SKILL.md    |  64 ++--
+|  23127430/reports/fr07.md                          |  83 +++++
+|  Seminar/Report_04/Group03.md                      | 100 ++++++
+|  Seminar/Report_04/Group03.pdf                     | Bin 0 -> 87869 bytes
+|  Seminar/Report_04/Group03_04.zip                  | Bin 0 -> 73902 bytes
+|  Seminar/Report_04/T02_Tool_Selection_Proposal.md  | 324 ++++++++++++++++++++
+|  Seminar/task.md                                   |  24 ++
+|  7 files changed, 571 insertions(+), 24 deletions(-)
+| 
+* commit c6f710eccba869f6f60dca77147708e1fcd729b9
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Fri Jul 3 23:08:39 2026 +0700
+| 
+|     test: Agent Skill
+| 
+|  .../.github/skills/ai-audit-recorder/SKILL.md     | 71 +++++++++++----------
+|  .../.github/skills/domain-bva-testing/SKILL.md    | 35 ++++++++++
+|  23127430/reports/main_report.md                   | 11 ++--
+|  3 files changed, 78 insertions(+), 39 deletions(-)
+| 
+* commit db1b2aa5e65b3d38bfa29aa2e8ae70101f7000b2
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Fri Jul 3 22:33:45 2026 +0700
+| 
+|     feat: AI Gap for FR-01
+| 
+|  23127430/reports/main_report.md | 21 ++++++++++++++++++++-
+|  1 file changed, 20 insertions(+), 1 deletion(-)
+| 
+* commit 46f6f0b7fccd24cd2b7d5cf1688db2a819e94677
+| Merge: b963d17 5b8f720
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Thu Jul 2 23:45:44 2026 +0700
+| 
+|     Merge branch 'main' of https://github.com/namdin05/ST-Group
+| 
+* commit b963d1760a9367a2fd76275a081946529b14b76b
+| Author: Nam <dhnam23@clc.fitus.edu.vn>
+| Date:   Thu Jul 2 23:42:32 2026 +0700
+| 
+|     Create structure & FR-01: Web Registration
+| 
+|  .../{.gitkeep => .github/copilot-instructions.md} |   0
+|  .../.github/skills/ai-audit-recorder/SKILL.md     |  41 +++
+|  .../.github/skills/domain-bva-testing/SKILL.md    |   0
+|  23127430/.gitignore                               |   1 +
+|  23127430/README.md                                |  19 ++
+|  23127430/ai/ai_critique_&_audit.md                |  50 +++
+|  23127430/git_commit_log.txt                       |   0
+|  23127430/reports/bug_report.md                    |  18 +
+|  23127430/reports/main_report.md                   | 125 +++++++
+|  .../T02_Tool_Selection_Proposal_Theory_Driven.md  | 353 ++++++++++++++++++++
+|  10 files changed, 607 insertions(+)
+| 
+* commit 10382308504b750b77d722c77518dc633611e9e1
+  Author: Nam <dhnam23@clc.fitus.edu.vn>
+  Date:   Sat Jun 13 15:00:16 2026 +0700
+  
+      Create project structure
+  
+   23127209/.gitkeep | 0
+   23127402/.gitkeep | 0
+   23127430/.gitkeep | 0
+   3 files changed, 0 insertions(+), 0 deletions(-)
