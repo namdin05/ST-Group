@@ -26,63 +26,63 @@ test.describe("Checkout & Coupon", () => {
 
     });
 
-    // test.describe("3.2. Áp dụng Mã giảm giá", () => {
+    test.describe("3.2. Áp dụng Mã giảm giá", () => {
 
-    //     test("TC-3.2.1: Mã giảm giá không tồn tại", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("FAKECODE");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/không hợp lệ|không tồn tại|invalid/i)).toBeVisible();
-    //     });
+        test("TC-3.2.1: Mã giảm giá không tồn tại", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("FAKECODE");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/không hợp lệ|không tồn tại|invalid/i)).toBeVisible();
+        });
 
-    //     test("TC-3.2.2: Mã giảm giá đã hết hạn", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("EXPIRED");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/hết hạn|expired/i)).toBeVisible();
-    //     });
+        test("TC-3.2.2: Mã giảm giá đã hết hạn", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("EXPIRED");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/hết hạn|expired/i)).toBeVisible();
+        });
 
-    //     test("TC-3.2.3: Mã giảm giá yêu cầu đơn hàng tối thiểu - chưa đủ ngưỡng", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/tối thiểu|chưa đủ|chưa đạt|min.*order/i)).toBeVisible();
-    //     });
+        test("TC-3.2.3: Mã giảm giá yêu cầu đơn hàng tối thiểu - chưa đủ ngưỡng", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/tối thiểu|chưa đủ|chưa đạt|min.*order/i)).toBeVisible();
+        });
 
-    //     test("TC-3.2.4: Mã giảm giá áp dụng thành công - đủ ngưỡng đơn hàng", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         const totalText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/giảm|discount|thành công/i)).toBeVisible();
-    //         const discountedText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
-    //         expect(discountedText).not.toBe(totalText);
-    //     });
+        test("TC-3.2.4: Mã giảm giá áp dụng thành công - đủ ngưỡng đơn hàng", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            const totalText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/giảm|discount|thành công/i)).toBeVisible();
+            const discountedText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
+            expect(discountedText).not.toBe(totalText);
+        });
 
-    //     test("TC-3.2.5: Người dùng đã hết lượt sử dụng mã giảm giá", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/hết lượt|đã sử dụng|giới hạn|max.*use/i)).toBeVisible();
-    //     });
+        test("TC-3.2.5: Người dùng đã hết lượt sử dụng mã giảm giá", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("SAVE10");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/hết lượt|đã sử dụng|giới hạn|max.*use/i)).toBeVisible();
+        });
 
-    //     test("TC-3.2.6: Mã giảm giá loại giảm cố định", async ({ page }) => {
-    //         await login(page);
-    //         await page.goto("http://localhost:5173/checkout");
-    //         const totalText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
-    //         await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("BIGBUY");
-    //         await page.getByRole('button', { name: /áp dụng|apply/i }).click();
-    //         await expect(page.getByText(/giảm|discount|thành công/i)).toBeVisible();
-    //         const discountedText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
-    //         expect(discountedText).not.toBe(totalText);
-    //     });
+        test("TC-3.2.6: Mã giảm giá loại giảm cố định", async ({ page }) => {
+            await login(page);
+            await page.goto("http://localhost:5173/checkout");
+            const totalText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
+            await page.locator('input[placeholder*="mã giảm"], input[placeholder*="coupon"], .coupon-input input').first().fill("BIGBUY");
+            await page.getByRole('button', { name: /áp dụng|apply/i }).click();
+            await expect(page.getByText(/giảm|discount|thành công/i)).toBeVisible();
+            const discountedText = await page.locator('.total-amount, .order-total, [data-testid="total"]').textContent();
+            expect(discountedText).not.toBe(totalText);
+        });
 
-    // });
+    });
 
     // test.describe("3.3. Tính toàn vẹn dữ liệu đơn hàng", () => {
 
