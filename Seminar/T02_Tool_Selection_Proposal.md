@@ -1,4 +1,4 @@
-# T02 — Web Automation Testing: Theory-Driven Tool Selection Proposal
+# T02 — Web Automation Testing
 
 > **SUT:** EShop — <https://github.com/ttbhanh/eshop-sut>  
 > **Mục đích tài liệu:** Trình bày cơ sở lý thuyết của kiểm thử tự động, từ đó xây dựng tiêu chí khảo sát và đề xuất công cụ phù hợp cho seminar T02.
