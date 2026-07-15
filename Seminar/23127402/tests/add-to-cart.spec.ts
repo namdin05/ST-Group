@@ -16,7 +16,6 @@ async function addFirstProduct(page: Page, quantity: number = 1) {
         await page.locator('input[type="number"], .quantity-input input').fill(quantity.toString());
     }
     await page.getByRole('button', { name: /thêm.*giỏ|add.*cart|mua/i }).click();
-    await page.getByRole('button', { name: /thêm.*giỏ|add.*cart|mua/i }).click();
 }
 
 test.describe("Add To Cart", () => {
