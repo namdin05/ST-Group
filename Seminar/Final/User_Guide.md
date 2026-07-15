@@ -451,7 +451,86 @@ Automated tools can sometimes hide bugs or create a false sense of security. Her
 
 ---
 
-## 7. References
+## 7. AI-Augmented Testing with Playwright Agent and OpenCode
+
+AI-augmented testing integrates autonomous agents with Playwright to accelerate test design, code generation, and test healing. By combining Playwright's specialized agent loop with **OpenCode** and **OpenRouter**, you can automate end-to-end testing workflows.
+
+### Installation & Setup
+
+Follow these steps to set up the AI-augmented testing environment:
+
+1. **Download and Install OpenCode**:
+   Download the OpenCode application from the official site: [https://opencode.ai/](https://opencode.ai/).
+
+2. **Generate an OpenRouter API Key**:
+   Go to OpenRouter and create an API key at [https://openrouter.ai/](https://openrouter.ai/).
+
+3. **Connect OpenCode to OpenRouter**:
+   - Launch OpenCode.
+   - Select **Connect Provider**.
+   - Choose **OpenRouter** and enter your generated API key.
+
+4. **Select an LLM Model**:
+   Choose a model in OpenCode (it is highly recommended to select a free model such as **Hy3 free** for cost efficiency).
+
+5. **Install Playwright**:
+   Ensure Playwright is installed in your test project. See [https://playwright.dev/](https://playwright.dev/) for more details.
+
+6. **Initialize Playwright**:
+   If starting from scratch, initialize a new Playwright project with:
+   ```bash
+   npm init playwright@latest
+   ```
+
+7. **Initialize Playwright Agents**:
+   Launch the agent setup connected to OpenCode by running:
+   ```bash
+   npx playwright init-agents --loop=opencode
+   ```
+
+8. **Create a Seed File**:
+   Create a basic `seed.spec.ts` in your tests directory to serve as the baseline template/context for the agents.
+
+---
+
+### The Three Playwright Agents
+
+The Playwright AI setup utilizes a multi-agent architecture consisting of three specialized agents: **Planner**, **Generator**, and **Healer**. You prompt them step-by-step to automate your testing lifecycle:
+
+```mermaid
+graph TD
+    A[seed.spec.ts & Project Context] -->|1. Prompt| B(Planner Agent)
+    B -->|Output| C[test_plan.md]
+    C -->|2. Prompt| D(Generator Agent)
+    D -->|Output| E[tests/login.spec.ts]
+    E -->|3. Run & Fail| F(Healer Agent)
+    F -->|Output| G[Passing or Skipped Test]
+```
+
+#### 1. Planner Agent
+* **Purpose**: Analyzes the application context and design requirements to output a detailed test plan.
+* **Usage**: Provide the agent with context files (like `README.md` and `seed.spec.ts`) and describe the features/functions you wish to test.
+* **Example Prompt**: 
+  > *"Create a test plan for the login feature. Read README.md and seed.spec.ts for context."*
+* **Output**: A Markdown test plan file outlining the scenarios and assertions to be built.
+
+#### 2. Generator Agent
+* **Purpose**: Converts the test plan into executable Playwright test scripts.
+* **Usage**: Provide the newly generated test plan markdown file and request the test suite generation.
+* **Example Prompt**: 
+  > *"Generate tests for the Login feature based on the test plan."*
+* **Output**: An executable test suite generated under the `tests/` directory.
+
+#### 3. Healer Agent
+* **Purpose**: Automatically diagnoses and fixes test scripts when they fail during execution.
+* **Usage**: Point the healer to the failing test suite and request a fix.
+* **Example Prompt**: 
+  > *"Fix the test."*
+* **Output**: A corrected, passing test suite (or a skipped test with notes if the healer determines the application functionality is fundamentally broken).
+
+---
+
+## 8. References
 
 To learn more about the technologies used in this guide, check the following official resources:
 
@@ -465,3 +544,4 @@ To learn more about the technologies used in this guide, check the following off
   [https://docs.github.com/en/copilot](https://docs.github.com/en/copilot)
 - **EShop SUT GitHub Repository**:
   [https://github.com/ttbhanh/eshop-sut](https://github.com/ttbhanh/eshop-sut)
+
