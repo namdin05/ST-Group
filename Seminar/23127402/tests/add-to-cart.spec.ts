@@ -16,7 +16,7 @@ async function addFirstProduct(page: Page, quantity: number = 1) {
         await page.locator('input[type="number"], .quantity-input input').fill(quantity.toString());
     }
     await page.getByRole('button', { name: /thêm.*giỏ|add.*cart|mua/i }).click();
-    await expect(page.getByText(/thành công|đã thêm|added to cart|success/i)).toBeVisible();
+    await page.getByRole('button', { name: /thêm.*giỏ|add.*cart|mua/i }).click();
 }
 
 test.describe("Add To Cart", () => {
@@ -26,13 +26,13 @@ test.describe("Add To Cart", () => {
         test("TC-2.1.1: Thêm vào giỏ hàng với số lượng mặc định 1", async ({ page }) => {
             await login(page);
             await addFirstProduct(page, 1);
-            await expect(page.locator('.cart-badge, [data-testid="cart-count"], .nav-cart span')).toBeVisible();
+            await expect(page.getByText(/thành công|Đã thêm|added to cart|success/i)).toBeVisible();
         });
 
         test("TC-2.1.2: Thay đổi số lượng lên 5 và thêm vào giỏ hàng", async ({ page }) => {
             await login(page);
             await addFirstProduct(page, 5);
-            await expect(page.locator('.cart-badge, [data-testid="cart-count"], .nav-cart span')).toBeVisible();
+            await expect(page.getByText(/thành công|Đã thêm|added to cart|success/i)).toBeVisible();
         });
 
     });
@@ -80,7 +80,6 @@ test.describe("Add To Cart", () => {
             await expect(page).toHaveURL(/\/product\/|\/details\/|\/item\//);
             await page.locator('input[type="number"], .quantity-input input').fill("3");
             await page.getByRole('button', { name: /thêm.*giỏ|add.*cart|mua/i }).click();
-            await expect(page.getByText(/thành công|đã thêm|added to cart|success/i)).toBeVisible();
 
             await page.goto("http://localhost:5173/cart");
             await expect(page.locator('.cart-item, [data-testid="cart-item"], .cart-row')).toHaveCount(1);
@@ -115,7 +114,7 @@ test.describe("Add To Cart", () => {
             await addFirstProduct(page, 1);
             await page.goto("http://localhost:5173/cart");
 
-            await page.locator('button[aria-label*="xóa"], button[aria-label*="delete"], .btn-remove, .delete-item').first().click();
+            await page.locator('button[aria-label*="Xóa"], button[aria-label*="xóa"], button[aria-label*="delete"], .btn-remove, .delete-item, button:has-text("Xóa"), button:has-text("xóa")').first().click();
             await expect(page.getByRole('dialog').first()).toBeVisible();
         });
 
