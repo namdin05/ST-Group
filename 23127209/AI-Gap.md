@@ -5,3 +5,5 @@
 - Câu trả lời của AI chưa hoàn toàn đầy đủ. Khi đi vào bước tiếp theo, AI lại bổ sung và phải chỉnh sửa lại các bước trước, và nó không được đồng nhất. Tester phải kiểm tra, chỉnh sửa lại các phần đã làm. Việt này xảy ra là do những chỉnh sửa này phải ở các bước tiếp theo thì AI mới có thể nhận ra và bổ sung
 
 - AI bị bias sang các chức năng khác
+
+- Model tự liên hệ test case dù chưa làm tới

@@ -30,7 +30,9 @@ Tài liệu này định nghĩa các kịch bản kiểm thử (Test Scenarios) 
         *   *Kết quả mong đợi*: Hiển thị thông báo lỗi đăng nhập thất bại. Thông báo nằm ở vị trí phía trên nút Submit.
     2.  **TC-1.2.2**: Nhập đúng Email nhưng sai Mật khẩu.
         *   *Kết quả mong đợi*: Hiển thị thông báo lỗi đăng nhập thất bại phía trên nút Submit.
-    3.  **TC-1.2.3**: Để trống một hoặc cả hai trường Email/Mật khẩu và nhấn Submit.
+    3.  **TC-1.2.3**: Để trống trường Email và nhấn Submit.
+        *   *Kết quả mong đợi*: Trình duyệt báo lỗi yêu cầu nhập liệu (HTML5 `required` attribute) hoặc báo lỗi trên giao diện.
+    4.  **TC-1.2.4**: Để trống trường Mật khẩu và nhấn Submit.
         *   *Kết quả mong đợi*: Trình duyệt báo lỗi yêu cầu nhập liệu (HTML5 `required` attribute) hoặc báo lỗi trên giao diện.
 
 #### Kịch bản 1.3: Kiểm tra định dạng dữ liệu đầu vào (Validation & GUI)
