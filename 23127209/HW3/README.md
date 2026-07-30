@@ -50,6 +50,7 @@
 - [Reusable Agent Skill](skills/ems-scenario-d-testing/SKILL.md)
 - [PDF output](output/pdf/)
 - [Git log export](git-log.txt)
+- [Next-session handoff](reports/NEXT-SESSION.md)
 
 ## Self-assessment
 
