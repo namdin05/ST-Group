@@ -49,6 +49,7 @@
 - [AI critique](reports/AI-Critique.md)
 - [Reusable Agent Skill](skills/ems-scenario-d-testing/SKILL.md)
 - [PDF output](output/pdf/)
+- [Git log export](git-log.txt)
 
 ## Self-assessment
 

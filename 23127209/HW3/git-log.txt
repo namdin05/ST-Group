@@ -1,0 +1,23 @@
+Scenario D Git log export
+Generated: 2026-07-30
+
+26aeed7 (HEAD -> 23127209) test(hw3): complete Scenario D Windows evidence
+73ecc3f Merge branch 'main' into 23127209
+bb78b84 (origin/main, origin/HEAD, main) Merge pull request #55 from namdin05/23127402
+c320c39 (origin/23127402) add 3 flow for seminar
+3c883a5 add evidence
+52f9d85 update checkout spec
+424c70c update add to cart spec
+f52eb3f add ai-augmented tesing in user guide
+c0eb460 Merge pull request #54 from namdin05/23127402
+1c64877 (23127402) update add to cart spec
+5a4f655 update add to cart spec
+3eb7d64 submit
+7001183 feat(domain testing) FR-04:  Boundary Value Analysis and add test case for BVA, add some addtional test cases for others FR
+4451272 feat(domain testing) FR-04: selecting test cases
+d44faa6 feat(domain testing) FR-04: identify equivalence classes
+7be3387 feat(domain testing) FR-04: identify input output variable
+f5efbb9 report 2
+3f341b7 Merge pull request #53 from namdin05/23127430
+1389a57 report: User_Guide.md
+cd6b253 update test case
