@@ -1,0 +1,21 @@
+{
+  "name": "23127402",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "playwright test",
+    "test:repeat": "playwright test --repeat-each=10",
+    "test:login": "playwright test tests/login.spec.ts",
+    "test:cart": "playwright test tests/add-to-cart.spec.ts",
+    "test:checkout": "playwright test tests/checkout.spec.ts"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "devDependencies": {
+    "@playwright/test": "^1.61.1",
+    "@types/node": "^26.1.1"
+  }
+}

@@ -1,0 +1,159 @@
+Running 10 tests using 1 worker
+
+  ✓ Run 1: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 2: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 3: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 4: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 5: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 6: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 7: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 8: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 9: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+  ✓ Run 10: TC-2.1.1: Click 'Thêm vào giỏ hàng' with the default quantity set to 1.
+
+10 passed
+Total duration: 5.7s
+
+Running 10 tests using 1 worker
+
+  ✓ Run 1: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 2: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 3: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 4: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 5: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 6: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 7: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 8: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 9: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+  ✓ Run 10: TC-2.1.2: Change the quantity to 5 and click 'Thêm vào giỏ hàng'.
+
+10 passed
+Total duration: 4.7s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 2: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 3: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 4: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 5: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 6: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 7: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 8: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 9: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 10: TC-2.2.1: Enter the quantity as 0 or a negative number (0, -1, -5) -> Error: Error: expect(locator).toBeVisible() failed
+
+10 failed
+Total duration: 14.5s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 2: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 3: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 4: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 5: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 6: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 7: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 8: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 9: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+  ✘ Run 10: TC-2.2.2: Enter a quantity that is not an integer (2.5, abc, 1e3) -> Error: Error: expect(received).toContain(expected) // indexOf
+
+10 failed
+Total duration: 5.4s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 2: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 3: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 4: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 5: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 6: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 7: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 8: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 9: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+  ✘ Run 10: TC-2.3.1: Add product A (quantity 2) -> Go back to home page -> Re-enter product A and add again (quantity 3) -> Error: Error: expect(locator).toHaveCount(expected) failed
+
+10 failed
+Total duration: 57.1s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 2: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 3: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 4: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 5: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 6: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 7: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 8: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 9: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 10: TC-2.4.1: Press increase (+) or decrease (-) quantity directly in Cart page -> Error: Error: expect(locator).toBeVisible() failed
+
+10 failed
+Total duration: 55.8s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 2: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 3: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 4: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 5: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 6: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 7: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 8: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 9: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 10: TC-2.4.2: Press the Delete product button -> display confirmation dialog -> Error: Error: expect(locator).toBeVisible() failed
+
+10 failed
+Total duration: 56.0s
+
+Running 10 tests using 1 worker
+
+  ✘ Run 1: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 2: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 3: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 4: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 5: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 6: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 7: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 8: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 9: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+  ✘ Run 10: TC-2.4.3: Select 'Cancel' on the delete confirmation dialog. -> Error: Error: expect(locator).toBeVisible() failed
+
+10 failed
+Total duration: 56.0s
+
+Running 10 tests using 1 worker
+
+  ✓ Run 1: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 2: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 3: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 4: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 5: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 6: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 7: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 8: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 9: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+  ✓ Run 10: TC-2.4.4: Select 'Confirm/Delete' on the delete confirmation dialog.
+
+10 passed
+Total duration: 5.8s
+
+Running 10 tests using 1 worker
+
+  ✓ Run 1: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 2: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 3: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 4: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 5: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 6: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 7: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 8: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 9: TC-2.4.5: Delete all products from the cart -> cart is empty
+  ✓ Run 10: TC-2.4.5: Delete all products from the cart -> cart is empty
+
+10 passed
+Total duration: 4.9s
