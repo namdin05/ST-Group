@@ -1,0 +1,4 @@
+interface:
+  display_name: "EMS Scenario D Testing"
+  short_description: "Run evidence-based EMS support-flow testing"
+  default_prompt: "Use $ems-scenario-d-testing to execute and document Scenario D support-request testing."
