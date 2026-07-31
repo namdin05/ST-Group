@@ -1,19 +1,21 @@
 # AI Audit Log
 
-| Date | AI tool | User intent / prompt summary | AI-assisted activity | Human review status |
+Exact interaction times and verbatim assistant outputs are not present in the
+workspace. They are not reconstructed.
+
+| Date / time | AI tool | User intent / prompt summary | AI-assisted output | Evidence / review status |
 | --- | --- | --- | --- | --- |
-| 2026-07-30 | Codex | Read the assignment and identify work for Scenario D, excluding real-user testing. | Interpreted scope and prepared an execution plan. | Pending student review |
-| 2026-07-30 | Codex with `ux-heuristics` | Begin the work possible on Windows; defer other browsers/devices. | Inspected D1–D4 on the live EMS, applied Nielsen/Krug heuristics, and drafted findings with severity 0–4. | Pending student review |
-| 2026-07-30 | Codex with Browser and ImageGen | Continue Scenario D testing. | Generated a neutral upload-test PNG; created request `#33`; verified Pending in D2/D3; sent Admin internal note and official response; verified Resolved and response in D2. | Pending student review |
-| 2026-07-30 | Codex with Browser | Complete all currently possible work. | Verified upload type/size/count boundaries, removal, Cancel, signed-out callback, wrong-role denial, and saved Fail evidence. | Pending student review |
-| 2026-07-30 | Codex with PDF and `skill-creator` | Package the assignment deliverables. | Built overlay evidence, validated the reusable skill, and produced rendered PDF reports. | Pending student review |
-| 2026-07-31 | Codex with `ux-heuristics` and Browser | Continue every Windows check that can be evidenced without simulating other environments. | Measured contrast and 320 px reflow; verified D2/D3 search/filter persistence, D3 no-result/reset and page-2 context; kept keyboard and Export checks Pending when automation was inconclusive. | Pending student review |
-| 2026-07-31 | Codex with `ux-heuristics` and Browser | Automate every remaining check that the current browser can support and skip unsupported checks. | Expanded contrast/reflow to D1–D4; verified localization, alert timing/semantics, and signed-out D2/D4 callbacks; documented unsupported request interception, download capture, and keyboard synthesis without inferring results. | Pending student review |
+| 2026-07-30; time unavailable | Codex | Read the assignment and identify Scenario D work, excluding real-user testing. | Interpreted scope and prepared an execution plan. | User prompt retained; full output available only in Codex task |
+| 2026-07-30; time unavailable | Codex + `ux-heuristics` | Begin work possible on Windows and defer other environments. | Inspected D1-D4 and drafted severity-rated findings. | Findings tied to live observations |
+| 2026-07-30; time unavailable | Codex + Browser + ImageGen | Continue Scenario D testing. | Created neutral upload input and executed request #33 user-to-Admin-to-user. | Asset and screenshots retained |
+| 2026-07-30; time unavailable | Codex + Browser | Complete all currently possible work. | Checked upload boundaries, removal, Cancel, authentication, and role denial. | Evidence retained; student review pending |
+| 2026-07-30; time unavailable | Codex + PDF + `skill-creator` | Prepare deliverables. | Built overlays, reusable skill, validator, and PDF reports. | Files retained; student review pending |
+| 2026-07-31; time unavailable | Codex + `ux-heuristics` + Browser | Continue deterministic Windows checks. | Measured contrast/reflow and checked list-state persistence. | Inconclusive keyboard/Export checks remained Pending |
+| 2026-07-31; time unavailable | Codex + `ux-heuristics` + Browser | Automate every supported remaining check. | Checked localization, alerts, callbacks, and documented automation limits. | Unsupported network/download/keyboard results were not inferred |
 
-## Important limitations
+## Missing audit evidence
 
-- No real-user testing data was generated.
-- No finding was submitted to the course Google Form.
-- No non-Windows compatibility result was inferred or fabricated.
-- The full verbatim conversation/output should be exported from the Codex task and
-  attached if the course requires every prompt and complete AI output.
+- Original group checklist-generation and refinement prompts: no source data found.
+- Exact interaction times: no source data found.
+- Verbatim assistant output export: remains in the Codex task; not stored locally.
+- Google Form confirmation/timestamp: no submission made.

@@ -1,41 +1,31 @@
 # AI Critique
 
-The AI was useful for turning a long assignment specification into a structured
-Scenario D workflow, mapping 56 checklist items across four screens, and maintaining
-consistent finding fields. It also helped identify accessibility problems that are
-easy to miss during mouse-only testing, such as an unnamed request-type control,
-validation focus remaining on the submit button, and the generic attachment label
-`attachment_1`. However, its first analysis was incomplete. It initially treated
-several visually plausible behaviours as passes before every required interaction
-had been executed. This happened because a language model tends to generalise from
-the visible interface and common design patterns, while a tester must require direct
-evidence for each state. The process was corrected by introducing a `Pending` state
-and refusing to convert it to Pass without a live observation.
+AI was useful for converting a long assignment into a structured Scenario D
+workflow, mapping 56 checklist items across four screens, and maintaining consistent
+evidence references. It also highlighted accessibility problems that mouse-only
+testing can miss, including unnamed controls, validation focus remaining on the
+submit button, low contrast, and the generic attachment label `attachment_1`.
 
-The AI also could not independently provide genuine compatibility evidence for
-macOS, iOS, Android, Safari, Firefox, Edge, Opera, tablets, or phones. Simulating
-those results or editing screenshots would violate the assignment's evidence rules.
-Similarly, it could not supply the group's original checklist-generation prompts
-because they were not present in the workspace. Reconstructing them would create a
-false audit history. A generated PNG was used only as neutral upload input and was
-explicitly separated from live EMS screenshots.
+Its first analysis was nevertheless too optimistic. Some visually plausible
+behaviors were initially treated as passes before the required interaction had
+been executed. A language model can generalize from familiar interface patterns,
+whereas a tester must require direct evidence for each state. The process was
+corrected by adding `Pending` and refusing to convert it to Pass without a
+repeatable observation.
 
-The main lesson is that AI should organise testing and challenge assumptions, not
-act as the source of truth. Every Pass, screenshot, participant, browser cell, form
-timestamp, and Git commit must correspond to a real execution. Human review remains
-necessary for severity, scope decisions, and final submission integrity.
+AI could not provide genuine evidence for other operating systems, browsers,
+tablets, or phones. A 320 CSS px viewport test can reveal reflow defects but is not
+equivalent to a physical mobile environment. Likewise, automated keyboard events,
+network interception, and Excel download capture were inconclusive, so those checks
+remain Pending. Inventing results or editing screenshots would violate the
+assignment's evidence rules.
 
-A later pass reinforced this rule: automated keyboard events and Export-download
-capture were inconclusive, so those cells stayed Pending. In contrast, numeric
-contrast ratios, direct 320 CSS px overflow measurements, and repeatable navigation
-state checks were strong enough to update the checklist and add two findings. The
-320 px browser viewport was documented only as a reflow test, never as genuine phone
-or mobile-browser compatibility evidence.
+The same integrity rule applies to audit history. The group's original
+checklist-generation prompts are absent, and reconstructing them would create a
+false record. Generated imagery was used only as neutral upload input and was kept
+separate from EMS evidence.
 
-The final automated pass also exposed an important limit of automation coverage.
-Computed styles, exact viewport dimensions, alert semantics, and authentication
-redirects were deterministic. In contrast, the available browser surface did not
-support request interception, produced no capturable Excel download, and could not
-faithfully reproduce a physical keyboard Tab sequence. The report therefore closes
-only deterministic cells and retains Pending for the rest instead of treating tool
-limitations as product failures.
+Overall, AI should organize testing, expose assumptions, and automate deterministic
+checks, not act as the source of truth. Every Pass, participant, browser cell,
+form timestamp, screenshot, and commit must correspond to a real execution. Human
+review remains necessary for severity, scope, and final submission integrity.

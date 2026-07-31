@@ -16,6 +16,8 @@ the final AI Audit if the course requires verbatim output.
 | 2026-07-30 | `làm hết cho tôi` |
 | 2026-07-31 | `[$ux-heuristics] oke bắt đầu làm tiếp những phần có thể làm được đi` |
 | 2026-07-31 | `làm tất cả cho tôi, cái nào không tự động làm được thì bỏ qua` |
+| 2026-07-31 | `Audit toàn bộ bài nộp so với Introduction.md và Requirement.md ...` |
+| 2026-07-31 | `PLEASE IMPLEMENT THIS PLAN: Kế hoạch hoàn thiện và kiểm tra bài nộp — chưa tạo ZIP` |
 
 ## Missing group prompt history
 
@@ -23,3 +25,6 @@ The prompts originally used by the group to generate and refine `Checklist.md`
 were not supplied in this workspace. They must be obtained from the group member
 or AI session that created the checklist. They are not reconstructed here because
 that would produce an inaccurate audit trail.
+
+Exact prompt times and verbatim assistant outputs are not available in repository
+files. The Codex task is the source for a future conversation export.

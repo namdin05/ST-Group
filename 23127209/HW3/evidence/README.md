@@ -32,6 +32,11 @@ and are intentionally omitted from the final repository after execution.
 
 Files under `compatibility/` are derived only by adding a transparent evidence
 overlay to the corresponding live screenshot. UI content is otherwise unchanged.
+They are supplemental Windows in-app Chromium baselines and are not counted as
+Google Chrome or as phone/tablet compatibility runs.
+
+Future compatibility evidence must follow the target cell IDs in
+[`../compatibility/Windows-Baseline.md`](../compatibility/Windows-Baseline.md).
 
 ## Automated measurements
 

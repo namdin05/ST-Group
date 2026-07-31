@@ -12,8 +12,8 @@
 | Checklist results | 95 Pass, 31 Fail, 78 N/A, 20 Pending |
 | Findings | 11 (5 severity-3, 6 severity-2) |
 | User testing | Not performed; no participant data was fabricated |
-| Compatibility | 4 Windows desktop cells complete; other environments pending |
-| Google Form | Not submitted |
+| Compatibility | 4 supplemental Windows Chromium baselines; 24 target cells Pending |
+| Google Form | 11 copy-ready drafts prepared; not submitted |
 
 ## Completed
 
@@ -32,21 +32,29 @@
 - Added MSSV/email overlays to all four Windows compatibility cells.
 - Created the checklist execution matrix, finding log, report, AI audit, critique,
   source record, Agent Skill, validator, and PDF build tooling.
+- Prepared an eight-case manual guide mapped to exactly 20 Pending checklist cells.
+- Prepared a 24-cell compatibility target matrix covering 3 OS, 5 browsers, and
+  desktop/tablet/phone for every D1-D4 screen.
+- Prepared 11 Google Form drafts without submitting them.
 
 ## Intentionally excluded or blocked
 
 - Task 2 with five real participants is intentionally excluded by the student.
-- macOS/Linux, five-browser coverage, tablet, and phone require genuine additional
-  environments. These cells remain Pending rather than being simulated.
-- Google Form submission requires explicit student permission.
+- Chrome, Edge, Firefox, Opera, Android phone, and iPadOS tablet coverage requires
+  genuine additional environments. These cells remain Pending rather than simulated.
+- Google Form submission requires student authentication and manual field verification.
 - Original group checklist-generation prompts are absent and were not reconstructed.
+- Exact AI interaction times and a verbatim output export are not available as
+  workspace files and were not reconstructed.
 
 ## Deliverables
 
 - [Main Scenario D report](reports/Scenario-D-Test-Report.md)
 - [Checklist execution](execution/Checklist-Execution.md)
+- [Manual guide for 20 Pending cells](execution/Pending-Manual-Test-Guide.md)
 - [Bug & usability findings](findings/Bug-Usability-Findings-Log.md)
-- [Windows compatibility matrix](compatibility/Windows-Baseline.md)
+- [Google Form draft](findings/Google-Form-Draft.md)
+- [Compatibility target matrix and Windows baseline](compatibility/Windows-Baseline.md)
 - [Evidence index](evidence/README.md)
 - [Checklist sources](references/Checklist-Sources.md)
 - [AI audit report](reports/AI-Audit-Report.md)
@@ -55,6 +63,7 @@
 - [Reusable Agent Skill](skills/ems-scenario-d-testing/SKILL.md)
 - [PDF output](output/pdf/)
 - [Git log export](git-log.txt)
+- [Submission preparation manifest](SUBMISSION-MANIFEST.md)
 - [Next-session handoff](reports/NEXT-SESSION.md)
 
 ## Self-assessment
@@ -65,6 +74,6 @@
 | 1b | D1–D4 execution and bug reports | 15 | 14 | End-to-end complete; 20 cells remain Pending |
 | 2 | Five-person user testing | 25 | 0 | Intentionally not performed |
 | 3 | Cross-browser/platform matrix | 25 | 4 | Four Windows Chromium desktop cells only |
-| 4 | Google Form and consolidated log | 10 | 4 | Complete local log; Form not submitted |
+| 4 | Google Form and consolidated log | 10 | 4 | Complete local log and draft; Form not submitted |
 | 5 | Agent Skill | 10 | 9 | Reusable skill and validator complete; video not supplied |
 |  | **Total** | **100** | **41** | Honest evidence-based estimate |

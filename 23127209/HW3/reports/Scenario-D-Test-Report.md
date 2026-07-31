@@ -1,6 +1,6 @@
-# Scenario D — GUI and Usability Test Report
+# Scenario D - GUI and Usability Test Report
 
-Status: **Windows execution expanded; compatibility expansion pending**
+Status: **Windows execution expanded; 20 checklist cells and 24 compatibility target cells Pending**
 
 Test dates: 2026-07-30 to 2026-07-31
 
@@ -29,7 +29,7 @@ internal note remained hidden.
 
 | Property | Verified value |
 | --- | --- |
-| Request | `#33` — `HW03 Scenario D end-to-end test 23127209` |
+| Request | `#33` - `HW03 Scenario D end-to-end test 23127209` |
 | User | `nakhoa232@clc.fitus.edu.vn` |
 | Type | Support |
 | State transition | Pending → Resolved |
@@ -123,13 +123,19 @@ attachment names, and complete verified keyboard-only and failure-recovery paths
 
 ## Remaining limits
 
-- Reliable keyboard-only traversal, hover/focus/disabled-state coverage,
-  network-failure recovery, D2 pagination, D3 Export Excel, and upload-progress
-  behaviour remain Pending.
+- Exactly 20 checklist cells remain Pending. They are mapped to eight manual cases
+  in [`Pending-Manual-Test-Guide.md`](../execution/Pending-Manual-Test-Guide.md):
+  device classes, control states, focus order, keyboard operation, D2 pagination,
+  D3 Export, Export feedback, and D1 upload progress/recovery.
 - The 320 CSS px check is a reflow test on Windows Chromium, not evidence of a real
   phone, mobile browser, or mobile operating system.
-- macOS/Linux, additional browsers, tablet, and phone evidence require genuine
-  environments and are not inferred from Windows Chromium.
-- Google Form submission has not been performed.
+- The compatibility plan contains 24 Pending target cells. For each D1-D4 screen it
+  covers Windows 11 Chrome/Edge/Firefox/Opera desktop, Android Chrome phone, and
+  iPadOS Safari tablet. The four current in-app Chromium results are supplemental
+  baselines and do not count as Chrome runs.
+- Eleven Google Form entries are prepared locally but have not been submitted.
+- Task 2 remains intentionally excluded; no participant, SUS, or UEQ-S data exists.
+- The Agent Skill demo video, original group prompts, exact AI interaction times,
+  and local verbatim conversation export remain unavailable.
 - Unsupported automation was not treated as evidence: request interception,
   download capture, and synthesized Tab traversal were inconclusive.
