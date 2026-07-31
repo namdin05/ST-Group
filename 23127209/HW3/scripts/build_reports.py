@@ -109,7 +109,16 @@ def markdown_story(path: Path, usable_width: float):
             story.append(Paragraph(clean_inline(line[4:]), styles["H3Arial"]))
         elif line.startswith("- "):
             flush_paragraph()
-            story.append(Paragraph(clean_inline(line[2:]), styles["BulletArial"], bulletText="•"))
+            bullet_parts = [line[2:].strip()]
+            while i + 1 < len(lines) and lines[i + 1].startswith("  "):
+                i += 1
+                bullet_parts.append(lines[i].strip())
+            story.append(
+                Paragraph(
+                    clean_inline("• " + " ".join(bullet_parts)),
+                    styles["BulletArial"],
+                )
+            )
         else:
             paragraph.append(line)
         i += 1
