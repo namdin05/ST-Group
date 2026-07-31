@@ -32,3 +32,10 @@ and are intentionally omitted from the final repository after execution.
 
 Files under `compatibility/` are derived only by adding a transparent evidence
 overlay to the corresponding live screenshot. UI content is otherwise unchanged.
+
+## Automated measurements
+
+- [`measurements/2026-07-31-automated-ui.md`](measurements/2026-07-31-automated-ui.md):
+  contrast ratios, 320 CSS px reflow dimensions, alert semantics/timing,
+  authentication redirects, localization checks, and explicitly inconclusive
+  automation.

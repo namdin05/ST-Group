@@ -57,6 +57,8 @@ internal note remained hidden.
   measured 2.56:1 and pink error text measured 3.53:1.
 - At 320 CSS px, the user header exceeds the content viewport and causes horizontal
   scrolling.
+- Empty validation uses a persistent `role="alert"` message that remains visible
+  beyond 5 seconds without covering Submit.
 
 ## D2 observations
 
@@ -68,6 +70,7 @@ internal note remained hidden.
 - Search and status filter state persisted after opening request `#33` and returning.
 - At 320 CSS px, the document measured 342 px against a 305 px content viewport;
   the menu control extended off-screen.
+- A signed-out detail deep link preserves `/complaints/33` in `callbackUrl`.
 
 ## D3 observations
 
@@ -83,6 +86,9 @@ internal note remained hidden.
   and Reset action.
 - Two automated Export Excel attempts produced no captured download. This remains
   Pending for manual verification rather than being classified as a failure.
+- At 320 CSS px, the Admin document measured 516 px against a 305 px content
+  viewport; Export, tabs, and filters were off-screen.
+- Vietnamese visible content retained the English document title.
 
 ## D4 observations
 
@@ -93,10 +99,17 @@ internal note remained hidden.
 - Response content is required by validation but is not marked required in advance.
 - Successful Send changes the request to Resolved and shows explicit success
   feedback.
+- Empty-response feedback uses a persistent `role="alert"` message that remains
+  visible beyond 5 seconds.
+- At 320 CSS px, the Admin document measured 516 px and placed Back, attachment,
+  and form controls off-screen.
+- Vietnamese visible content retained the English document title and the English
+  `Internal note` label.
+- A signed-out detail deep link preserved the complete Admin route in `callbackUrl`.
 
 ## Findings and heuristic score
 
-Eleven findings are recorded: five severity-3, five severity-2, and one severity-1.
+Eleven findings are recorded: five severity-3 and six severity-2.
 The provisional usability score is **6/10**. The highest-impact issues are form
 labelling, validation recovery, insufficient contrast, and narrow-viewport reflow.
 The `ux-heuristics` framework drove checks for task clarity, navigation orientation,
@@ -110,11 +123,13 @@ attachment names, and complete verified keyboard-only and failure-recovery paths
 
 ## Remaining limits
 
-- Reliable keyboard-only traversal, complete all-state contrast coverage, 200% zoom
-  with long translations, network-failure recovery, session expiry, D2 pagination,
-  and D3 Export Excel remain Pending.
+- Reliable keyboard-only traversal, hover/focus/disabled-state coverage,
+  network-failure recovery, D2 pagination, D3 Export Excel, and upload-progress
+  behaviour remain Pending.
 - The 320 CSS px check is a reflow test on Windows Chromium, not evidence of a real
   phone, mobile browser, or mobile operating system.
 - macOS/Linux, additional browsers, tablet, and phone evidence require genuine
   environments and are not inferred from Windows Chromium.
 - Google Form submission has not been performed.
+- Unsupported automation was not treated as evidence: request interception,
+  download capture, and synthesized Tab traversal were inconclusive.

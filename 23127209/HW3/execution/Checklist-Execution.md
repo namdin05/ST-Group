@@ -11,17 +11,17 @@ as a Pass.
 | IA01-01 | P | P | P | P | No overlap or clipping at 1280×720 |
 | IA01-02 | Pending | Pending | Pending | Pending | Tablet/phone deferred |
 | IA01-03 | P | P | P | P | Basic visual hierarchy inspected |
-| IA01-04 | F (D-F10) | Pending | F (D-F10) | Pending | Measured cyan/white at 2.08:1; D1 helper/error text also below 4.5:1 |
+| IA01-04 | F (D-F10) | F (D-F10) | F (D-F10) | F (D-F10) | Shared cyan/white controls measure 2.08:1; additional D1 helper/error text is also below 4.5:1 |
 | IA01-05 | N/A | N/A | P | P | Status uses text as well as colour |
 | IA01-06 | P | F (D-F09) | N/A | F (D-F09) | Detail renames the attachment to `attachment_1` |
 | IA01-07 | Pending | Pending | Pending | Pending | Full focus/hover/disabled sweep pending |
-| IA01-08 | F (D-F07) | F (D-F07) | P | P | D1/D2 English UI has Vietnamese document title |
+| IA01-08 | F (D-F07) | F (D-F07) | F (D-F07) | F (D-F07) | D1/D2 keep Vietnamese titles in English; D3/D4 keep English titles in Vietnamese |
 | IA01-09 | N/A | P | P | P | Displayed dates are readable and consistent |
 | IA01-10 | N/A | P | P | N/A | D2 empty state and D3 no-result state verified |
-| IA01-11 | P | P | P | Pending | D4 “Complaint”/“Support request” terminology needs review |
+| IA01-11 | P | P | P | F (D-F07) | D4 mixes localized support-request wording with English “Complaint” and “Internal note” |
 | IA01-12 | P | P | P | P | Primary information visible |
 | IA01-13 | P | P | P | P | Heading and route identify each screen |
-| IA01-14 | F (D-F11) | F (D-F11) | Pending | Pending | D1/D2 overflow at 320 CSS px; Admin evidence capture still pending |
+| IA01-14 | F (D-F11) | F (D-F11) | F (D-F11) | F (D-F11) | D1/D2 overflow at 320 CSS px; D3/D4 measure 516 px against a 305 px content viewport |
 | IA02-01 | F (D-F01) | F (D-F06) | F (D-F03) | P | Programmatic labels inspected |
 | IA02-02 | P | N/A | N/A | F (D-F05) | D4 response is required but unmarked |
 | IA02-03 | P | N/A | N/A | N/A | D1 attachment constraints are visible |
@@ -40,7 +40,7 @@ as a Pass.
 | IA03-02 | P | P | P | P | Headings and active Admin navigation visible |
 | IA03-03 | P | P | P | P | Controls match their actions |
 | IA03-04 | P | P | P | P | Cancel discards unsaved D1 data; Back works |
-| IA03-05 | P | Pending | P | Pending | Signed-out D1 redirect and user→Admin-list denial tested |
+| IA03-05 | P | P | P | P | Signed-out D1/D2/D4 deep links preserve callback; user→Admin-list denial tested |
 | IA03-06 | N/A | N/A | P | N/A | Pending/Resolved updates the table |
 | IA03-07 | N/A | P | P | N/A | D2/D3 search and status/tab state persist through detail/back; D3 Reset verified |
 | IA03-08 | Pending | Pending | Pending | Pending | Keyboard-only navigation pending |
@@ -49,21 +49,21 @@ as a Pass.
 | IA03-11 | N/A | N/A | N/A | N/A | No drag-and-drop reorder |
 | IA03-12 | N/A | Pending | P | N/A | D3 page 2 and filters persist after opening an item and returning |
 | IA03-13 | N/A | N/A | Pending | P | Two automated Export attempts produced no captured download; manual verification required |
-| IA03-14 | F (D-F11) | F (D-F11) | Pending | Pending | D1/D2 header navigation extends beyond the 320 px viewport |
+| IA03-14 | F (D-F11) | F (D-F11) | F (D-F11) | F (D-F11) | User header and Admin sidebar/actions extend beyond the 320 px viewport |
 | IA04-01 | P | P | P | F (D-F04) | D4 recovery feedback is weak |
 | IA04-02 | P | P | P | P | Observed async transitions remained responsive |
 | IA04-03 | F (D-F08) | P | P | P | D1 success is implicit only |
 | IA04-04 | F (D-F02) | N/A | N/A | F (D-F04) | Recovery guidance/focus insufficient |
-| IA04-05 | Pending | Pending | Pending | Pending | Toast timing/announcement pending |
+| IA04-05 | P | N/A | Pending | P | D1/D4 validation alerts use `role=alert`, remain visible beyond 5 seconds, and do not cover the primary action |
 | IA04-06 | N/A | P | P | P | Pending/Resolved is consistent |
 | IA04-07 | N/A | N/A | N/A | N/A | No confirmation dialog in scope |
-| IA04-08 | P | N/A | N/A | Pending | D1 Cancel verified; response reversal not available |
+| IA04-08 | P | N/A | N/A | N/A | D1 Cancel verified; resolved official response is outside the checklist’s technically reversible-action cases |
 | IA04-09 | Pending | N/A | N/A | N/A | Upload progress during network transfer pending |
 | IA04-10 | P | P | P | P | User→Admin→User state and notification verified |
 | IA04-11 | N/A | P | P | N/A | D2 empty state offers Create request; D3 no-result state explains the filter outcome and offers Reset |
-| IA04-12 | P | Pending | P | Pending | Signed-out redirect and wrong-role Admin route tested |
-| IA04-13 | N/A | N/A | Pending | Pending | Prerequisite explanation pending |
-| IA04-14 | P | N/A | Pending | P | D1 disabled while submitting; one linked record created |
+| IA04-12 | P | P | P | P | Signed-out D1/D2/D4 redirects preserve callback; wrong-role Admin route returns no Admin data |
+| IA04-13 | N/A | N/A | N/A | N/A | No prerequisite-disabled control exists in the Scenario D D1–D4 scope |
+| IA04-14 | P | N/A | N/A | P | D1 disabled while submitting; one linked record created; D3 has no record-creating action |
 
 ## Confirmed finding references
 
@@ -73,8 +73,8 @@ as a Pass.
 - D-F04: D4 empty-response validation and focus.
 - D-F05: D4 required response is not communicated in advance.
 - D-F06: D2 status filter lacks a persistent label.
-- D-F07: D1/D2 document titles do not follow the selected language.
+- D-F07: D1–D4 titles/terminology do not consistently follow the selected language.
 - D-F08: D1 creation has no explicit success confirmation.
 - D-F09: Attachment detail exposes only generic `attachment_1` text.
 - D-F10: Cyan controls and small helper/error text have insufficient contrast.
-- D-F11: D1/D2 overflow horizontally at 320 CSS px and push navigation off-screen.
+- D-F11: D1–D4 overflow horizontally at 320 CSS px and push navigation/actions off-screen.

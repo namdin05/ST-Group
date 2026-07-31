@@ -31,3 +31,11 @@ contrast ratios, direct 320 CSS px overflow measurements, and repeatable navigat
 state checks were strong enough to update the checklist and add two findings. The
 320 px browser viewport was documented only as a reflow test, never as genuine phone
 or mobile-browser compatibility evidence.
+
+The final automated pass also exposed an important limit of automation coverage.
+Computed styles, exact viewport dimensions, alert semantics, and authentication
+redirects were deterministic. In contrast, the available browser surface did not
+support request interception, produced no capturable Excel download, and could not
+faithfully reproduce a physical keyboard Tab sequence. The report therefore closes
+only deterministic cells and retains Pending for the rest instead of treating tool
+limitations as product failures.

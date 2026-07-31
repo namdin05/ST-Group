@@ -15,6 +15,7 @@ the final AI Audit if the course requires verbatim output.
 | 2026-07-30 | `tổng hợp lại những việc đã làm, chưa làm và cần phải làm` |
 | 2026-07-30 | `làm hết cho tôi` |
 | 2026-07-31 | `[$ux-heuristics] oke bắt đầu làm tiếp những phần có thể làm được đi` |
+| 2026-07-31 | `làm tất cả cho tôi, cái nào không tự động làm được thì bỏ qua` |
 
 ## Missing group prompt history
 
