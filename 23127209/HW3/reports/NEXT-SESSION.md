@@ -1,6 +1,7 @@
 # Scenario D — Next-session handoff
 
-Saved on: 2026-07-30  
+Saved on: 2026-07-31
+
 Workspace: `D:\Code\ST-Group\23127209\HW3`  
 Branch: `23127209`
 
@@ -25,13 +26,17 @@ Branch: `23127209`
   images, preview/removal, Cancel/discard, empty validations, loading disablement,
   lightbox Escape/focus restoration, signed-out callback, wrong-role denial, and
   notification/official-response visibility.
-- Recorded nine findings:
-  - Severity 3: D-F01, D-F02, D-F04.
+- Recorded eleven findings:
+  - Severity 3: D-F01, D-F02, D-F04, D-F10, D-F11.
   - Severity 2: D-F03, D-F05, D-F06, D-F08, D-F09.
   - Severity 1: D-F07.
-- Checklist status: **85 Pass, 16 Fail, 73 N/A, 50 Pending**.
-- Saved eight live EMS screenshots and four Windows compatibility screenshots
+- Checklist status: **91 Pass, 22 Fail, 73 N/A, 38 Pending**.
+- Saved nine live EMS screenshots and four Windows compatibility screenshots
   containing the student-email/environment overlay.
+- Verified D2/D3 search and filter persistence, D3 Reset/no-result behaviour, and
+  D3 page-2 context after opening a request and returning.
+- Measured cyan/white contrast at 2.08:1 and documented low-contrast helper/error
+  text. Verified D1/D2 horizontal overflow at a 320 CSS px reflow viewport.
 - Completed Markdown reports, finding log, AI audit, AI critique, prompt record,
   evidence index, compatibility matrix, and README.
 - Generated and visually checked:
@@ -39,7 +44,8 @@ Branch: `23127209`
   - `output/pdf/AI-Audit-Report.pdf`
   - `output/pdf/AI-Critique.pdf`
 - Created and validated `skills/ems-scenario-d-testing`.
-- Submission validator result: **0 errors, 1 expected warning** for 50 Pending cells.
+- Submission validator result: **0 errors, 1 expected warning** for the current
+  38 Pending cells.
 - Commits already created:
   - `26aeed7 test(hw3): complete Scenario D Windows evidence`
   - `79adfb7 docs(hw3): add Scenario D git log export`
@@ -64,12 +70,16 @@ Branch: `23127209`
 ### Windows checklist items still Pending
 
 - Reliable keyboard-only traversal and focus order.
-- Complete contrast measurement.
-- 200% zoom/reflow and long-translation behaviour.
-- Search/filter and pagination persistence.
+- Complete all-state contrast coverage.
+- 200% zoom and long-translation behaviour beyond the completed 320 px D1/D2
+  reflow check.
+- D3/D4 narrow-viewport screenshot evidence; direct measurements showed overflow,
+  but capture was not reliable enough to close their checklist cells.
+- D2 pagination context, if enough records become available.
 - Network/upload failure recovery and toast announcement timing.
 - Session-expiry behaviour.
-- Remaining D3 export and prerequisite-state checks.
+- Remaining D3 Export Excel (two automated attempts were inconclusive) and
+  prerequisite-state checks.
 
 ### Submission actions requiring a decision
 

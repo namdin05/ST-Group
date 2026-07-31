@@ -25,3 +25,9 @@ act as the source of truth. Every Pass, screenshot, participant, browser cell, f
 timestamp, and Git commit must correspond to a real execution. Human review remains
 necessary for severity, scope decisions, and final submission integrity.
 
+A later pass reinforced this rule: automated keyboard events and Export-download
+capture were inconclusive, so those cells stayed Pending. In contrast, numeric
+contrast ratios, direct 320 CSS px overflow measurements, and repeatable navigation
+state checks were strong enough to update the checklist and add two findings. The
+320 px browser viewport was documented only as a reflow test, never as genuine phone
+or mobile-browser compatibility evidence.

@@ -2,18 +2,19 @@
 
 Student: `nakhoa232@clc.fitus.edu.vn`  
 Scenario: D  
-Execution date: 2026-07-30
+Execution dates: 2026-07-30 to 2026-07-31
 
 ## AI-assisted work
 
 | Activity | Tool / skill | Result | Human verification |
 | --- | --- | --- | --- |
 | Interpret assignment and plan Scenario D | Codex | D1–D4 workflow and deliverables | Student chose to exclude Task 2 |
-| Apply usability heuristics | Codex + `ux-heuristics` | Nine findings with severity 0–4 | Findings tied to live observations |
+| Apply usability heuristics | Codex + `ux-heuristics` | Eleven findings with severity 0–4 | Findings tied to live observations and measurements |
 | Operate live EMS | Codex + Browser | Request #33 executed user→Admin→user | Screenshots and state transitions retained |
 | Create upload input | ImageGen | Neutral PNG test asset | Clearly separated from EMS evidence |
 | Organise submission artefacts | Codex | Checklist, reports, logs, compatibility matrix | Pending cells remain explicit |
 | Create reusable workflow | Codex + `skill-creator` | `ems-scenario-d-testing` skill and validator | Validator executed locally |
+| Expand Windows coverage | Codex + Browser | Contrast/reflow measurements and D2/D3 state-persistence tests | Inconclusive keyboard/Export checks remained Pending |
 
 ## Integrity controls
 

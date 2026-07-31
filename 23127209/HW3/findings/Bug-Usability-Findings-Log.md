@@ -15,9 +15,11 @@ Severity follows Nielsen’s 0–4 scale.
 | D-F07 | D1/D2 | i18n | Compare the English H1/UI with the browser title. IA01-08; Nielsen H4. | Document title follows the selected locale. | D1/D2 titles remain Vietnamese while visible UI is English. | 1 | Generate title from the same active locale as page content. | [D1 context](../evidence/screenshots/D1-empty-form-validation.png) |
 | D-F08 | D1→D2 | Usability | Submit a valid request and inspect the destination. IA04-03; Nielsen H1. | Accessible success message names the created request and next action. | Redirect shows the new record; no explicit creation confirmation is visible. | 2 | Show “Request #ID created” with a link to detail. | [D2 resulting record](../evidence/screenshots/D2-request-33-list-resolved.png) |
 | D-F09 | D2/D4 | Accessibility | Open request #33 and inspect its attachment. IA01-06; WCAG 1.1.1. | Meaningful filename or alternative description is retained. | Image/button expose only `attachment_1`. | 2 | Preserve the sanitized original filename or add descriptive alt text. | [D2 request detail](../evidence/screenshots/D2-request-33-resolved.png) |
+| D-F10 | D1/D3 | Accessibility | Inspect cyan controls and small helper/error text. IA01-04; Nielsen H4; WCAG 1.4.3. | Normal text has at least 4.5:1 contrast against its background. | White on cyan is 2.08:1; D1 gray helper text is 2.56:1 and pink error text is 3.53:1. | 3 | Use darker control/error/helper colours or dark text, and verify every state at 4.5:1 or better. | [D1 contrast context](../evidence/screenshots/D1-empty-form-validation.png) |
+| D-F11 | D1/D2 | Responsive usability | Set the viewport to 320 CSS px and inspect the user header. IA01-14/IA03-14; Nielsen H7; WCAG 1.4.10. | Content and navigation reflow without two-dimensional scrolling. | The document is 342 px wide while the content viewport is 305 px; a horizontal scrollbar appears and the menu control extends off-screen. | 3 | Make the header flexible, keep the menu inside the viewport, and test reflow at 320 CSS px. | [D2 320 px reflow](../evidence/screenshots/D2-reflow-320-overflow.png) |
 
 ## Submission integrity
 
-- Findings come from the live EMS UI observed on 2026-07-30.
+- Findings come from the live EMS UI observed on 2026-07-30 and 2026-07-31.
 - No Google Form submission has been made because explicit permission was not given.
 - Task 2 participant data, SUS, and UEQ-S were not created.

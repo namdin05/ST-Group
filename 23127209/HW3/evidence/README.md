@@ -20,6 +20,7 @@ and are intentionally omitted from the final repository after execution.
 | --- | --- | --- |
 | [`screenshots/D1-empty-form-validation.png`](screenshots/D1-empty-form-validation.png) | D1 | Aggregate required-field alert and focus on Submit |
 | [`screenshots/D2-status-filter-unlabeled.png`](screenshots/D2-status-filter-unlabeled.png) | D2 | Status-filter context |
+| [`screenshots/D2-reflow-320-overflow.png`](screenshots/D2-reflow-320-overflow.png) | D2 | 320 CSS px reflow failure and horizontal scrollbar |
 | [`screenshots/D2-request-33-list-resolved.png`](screenshots/D2-request-33-list-resolved.png) | D2 | Request #33 is Resolved |
 | [`screenshots/D2-request-33-resolved.png`](screenshots/D2-request-33-resolved.png) | D2 | Official response and generic attachment label |
 | [`screenshots/D3-category-filter-unlabeled.png`](screenshots/D3-category-filter-unlabeled.png) | D3 | Category-filter context |

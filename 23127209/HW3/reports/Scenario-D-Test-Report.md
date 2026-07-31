@@ -1,8 +1,9 @@
 # Scenario D — GUI and Usability Test Report
 
-Status: **Windows execution complete; compatibility expansion pending**
+Status: **Windows execution expanded; compatibility expansion pending**
 
-Test date: 2026-07-30  
+Test dates: 2026-07-30 to 2026-07-31
+
 Environment: Windows, in-app Chromium browser, 1280 × 720  
 SUT: `https://prod-dev.ems-fitus.cloud`
 
@@ -52,6 +53,10 @@ internal note remained hidden.
   of moving to an invalid field.
 - The request-type select has no programmatic name.
 - Successful creation redirects to the record list without explicit confirmation.
+- White text on the cyan primary control measured 2.08:1; gray helper text
+  measured 2.56:1 and pink error text measured 3.53:1.
+- At 320 CSS px, the user header exceeds the content viewport and causes horizontal
+  scrolling.
 
 ## D2 observations
 
@@ -60,6 +65,9 @@ internal note remained hidden.
 - Detail shows the official response and hides the internal note.
 - Status filter exposes only its current value, not a persistent Status label.
 - English UI is paired with a Vietnamese document title.
+- Search and status filter state persisted after opening request `#33` and returning.
+- At 320 CSS px, the document measured 342 px against a 305 px content viewport;
+  the menu control extended off-screen.
 
 ## D3 observations
 
@@ -70,6 +78,11 @@ internal note remained hidden.
   accessible name “All categories Category”.
 - A normal user opening the Admin-list deep link received a 404 page and no Admin
   data.
+- Search, Pending/Resolved tab, and page-2 pagination state persisted after opening
+  a request and returning; a no-match search displayed a dedicated result message
+  and Reset action.
+- Two automated Export Excel attempts produced no captured download. This remains
+  Pending for manual verification rather than being classified as a failure.
 
 ## D4 observations
 
@@ -83,17 +96,25 @@ internal note remained hidden.
 
 ## Findings and heuristic score
 
-Nine findings are recorded: three severity-3, five severity-2, and one severity-1.
-The provisional usability score is **7/10**. The highest-impact issues are form
-labelling and validation recovery. The `ux-heuristics` framework drove checks for
-task clarity, navigation orientation, feedback, error prevention/recovery,
-accessibility, and severity based on frequency, impact, and persistence.
+Eleven findings are recorded: five severity-3, five severity-2, and one severity-1.
+The provisional usability score is **6/10**. The highest-impact issues are form
+labelling, validation recovery, insufficient contrast, and narrow-viewport reflow.
+The `ux-heuristics` framework drove checks for task clarity, navigation orientation,
+feedback, error prevention/recovery, accessibility, and severity based on frequency,
+impact, and persistence.
+
+To reach 10/10, the product should first fix accessible labels and validation focus,
+raise normal-text contrast to at least 4.5:1, and make the user header reflow at
+320 CSS px. It should then add explicit creation feedback, preserve meaningful
+attachment names, and complete verified keyboard-only and failure-recovery paths.
 
 ## Remaining limits
 
-- Reliable keyboard-only traversal, complete contrast measurement, 200% zoom,
-  network-failure recovery, session expiry, and selected search/pagination
-  persistence tests remain Pending.
+- Reliable keyboard-only traversal, complete all-state contrast coverage, 200% zoom
+  with long translations, network-failure recovery, session expiry, D2 pagination,
+  and D3 Export Excel remain Pending.
+- The 320 CSS px check is a reflow test on Windows Chromium, not evidence of a real
+  phone, mobile browser, or mobile operating system.
 - macOS/Linux, additional browsers, tablet, and phone evidence require genuine
   environments and are not inferred from Windows Chromium.
 - Google Form submission has not been performed.
