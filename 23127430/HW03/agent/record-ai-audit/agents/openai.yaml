@@ -1,0 +1,4 @@
+interface:
+  display_name: "Record AI Audit"
+  short_description: "Log auditable AI prompts and outputs"
+  default_prompt: "Use $record-ai-audit to preserve this AI interaction and update the HW03 audit artifacts."

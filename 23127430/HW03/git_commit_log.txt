@@ -1,0 +1,19 @@
+# HW03 Git Commit Log
+
+Status: TODO-HUMAN-EVIDENCE
+
+No HW03-specific Git commit was present when this scaffold was created. Do not
+copy unrelated repository history into the submission. After each real procedure
+step, commit it and regenerate this file from the real Git history.
+
+Required future commit stages:
+- checklist design and human review;
+- C1, C2, and C3 checklist execution/evidence;
+- bug and Google Form logging;
+- pilot and each official user-testing evidence stage;
+- SUS/metrics/findings analysis;
+- each compatibility configuration or coherent run batch;
+- AI review, final report/PDF, and packaging.
+
+Suggested regeneration command (run manually from the repository root):
+git log --date=iso-strict --pretty=format:"%h | %ad | %an | %s" -- HW03

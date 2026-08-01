@@ -1,0 +1,4 @@
+interface:
+  display_name: "EMS Checklist Executor"
+  short_description: "Execute or audit EMS GUI checklists"
+  default_prompt: "Use $ems-checklist-executor to prepare or audit an evidence-backed EMS GUI checklist execution."
