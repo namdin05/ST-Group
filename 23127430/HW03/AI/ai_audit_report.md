@@ -10,7 +10,7 @@ I use AI tools for the following tasks,
 
 - analysing the supplied requirements and workbook;
 - scaffolding the English report and evidence templates;
-- repairing the workbook's broken checklist reference and compatibility plan;
+- recovering and migrating workbook content into Markdown artefacts;
 - creating deterministic repository-local Agent Skills and validators;
 - checking structural consistency without deciding live EMS results.
 
@@ -28,7 +28,7 @@ Only confirmed `VALID`, `INVALID`, or `INCOMPLETE` verdicts are counted.
 | INVALID | 0 | 0.0% |
 | INCOMPLETE | 1 | 100.0% |
 | **Evaluated** | **1** | **100.0%** |
-| Pending human review | 1 | Not included |
+| Pending human review | 3 | Not included |
 <!-- AUTO-SUMMARY:END -->
 
 ## Interaction index
@@ -37,6 +37,8 @@ Only confirmed `VALID`, `INVALID`, or `INCOMPLETE` verdicts are counted.
 | --- | --- | --- | --- | --- |
 | AI-000 | Kickoff / requirements analysis | [Detailed entry](audit_entries/AI-000.md) | INCOMPLETE (preserved source value) | Evidence work remains |
 | AI-007 | Scaffold, workbook, reports, and skills | [Detailed entry](audit_entries/AI-007.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
+| AI-008 | Checklist approval status update | [Detailed entry](audit_entries/AI-008.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
+| AI-009 | Spreadsheet removal after Markdown migration | [Detailed entry](audit_entries/AI-009.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
 
 ## Human-review gate
 

@@ -7,6 +7,8 @@ participant contacts in this log.
 | --- | --- | --- | --- | --- | --- | --- | --- | --- |
 | AI-000 | Preserved prior interaction | Kickoff / requirements analysis | OpenAI Codex | `TODO-HUMAN-EVIDENCE` | 2026-07-30; exact local time unavailable | [AI-000 entry](audit_entries/AI-000.md) | Supplied working pack and kickoff analysis; exact output unavailable | INCOMPLETE (preserved source value) |
 | AI-007 | Recorded current interaction | HW03 scaffold, report, workbook, and repository-local skills | OpenAI Codex | `TODO-HUMAN-EVIDENCE` | 2026-08-01T19:05:18+07:00 | [AI-007 entry](audit_entries/AI-007.md) | Labelled external artefacts listed in the entry | `TODO-HUMAN-REVIEW` |
+| AI-008 | Recorded current interaction | Checklist approval status update | OpenAI Codex | `TODO-HUMAN-EVIDENCE` | 2026-08-01T19:58:58+07:00 | [AI-008 entry](audit_entries/AI-008.md) | Checklist, report, workbook, and audit status synchronized | `TODO-HUMAN-REVIEW` |
+| AI-009 | Recorded current interaction | Spreadsheet removal after Markdown migration | OpenAI Codex | `TODO-HUMAN-EVIDENCE` | 2026-08-01T20:20:25+07:00 | [AI-009 entry](audit_entries/AI-009.md) | Markdown coverage manifest, reference updates, and removal of two spreadsheet files | `TODO-HUMAN-REVIEW` |
 
 Template prompts that have not been run remain in
 [`group/checklist_ai_prompts.md`](../group/checklist_ai_prompts.md) and are not

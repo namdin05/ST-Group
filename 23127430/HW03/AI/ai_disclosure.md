@@ -6,7 +6,7 @@ The assignment brief supplies the following declaration for AI use:
 
 - requirements and source comparison;
 - repository/report/template scaffolding;
-- workbook structural repair and planned compatibility configuration;
+- recovery and migration of supplied workbook content into Markdown artefacts;
 - creation and deterministic validation of two repository-local Agent Skills;
 - structural compliance checks.
 

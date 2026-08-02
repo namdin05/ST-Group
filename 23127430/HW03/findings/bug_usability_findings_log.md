@@ -1,19 +1,60 @@
 # Consolidated Bug & Usability Findings Log
 
-Google Form: <https://forms.gle/CJQFQCAXcsDbXDMM9>
+This file is the single canonical register for:
 
-Every genuine Task 1–3 finding must appear both here and in the Google Form.
-Codex must not submit the Form or invent a receipt. Reporter email remains
-`23127430@[TODO-INSTITUTION-DOMAIN]` until the student confirms the exact domain.
+- Task 1 functional, GUI, accessibility, and usability-related bugs; and
+- Task 2 participant-derived usability findings and recommendations.
 
-| ID | Scenario / Screen | Type | Description | Steps / Heuristic | Expected | Actual | Severity | Suggested Fix | Screenshot Ref | Source Task | Form Submission Timestamp | Form Confirmation Ref | Reporter Email | Status |
-| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
-| DRAFT-C3-RESET-001 | Scenario C / C3 | Bug candidate | Reset Password action is reportedly not visible; this is not yet a confirmed defect. | `TODO-HUMAN-EVIDENCE`: reproduce from Admin → Users List on a real target account | Authorised admin can locate and initiate the required Reset Password flow with confirmation and audit feedback. | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | Preliminary observation / Task 1 and Task 2 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `23127430@[TODO-INSTITUTION-DOMAIN]` | **Evidence Required** |
+There are currently nine confirmed Task 1B bugs and no official Task 2
+participant finding. Do not add a placeholder as if it were a real finding.
+Append each genuine Task 2 finding to the same table using a stable `UF-###` ID
+after observation evidence is available.
 
-Before finalization, reconcile:
+## Unified column rules
 
-1. one row per real finding with stable ID;
-2. screenshot and source-task references;
-3. identical count and substance in the Google Form;
-4. real submission timestamp and confirmation reference;
-5. retest/status updates without deleting history.
+- **Finding Class:** use `Functional / UI bug` or `Usability finding`.
+- **Context / Participants:** bugs record the test context; usability findings
+  list affected de-identified participant IDs.
+- **Reproduction / Observation Steps:** bugs use reproducible steps; usability
+  findings record the observed task moment and behaviour.
+- **Expected / User Goal** and **Actual / Observed Behaviour:** support both
+  system defects and participant experience gaps.
+- **Severity 0–4:** use Nielsen's scale. Justify participant findings with the
+  separate Frequency, Impact, and Persistence columns.
+- **Related Bug / Finding:** link a usability issue to a functional bug when
+  applicable; otherwise use `None observed`.
+- **Form Submission:** combine the real submission timestamp and confirmation
+  reference. Never invent either value.
+
+| ID | Finding Class | Scenario / Screen | Description | Context / Participants | Reproduction / Observation Steps | Heuristic / Criterion | Expected / User Goal | Actual / Observed Behaviour | Severity 0–4 | Frequency | Impact | Persistence | Recommendation / Suggested Fix | Related Bug / Finding | Evidence / Screenshot | Source Task | Form Submission | Reporter Email | Status |
+| --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- | --- |
+| C1-LOCALE-001 | Functional / UI bug | Scenario C / C1 Users List | Created and Updated dates use an ambiguous numeric format in the English UI. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin using the English UI; dedicated account isolated. Inspect the Created and Updated values. | Match between system and the real world; consistency and standards | Dates use an unambiguous locale-aware format or a month name. | Values such as `02/08/2026 13:35` appear without a locale cue, so day/month order is ambiguous. | 2 — Minor/medium localisation defect | Observed in 1/1 authorised Task 1B run | Medium | Persistence across independent sessions not yet measured | Use a locale-aware format such as `02 Aug 2026, 13:35`, or display the active date convention near the table. | This row is the functional bug | findings/screenshots/failed/task1_C1_C1-LOCALE-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@lc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C1-NAV-001 | Functional / UI bug | Scenario C / C1 Users List | Six sidebar destination links have no accessible names. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin at User Management. Inspect each sidebar link's text, `aria-label`, `title`, and `aria-labelledby`. | WCAG accessible name; recognition rather than recall | Every navigation link has a programmatic label that identifies its destination. | Six links have no text, `aria-label`, `title`, or `aria-labelledby` value. | 3 — Major accessibility defect | Observed in 1/1 authorised Task 1B run | High | Persistence across independent sessions not yet measured | Give every destination link a concise accessible name, keep decorative SVGs `aria-hidden`, and expose visible tooltips for icon-only navigation. | This row is the functional bug | findings/screenshots/failed/task1_C1_C1-NAV-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C1-SEARCH-001 | Functional / UI bug | Scenario C / C1 Users List | The no-result search state offers no Clear or next action. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin at User Management. Enter a query with no matching user and wait for results to settle. | Help users recognize, diagnose, and recover from errors | The state explains the condition and provides a visible Clear filters or recovery action. | “No users found matching your filters.” appears without a visible Clear or next-action control. | 2 — Minor/medium recovery defect | Observed in 1/1 authorised Task 1B run | Medium | Persistence across independent sessions not yet measured | Add a visible Clear search/filters action beside the message and return focus to Search users after clearing. | This row is the functional bug | findings/screenshots/failed/task1_C1_C1-SEARCH-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C2-FORM-001 | Functional / UI bug | Scenario C / C2 Assign Role/Edit User | First Name and Last Name placeholders are reversed. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Dinh Nam filtered. Open Edit user, temporarily clear First Name and Last Name without saving, observe the placeholders, then Cancel. | Match between system and the real world; error prevention | Each placeholder is consistent with its visible and programmatic field label. | First Name displays “Last Name”, while Last Name displays “First Name”. | 2 — Minor/medium form clarity defect | Observed in 1/1 authorised Task 1B run | Medium | Persistence across independent sessions not yet measured | Correct the field-to-placeholder mapping and add automated tests that assert label, accessible name, validation key, and placeholder refer to the same property. | This row is the functional bug | findings/screenshots/failed/task1_C2_C2-FORM-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C2-FOCUS-001 | Functional / UI bug | Scenario C / C2 Assign Role/Edit User | Edit User does not move focus into the modal or restore it after Cancel. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Dinh Nam visible. Activate Edit user, inspect the active element, choose Cancel, and inspect focus again. | WCAG focus order/management; user control and freedom | Focus moves into Edit User and returns to the triggering Edit user button after dismissal. | Focus remains on the background Edit user button while open and moves to the document body after Cancel. | 3 — Major keyboard/accessibility defect | Observed in 1/1 authorised Task 1B run | High | Persistence across independent sessions not yet measured | On open, focus the modal heading or first field; trap focus inside the modal; on every dismissal path, return focus to the invoking Edit user button. | This row is the functional bug | findings/screenshots/failed/task1_C2_C2-FOCUS-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C2-VALIDATION-001 | Functional / UI bug | Scenario C / C2 Assign Role/Edit User | Empty First Name produces a Last Name required error. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Edit User open for Dinh Nam. Clear First Name, choose Save Changes, observe the message, then restore the original value. | Help users recognize, diagnose, and recover from errors | Validation identifies First Name as missing and associates/focuses its message with that field. | The modal remains open but displays “Last name is required” although First Name is empty. | 2 — Minor/medium validation defect | Observed in 1/1 authorised Task 1B run | Medium | Persistence across independent sessions not yet measured | Correct the First Name validation key/message mapping, associate the error through `aria-describedby`, and focus the first invalid field after submission. | This row is the functional bug | findings/screenshots/failed/task1_C2_C2-VALIDATION-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C3-CONFIRM-001 | Functional / UI bug | Scenario C / C3 Block/Unblock | Active-state changes have no Block/Unblock warning or confirmation. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Edit User open for Dinh Nam. Toggle Active off and on in separate saves and observe the UI before each Save Changes action. | Error prevention; user control and freedom | A confirmation identifies the account, consequence, intended Block/Unblock action, and safe default. | The generic Edit User modal shows Active and Save Changes only; no warning or confirmation precedes either persistent state change. | 3 — Major safety/confirmation defect | Observed in 1/1 authorised Task 1B run | High | Persistence across independent sessions not yet measured | Use a dedicated confirmation dialog naming Dinh Nam and the consequence; default focus to Cancel, require an explicit Block/Unblock action, and show success feedback. | This row is the functional bug | findings/screenshots/failed/task1_C3_C3-CONFIRM-001_01.png; findings/screenshots/failed/task1_C3_C3-CONFIRM-001_02.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C3-FOCUS-001 | Functional / UI bug | Scenario C / C3 Block/Unblock | The Block/Unblock modal path does not move or restore focus. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Dinh Nam visible. Activate Edit user for Block/Unblock, inspect focus, choose Cancel, and inspect focus again. | WCAG focus order/management; user control and freedom | Focus moves into the modal and returns to the triggering Edit user button. | Focus remains on Edit user behind the modal and falls to the document body after Cancel. | 3 — Major keyboard/accessibility defect | Observed in 1/1 authorised Task 1B run | High | Persistence across independent sessions not yet measured | Apply modal initial-focus, focus-trap, and trigger-restoration behaviour consistently to the state-change flow. | This row is the functional bug | findings/screenshots/failed/task1_C3_C3-FOCUS-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+| C3-RESET-001 | Functional / UI bug | Scenario C / C3 Reset Password | Reset Password is absent from the dedicated user's available actions. | Expert GUI checklist; participants: N/A | Preconditions: authenticated Admin; Dinh Nam filtered. Inspect the row actions, open Edit user, and inspect all dialog actions without saving. | User control and freedom; consistency and standards | An authorised Admin can locate Reset Password and proceed to a safe confirmation and audit-feedback flow. | The row exposes only Edit user and Delete user; Edit User exposes Close, Cancel, and Save Changes. No Reset Password action exists. | 3 — Major functional gap | Observed in 1/1 authorised Task 1B run | High | Persistence across independent sessions not yet measured | Implement a permission-controlled Reset Password action with account-specific confirmation, secure non-disclosing feedback, audit logging, and a safe recovery path. | This row is the functional bug | findings/screenshots/failed/task1_C3_C3-RESET-001_01.png | Task 1B — GUI checklist execution | Not submitted; confirmation: Not available | `dhnam23@clc.fitus.edu.vn` | Confirmed — pending Google Form submission |
+
+## Task 2 intake status
+
+Official participant observation evidence has not yet been supplied, so no
+usability finding is ranked. When evidence exists, append real `UF-###` rows to
+the unified table above with:
+
+- affected screen(s) and de-identified participant ID(s);
+- screenshot or observation-note reference;
+- Nielsen heuristic;
+- frequency, impact, and persistence justification;
+- recommendation and functional-bug relationship; and
+- Google Form submission evidence when the student submits it manually.
+
+## Before final submission
+
+1. Keep one row per genuine finding with a stable ID.
+2. Reconcile screenshot and source-task references.
+3. Keep the same finding count and substance in the Google Form.
+4. Record real submission timestamps and confirmation references.
+5. Update status without deleting historical findings.

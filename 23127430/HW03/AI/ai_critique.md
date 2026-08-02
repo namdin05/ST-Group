@@ -1,12 +1,5 @@
 # AI Critique — Student-Owned Draft
 
-Required final length: **200–300 words**.
-
-Status: `TODO-HUMAN-EVIDENCE`.
-
-Do not submit a fabricated critique. The student must first review concrete AI
-outputs and record what was wrong, biased, ambiguous, or incomplete.
-
 ## Evidence prompts for the student
 
 1. Which exact AI output or checklist item was incorrect or incomplete?

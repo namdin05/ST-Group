@@ -10,7 +10,7 @@
 | Scenario | Scenario C — Admin manages users |
 | Owned screens | C1 Users List; C2 Assign Role / Edit User; C3 Block/Unblock and Reset Password dialogs |
 | Working SUT | <https://prod-dev.ems-fitus.cloud/> |
-| Package status | **Scaffold ready; live and human evidence still BLOCKED** |
+| Package status | **Markdown-only working package; checklist approved; live Task 1–3 evidence remains BLOCKED** |
 
 ## Academic-integrity gate
 
@@ -25,7 +25,7 @@ or unmasked participant personal data to AI tools.
 | --- | --- |
 | Scenario | Scenario C — Admin manages users |
 | Screens | Exactly C1, C2, C3; C4 is excluded |
-| Checklist items designed | 56 preserved AI Draft items; human review/additions are `TODO-HUMAN-EVIDENCE` |
+| Checklist items designed | 56 preserved AI Draft items; group-reviewed and approved 56/56 unchanged; 0 additions |
 | Checklist screen-item cells run | 0 of 168; all working statuses are `BLOCKED` |
 | Passed / Failed | `TODO-HUMAN-EVIDENCE` / `TODO-HUMAN-EVIDENCE` |
 | Verified bugs | 0; one Reset Password draft is `Evidence Required`, not a confirmed defect |
@@ -38,7 +38,7 @@ or unmasked participant personal data to AI tools.
 ## Deliverables
 
 - [Main report](main_report.md)
-- [Working workbook](docs/HW03_Working_Pack.xlsx)
+- [Workbook-to-Markdown migration manifest](docs/workbook_migration_manifest.md)
 - [Shared GUI checklist](group/shared_gui_checklist.md)
 - [Task 1 execution](task1_checklist_execution/execution_C1_C2_C3.md)
 - [Task 2 user-testing plan](task2_user_testing/test_plan.md)
@@ -49,10 +49,11 @@ or unmasked participant personal data to AI tools.
 - [AI audit recording skill](agent/record-ai-audit/SKILL.md)
 - [Demo-video links](agent/demo_video_links.md)
 
-The original course brief and macro-enabled workbook remain unchanged in
-[`docs/`](docs/). The `.xlsx` working copy repairs the workbook's broken external
-checklist reference and updates only scaffold content; it does not claim that any
-test was executed.
+The supplied workbook content has been migrated into the Markdown artefacts
+listed in the [migration manifest](docs/workbook_migration_manifest.md). The
+`.xlsm` source and `.xlsx` working copy were removed at the student's request
+after the Markdown coverage check. This removal does not claim that any live test
+was executed.
 
 ## Self-assessment
 

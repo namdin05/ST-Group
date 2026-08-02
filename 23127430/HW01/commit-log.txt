@@ -1,0 +1,24 @@
+Commit: 7d154be484f2d901bc03562c080ea07d6575febe
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date: Wed Jun 3 01:20:30 2026 +0700
+Message: feat: And Excel file about Test Case
+
+Commit: cb7574b95373a67c679f6c99b575850d206c7f94
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date: Wed Jun 3 01:18:27 2026 +0700
+Message: feat: complete requirement 3 and all documents about AI
+
+Commit: a9ee510ed3b9702dda0b34706fc27d14fcfa8c73
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date: Tue Jun 2 01:06:33 2026 +0700
+Message: feat: Find 20 defects in 2022-2026 and add mindmap of QA/QC role
+
+Commit: 70aa724484e17130b5bace5f5cfb8d931db62652
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date: Sun May 31 02:25:05 2026 +0700
+Message: feat: Find 20 job about QA/QC
+
+Commit: daa65ce03ef618ea12dcdd51d374506c23cefafe
+Author: Nam Đinh <dhnam23@clc.fitus.edu.vn>
+Date: Thu May 28 16:34:08 2026 +0700
+Message: Initial commit
