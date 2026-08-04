@@ -16,12 +16,19 @@
 | C2 | Assign Role / Edit User |
 | C3 | Block/Unblock and Reset Password dialogs — confirmation and audit feedback |
 | Current SUT | <https://prod-dev.ems-fitus.cloud/> |
-| Report status | **Task 1B live execution complete; Task 2 participant and Task 3 compatibility evidence remain pending** |
-| Test dates | Task 1B: 2026-08-02, 13:08:06–14:54:02 (UTC+07:00); other tasks pending |
-| Test environment | Task 1B: authenticated Codex in-app browser, 510 × 698 observed viewport; exact engine/version unavailable |
-| Student-ID evidence overlay | `23127430@[TODO-INSTITUTION-DOMAIN]` |
+| Report status | **Task 1B complete; Task 2 official sessions analysed with evidence gaps; Task 3 executed with one confirmed compatibility defect** |
+| Test dates | Task 1B: 2026-08-02, 13:08:06–14:54:02 (UTC+07:00); Task 2 official sessions: 2026-08-02 to 2026-08-03; Task 3: 2026-08-04 |
+| Test environment | Task 1B: authenticated Codex in-app browser, 510 × 698 observed viewport; exact engine/version unavailable. Task 2 participant device/browser environments were not recorded in the supplied notes. |
+| Student evidence overlay | `dhnam23@clc.fitus.edu.vn` with student/device identification |
 
-Task 1B reports a completed authorised live EMS execution with genuine SUT screenshots. Remaining `BLOCKED` and `TODO-HUMAN-EVIDENCE` markers apply only to unfinished participant, compatibility, submission-receipt, and demo evidence.
+Task 1B reports a completed authorised live EMS execution with genuine SUT
+screenshots. Task 2 reports five official sessions and corrected aggregate
+analysis; its separate pilot, structured probe/procedure details, recording
+governance, and Form receipt remain incomplete. Task 3 contains 15 executed
+physical-device cells and one confirmed Android responsive-layout failure.
+Remaining `BLOCKED` and `TODO-HUMAN-EVIDENCE` markers apply to the Task 2,
+submission-receipt, AI-critique, exact compatibility-version/viewport, and demo
+evidence gaps.
 
 ### Source discrepancy
 
@@ -33,7 +40,11 @@ text. The current SUT URL above governs this working scope.
 
 ## 2. Executive Test Summary
 
-Scenario C is an end-to-end user-administration flow across C1–C3. The group approved all 56 checklist items, and Task 1B live execution is complete. Participant and compatibility evidence remain pending.
+Scenario C is an end-to-end user-administration flow across C1–C3. The group
+approved all 56 checklist items, Task 1B live execution is complete, the five
+official Task 2 sessions have been quantitatively analysed, and all 15 Task 3
+compatibility cells have been executed. Pilot and other human-owned evidence
+gaps remain.
 
 | Measure | Current evidence-backed value |
 | --- | --- |
@@ -41,21 +52,24 @@ Scenario C is an end-to-end user-administration flow across C1–C3. The group a
 | Human checklist review/additions | 56/56 group-approved; 0 AI-Assisted Review additions; 0 Human Added |
 | Checklist screen-item cells | 168 executed; 150 Passed; 18 Failed; 0 `BLOCKED` |
 | Passed / Failed | 150 / 18 |
-| Verified bugs | 9 |
+| Verified bugs | 10 total: 9 from Task 1B and 1 from Task 3 |
 | Evidence-required bug candidates | 0; Reset Password absence is confirmed as C3-RESET-001 |
-| Pilot / official participants | 0 / 0 evidence supplied; required 1 / 5 |
-| Mean SUS | `TODO-HUMAN-EVIDENCE` |
-| Usability findings by severity 0–4 | `TODO-HUMAN-EVIDENCE` |
-| Compatibility cells | 15 planned; 0 executed |
-| Skill demo videos | 2 required; `TODO-HUMAN-EVIDENCE` |
+| Pilot / official participants | 0 / 5 documented; required 1 / 5 |
+| Official-session metrics | 100% available-task success; mean time 60.0 s; mean errors/hesitations/assistance 0.0; Reset Password system-blocked for 5/5 |
+| Mean SUS | 68.5 / 100 |
+| Task 2 usability conclusion | 5/5 participants were system-blocked by existing bug `C3-RESET-001`; no separate usability-finding ID is counted |
+| Compatibility cells | 15 planned and executed; 14 Passed, 1 Failed (`C1-RESPONSIVE-001`) |
+| Skill demo videos | 1 required for `ems-checklist-executor`; `TODO-HUMAN-EVIDENCE` |
 
 Primary artefacts:
 [Task 1 execution](task1_checklist_execution/execution_C1_C2_C3.md),
 [Task 2 plan](task2_user_testing/test_plan.md),
+[Task 2 metrics](task2_user_testing/metrics_summary.md),
+[Task 2 usability analysis](task2_user_testing/usability_findings.md),
+[Task 2 audit](task2_user_testing/task2_audit.md),
 [Task 3 matrix](task3_compatibility/compatibility_matrix.md), and
 [findings log](findings/bug_usability_findings_log.md). The former workbook
-structure is mapped to Markdown in
-[workbook_migration_manifest.md](docs/workbook_migration_manifest.md).
+structure is mapped to Markdown in this repository.
 
 ## 3. Scope, Screen Selection, and Exclusions
 
@@ -91,8 +105,7 @@ reviewed and approved all 56 rows unchanged. The distribution is:
 The authoritative row-level checklist is stored in
 [shared_gui_checklist.md](group/shared_gui_checklist.md). The supplied workbook
 content was migrated to Markdown and the spreadsheet files were then removed at
-the student's request; see the
-[migration manifest](docs/workbook_migration_manifest.md). References cover the
+the student's request. References cover the
 course slides, Nielsen, Norman, Shneiderman, W3C/WCAG, SUS, ISTQB, BrowserStack,
 and EMS materials; see
 [reference_sources.md](group/reference_sources.md).
@@ -234,6 +247,10 @@ confirmed Passed in practice. Google Form submission has not been claimed.
 | C3-FOCUS-001 | C3 | 3 — Major keyboard/accessibility defect | Focus remains on Edit user behind the modal and falls to the document body after Cancel. | findings/screenshots/failed/task1_C3_C3-FOCUS-001_01.png | Not submitted |
 | C3-RESET-001 | C3 | 3 — Major functional gap | The row exposes only Edit user and Delete user; Edit User exposes Close, Cancel, and Save Changes. No Reset Password action is present. | findings/screenshots/failed/task1_C3_C3-RESET-001_01.png | Not submitted |
 
+Task 3 subsequently identified the separate physical-phone responsive-layout
+bug `C1-RESPONSIVE-001`. It is not retroactively counted as a Task 1B failure;
+the later Android evidence is reconciled in Sections 10 and 11.
+
 The canonical detailed bug and usability records are maintained in the single
 [bug_usability_findings_log.md](findings/bug_usability_findings_log.md). Per-cell
 checklist failure reasons and bug IDs remain in
@@ -249,9 +266,10 @@ Starting state: **Admin → Users List**.
 > attempt to reset its password. Tell the moderator when you believe each
 > requested account state has been saved.
 
-The moderator tests the product, asks the participant to think aloud, gives no
-leading hints, and records assistance only when the participant is completely
-stuck. Consent and separate recording consent are mandatory.
+The moderator explains that the product—not the participant—is being tested,
+asks the participant to think aloud, gives no leading hints, and records
+assistance only when the participant is completely stuck. Informed observation
+consent and separate recording consent are mandatory.
 
 ### 7.2 Measures
 
@@ -262,7 +280,7 @@ stuck. Consent and separate recording consent are mandatory.
 | Failed | No meaningful available goal achieved, participant abandons, or moderator performs the available task |
 | Time | Seconds from first measured C1 action to terminal state; system-block time noted separately |
 | Error | Participant action away from goal or requiring recovery; verified system defects excluded |
-| Hesitation | Pause threshold must be fixed before pilot: `TODO-HUMAN-EVIDENCE` |
+| Hesitation | Observable pause beyond a threshold fixed before the pilot, or explicit uncertainty; the threshold was not documented in the supplied plan |
 | Assistance | Each task-relevant moderator intervention |
 
 If Reset Password is unavailable, that subtask is **Blocked by system defect**
@@ -278,56 +296,112 @@ and is not participant failure.
 
 ### 7.4 Pilot
 
-The pilot is one separate person and is excluded from P01–P05 aggregates.
-Profile, masked contact, notes, procedural problems, and changes are all
-`TODO-HUMAN-EVIDENCE`. See [pilot notes](task2_user_testing/pilot/pilot_notes.md)
-and [changes after pilot](task2_user_testing/pilot/changes_after_pilot.md).
+The required pilot is one separate person and must be excluded from P01–P05
+aggregates. No current pilot artefact, participant profile, notes, procedural
+problem, or evidence-backed refinement is present. This requirement is
+**BLOCKED pending human evidence** and is not inferred from the five official
+sessions.
 
 ## 8. Task 2 — Five Official Sessions
 
-All five participants must be real and outside 23KTPM1. Store only masked,
-verifiable contacts in this submission and never send raw contacts/recordings to
-AI.
+The student-supplied notes identify five participants and confirm that each is
+outside 23KTPM1. Contacts are masked. The participants’ target-user profiles and
+device/browser environments are not separately recorded, so those facts are not
+inferred. Raw recordings were not analysed by AI.
 
-| ID | Target profile | Outside class | Masked contact | Success | Time | Errors | Hesitations | Assistance | Notes/recording | Observation |
-| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- | --- |
-| P01 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` | [P01 notes](task2_user_testing/sessions/P01_notes.md) | `TODO-HUMAN-EVIDENCE` |
-| P02 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` | [P02 notes](task2_user_testing/sessions/P02_notes.md) | `TODO-HUMAN-EVIDENCE` |
-| P03 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` | [P03 notes](task2_user_testing/sessions/P03_notes.md) | `TODO-HUMAN-EVIDENCE` |
-| P04 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` | [P04 notes](task2_user_testing/sessions/P04_notes.md) | `TODO-HUMAN-EVIDENCE` |
-| P05 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` | `TODO` | `TODO` | `TODO` | [P05 notes](task2_user_testing/sessions/P05_notes.md) | `TODO-HUMAN-EVIDENCE` |
+| ID | Participant / target profile | Outside class | Masked contact | Success | Time | Errors | Hesitations | Assistance | Evidence and concise observation |
+| --- | --- | --- | --- | --- | ---: | ---: | ---: | ---: | --- |
+| P01 | Nguyen Duy Khanh; target profile not recorded | Student-confirmed: Yes | 033****604 | Completed available subtasks | 77 s | 0 | 0 | 0 | [P01 notes](task2_user_testing/sessions/P01_notes.md); Reset Password system-blocked by `C3-RESET-001` |
+| P02 | Mai Hoang Thai; target profile not recorded | Student-confirmed: Yes | 090****533 | Completed available subtasks | 42 s | 0 | 0 | 0 | [P02 notes](task2_user_testing/sessions/P02_notes.md); Reset Password system-blocked by `C3-RESET-001` |
+| P03 | Tang Nhat Minh; target profile not recorded | Student-confirmed: Yes | 090****402 | Completed available subtasks | 50 s | 0 | 0 | 0 | [P03 notes](task2_user_testing/sessions/P03_notes.md); Reset Password system-blocked by `C3-RESET-001` |
+| P04 | Le Long; target profile not recorded | Student-confirmed: Yes | 037****840 | Completed available subtasks | 40 s | 0 | 0 | 0 | [P04 notes](task2_user_testing/sessions/P04_notes.md); Reset Password system-blocked by `C3-RESET-001` |
+| P05 | Nguyen Ngoc Bao Tram; target profile not recorded | Student-confirmed: Yes | 089****270 | Completed available subtasks | 91 s | 0 | 0 | 0 | [P05 notes](task2_user_testing/sessions/P05_notes.md); Reset Password system-blocked by `C3-RESET-001` |
+
+“Completed” applies to every available task step. The full Reset Password goal
+was completed by 0/5 because the product did not expose the action; this is not
+participant failure under the predefined rule.
 
 ## 9. Task 2 — SUS, Metrics, Findings, and Recommendations
 
-### 9.1 SUS
+### 9.1 SUS scoring
 
-Use the ten standard statements in
+The ten standard statements are preserved in
 [test_plan.md](task2_user_testing/test_plan.md). For each official participant:
 odd item contribution = response − 1; even item contribution = 5 − response;
 SUS = contribution sum × 2.5. The pilot is excluded.
 
+| Participant | Contribution sum | SUS score |
+| --- | ---: | ---: |
+| P01 | 26 | 65 |
+| P02 | 20 | 50 |
+| P03 | 30 | 75 |
+| P04 | 30 | 75 |
+| P05 | 31 | 77.5 |
+| **Mean** | **27.4** | **68.5** |
+
+The earlier draft treated the raw response sum as the contribution sum and
+therefore did not reverse-score the even items. The values above correct that
+arithmetic. For example, P02’s response of 4 to every item gives a score of 50,
+not 80.
+
+### 9.2 Aggregate task metrics
+
 | Metric | Result |
 | --- | --- |
-| Success rate | `TODO-HUMAN-EVIDENCE` |
-| Mean time | `TODO-HUMAN-EVIDENCE` |
-| Mean errors | `TODO-HUMAN-EVIDENCE` |
-| Mean hesitations | `TODO-HUMAN-EVIDENCE` |
-| Mean SUS | `TODO-HUMAN-EVIDENCE` |
+| Available-task success rate | 5/5 = 100% |
+| Full Reset Password completion | 0/5 = 0% (system-blocked) |
+| Mean time | (77 + 42 + 50 + 40 + 91) ÷ 5 = 60.0 seconds |
+| Mean errors | 0.0 |
+| Mean hesitations | 0.0 |
+| Mean assistance | 0.0 |
+| Mean SUS | 68.5 / 100 |
 
 Raw de-identified response and formula tables are in
 [sus_responses.md](task2_user_testing/sus_responses.md) and
 [metrics_summary.md](task2_user_testing/metrics_summary.md).
 
-### 9.2 Ranked findings
+### 9.3 Task 2 conclusion
 
-No official Task 2 usability finding is ranked because participant observation
-evidence has not yet been supplied. Nielsen severity 0–4 must be justified using
-frequency, impact, and persistence.
+All five participants were unable to complete Reset Password because no such
+action was exposed. Evidence consists of the
+[five session notes](task2_user_testing/sessions/) and the
+[genuine SUT screenshot](findings/screenshots/failed/task1_C3_C3-RESET-001_01.png).
+This is the Task 2 impact of the existing functional bug `C3-RESET-001`, not an
+additional bug or separate usability-finding ID. The supplied notes contain no
+structured friction observations or probe answers supporting another conclusion.
 
-All genuine Task 2 findings will be appended as `UF-###` rows to the single
+### 9.4 Prioritised recommendations
+
+1. **P0 — Restore the missing control.** Add a permission-controlled Reset
+   Password action in a predictable location on the selected user’s row or
+   edit/detail flow.
+2. **P0 — Make the action safe and trustworthy.** Use an account-specific
+   confirmation with a safe default, explain the consequence, avoid disclosing
+   credentials, show clear success/failure feedback, and record an audit event.
+3. **P1 — Validate the repair.** Retest C3 with real users and capture structured
+   think-aloud notes plus the clarity, recovery, speed, trust, and improvement
+   probe answers.
+
+The detailed Task 2 conclusion is in
+[usability_findings.md](task2_user_testing/usability_findings.md).
+`C3-RESET-001` remains the single canonical row in the
 [Consolidated Bug & Usability Findings Log](findings/bug_usability_findings_log.md).
-That unified schema also records affected participants/screens, evidence,
-heuristic, recommendation, functional-bug relationship, and Form status.
+
+### 9.5 Task 2 evidence limitations
+
+- The separate pilot and changes-after-pilot evidence are absent.
+- Target profiles and participant device/browser environments are not recorded.
+- Session notes document recording consent only, not general informed/observation
+  consent.
+- The hesitation threshold was not fixed in the supplied plan.
+- Think-aloud observations and neutral probe answers are absent.
+- The central access/retention record for recordings is absent; public-sharing
+  permission and access settings require human review.
+- `C3-RESET-001` still requires manual Google Form submission and a real
+  timestamp/receipt.
+
+The requirement-by-requirement status is recorded in
+[task2_audit.md](task2_user_testing/task2_audit.md).
 ## 10. Task 3 — Cross-Browser / Cross-Platform
 
 Every screen uses the same five planned configurations:
@@ -338,45 +412,56 @@ Every screen uses the same five planned configurations:
 4. iPadOS + Safari + Tablet
 5. Android + Chrome + Phone
 
-| Cell | Screen | OS | Browser | Class | Version/device/viewport/date/environment | Result | Screenshot |
+| Cell | Screen | OS | Browser | Class | Device; versions; viewport; date; environment | Result | Screenshot |
 | --- | --- | --- | --- | --- | --- | --- | --- |
-| C1-01 | C1 | Windows | Edge | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C1-02 | C1 | Windows | Firefox | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C1-03 | C1 | Windows | Opera | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C1-04 | C1 | iPadOS | Safari | Tablet | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C1-05 | C1 | Android | Chrome | Phone | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C2-01 | C2 | Windows | Edge | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C2-02 | C2 | Windows | Firefox | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C2-03 | C2 | Windows | Opera | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C2-04 | C2 | iPadOS | Safari | Tablet | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C2-05 | C2 | Android | Chrome | Phone | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C3-01 | C3 | Windows | Edge | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C3-02 | C3 | Windows | Firefox | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C3-03 | C3 | Windows | Opera | Desktop | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C3-04 | C3 | iPadOS | Safari | Tablet | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
-| C3-05 | C3 | Android | Chrome | Phone | `TODO-HUMAN-EVIDENCE` | BLOCKED | `TODO-HUMAN-EVIDENCE` |
+| C1-01 | C1 | Windows | Edge | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C1-01](task3_compatibility/screenshots/C1/C1-01_C1_Windows_Edge_Desktop_20260804.jpg) |
+| C1-02 | C1 | Windows | Firefox | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C1-02](task3_compatibility/screenshots/C1/C1-02_C1_Windows_Firefox_Desktop_20260804.jpg) |
+| C1-03 | C1 | Windows | Opera | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C1-03](task3_compatibility/screenshots/C1/C1-03_C1_Windows_Opera_Desktop_20260804.jpg) |
+| C1-04 | C1 | iPadOS | Safari | Tablet | iPad Air M6; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C1-04](task3_compatibility/screenshots/C1/C1-04_C1_iPadOS_Safari_Tablet_20260804.jpg) |
+| C1-05 | C1 | Android | Chrome | Phone | Samsung Galaxy A70; versions/viewport not recorded; 2026-08-04; Physical | FAIL | [C1-05](task3_compatibility/screenshots/C1/C1-05_C1_Android_Chrome_Phone_20260804.jpg) |
+| C2-01 | C2 | Windows | Edge | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C2-01](task3_compatibility/screenshots/C2/C2-01_C2_Windows_Edge_Desktop_20260804.jpg) |
+| C2-02 | C2 | Windows | Firefox | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C2-02](task3_compatibility/screenshots/C2/C2-02_C2_Windows_Firefox_Desktop_20260804.jpg) |
+| C2-03 | C2 | Windows | Opera | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C2-03](task3_compatibility/screenshots/C2/C2-03_C2_Windows_Opera_Desktop_20260804.jpg) |
+| C2-04 | C2 | iPadOS | Safari | Tablet | iPad Air M6; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C2-04](task3_compatibility/screenshots/C2/C2-04_C2_iPadOS_Safari_Tablet_20260804.jpg) |
+| C2-05 | C2 | Android | Chrome | Phone | Samsung Galaxy A70; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C2-05](task3_compatibility/screenshots/C2/C2-05_C2_Android_Chrome_Phone_20260804.jpg) |
+| C3-01 | C3 | Windows | Edge | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C3-01](task3_compatibility/screenshots/C3/C3-01_C3_Windows_Edge_Desktop_20260804.jpg) |
+| C3-02 | C3 | Windows | Firefox | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C3-02](task3_compatibility/screenshots/C3/C3-02_C3_Windows_Firefox_Desktop_20260804.jpg) |
+| C3-03 | C3 | Windows | Opera | Desktop | MSI GF63; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C3-03](task3_compatibility/screenshots/C3/C3-03_C3_Windows_Opera_Desktop_20260804.jpg) |
+| C3-04 | C3 | iPadOS | Safari | Tablet | iPad Air M6; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C3-04](task3_compatibility/screenshots/C3/C3-04_C3_iPadOS_Safari_Tablet_20260804.jpg) |
+| C3-05 | C3 | Android | Chrome | Phone | Samsung Galaxy A70; versions/viewport not recorded; 2026-08-04; Physical | PASS | [C3-05](task3_compatibility/screenshots/C3/C3-05_C3_Android_Chrome_Phone_20260804.jpg) |
+
+Overall result: **14 PASS and 1 FAIL**. `C1-RESPONSIVE-001` records
+horizontal overflow and severe compression on the Android/Chrome phone cell.
+The C3 PASS values apply only to the available Edit User/Active compatibility
+path; Reset Password remains unavailable as the already confirmed functional
+gap `C3-RESET-001`.
 
 ### Coverage proof
 
 | Screen | OS (3) | Browsers (5) | Classes (3) | Planned | Executed |
 | --- | --- | --- | --- | ---: | ---: |
-| C1 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 0 |
-| C2 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 0 |
-| C3 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 0 |
+| C1 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 5 |
+| C2 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 5 |
+| C3 | Windows, iPadOS, Android | Edge, Firefox, Opera, Safari, Chrome | Desktop, Tablet, Phone | 5 | 5 |
 
-Every final cell requires a real screenshot showing the student-ID overlay, EMS
-URL, browser, OS, and device identity. See the complete
+All 15 cells have real screenshots showing the student email overlay, EMS URL,
+browser, OS, and device identity. Browser/OS versions and exact viewport values
+were not recorded and are not inferred. See the complete
 [compatibility matrix](task3_compatibility/compatibility_matrix.md).
 
 ## 11. Consolidated Bug & Usability Findings Log
 
-The unified log currently contains nine confirmed Task 1B bugs and no official Task 2 participant finding. Future `UF-###` rows will use the same schema. Google Form timestamps and confirmation references remain unclaimed until the student submits the Form manually.
+The unified log contains nine confirmed Task 1B bugs and one confirmed Task 3
+compatibility/UI bug. Task 2 adds no duplicate row: its 5/5 system-block
+conclusion corroborates `C3-RESET-001`. Google Form timestamps and confirmation
+references remain unclaimed until the student submits the Form manually.
 
 | ID | Screen | Type | Description | Evidence | Form status | Overall status |
 | --- | --- | --- | --- | --- | --- | --- |
 | C1-LOCALE-001 | Scenario C / C1 Users List | Localisation / usability defect | Created and Updated dates use an ambiguous numeric format in the English UI. | findings/screenshots/failed/task1_C1_C1-LOCALE-001_01.png | Not submitted | Confirmed — pending Google Form submission |
 | C1-NAV-001 | Scenario C / C1 Users List | Accessibility / navigation defect | Six sidebar destination links have no accessible names. | findings/screenshots/failed/task1_C1_C1-NAV-001_01.png | Not submitted | Confirmed — pending Google Form submission |
 | C1-SEARCH-001 | Scenario C / C1 Users List | Usability / recovery defect | The no-result search state offers no Clear or next action. | findings/screenshots/failed/task1_C1_C1-SEARCH-001_01.png | Not submitted | Confirmed — pending Google Form submission |
+| C1-RESPONSIVE-001 | Scenario C / C1 Users List | Responsive/mobile UI defect | Users List overflows horizontally and is severely compressed on Android/Chrome phone. | task3_compatibility/screenshots/C1/C1-05_C1_Android_Chrome_Phone_20260804.jpg | Not submitted | Confirmed — pending Google Form submission |
 | C2-FORM-001 | Scenario C / C2 Assign Role/Edit User | Form clarity defect | First Name and Last Name placeholders are reversed. | findings/screenshots/failed/task1_C2_C2-FORM-001_01.png | Not submitted | Confirmed — pending Google Form submission |
 | C2-FOCUS-001 | Scenario C / C2 Assign Role/Edit User | Accessibility / modal focus defect | Edit User does not move focus into the modal or restore it after Cancel. | findings/screenshots/failed/task1_C2_C2-FOCUS-001_01.png | Not submitted | Confirmed — pending Google Form submission |
 | C2-VALIDATION-001 | Scenario C / C2 Assign Role/Edit User | Validation defect | Empty First Name produces a Last Name required error. | findings/screenshots/failed/task1_C2_C2-VALIDATION-001_01.png | Not submitted | Confirmed — pending Google Form submission |
@@ -400,38 +485,41 @@ failure metadata, and duplicate IDs; it never decides UI quality.
 ### 12.2 Record AI audit
 
 [SKILL.md](agent/record-ai-audit/SKILL.md) accepts real interaction metadata,
-verbatim prompt/output or a labelled artefact reference, and optional
-student-owned review. It blocks likely secrets/PII, allocates stable IDs, rejects
-duplicates, writes five-part entries, updates the prompt log, and counts only
-confirmed verdicts.
+the verbatim prompt, and the verbatim AI output or a labelled artefact reference.
+It blocks likely secrets/PII, allocates stable IDs, rejects duplicates, writes
+the four required fields, and updates the prompt log and audit-report index.
 
 ### 12.3 Demonstrations and limitations
 
 Both skills are repository-local submission artefacts and are not globally
 installed. They cannot replace human EMS observation, participant recruitment,
-student verdicts, or Google Form actions. Video links are tracked in
-[demo_video_links.md](agent/demo_video_links.md); the two required end-to-end
-demos remain `TODO-HUMAN-EVIDENCE`.
+or Google Form actions. Only the `ems-checklist-executor` demonstration is
+required. Its video link is tracked in
+[demo_video_links.md](agent/demo_video_links.md) and remains
+`TODO-HUMAN-EVIDENCE` until the student adds it.
 
 ### 12.4 Validation results
 
 | Check | Result |
 | --- | --- |
-| `quick_validate.py` — `ems-checklist-executor` | Valid |
-| `quick_validate.py` — `record-ai-audit` | Valid |
-| Synthetic execution metadata — valid final structure | Passed |
-| Synthetic Failed row without evidence | Correctly rejected |
-| Synthetic audit append and summary update | Passed |
-| Synthetic duplicate audit ID | Correctly rejected |
-| Current scaffold working-mode validation | 56 checklist rows, 56 execution rows, 168 cells, 168 working blockers; structurally valid |
-| Current scaffold final-mode validation | Correctly rejected because all 168 cells remain `BLOCKED` |
+| Current `ems-checklist-executor` final validation | `OK`: 56 checklist rows, 56 execution rows, 168 cells, 150 Passed, 18 Failed, 0 working blockers |
+| `record-ai-audit` privacy/schema dry-run for `AI-010` | Passed |
+| `record-ai-audit` entry/index generation for `AI-010` | Passed |
+| Task 2 numerical recomputation | Passed: 300 total seconds, 60.0-second mean, 68.5 mean SUS |
+| Checked local Markdown links in changed report artefacts | All resolved |
+| `git diff --check` | Passed; line-ending conversion warnings only |
 
 ## 13. AI Use, Human Review, and Critique
 
 Codex was used for requirement comparison, scaffold generation, workbook
-content recovery and Markdown migration, skill/script creation, and
-deterministic consistency checks.
-It was not used for live UI outcomes or human evidence.
+content recovery and Markdown migration, skill/script creation, the authorised
+Task 1B live browser run and evidence capture, deterministic consistency checks,
+and recalculation/cross-reconciliation of the student-supplied de-identified
+Task 2 metrics and SUS responses.
+
+Codex did not recruit participants, answer SUS on their behalf, open or analyse
+the participant recordings, invent probe answers or pilot evidence, perform the
+student's physical-device Task 3 runs, or submit Google Forms.
 
 Mandatory assignment declaration:
 
@@ -451,11 +539,11 @@ review evidence. The scaffold questions are in
 
 ### Appendix A — AI Audit Report Snapshot
 
-Four interactions are indexed: AI-000 (preserved prior record, INCOMPLETE),
-AI-007 (this scaffold, pending human review), and AI-008 (checklist approval
-status update, pending human review), and AI-009 (spreadsheet removal after
-Markdown migration, pending human review). Confirmed verdict counts: VALID 0,
-INVALID 0, INCOMPLETE 1; pending 3. The authoritative detailed appendix is
+Five interactions are indexed: AI-000 (kickoff), AI-007 (scaffold), AI-008
+(checklist approval update), AI-009 (spreadsheet removal after Markdown
+migration), and AI-010 (Task 2 analysis and audit). Each record contains only
+the AI tool name, date/time, prompt, and AI output or a clearly labelled output
+reference. The authoritative detailed appendix is
 [AI/ai_audit_report.md](AI/ai_audit_report.md) and must be copied exactly into
 this report at finalization.
 
@@ -463,34 +551,38 @@ this report at finalization.
 
 - AI-000: prior Vietnamese kickoff prompt, 2026-07-30; exact output/time/model
   unavailable.
-- AI-007: current Vietnamese request to complete HW03 from `docs/` and the master
+- AI-007: current Vietnamese request to complete HW03 from supplied materials and the master
   prompt, recorded 2026-08-01T19:05:18+07:00; artefact output references recorded.
 - AI-008: student confirmation that the group reviewed and approved all 56
   checklist items, recorded 2026-08-01T19:58:58+07:00; synchronized status
   references recorded.
 - AI-009: student request to keep the working package in Markdown and remove
   Excel files after migration verification, recorded 2026-08-01T20:20:25+07:00.
+- AI-010: student request to finish Task 2 from five supplied session records and
+  audit the result with a skill, recorded 2026-08-03T22:41:45+07:00; affected
+  artefact references recorded without participant PII or recording content.
 
 See [AI/prompt_log.md](AI/prompt_log.md). Later material interactions must be
 appended verbatim.
 
 ### Appendix C — Git Commit Log
 
-No HW03-specific commit is claimed at scaffold time. See
-[git_commit_log.txt](git_commit_log.txt); regenerate it from real future commits.
+The student has intentionally deferred generation of the submission commit log
+until all HW03 content is complete. See [git_commit_log.txt](git_commit_log.txt).
 
 ### Appendix D — Evidence Index and Demo Links
 
 | Evidence group | Path | Status |
 | --- | --- | --- |
-| Workbook migration | `docs/workbook_migration_manifest.md` | Complete; source hashes preserved; spreadsheet files removed |
 | Shared checklist/review | `group/` | Approved 56/56 unchanged; exact reviewer/date record TODO |
-| Task 1 failed screenshots | `findings/screenshots/failed/` | 13 genuine SUT PNGs present; 10 referenced by the 9 confirmed bugs |
-| Pilot and P01–P05 notes | `task2_user_testing/` | Templates only |
-| Recordings | `task2_user_testing/recordings/recording_links.md` | TODO |
-| Compatibility screenshots | `task3_compatibility/screenshots/C1/`, `C2/`, `C3/` | Empty |
+| Task 1 failed screenshots | `findings/screenshots/failed/` | 10 genuine SUT PNG files present; 8 unique hashes because individual captures support more than one finding |
+| Task 2 official sessions | `task2_user_testing/sessions/` | Five participant notes supplied; target-profile, environment, informed-consent, think-aloud, and probe-answer gaps remain |
+| Task 2 metrics/SUS/conclusion | `task2_user_testing/metrics_summary.md`, `sus_responses.md`, `usability_findings.md` | Aggregates corrected; 5/5 system-block conclusion linked to existing bug `C3-RESET-001` without a duplicate finding ID |
+| Task 2 pilot | `task2_user_testing/pilot/` | Required evidence absent; current pilot files were deleted |
+| Recordings | References remain in individual session notes | Not analysed by AI; central access/retention record absent |
+| Compatibility screenshots | `task3_compatibility/screenshots/C1/`, `C2/`, `C3/` | 15 executed cells and 15 distinct JPG files; 14 Passed, 1 Failed |
 | Google Form receipts | `findings/google_form_receipts.md` | None claimed |
-| Skill demos | `agent/demo_video_links.md` | Two required links TODO; one old link preserved/unclassified |
+| Skill demos | `agent/demo_video_links.md` | One required `ems-checklist-executor` link remains TODO |
 | Final PDFs | `main_report.pdf`, `AI/ai_audit_report.pdf` | Intentionally not generated |
 
 Final PDFs and ZIP are blocked until all unresolved evidence markers are reviewed.

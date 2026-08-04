@@ -7,14 +7,8 @@ import argparse
 import json
 import re
 import sys
-from collections import Counter
 from pathlib import Path
 
-
-CONFIRMED = {"VALID", "INVALID", "INCOMPLETE"}
-PENDING = "TODO-HUMAN-REVIEW"
-SUMMARY_START = "<!-- AUTO-SUMMARY:START -->"
-SUMMARY_END = "<!-- AUTO-SUMMARY:END -->"
 
 SENSITIVE_PATTERNS = {
     "credential assignment": re.compile(
@@ -60,19 +54,6 @@ def allocate_id(ids: set[str]) -> str:
     return f"AI-{(max(numbers, default=-1) + 1):03d}"
 
 
-def normalize_verdict(value: object) -> str:
-    if value is None or str(value).strip() == "":
-        return PENDING
-    verdict = str(value).strip().upper()
-    if verdict == "INCOM" + "PELTE":
-        verdict = "INCOMPLETE"
-    if verdict not in CONFIRMED:
-        raise ValueError(
-            f"verdict must be VALID, INVALID, INCOMPLETE, or omitted; got {value!r}"
-        )
-    return verdict
-
-
 def require_text(data: dict[str, object], key: str) -> str:
     value = data.get(key)
     if not isinstance(value, str) or value == "":
@@ -95,60 +76,23 @@ def insert_markdown_row(text: str, header_prefix: str, row: str) -> str | None:
     return "\n".join(lines).rstrip() + "\n"
 
 
-def prompt_log_text(current: str, entry_id: str, data: dict[str, object], verdict: str) -> str:
+def prompt_log_text(current: str, entry_id: str, data: dict[str, object]) -> str:
     if re.search(rf"\b{re.escape(entry_id)}\b", current):
         raise ValueError(f"{entry_id} already exists in prompt_log.md")
     link = f"[{entry_id} entry](audit_entries/{entry_id}.md)"
     row = (
-        f"| {entry_id} | Recorded | {data['stage']} / {data['artifact']} | "
-        f"{data['tool']} | {data['model']} | {data['datetime']} | {link} | "
-        f"See detailed entry | {verdict} |"
+        f"| {entry_id} | {data['tool']} | {data['datetime']} | {link} | "
+        "See detailed entry |"
     )
     inserted = insert_markdown_row(current, "| ID |", row)
     if inserted is not None:
         return inserted
     return (
         current.rstrip()
-        + "\n\n| ID | Status | Stage / artifact | Tool | Model | Date/time | "
-        "Verbatim prompt location | AI output / artifact reference | Student verdict |\n"
-        "| --- | --- | --- | --- | --- | --- | --- | --- | --- |\n"
+        + "\n\n| ID | AI tool | Date/time | Prompt | AI output |\n"
+        "| --- | --- | --- | --- | --- |\n"
         + row
         + "\n"
-    )
-
-
-def count_verdicts(entries_dir: Path, pending_entry: tuple[str, str] | None = None) -> Counter[str]:
-    counts: Counter[str] = Counter()
-    if entries_dir.exists():
-        for path in entries_dir.glob("AI-[0-9][0-9][0-9].md"):
-            text = path.read_text(encoding="utf-8")
-            match = re.search(r"\*\*Verdict:\*\*\s*(VALID|INVALID|INCOMPLETE)\b", text)
-            if match:
-                counts[match.group(1)] += 1
-            else:
-                counts[PENDING] += 1
-    if pending_entry:
-        _, verdict = pending_entry
-        counts[verdict if verdict in CONFIRMED else PENDING] += 1
-    return counts
-
-
-def summary_block(counts: Counter[str]) -> str:
-    evaluated = sum(counts[value] for value in CONFIRMED)
-    def percentage(value: str) -> float:
-        return (counts[value] / evaluated * 100.0) if evaluated else 0.0
-    return (
-        f"{SUMMARY_START}\n"
-        "## Confirmed verdict summary\n\n"
-        "Only confirmed `VALID`, `INVALID`, or `INCOMPLETE` verdicts are counted.\n\n"
-        "| Verdict | Count | Percentage of evaluated entries |\n"
-        "| --- | ---: | ---: |\n"
-        f"| VALID | {counts['VALID']} | {percentage('VALID'):.1f}% |\n"
-        f"| INVALID | {counts['INVALID']} | {percentage('INVALID'):.1f}% |\n"
-        f"| INCOMPLETE | {counts['INCOMPLETE']} | {percentage('INCOMPLETE'):.1f}% |\n"
-        f"| **Evaluated** | **{evaluated}** | **{100.0 if evaluated else 0.0:.1f}%** |\n"
-        f"| Pending human review | {counts[PENDING]} | Not included |\n"
-        f"{SUMMARY_END}"
     )
 
 
@@ -156,40 +100,27 @@ def report_text(
     current: str,
     entry_id: str,
     data: dict[str, object],
-    verdict: str,
-    counts: Counter[str],
 ) -> str:
-    block = summary_block(counts)
-    if SUMMARY_START in current and SUMMARY_END in current:
-        pattern = re.compile(
-            re.escape(SUMMARY_START) + r".*?" + re.escape(SUMMARY_END),
-            re.DOTALL,
-        )
-        updated = pattern.sub(block, current, count=1)
-    else:
-        updated = current.rstrip() + "\n\n" + block + "\n"
-
-    if re.search(rf"\b{re.escape(entry_id)}\b", updated):
-        return updated
+    if re.search(rf"\b{re.escape(entry_id)}\b", current):
+        return current
     row = (
-        f"| {entry_id} | {data['stage']} / {data['artifact']} | "
-        f"[Detailed entry](audit_entries/{entry_id}.md) | {verdict} | "
-        f"{data.get('student_fix') or PENDING} |"
+        f"| {entry_id} | {data['tool']} | {data['datetime']} | "
+        f"[Detailed entry](audit_entries/{entry_id}.md) | See detailed entry |"
     )
-    inserted = insert_markdown_row(updated, "| ID | Stage /", row)
+    inserted = insert_markdown_row(current, "| ID | AI tool |", row)
     if inserted is not None:
         return inserted
     return (
-        updated.rstrip()
+        current.rstrip()
         + "\n\n## Interaction index\n\n"
-        "| ID | Stage / artefact | Prompt and output | Verdict | Student correction |\n"
+        "| ID | AI tool | Date/time | Prompt | AI output |\n"
         "| --- | --- | --- | --- | --- |\n"
         + row
         + "\n"
     )
 
 
-def entry_text(entry_id: str, data: dict[str, object], verdict: str) -> str:
+def entry_text(entry_id: str, data: dict[str, object]) -> str:
     output = data.get("output")
     output_ref = data.get("output_ref")
     if bool(output) == bool(output_ref):
@@ -199,25 +130,16 @@ def entry_text(entry_id: str, data: dict[str, object], verdict: str) -> str:
         if output
         else f"Labelled external artefact/reference (not verbatim output):\n\n{output_ref}"
     )
-    reasoning = data.get("reasoning") or PENDING
-    student_fix = data.get("student_fix") or PENDING
     return (
         f"# {entry_id}\n\n"
-        "## 1. Prompt + Tool\n\n"
-        f"- Tool: {data['tool']}\n"
-        f"- Model: {data['model']}\n"
-        f"- Date/time: {data['datetime']}\n"
-        f"- Stage/artifact: {data['stage']} / {data['artifact']}\n\n"
-        "### Verbatim prompt\n\n"
+        "## AI tool\n\n"
+        f"{data['tool']}\n\n"
+        "## Date/time\n\n"
+        f"{data['datetime']}\n\n"
+        "## Prompt\n\n"
         f"{fenced_verbatim(str(data['prompt']))}\n\n"
-        "## 2. AI Output\n\n"
-        f"{output_section}\n\n"
-        "## 3. Verdict\n\n"
-        f"**Verdict:** {verdict}\n\n"
-        "## 4. Reasoning with Course/ISTQB/Standard Reference\n\n"
-        f"{reasoning}\n\n"
-        "## 5. Student Fix\n\n"
-        f"{student_fix}\n"
+        "## AI output\n\n"
+        f"{output_section}\n"
     )
 
 
@@ -236,9 +158,8 @@ def main() -> int:
         data = json.loads(args.input_json.read_text(encoding="utf-8"))
         if not isinstance(data, dict):
             raise ValueError("input JSON root must be an object")
-        for key in ("tool", "model", "datetime", "stage", "artifact", "prompt"):
+        for key in ("tool", "datetime", "prompt"):
             data[key] = require_text(data, key)
-        verdict = normalize_verdict(data.get("verdict"))
         ids = existing_ids(args.root)
         entry_id = args.id or allocate_id(ids)
         if not re.fullmatch(r"AI-\d{3}", entry_id):
@@ -255,19 +176,18 @@ def main() -> int:
                 + "); request a student-redacted source"
             )
 
-        rendered_entry = entry_text(entry_id, data, verdict)
+        rendered_entry = entry_text(entry_id, data)
         ai_dir = args.root / "AI"
         entries_dir = ai_dir / "audit_entries"
         prompt_log = ai_dir / "prompt_log.md"
         report = ai_dir / "ai_audit_report.md"
         current_log = prompt_log.read_text(encoding="utf-8") if prompt_log.exists() else "# AI Prompt Log\n"
         current_report = report.read_text(encoding="utf-8") if report.exists() else "# AI Audit Report\n"
-        updated_log = prompt_log_text(current_log, entry_id, data, verdict)
-        counts = count_verdicts(entries_dir, (entry_id, verdict))
-        updated_report = report_text(current_report, entry_id, data, verdict, counts)
+        updated_log = prompt_log_text(current_log, entry_id, data)
+        updated_report = report_text(current_report, entry_id, data)
 
         if args.dry_run:
-            print(f"DRY-RUN OK id={entry_id} verdict={verdict}")
+            print(f"DRY-RUN OK id={entry_id}")
             return 0
 
         entries_dir.mkdir(parents=True, exist_ok=True)
@@ -276,10 +196,7 @@ def main() -> int:
             handle.write(rendered_entry)
         prompt_log.write_text(updated_log, encoding="utf-8", newline="\n")
         report.write_text(updated_report, encoding="utf-8", newline="\n")
-        print(
-            f"APPENDED id={entry_id} evaluated="
-            f"{sum(counts[value] for value in CONFIRMED)} pending={counts[PENDING]}"
-        )
+        print(f"APPENDED id={entry_id}")
         return 0
     except (OSError, UnicodeError, json.JSONDecodeError, ValueError) as exc:
         print(f"ERROR: {exc}", file=sys.stderr)

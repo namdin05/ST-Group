@@ -1,10 +1,10 @@
 # HW03 Git Commit Log
 
-Status: TODO-HUMAN-EVIDENCE
+Status: DEFERRED UNTIL FINALIZATION
 
-No HW03-specific Git commit was present when this scaffold was created. Do not
-copy unrelated repository history into the submission. After each real procedure
-step, commit it and regenerate this file from the real Git history.
+The student will generate this file from the real repository history after all
+HW03 content is complete. Do not copy unrelated history or treat this temporary
+placeholder as the final commit log.
 
 Required future commit stages:
 - checklist design and human review;

@@ -11,8 +11,8 @@ Do not perform or pretend to perform live EMS tests during this initial scaffold
 
 Before editing anything, recursively inspect the current repository and read all relevant files. Use this precedence when sources disagree:
 
-1. The current HW03 assignment brief in `docs/` or the supplied file named similar to `2026.HW03.GUI Usability EMS_En.md`.
-2. The course AI templates `[AI-01]` through `[AI-06]` in `docs/`.
+1. The current HW03 assignment brief supplied to the repository (for example a file named similar to `2026.HW03.GUI Usability EMS_En.md`).
+2. The course AI templates `[AI-01]` through `[AI-06]` supplied with the assignment package.
 3. My explicit facts and constraints in this prompt.
 4. Existing workbook/report content, which may be an older draft and may contain obsolete platform suggestions.
 
@@ -70,10 +70,6 @@ HW03/
 ├── main_report.md
 ├── main_report.pdf                         # generate only after content is ready
 ├── git_commit_log.txt
-├── docs/
-│   ├── assignment/
-│   ├── ai_templates/
-│   └── HW03_Working_Pack.xlsx
 ├── group/
 │   ├── shared_gui_checklist.xlsx-or-md
 │   ├── reference_sources.md

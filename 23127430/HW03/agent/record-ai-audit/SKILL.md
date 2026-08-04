@@ -1,25 +1,22 @@
 ---
 name: record-ai-audit
-description: Record an AI interaction after a user asks to log a prompt/output, generate a five-part audit entry, update the HW03 prompt log, or prepare/update the AI Audit Report. Use for verbatim, privacy-checked logging and confirmed-verdict metrics without evaluating the AI on the student's behalf.
+description: Record an AI interaction after a user asks to log a prompt/output, generate a four-field audit entry, update the HW03 prompt log, or prepare/update the AI Audit Report. Use for privacy-checked logging of the AI tool name, date/time, verbatim prompt, and AI output.
 ---
 
 # Record AI Audit
 
-Preserve the source exactly and separate factual logging from student evaluation.
-Read [references/audit_schema.md](references/audit_schema.md) before writing an
-entry.
+Preserve the source exactly and keep the audit factual. Read
+[references/audit_schema.md](references/audit_schema.md) before writing an entry.
 
 ## Required inputs
 
 Obtain:
 
 - interaction/artifact ID or permission to allocate the next stable ID;
-- AI tool and model, when known;
+- AI tool name;
 - real date/time, when available;
-- stage/task and affected artifact;
 - verbatim user prompt;
-- verbatim AI output or a labelled allowed external-artefact reference;
-- optional student-supplied verdict, reasoning citation, and correction.
+- verbatim AI output or a labelled allowed external-artefact reference.
 
 Use explicit TODO fields for unavailable metadata. Do not guess.
 
@@ -31,16 +28,11 @@ Use explicit TODO fields for unavailable metadata. Do not guess.
 3. Preserve prompt and output verbatim. Do not clean up, shorten, or paraphrase.
    For long content, split it into ordered files and link every part; never
    silently truncate.
-4. Create one five-part entry under `AI/audit_entries/`.
+4. Create one four-field entry under `AI/audit_entries/`.
 5. Add one index row to `AI/prompt_log.md` without duplicating the ID.
-6. Leave `Verdict`, `Reasoning`, and `Student Fix` as human-owned TODOs unless the
-   student supplies them. Confirmed verdicts are only `VALID`, `INVALID`, or
-   `INCOMPLETE`; correct the legacy transposed-letter misspelling without changing
-   meaning.
-7. Update `AI/ai_audit_report.md` and calculate counts/percentages from confirmed
-   verdicts only. Exclude TODO entries from the denominator.
-8. Preserve the assignment disclosure and keep the 200–300 word critique
-   separate.
+6. Update `AI/ai_audit_report.md` with the same factual index fields.
+7. Preserve the assignment disclosure and keep any separate course-required
+   critique outside the audit-entry schema.
 
 ## Deterministic helper
 
@@ -56,7 +48,6 @@ output before finalizing.
 
 ## Safeguards
 
-- Never infer a model name, timestamp, link, verdict, citation, or correction.
-- Never count TODO reviews as evaluated.
+- Never infer a timestamp or output.
 - Never replace unavailable verbatim output with an unlabeled summary.
 - Never expose passwords, tokens, private recordings, or unmasked contacts.

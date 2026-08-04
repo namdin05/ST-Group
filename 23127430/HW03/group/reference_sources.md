@@ -17,7 +17,7 @@ re-verified at finalization because web content can change.
 | SRC-10 | Brooke, J. (1996), *SUS: A Quick and Dirty Usability Scale* | Ten-item SUS and scoring | Book/chapter citation | Odd: response − 1; even: 5 − response; sum × 2.5 |
 | SRC-11 | Nielsen Norman Group, *Usability 101* | Effectiveness, efficiency, satisfaction | <https://www.nngroup.com/articles/usability-101-introduction-to-usability/> | Source recorded |
 | SRC-12 | EMS Student Manual | EMS terms and functions | <https://prod-dev.ems-fitus.cloud/manual/student> | Live source; re-check during testing |
-| SRC-13 | `docs/2026.HW03.GUI Usability EMS_En.md` | Authoritative homework requirements | Course-provided brief | Primary source |
+| SRC-13 | Course assignment brief (supplied file) | Authoritative homework requirements | Course-provided brief | Primary source |
 | SRC-14 | ISTQB Foundation Level Syllabus | Testing terminology and evidence discipline | `TODO-HUMAN-EVIDENCE`: add the exact edition and section used | Required by brief |
 
 ## Source discrepancy

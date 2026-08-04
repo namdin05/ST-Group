@@ -4,11 +4,10 @@
 | --- | --- |
 | Participant alias / target profile | Le Long |
 | Outside 23KTPM1 confirmed | Valid |
-| Masked, verifiable contact | [EMAIL_ADDRESS] |
-| Consent / recording consent | `TODO-HUMAN-EVIDENCE` |
-| Date / environment | 02-08-2026 21:54 |
-| Task success / time (s) | `TODO-HUMAN-EVIDENCE` |
-| Errors / hesitations / assistance | `TODO-HUMAN-EVIDENCE` |
-| Reset Password subtask | `TODO-HUMAN-EVIDENCE` |
-| Recording / raw-note reference | `TODO-HUMAN-EVIDENCE` |
-
+| Masked, verifiable contact | 037****840 |
+| Consent / recording consent | Only recording consent |
+| Date / environment | 03-08-2026 14:51 |
+| Task success / time | 40s |
+| Errors / hesitations / assistance | None |
+| Reset Password subtask | Blocked by confirmed system defect `C3-RESET-001`; not participant failure |
+| Recording | https://youtu.be/L1UUou9n9uc |

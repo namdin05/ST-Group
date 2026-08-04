@@ -7,7 +7,7 @@ templates that have not yet been run. Do not relabel a template as an interactio
 
 Source before spreadsheet removal: cached `AI Prompts` sheet in the supplied
 macro-enabled workbook. The source hash and Markdown destination are recorded in
-[`docs/workbook_migration_manifest.md`](../docs/workbook_migration_manifest.md).
+the repository migration notes.
 
 > Đây là bài tập HW03 của tôi, bạn hãy hướng dẫn cho nhóm tôi và tôi hoàn thành đầy đủ bài tập này. AI Agent mà tôi sử dụng: Codex. Link website mới: https://prod-dev.ems-fitus.cloud/
 

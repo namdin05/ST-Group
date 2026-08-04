@@ -12,42 +12,32 @@ I use AI tools for the following tasks,
 - scaffolding the English report and evidence templates;
 - recovering and migrating workbook content into Markdown artefacts;
 - creating deterministic repository-local Agent Skills and validators;
-- checking structural consistency without deciding live EMS results.
+- controlling the existing authenticated in-app browser for the authorised Task
+  1B live EMS checklist execution;
+- capturing genuine SUT failure evidence and recording the observed results;
+- synchronising student-reviewed corrections, findings, references, and reports;
+- recalculating and cross-reconciling student-supplied de-identified Task 2
+  session metrics and SUS responses;
+- checking structural consistency with deterministic validators.
 
-OpenAI Codex did not perform a live EMS run, recruit participants, answer SUS,
-capture screenshots, submit Google Forms, or assign Passed/Failed outcomes.
-
-<!-- AUTO-SUMMARY:START -->
-## Confirmed verdict summary
-
-Only confirmed `VALID`, `INVALID`, or `INCOMPLETE` verdicts are counted.
-
-| Verdict | Count | Percentage of evaluated entries |
-| --- | ---: | ---: |
-| VALID | 0 | 0.0% |
-| INVALID | 0 | 0.0% |
-| INCOMPLETE | 1 | 100.0% |
-| **Evaluated** | **1** | **100.0%** |
-| Pending human review | 3 | Not included |
-<!-- AUTO-SUMMARY:END -->
+OpenAI Codex performed the authorised Task 1B browser run under the student's
+direction and recorded genuine observations. The student reviewed the checklist
+and corrected five C1 outcomes. Codex did not recruit participants, answer SUS
+on anyone's behalf, open or analyse participant recordings, fabricate pilot or
+probe evidence, execute Task 3 compatibility coverage, or submit Google Forms.
 
 ## Interaction index
 
-| ID | Stage / artefact | Prompt and output | Verdict | Student correction |
+Each detailed record contains only the AI tool name, date/time, prompt, and AI
+output or a clearly labelled output reference.
+
+| ID | AI tool | Date/time | Prompt | AI output |
 | --- | --- | --- | --- | --- |
-| AI-000 | Kickoff / requirements analysis | [Detailed entry](audit_entries/AI-000.md) | INCOMPLETE (preserved source value) | Evidence work remains |
-| AI-007 | Scaffold, workbook, reports, and skills | [Detailed entry](audit_entries/AI-007.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
-| AI-008 | Checklist approval status update | [Detailed entry](audit_entries/AI-008.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
-| AI-009 | Spreadsheet removal after Markdown migration | [Detailed entry](audit_entries/AI-009.md) | `TODO-HUMAN-REVIEW` | `TODO-HUMAN-REVIEW` |
+| AI-000 | OpenAI Codex | 2026-07-30; exact local time unavailable | [Detailed entry](audit_entries/AI-000.md) | Exact output unavailable; labelled source reference retained |
+| AI-007 | OpenAI Codex | 2026-08-01T19:05:18+07:00 | [Detailed entry](audit_entries/AI-007.md) | Labelled artefact references retained |
+| AI-008 | OpenAI Codex | 2026-08-01T19:58:58+07:00 | [Detailed entry](audit_entries/AI-008.md) | Labelled artefact references retained |
+| AI-009 | OpenAI Codex | 2026-08-01T20:20:25+07:00 | [Detailed entry](audit_entries/AI-009.md) | Labelled artefact references retained |
+| AI-010 | OpenAI Codex | 2026-08-03T22:41:45.6285829+07:00 | [Detailed entry](audit_entries/AI-010.md) | Labelled artefact references retained |
 
-## Human-review gate
-
-For every pending entry, the student must supply:
-
-- one verdict from `VALID`, `INVALID`, or `INCOMPLETE`;
-- reasoning supported by the course, ISTQB, or a named standard;
-- the student correction or explicit statement that no correction was required.
-
-The mandatory 200–300 word critique is maintained separately in
-[ai_critique.md](ai_critique.md). A final PDF must not be generated while these
-review fields or live evidence remain unresolved.
+The separate course-required AI critique, if applicable, is maintained in
+[ai_critique.md](ai_critique.md) and is not part of the audit-entry schema.

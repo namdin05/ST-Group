@@ -91,7 +91,8 @@ aggregates.
 ## Evidence naming
 
 - Notes: `sessions/P01_notes.md` … `P05_notes.md`.
-- Recordings: keep private and list only access-controlled references in
-  `recordings/recording_links.md`.
+- Recordings: keep private and list only access-controlled references. The
+  supplied session notes currently contain the references; a central
+  access/retention record is still required before final submission.
 - Screenshots: `task2_<session>_<screen>_<finding-id>_<sequence>.<ext>`.
 - Never upload raw contacts or recordings to an AI tool.

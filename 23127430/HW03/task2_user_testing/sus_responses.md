@@ -18,8 +18,17 @@ Use a 1–5 scale from Strongly Disagree to Strongly Agree.
 
 | Participant | Q1 | Q2 | Q3 | Q4 | Q5 | Q6 | Q7 | Q8 | Q9 | Q10 | Contribution sum | SUS score |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: | ---: |
-| P01 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` |
-| P02 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` |
-| P03 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` |
-| P04 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` |
-| P05 | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO-HUMAN-EVIDENCE` | `TODO` | `TODO` |
+| P01 | 4 | 2 | 4 | 1 | 3 | 4 | 4 | 4 | 4 | 2 | 26 | 65 |
+| P02 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 4 | 20 | 50 |
+| P03 | 4 | 2 | 4 | 1 | 4 | 2 | 4 | 3 | 4 | 2 | 30 | 75 |
+| P04 | 4 | 2 | 4 | 1 | 4 | 2 | 4 | 3 | 4 | 2 | 30 | 75 |
+| P05 | 4 | 1 | 4 | 1 | 4 | 2 | 4 | 3 | 4 | 2 | 31 | 77.5 |
+
+## Aggregate
+
+Mean SUS = (65 + 50 + 75 + 75 + 77.5) ÷ 5 = **68.5 / 100**.
+
+Audit correction: the original contribution sums and SUS scores did not apply
+the stated odd/even reverse-scoring formula. In particular, an answer of 4 on
+every item produces a SUS score of 50, not 80, because the five negatively
+worded even items contribute one point each.
