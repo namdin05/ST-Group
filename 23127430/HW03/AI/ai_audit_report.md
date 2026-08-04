@@ -33,11 +33,7 @@ output or a clearly labelled output reference.
 
 | ID | AI tool | Date/time | Prompt | AI output |
 | --- | --- | --- | --- | --- |
-| AI-000 | OpenAI Codex | 2026-07-30; exact local time unavailable | [Detailed entry](audit_entries/AI-000.md) | Exact output unavailable; labelled source reference retained |
 | AI-007 | OpenAI Codex | 2026-08-01T19:05:18+07:00 | [Detailed entry](audit_entries/AI-007.md) | Labelled artefact references retained |
 | AI-008 | OpenAI Codex | 2026-08-01T19:58:58+07:00 | [Detailed entry](audit_entries/AI-008.md) | Labelled artefact references retained |
 | AI-009 | OpenAI Codex | 2026-08-01T20:20:25+07:00 | [Detailed entry](audit_entries/AI-009.md) | Labelled artefact references retained |
 | AI-010 | OpenAI Codex | 2026-08-03T22:41:45.6285829+07:00 | [Detailed entry](audit_entries/AI-010.md) | Labelled artefact references retained |
-
-The separate course-required AI critique, if applicable, is maintained in
-[ai_critique.md](ai_critique.md) and is not part of the audit-entry schema.

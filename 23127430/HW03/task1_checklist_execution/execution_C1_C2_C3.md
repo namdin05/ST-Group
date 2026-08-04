@@ -11,8 +11,7 @@ Screens:
 Partial live run:
 
 - Date/time: 2026-08-02T13:08:06+07:00 to 2026-08-02T14:54:02+07:00.
-- Environment: authenticated Codex in-app browser, observed viewport 510 × 698;
-  exact browser engine/version is `TODO-HUMAN-EVIDENCE`.
+- Environment: authenticated Codex in-app browser, observed viewport 510 × 698.
 - Tester: Đinh Hoàng Nam (23127430), with browser operation assisted by OpenAI
   Codex under the student's authorization.
 - Dedicated C2/C3 account: Dinh Nam (`hnam23@clc.fitus.edu.vn`), explicitly

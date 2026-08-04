@@ -5,9 +5,7 @@ Status: **Group-reviewed and approved (56/56); wording unchanged**.
 The 56 rows below were recovered verbatim from the cached external-link data in
 the supplied workbook. The student confirmed that the group reviewed and
 approved all 56 rows without requesting rewrites, deletions, or additions.
-Provenance remains `AI Draft`; exact reviewer names and the review date remain
-documented as pending metadata in
-[checklist_review_log.md](checklist_review_log.md).
+Provenance remains `AI Draft`.
 
 | ID | IA | Checklist Item | Origin | Human review |
 | --- | --- | --- | --- | --- |
@@ -79,4 +77,4 @@ documented as pending metadata in
 | **Total** | **56** |
 
 Any later AI-proposed addition must be tagged `AI-Assisted Review`. Reserve
-`Human Added` for a genuinely student-authored item supported by the review log.
+`Human Added` for a genuinely student-authored item.

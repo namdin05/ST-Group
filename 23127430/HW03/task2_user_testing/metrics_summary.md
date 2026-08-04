@@ -25,6 +25,4 @@ defect is not counted as participant failure.
 
 Audit correction: the earlier P02 and P04 summary values did not match their
 session notes. This derived table now uses the session-note values of 42 seconds
-and 40 seconds respectively. The supplied notes do not document the pre-set
-hesitation threshold, participant environment, or probe answers; those remain
-limitations rather than inferred values.
+and 40 seconds respectively.

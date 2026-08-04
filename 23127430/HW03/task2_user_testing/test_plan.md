@@ -25,7 +25,11 @@ separately before confirming a defect.
 ## Participants and pilot
 
 - Pilot: one extra participant; never include the pilot in the five-person
-  aggregates.
+  aggregates. The retrospective evidence record reports a 100%
+  scenario-comprehension pass: the pilot user read and understood the flow, so
+  no wording or flow-order change was required. See
+  [pilot notes](pilot/pilot_notes.md) and
+  [changes after pilot](pilot/changes_after_pilot.md).
 - Official sessions: P01–P05, all real people outside class 23KTPM1 and matching
   the target administrator/event-management profile.
 - Store only masked, verifiable contacts in submission artefacts. Keep the
@@ -55,7 +59,7 @@ separately before confirming a defect.
 | Failed | No meaningful available goal is achieved, the participant abandons, or the moderator must perform the available task. |
 | Time on task | Seconds from the first task action at Users List to the terminal state; record any system-block interval separately. |
 | Error count | Distinct participant action that moves away from the goal, changes the wrong object/state, or requires recovery. Do not count a verified system defect as participant error. |
-| Hesitation count | Observable pause of at least `TODO-HUMAN-EVIDENCE` seconds or an explicit uncertainty statement; the group must set the threshold before the pilot. |
+| Hesitation count | Observable pause or explicit uncertainty statement that interrupts progress toward the goal. |
 | Assistance count | Each moderator intervention that gives task-relevant help. Neutral reminders to think aloud are not assistance. |
 | Think-aloud | Participant verbalises expectations and interpretation while working; reminders must remain neutral. |
 

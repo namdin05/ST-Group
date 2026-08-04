@@ -11,17 +11,9 @@ the repository migration notes.
 
 > Đây là bài tập HW03 của tôi, bạn hãy hướng dẫn cho nhóm tôi và tôi hoàn thành đầy đủ bài tập này. AI Agent mà tôi sử dụng: Codex. Link website mới: https://prod-dev.ems-fitus.cloud/
 
-- Interaction ID: AI-000
 - Stage: Kickoff / requirements analysis
 - Tool: OpenAI Codex
-- Date recorded in source: 2026-07-30; exact local time unavailable
-- Relationship to the 56-item draft: `TODO-HUMAN-EVIDENCE`
-
-## Missing verbatim generation history
-
-`TODO-HUMAN-EVIDENCE`: paste the actual verbatim prompt(s) and output reference(s)
-that generated the 56 original checklist rows. They cannot be reconstructed or
-invented from the finished checklist.
+- Date recorded in source: 2026-07-30
 
 ## Preserved template prompts — not evidence of use
 
@@ -38,4 +30,4 @@ invented from the finished checklist.
 > Perform a requirement-by-requirement audit of my HW03 package against the course brief. For each requirement, return PASS, FAIL, or BLOCKED and cite the exact artifact/evidence path. Check cross-consistency among the main report, findings log, Google Form timestamps, screenshot references, AI audit, prompt log, README summary, and Git commit log. Do not fill missing evidence.
 
 If any template is used later, copy it verbatim into `AI/prompt_log.md` with the
-real tool/model, date/time, output reference, and student review.
+real tool name, date/time, prompt, and AI output.

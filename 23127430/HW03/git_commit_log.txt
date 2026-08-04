@@ -3,17 +3,7 @@
 Status: DEFERRED UNTIL FINALIZATION
 
 The student will generate this file from the real repository history after all
-HW03 content is complete. Do not copy unrelated history or treat this temporary
-placeholder as the final commit log.
+HW03 content is complete.
 
-Required future commit stages:
-- checklist design and human review;
-- C1, C2, and C3 checklist execution/evidence;
-- bug and Google Form logging;
-- pilot and each official user-testing evidence stage;
-- SUS/metrics/findings analysis;
-- each compatibility configuration or coherent run batch;
-- AI review, final report/PDF, and packaging.
-
-Suggested regeneration command (run manually from the repository root):
-git log --date=iso-strict --pretty=format:"%h | %ad | %an | %s" -- HW03
+Run from the HW03 directory:
+git log --date=iso-strict --pretty=format:"%h | %ad | %an | %s" -- .

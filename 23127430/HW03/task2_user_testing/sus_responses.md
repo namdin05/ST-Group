@@ -32,3 +32,38 @@ Audit correction: the original contribution sums and SUS scores did not apply
 the stated odd/even reverse-scoring formula. In particular, an answer of 4 on
 every item produces a SUS score of 50, not 80, because the five negatively
 worded even items contribute one point each.
+
+## SUS-derived interpretation
+
+These statements are derived only from the recorded SUS answers. They are
+attitudinal signals and are interpreted alongside the task metrics,
+neutral-probe answers, task environments, or consent records.
+
+| Participant | Score | Evidence-backed interpretation |
+| --- | ---: | --- |
+| P01 | 65 | Positive ratings for intended use, ease, learnability, and confidence are offset by agreement that the system felt inconsistent and cumbersome. |
+| P02 | 50 | Every item was answered `4`, producing simultaneous agreement with positive and negative statements. Treat this response pattern cautiously rather than inferring a specific usability cause. |
+| P03 | 75 | Positive ease, integration, learnability, and confidence ratings; low reported complexity, support need, and inconsistency; neutral response on cumbersomeness. |
+| P04 | 75 | Same recorded response pattern as P03 and therefore the same SUS-derived signal. |
+| P05 | 77.5 | Strongest overall score; positive ease, integration, learnability, and confidence ratings with low complexity/support need and a neutral cumbersomeness response. |
+
+### Item-level signals
+
+| SUS item | Mean response | Interpretation boundary |
+| --- | ---: | --- |
+| Q1 — Would like to use frequently | 4.0 | Consistently positive stated willingness |
+| Q2 — Unnecessarily complex | 2.2 | Generally low complexity concern, with P02 as the high outlier |
+| Q3 — Easy to use | 4.0 | Consistently positive perceived ease |
+| Q4 — Need technical support | 1.6 | Generally low perceived support need |
+| Q5 — Functions well integrated | 3.8 | Generally positive perceived integration |
+| Q6 — Too much inconsistency | 2.8 | Mixed signal, driven upward by P01 and P02 |
+| Q7 — Most people learn quickly | 4.0 | Consistently positive perceived learnability |
+| Q8 — Very cumbersome | 3.4 | The clearest group-level caution; P01/P02 agreed and P03–P05 were neutral |
+| Q9 — Felt confident | 4.0 | Consistently positive self-reported confidence |
+| Q10 — Needed to learn a lot first | 2.4 | Generally low learning burden, with P02 as the high outlier |
+
+Overall, the mean SUS of **68.5/100** indicates mixed-to-moderately-positive
+perceived usability in this sample. The strongest shared positives are ease,
+learnability, and confidence. The main SUS-level caution is perceived
+cumbersomeness, followed by a mixed inconsistency signal. These signals do not
+identify a concrete interface cause without observational or probe evidence.

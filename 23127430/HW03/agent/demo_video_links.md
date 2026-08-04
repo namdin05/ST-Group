@@ -2,7 +2,7 @@
 
 | Skill / artefact | Link | Evidence status |
 | --- | --- | --- |
-| `ems-checklist-executor` end-to-end C1/C2/C3 execution/audit | `TODO-HUMAN-EVIDENCE` | Not recorded |
+| `ems-checklist-executor` end-to-end C1/C2/C3 execution/audit | Link pending | Pending recording |
 
 Only one skill demonstration is required for this submission. The student will
 add the `ems-checklist-executor` video link later. The final video must show the

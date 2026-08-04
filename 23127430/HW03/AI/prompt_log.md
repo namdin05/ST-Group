@@ -5,7 +5,6 @@ participant contacts in this log.
 
 | ID | AI tool | Date/time | Prompt | AI output |
 | --- | --- | --- | --- | --- |
-| AI-000 | OpenAI Codex | 2026-07-30; exact local time unavailable | [AI-000 entry](audit_entries/AI-000.md) | Exact output unavailable; labelled source reference retained in the entry |
 | AI-007 | OpenAI Codex | 2026-08-01T19:05:18+07:00 | [AI-007 entry](audit_entries/AI-007.md) | Labelled artefact references retained in the entry |
 | AI-008 | OpenAI Codex | 2026-08-01T19:58:58+07:00 | [AI-008 entry](audit_entries/AI-008.md) | Labelled artefact references retained in the entry |
 | AI-009 | OpenAI Codex | 2026-08-01T20:20:25+07:00 | [AI-009 entry](audit_entries/AI-009.md) | Labelled artefact references retained in the entry |

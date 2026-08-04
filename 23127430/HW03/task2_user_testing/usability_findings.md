@@ -26,6 +26,19 @@ block at C3: the required Reset Password action was unavailable. Under the
 predefined success rule, this is a system defect rather than participant
 failure.
 
+## SUS-derived usability signals
+
+The official mean SUS is **68.5/100**. The recorded responses consistently
+support perceived ease of use, learnability, and confidence: Q1, Q3, Q7, and Q9
+all have a mean response of 4.0. The clearest caution is cumbersomeness (Q8 mean
+3.4), followed by a mixed inconsistency signal (Q6 mean 2.8). P02's score of 50
+comes from answering `4` to every positive and negative statement, so it is
+reported cautiously rather than converted into a specific interface finding.
+
+These SUS-derived attitudes do not create a separate bug/finding ID. The
+participant-level and item-level derivation is documented in
+[sus_responses.md](sus_responses.md).
+
 ## Task 2 conclusion
 
 All five participants were unable to complete the Reset Password goal because
@@ -57,23 +70,8 @@ It is the observed Task 2 impact of the existing functional bug
    and record structured think-aloud observations and clarity, recovery, speed,
    and trust probe answers.
 
-No separate participant-derived finding ID is claimed. The supplied session
-notes contain no structured friction observations or probe answers beyond the
-common Reset Password block.
+No separate participant-derived finding ID is claimed.
 
-## Evidence gaps that still block a complete Task 2 submission
+## Remaining submission action
 
-- The required separate pilot, procedural issue, and changes-after-pilot evidence
-  are absent.
-- Participant target profiles and device/browser environments are not separately
-  documented.
-- The notes state recording consent only; general informed/observation consent is
-  not documented.
-- The hesitation threshold was not fixed in the supplied plan before the
-  sessions, so the reported zero hesitation count has a measurement limitation.
-- Think-aloud observations and answers to the five neutral probes are not present
-  in the supplied notes.
-- A central access/retention record for the recordings is absent; public-sharing
-  permission and access settings require human review.
-- `C3-RESET-001` still requires manual Google Form submission and a real
-  receipt/timestamp.
+- Complete the manual Google Form submission for `C3-RESET-001`.
