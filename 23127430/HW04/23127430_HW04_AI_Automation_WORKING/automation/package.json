@@ -1,0 +1,17 @@
+{
+  "name": "hw04-ai-automation-23127430",
+  "version": "1.0.0",
+  "private": true,
+  "description": "HW04 – AI Automation Testing with Playwright and TypeScript",
+  "scripts": {
+    "test": "playwright test",
+    "test:fr01": "playwright test tests/fr01-registration.spec.ts",
+    "test:fr07": "playwright test tests/fr07-shopping-cart.spec.ts",
+    "test:fr13": "playwright test tests/fr13-dashboard.spec.ts",
+    "report": "playwright show-report ../html-reports/fr01/chromium"
+  },
+  "devDependencies": {
+    "@playwright/test": "latest",
+    "typescript": "latest"
+  }
+}
