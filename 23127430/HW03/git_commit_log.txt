@@ -1,9 +1,4 @@
-# HW03 Git Commit Log
-
-Status: DEFERRED UNTIL FINALIZATION
-
-The student will generate this file from the real repository history after all
-HW03 content is complete.
-
-Run from the HW03 directory:
-git log --date=iso-strict --pretty=format:"%h | %ad | %an | %s" -- .
+﻿ed3e7fb | 2026-08-04T15:44:35+07:00 | Nam | feat: AI audit & critique
+c4506d0 | 2026-08-04T14:35:16+07:00 | Nam | feat: Task 03 completed
+15e38ef | 2026-08-02T20:05:18+07:00 | Nam | feat: Task01 - Checklist Execution
+ec27ed2 | 2026-08-01T19:55:23+07:00 | Nam | feat: Create GUI checklists, main_report template

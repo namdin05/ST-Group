@@ -1,0 +1,298 @@
+1.
+Question 1
+A team introduces code instrumentation into their application to support white-box testing. Which action best illustrates code instrumentation in this context?
+
+
+
+Refactoring long functions into smaller ones without altering runtime behavior
+
+Inserting additional statements that log variable values and branch decisions during execution
+
+Configuring CI pipeline to run tests
+
+Writing more unit tests
+
+1 point
+2.
+Question 2
+What is the main benefit of white-box testing?
+
+
+
+Guarantees all inputs tested
+
+Explores internal logic and paths
+
+Removes need for black-box
+
+Detects performance issues automatically
+
+1 point
+3.
+Question 3
+Statement vs branch coverage?
+
+
+
+Covers all paths vs functions
+
+Statement = lines, Branch = decisions
+
+Only loops vs sequential
+
+Only OOP
+
+1 point
+4.
+Question 4
+Path coverage challenge?
+
+
+
+Requirements clarity
+
+Too many paths due to nested conditions
+
+UI automation tools
+
+Data anonymization
+
+1 point
+5.
+Question 5
+Control flow path means?
+
+
+
+Adjacent nodes only
+
+Sequence from start to end following decisions
+
+Set of nodes
+
+Only decisions
+
+1 point
+6.
+Question 6
+Static testing example?
+
+
+
+Regression testing
+
+Performance testing
+
+Code inspection
+
+UAT
+
+1 point
+7.
+Question 7
+Formal review goal?
+
+
+
+Budget agreement
+
+Detect defects early
+
+Replace testing
+
+Check compliance
+
+1 point
+8.
+Question 8
+Checklists help by?
+
+
+
+Remove need for reviewers
+
+Standardizing review process
+
+Increase docs only
+
+Guarantee no defects
+
+1 point
+9.
+Question 9
+Static vs dynamic?
+
+
+
+Static runtime only
+
+Static = no execution, Dynamic = execution
+
+Static for performance
+
+Static after deployment
+
+1 point
+10.
+Question 10
+Inspection vs walkthrough?
+
+
+
+External vs internal
+
+Inspection formal roles, walkthrough explanation
+
+Code vs design only
+
+Timing based
+
+1 point
+11.
+Question 11
+Best test planning?
+
+
+
+Only exploratory
+
+Only acceptance tests
+
+Positive + negative + prioritized
+
+Only automation
+
+1 point
+12.
+Question 12
+Environment details?
+
+
+
+Tester name
+
+Browser, OS, device, plugins
+
+Roadmap
+
+Test IDs
+
+1 point
+13.
+Question 13
+Verification best action?
+
+
+
+Check status
+
+Check code comments
+
+Re-test and test boundaries
+
+Ask product owner
+
+1 point
+14.
+Question 14
+Reproducibility key?
+
+
+
+Screenshot
+
+Step-by-step instructions
+
+Summary
+
+Severity
+
+1 point
+15.
+Question 15
+After assignment stage?
+
+
+
+Close bug
+
+Developer fixes bug
+
+Roadmap update
+
+Inform customer
+
+1 point
+16.
+Question 16
+Equivalence partition?
+
+
+
+Each value separate
+
+<18, 18–65, >65
+
+Even/odd
+
+Source based
+
+1 point
+17.
+Question 17
+Boundary values?
+
+
+
+Random values
+
+0,1,2,499,500,501
+
+Middle values
+
+Only valid
+
+1 point
+18.
+Question 18
+Test scenarios purpose?
+
+
+
+List all inputs
+
+High-level flows
+
+SQL queries
+
+Internal algorithm
+
+1 point
+19.
+Question 19
+Black-box testing means?
+
+
+
+Inspect code
+
+Test inputs/outputs only
+
+Refactor code
+
+Add logging
+
+1 point
+20.
+Question 20
+Negative test scenario?
+
+
+
+Valid transfer
+
+Insufficient balance transfer
+
+Common transfer
+
+Recurring transfer

@@ -1,8 +1,8 @@
 # Agent Skill Demonstration Videos
 
-| Skill / artefact | Link | Evidence status |
-| --- | --- | --- |
-| `ems-checklist-executor` end-to-end C1/C2/C3 execution/audit | Link pending | Pending recording |
+| Skill / artefact | Link |
+| --- | --- | 
+| `ems-checklist-executor` end-to-end C1/C2/C3 execution/audit | https://youtu.be/siMpFzROvAk | 
 
 Only one skill demonstration is required for this submission. The student will
 add the `ems-checklist-executor` video link later. The final video must show the
