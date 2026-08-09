@@ -1,0 +1,14 @@
+[
+  {"id":"FR08-TC01","description":"Checkout thành công với một sản phẩm","preconditions":["đã đăng nhập"],"input":{"mode":"successOne"},"expected":["HTTP 200","đơn được tạo"],"references":["FR-08","EC17","BV2"]},
+  {"id":"FR08-TC02","description":"Tổng tiền trên UI không thể chỉnh sửa","preconditions":["giỏ có sản phẩm"],"input":{"mode":"readonly"},"expected":["readonly hoặc disabled"],"references":["FR-08","EC1","EC2"]},
+  {"id":"FR08-TC03","description":"Backend bỏ qua total_amount=1","preconditions":["giỏ có sản phẩm"],"input":{"mode":"tamper","amount":1},"expected":["đơn lưu giá thật hoặc API từ chối"],"references":["FR-08","EC4","BV6"]},
+  {"id":"FR08-TC04","description":"Chưa đăng nhập không được checkout","preconditions":[],"input":{"mode":"unauthenticated"},"expected":["redirect login hoặc API 401/403"],"references":["FR-08","EC6"]},
+  {"id":"FR08-TC05","description":"Giỏ rỗng không được checkout","preconditions":["đã đăng nhập"],"input":{"mode":"emptyCart"},"expected":["không tạo đơn"],"references":["FR-08","EC8","BV1"]},
+  {"id":"FR08-TC06","description":"Checkout hai sản phẩm","preconditions":["đã đăng nhập"],"input":{"mode":"twoProducts"},"expected":["hiện hai item","tổng đúng"],"references":["FR-08","BV3"]},
+  {"id":"FR08-TC07","description":"Backend bỏ qua total_amount=-1","preconditions":["giỏ có sản phẩm"],"input":{"mode":"tamper","amount":-1},"expected":["đơn lưu giá thật hoặc API từ chối"],"references":["FR-08","BV4"]},
+  {"id":"FR08-TC08","description":"Backend bỏ qua total_amount=0","preconditions":["giỏ có sản phẩm"],"input":{"mode":"tamper","amount":0},"expected":["đơn lưu giá thật hoặc API từ chối"],"references":["FR-08","BV5"]},
+  {"id":"FR08-TC09","description":"UI hiển thị đủ thông tin nhiều item","preconditions":["giỏ có hai sản phẩm"],"input":{"mode":"displayItems"},"expected":["tên và số lượng từng item hiển thị"],"references":["FR-08","EC15","EC16"]},
+  {"id":"FR08-TC10","description":"Tổng tự tính đúng với quantity=2","preconditions":["cùng sản phẩm được thêm hai lần"],"input":{"mode":"quantityTwo"},"expected":["tổng bằng đơn giá nhân hai"],"references":["FR-08","EC9"]},
+  {"id":"FR08-TC11","description":"Token không hợp lệ bị từ chối","preconditions":[],"input":{"mode":"invalidToken"},"expected":["HTTP 401/403","không tạo đơn"],"references":["FR-08","EC6","SEC-02"]},
+  {"id":"FR08-TC12","description":"Checkout thành công xóa giỏ và cập nhật badge","preconditions":["giỏ có sản phẩm"],"input":{"mode":"clearCart"},"expected":["giỏ rỗng","badge=0"],"references":["FR-08","EC11","EC12"]}
+]
