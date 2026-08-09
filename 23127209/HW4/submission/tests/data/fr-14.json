@@ -1,0 +1,14 @@
+[
+  {"id":"FR14-TC01","description":"Admin thêm category hợp lệ","preconditions":["admin đăng nhập"],"input":{"mode":"create","name":"Thiết bị thông minh"},"expected":["category xuất hiện"],"references":["FR-14","EC1","EC3"]},
+  {"id":"FR14-TC02","description":"Admin xem đầy đủ danh sách category","preconditions":["admin đăng nhập"],"input":{"mode":"list"},"expected":["UI khớp API"],"references":["FR-14","EC7","EC8"]},
+  {"id":"FR14-TC03","description":"Xóa đúng category và giữ category khác","preconditions":["hai category test tồn tại"],"input":{"mode":"deleteExisting"},"expected":["chỉ target biến mất"],"references":["FR-14","EC5"]},
+  {"id":"FR14-TC04","description":"Tên rỗng bị từ chối","preconditions":["admin đăng nhập"],"input":{"mode":"invalidName","name":""},"expected":["không tạo category"],"references":["FR-14","EC2","BV1"]},
+  {"id":"FR14-TC05","description":"Tên chỉ khoảng trắng bị từ chối","preconditions":["admin đăng nhập"],"input":{"mode":"invalidName","name":"   "},"expected":["không tạo category"],"references":["FR-14","EC10"]},
+  {"id":"FR14-TC06","description":"Tên trùng được xử lý rõ ràng","preconditions":["category cùng tên tồn tại"],"input":{"mode":"duplicate"},"expected":["từ chối duplicate"],"references":["FR-14","EC9"]},
+  {"id":"FR14-TC07","description":"Xóa ID không tồn tại trả lỗi","preconditions":["admin token"],"input":{"mode":"deleteMissing"},"expected":["HTTP 404"],"references":["FR-14","EC6"]},
+  {"id":"FR14-TC08","description":"User thường không thể thêm category","preconditions":["user token"],"input":{"mode":"userCreate"},"expected":["HTTP 403"],"references":["FR-14","FR-12","EC4"]},
+  {"id":"FR14-TC09","description":"User thường không thể xóa category","preconditions":["user token"],"input":{"mode":"userDelete"},"expected":["HTTP 403"],"references":["FR-14","FR-12","EC4"]},
+  {"id":"FR14-TC10","description":"Không token không thể thêm category","preconditions":[],"input":{"mode":"noToken"},"expected":["HTTP 401"],"references":["FR-14","FR-12"]},
+  {"id":"FR14-TC11","description":"Tên một ký tự hợp lệ","preconditions":["admin token"],"input":{"mode":"apiCreate","name":"A"},"expected":["HTTP 200"],"references":["FR-14","BV2"]},
+  {"id":"FR14-TC12","description":"Tên Unicode tồn tại sau refresh","preconditions":["admin đăng nhập"],"input":{"mode":"unicode","name":"Đồ gia dụng Việt"},"expected":["tên giữ nguyên sau reload"],"references":["FR-14","EC1"]}
+]

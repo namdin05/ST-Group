@@ -1,0 +1,16 @@
+HW04 qualifying commit log
+Student ID: 23127209
+Generated: 2026-08-09 21:10:18 +07:00
+
+8284b12 fix(hw4): stabilize admin session across browsers
+3a695d2 refactor(hw4): remove custom evidence attachments
+bde391e feat(hw4): drive browser projects from matrix data
+19bb274 test(hw4): make FR-14 cleanup deterministic
+9684b4a feat(hw4): add data-driven FR-14 automation
+b16254d test(hw4): strengthen FR-08 cart postconditions
+5115ee5 feat(hw4): add data-driven FR-08 automation
+3bb4a53 test(hw4): harden FR-02 lockout boundaries
+d8771b6 feat(hw4): add data-driven FR-02 automation
+
+All nine commits change at least one Playwright `.spec.ts` file. The log is
+ordered newest first and was produced from the repository's real Git history.

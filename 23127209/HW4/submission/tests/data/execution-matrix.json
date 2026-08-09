@@ -1,0 +1,12 @@
+{
+  "features": [
+    { "id": "fr-02", "spec": "tests/fr-02.spec.ts", "data": "tests/data/fr-02.json", "cases": 15 },
+    { "id": "fr-08", "spec": "tests/fr-08.spec.ts", "data": "tests/data/fr-08.json", "cases": 12 },
+    { "id": "fr-14", "spec": "tests/fr-14.spec.ts", "data": "tests/data/fr-14.json", "cases": 12 }
+  ],
+  "browsers": [
+    { "name": "chromium", "device": "Desktop Chrome" },
+    { "name": "firefox", "device": "Desktop Firefox" },
+    { "name": "webkit", "device": "Desktop Safari" }
+  ]
+}

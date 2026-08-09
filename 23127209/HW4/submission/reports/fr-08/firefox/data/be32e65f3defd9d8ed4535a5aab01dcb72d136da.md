@@ -1,0 +1,178 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: fr-08.spec.ts >> Run by: 23127209 | FR-08 - Thanh toán >> FR08-TC05 - Giỏ rỗng không được checkout
+- Location: tests\fr-08.spec.ts:12:5
+
+# Error details
+
+```
+Error: expect(locator).toHaveCount(expected) failed
+
+Locator:  getByRole('button', { name: 'Xác Nhận Thanh Toán' })
+Expected: 0
+Received: 1
+Timeout:  10000ms
+
+Call log:
+  - Expect "toHaveCount" with timeout 10000ms
+  - waiting for getByRole('button', { name: 'Xác Nhận Thanh Toán' })
+    23 × locator resolved to 1 element
+       - unexpected value "1"
+
+```
+
+# Page snapshot
+
+```yaml
+- generic [ref=f1e3]:
+  - banner [ref=f1e4]:
+    - link "EShop" [ref=f1e5] [cursor=pointer]:
+      - /url: /
+    - navigation [ref=f1e6]:
+      - link "Giỏ hàng" [ref=f1e7] [cursor=pointer]:
+        - /url: /cart
+      - generic [ref=f1e8]:
+        - link "Chào, HW04 fr08-tc05" [ref=f1e9] [cursor=pointer]:
+          - /url: /profile
+        - button "Thoát" [ref=f1e10] [cursor=pointer]
+  - main [ref=f1e11]:
+    - generic [ref=f1e12]:
+      - heading "Xác Nhận Đơn Hàng" [level=2] [ref=f1e13]
+      - generic [ref=f1e14]:
+        - heading "Sản phẩm:" [level=3] [ref=f1e15]
+        - list
+      - generic [ref=f1e16]:
+        - generic [ref=f1e17]: "Tổng tiền thanh toán (VND):"
+        - spinbutton [ref=f1e18]: "0"
+      - generic [ref=f1e19]:
+        - generic [ref=f1e20]: Mã Giảm Giá
+        - generic [ref=f1e21]:
+          - textbox "Nhập mã giảm giá..." [ref=f1e22]
+          - button "Áp dụng" [disabled] [ref=f1e23]
+      - generic [ref=f1e24]: "Tổng thanh toán: 0 ₫"
+      - button "Xác Nhận Thanh Toán" [ref=f1e26] [cursor=pointer]
+  - contentinfo [ref=f1e27]: © 2026 EShop SUT. Dành cho mục đích kiểm thử.
+```
+
+# Test source
+
+```ts
+  1   | import { expect, test } from '@playwright/test';
+  2   | import casesJson from './data/fr-08.json' with { type: 'json' };
+  3   | import { createTempUser, deleteTempUser, type TempUser } from './support/api.js';
+  4   | import { env, type CaseRecord } from './support/config.js';
+  5   | import { annotateCase } from './support/annotations.js';
+  6   | import { CheckoutPage, LoginPage } from './support/pages.js';
+  7   | 
+  8   | const cases = casesJson as CaseRecord[];
+  9   | 
+  10  | test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
+  11  |   for (const record of cases) {
+  12  |     test(`${record.id} - ${record.description}`, async ({ page, request }, testInfo) => {
+  13  |       annotateCase(testInfo, record, 'FR-08');
+  14  |       const mode = String(record.input.mode);
+  15  |       let user: TempUser | undefined;
+  16  | 
+  17  |       try {
+  18  |         if (mode === 'invalidToken') {
+  19  |           const response = await request.post(`${env.apiUrl}/api/checkout`, {
+  20  |             headers: { Authorization: 'Bearer invalid-token' },
+  21  |             data: { total_amount: 1, shipping_address: 'HW04 test' }
+  22  |           });
+  23  |           expect([401, 403]).toContain(response.status());
+  24  |           return;
+  25  |         }
+  26  | 
+  27  |         if (mode === 'unauthenticated') {
+  28  |           await page.goto(`${env.webUrl}/checkout`);
+  29  |           await expect(page).toHaveURL(/\/login$/);
+  30  |           return;
+  31  |         }
+  32  | 
+  33  |         user = await createTempUser(request, record.id.toLowerCase());
+  34  |         const checkout = new CheckoutPage(page);
+  35  |         await checkout.login(user.email, user.password);
+  36  | 
+  37  |         if (mode === 'emptyCart') {
+  38  |           await page.goto(`${env.webUrl}/checkout`);
+  39  |           await expect(page).toHaveURL(/\/checkout$/);
+> 40  |           await expect(checkout.confirm()).toHaveCount(0);
+      |                                            ^ Error: expect(locator).toHaveCount(expected) failed
+  41  |           return;
+  42  |         }
+  43  | 
+  44  |         await checkout.addProduct(0);
+  45  |         if (['twoProducts', 'displayItems'].includes(mode)) await checkout.addProduct(1);
+  46  |         if (mode === 'quantityTwo') await checkout.addProduct(0);
+  47  |         await checkout.gotoCheckout();
+  48  | 
+  49  |         if (mode === 'readonly') {
+  50  |           const amount = checkout.amountInput();
+  51  |           const readOnly = await amount.getAttribute('readonly');
+  52  |           const disabled = await amount.isDisabled();
+  53  |           expect(readOnly !== null || disabled).toBeTruthy();
+  54  |           return;
+  55  |         }
+  56  | 
+  57  |         if (mode === 'twoProducts' || mode === 'displayItems') {
+  58  |           await expect(page.getByText(/iPhone 15 Pro Max x 1/)).toBeVisible();
+  59  |           await expect(page.getByText(/Samsung Galaxy S24 Ultra x 1/)).toBeVisible();
+  60  |           expect(Number(await checkout.amountInput().inputValue())).toBe(58_000_000);
+  61  |           if (mode === 'displayItems') expect(await page.getByRole('listitem').count()).toBe(2);
+  62  |           return;
+  63  |         }
+  64  | 
+  65  |         if (mode === 'quantityTwo') {
+  66  |           expect(Number(await checkout.amountInput().inputValue())).toBe(60_000_000);
+  67  |           return;
+  68  |         }
+  69  | 
+  70  |         const genuineAmount = Number(await checkout.amountInput().inputValue());
+  71  |         const tamperedAmount = mode === 'tamper' ? Number(record.input.amount) : genuineAmount;
+  72  |         if (mode === 'tamper') {
+  73  |           await page.route('**/api/checkout', async route => {
+  74  |             const original = route.request().postDataJSON() as Record<string, unknown>;
+  75  |             await route.continue({ postData: JSON.stringify({ ...original, total_amount: tamperedAmount }), headers: { ...route.request().headers(), 'content-type': 'application/json' } });
+  76  |           });
+  77  |         }
+  78  | 
+  79  |         const responsePromise = page.waitForResponse(response => response.url().endsWith('/api/checkout'));
+  80  |         await checkout.confirm().click();
+  81  |         const response = await responsePromise;
+  82  |         const body = await response.json().catch(() => ({}));
+  83  | 
+  84  |         if (mode === 'tamper' && !response.ok()) {
+  85  |           expect(response.status()).toBe(400);
+  86  |           return;
+  87  |         }
+  88  | 
+  89  |         expect(response.status()).toBe(200);
+  90  |         expect(body.orderId).toEqual(expect.any(Number));
+  91  |         const orderResponse = await request.get(`${env.apiUrl}/api/orders/${body.orderId}`);
+  92  |         const order = await orderResponse.json();
+  93  |         expect(Number(order.total_amount)).toBe(genuineAmount);
+  94  | 
+  95  |         if (mode === 'clearCart') {
+  96  |           await page.goto(`${env.webUrl}/cart`);
+  97  |           await expect(page.getByText(/giỏ hàng.*trống/i)).toBeVisible();
+  98  |           const token = await page.evaluate(() => localStorage.getItem('token'));
+  99  |           const cart = await request.get(`${env.apiUrl}/api/cart`, { headers: { Authorization: `Bearer ${token}` } });
+  100 |           expect(cart.status()).toBe(200);
+  101 |           expect(await cart.json()).toEqual([]);
+  102 |           await page.goto(env.webUrl);
+  103 |           await expect(page.getByRole('link', { name: /Giỏ hàng \(0\)/ })).toBeVisible();
+  104 |         }
+  105 |       } finally {
+  106 |         await deleteTempUser(request, user);
+  107 |       }
+  108 |     });
+  109 |   }
+  110 | });
+  111 | 
+```

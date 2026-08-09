@@ -1,0 +1,7 @@
+# AI Critique (200-300 words)
+
+Trong bài này, AI hỗ trợ tốt ở việc chuyển các phân hoạch tương đương và giá trị biên thành cấu trúc Playwright data-driven, nhưng output đầu tiên vẫn có nhiều giả định sai về hệ thống thực. Điển hình nhất là AI cho rằng thao tác thêm sản phẩm sẽ phát sinh `POST /api/cart`, vì API specification có endpoint đó. Khi chạy thật, frontend lại giữ giỏ hàng trong React state; việc chờ response làm test timeout. AI cũng dùng `page.goto()` để sang giỏ hàng, vô tình reload ứng dụng và xóa state vừa tạo. Hai lỗi này không đến từ Playwright mà từ việc suy luận implementation dựa trên tài liệu API thay vì quan sát UI runtime.
+
+AI còn đề xuất locator theo label cho form đăng nhập, trong khi giao diện không liên kết label với input và cả email lẫn password đều dùng `type="text"`. Nếu giữ nguyên output AI, suite có thể fail vì locator sai trước khi kiểm tra được defect thật. Sau human review, tôi dùng DOM snapshot, error context và trace để sửa Page Object, giữ navigation bên trong SPA, tạo user tạm cho từng ca lockout và cleanup dữ liệu trong `finally`.
+
+Một giới hạn khác là AI có thể dễ dàng “sửa” expected result theo hành vi hiện tại để tăng số test pass. Tôi không làm vậy: requirement vẫn là oracle, còn failure được giữ làm bằng chứng lỗi. Bài học là AI tạo khung nhanh nhưng không thể thay thế bước khám phá SUT, kiểm tra state và đánh giá test oracle. Cộng tác hiệu quả đòi hỏi prompt theo từng bước, chạy sớm, đọc evidence và sửa giả định dựa trên dữ liệu quan sát được.
