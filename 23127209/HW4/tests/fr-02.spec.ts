@@ -2,7 +2,7 @@ import { expect, test, type APIRequestContext } from '@playwright/test';
 import casesJson from './data/fr-02.json' with { type: 'json' };
 import { createTempUser, deleteTempUser, loginApi, adminToken, type TempUser } from './support/api.js';
 import { env, type CaseRecord } from './support/config.js';
-import { annotateCase, attachJson } from './support/evidence.js';
+import { annotateCase } from './support/annotations.js';
 import { LoginPage } from './support/pages.js';
 
 const cases = casesJson as CaseRecord[];
@@ -50,7 +50,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
         if (mode === 'happy') {
           const response = await new LoginPage(page).login(env.user.email, env.user.password);
           const body = await response.json();
-          await attachJson(testInfo, 'login-response', body);
           expect(response.status()).toBe(200);
           expect(body.token).toEqual(expect.any(String));
           await expect(page).toHaveURL(env.webUrl + '/');
@@ -75,7 +74,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
           const login = new LoginPage(page);
           const response = await login.login(`missing-${Date.now()}@example.test`, 'Wrong1234!');
           const body = await response.json();
-          await attachJson(testInfo, 'login-error', body);
           expect(response.status()).toBe(401);
           expect(JSON.stringify(body).toLowerCase()).not.toMatch(/not found|không tồn tại/);
           const error = page.locator('[class*="error"], [role="alert"]').first();
@@ -92,7 +90,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
           const attempts = Number(record.input.attempts);
           const statuses = await wrongAttempts(request, tempUser, attempts);
           const state = await userState(request, tempUser);
-          await attachJson(testInfo, 'login-state', { statuses, state });
           expect(statuses).toHaveLength(attempts);
           expect(statuses.every(status => status === 401)).toBeTruthy();
           expect(state.login_attempts).toBe(attempts);
@@ -106,7 +103,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
         if (mode === 'correctWhileLocked' || mode === 'fourthAttempt') {
           const response = await loginApi(request, tempUser.email, mode === 'correctWhileLocked' ? tempUser.password : 'Wrong1234!');
           const body = await response.json();
-          await attachJson(testInfo, 'locked-login-response', body);
           expect(response.status()).toBe(403);
           expect(body.token).toBeUndefined();
           return;
@@ -118,7 +114,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
         if (mode === 'wrongAfterUnlock') {
           const response = await loginApi(request, tempUser.email, 'Wrong1234!');
           const state = await userState(request, tempUser);
-          await attachJson(testInfo, 'post-unlock-state', { status: response.status(), state });
           expect(response.status()).toBe(401);
           expect(state.login_attempts).toBe(1);
           expect(state.locked_until).toBeNull();
@@ -127,7 +122,6 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
 
         const response = await loginApi(request, tempUser.email, tempUser.password);
         const body = await response.json();
-        await attachJson(testInfo, 'boundary-login-response', { elapsedSeconds, status: response.status(), body });
         expect(response.status()).toBe(elapsedSeconds < 30 ? 403 : 200);
         if (elapsedSeconds >= 30) expect(body.token).toEqual(expect.any(String));
       } finally {

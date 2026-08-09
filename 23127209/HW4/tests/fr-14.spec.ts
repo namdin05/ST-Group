@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import casesJson from './data/fr-14.json' with { type: 'json' };
 import { adminToken, categoryApi, createTempUser, deleteTempUser, loginApi, type TempUser } from './support/api.js';
 import { env, type CaseRecord } from './support/config.js';
-import { annotateCase, attachJson } from './support/evidence.js';
+import { annotateCase } from './support/annotations.js';
 import { CategoryPage } from './support/pages.js';
 
 const cases = casesJson as CaseRecord[];
@@ -64,7 +64,6 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
             const after = await request.get(`${env.apiUrl}/api/categories`).then(r => r.json());
             const beforeIds = new Set(before.map((category: { id: number }) => category.id));
             for (const category of after) if (!beforeIds.has(category.id)) createdIds.add(category.id);
-            await attachJson(testInfo, 'category-counts', { before: before.length, after: after.length });
             expect(after.length).toBe(before.length);
             return;
           }
@@ -85,7 +84,6 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
           const name = uniqueName('HW04 Duplicate', record.id);
           const first = await createCategory(name);
           const second = await createCategory(name);
-          await attachJson(testInfo, 'duplicate-responses', { first: first.response.status(), second: second.response.status(), secondBody: second.body });
           expect(first.response.ok()).toBeTruthy();
           expect(second.response.status()).toBe(409);
           return;
@@ -93,7 +91,6 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
 
         if (mode === 'deleteMissing') {
           const response = await categoryApi(request, 'delete', '/api/categories/999999999', adminJwt);
-          await attachJson(testInfo, 'delete-missing', { status: response.status(), body: await response.text() });
           expect(response.status()).toBe(404);
           return;
         }
@@ -118,7 +115,6 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
           const response = await categoryApi(request, 'post', '/api/categories', userToken, { name: uniqueName('Forbidden', record.id) });
           const body = await response.json().catch(() => ({}));
           if (body.id) createdIds.add(body.id);
-          await attachJson(testInfo, 'user-create-response', { status: response.status(), body });
           expect(response.status()).toBe(403);
           return;
         }
@@ -126,7 +122,6 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
         if (mode === 'userDelete') {
           const target = await createCategory(uniqueName('Protected', record.id));
           const response = await categoryApi(request, 'delete', `/api/categories/${target.body.id}`, userToken);
-          await attachJson(testInfo, 'user-delete-response', { status: response.status(), body: await response.text() });
           expect(response.status()).toBe(403);
         }
       } finally {

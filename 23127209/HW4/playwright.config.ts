@@ -29,9 +29,9 @@ export default defineConfig({
   },
   use: {
     baseURL: process.env.WEB_BASE_URL ?? 'http://localhost:5173',
-    trace: 'retain-on-failure',
-    screenshot: 'only-on-failure',
-    video: 'retain-on-failure'
+    trace: 'off',
+    screenshot: 'off',
+    video: 'off'
   },
   projects: executionMatrix.browsers.map(browser => ({
     name: browser.name,

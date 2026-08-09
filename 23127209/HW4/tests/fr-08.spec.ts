@@ -2,7 +2,7 @@ import { expect, test } from '@playwright/test';
 import casesJson from './data/fr-08.json' with { type: 'json' };
 import { createTempUser, deleteTempUser, type TempUser } from './support/api.js';
 import { env, type CaseRecord } from './support/config.js';
-import { annotateCase, attachJson } from './support/evidence.js';
+import { annotateCase } from './support/annotations.js';
 import { CheckoutPage, LoginPage } from './support/pages.js';
 
 const cases = casesJson as CaseRecord[];
@@ -20,7 +20,6 @@ test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
             headers: { Authorization: 'Bearer invalid-token' },
             data: { total_amount: 1, shipping_address: 'HW04 test' }
           });
-          await attachJson(testInfo, 'invalid-token-response', { status: response.status(), body: await response.text() });
           expect([401, 403]).toContain(response.status());
           return;
         }
@@ -81,7 +80,6 @@ test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
         await checkout.confirm().click();
         const response = await responsePromise;
         const body = await response.json().catch(() => ({}));
-        await attachJson(testInfo, 'checkout-response', { status: response.status(), genuineAmount, tamperedAmount, body });
 
         if (mode === 'tamper' && !response.ok()) {
           expect(response.status()).toBe(400);
@@ -92,7 +90,6 @@ test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
         expect(body.orderId).toEqual(expect.any(Number));
         const orderResponse = await request.get(`${env.apiUrl}/api/orders/${body.orderId}`);
         const order = await orderResponse.json();
-        await attachJson(testInfo, 'created-order', order);
         expect(Number(order.total_amount)).toBe(genuineAmount);
 
         if (mode === 'clearCart') {

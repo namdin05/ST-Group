@@ -11,10 +11,3 @@ export function annotateCase(testInfo: TestInfo, record: CaseRecord, feature: st
     { type: 'References', description: record.references.join(', ') }
   );
 }
-
-export async function attachJson(testInfo: TestInfo, name: string, value: unknown) {
-  await testInfo.attach(name, {
-    body: Buffer.from(JSON.stringify(value, null, 2), 'utf8'),
-    contentType: 'application/json'
-  });
-}
