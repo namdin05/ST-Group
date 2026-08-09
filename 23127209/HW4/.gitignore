@@ -1,0 +1,9 @@
+node_modules/
+test-results/
+blob-report/
+playwright-report/
+reports/**/data/
+reports/**/trace/
+tmp/
+.env
+*.zip

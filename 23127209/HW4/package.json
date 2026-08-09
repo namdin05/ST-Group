@@ -1,0 +1,23 @@
+{
+  "name": "23127209-hw04-ai-automation",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "test": "playwright test",
+    "test:fr02": "cross-env FEATURE=fr-02 playwright test tests/fr-02.spec.ts",
+    "test:fr08": "cross-env FEATURE=fr-08 playwright test tests/fr-08.spec.ts",
+    "test:fr14": "cross-env FEATURE=fr-14 playwright test tests/fr-14.spec.ts",
+    "test:matrix": "node scripts/run-matrix.mjs",
+    "test:list": "playwright test --list",
+    "report:summary": "node scripts/summarize-results.mjs",
+    "audit:features": "node skills/eshop-playwright-automation/scripts/audit_feature.mjs . fr-02 && node skills/eshop-playwright-automation/scripts/audit_feature.mjs . fr-08 && node skills/eshop-playwright-automation/scripts/audit_feature.mjs . fr-14",
+    "validate": "node scripts/validate-submission.mjs"
+  },
+  "devDependencies": {
+    "@playwright/test": "^1.55.0",
+    "@types/node": "^24.0.0",
+    "cross-env": "^10.0.0",
+    "typescript": "^5.9.0"
+  }
+}

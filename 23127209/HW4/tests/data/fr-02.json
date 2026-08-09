@@ -1,0 +1,17 @@
+[
+  {"id":"FR02-TC01","description":"Đăng nhập thành công","preconditions":["Tài khoản hợp lệ, không khóa"],"input":{"mode":"happy"},"expected":["HTTP 200","JWT tồn tại","chuyển về trang chủ"],"references":["FR-02","EC1","EC4","EC8"]},
+  {"id":"FR02-TC02","description":"Đăng nhập thành công sau 31 giây khóa","preconditions":["Tài khoản bị khóa bởi 3 lần sai"],"input":{"mode":"unlock","elapsedSeconds":31},"expected":["HTTP 200","counter reset"],"references":["FR-02","EC13","EC17","BV8"]},
+  {"id":"FR02-TC03","description":"Email rỗng","preconditions":[],"input":{"mode":"emptyEmail"},"expected":["HTML validation chặn submit"],"references":["FR-02","FR-22","EC2"]},
+  {"id":"FR02-TC04","description":"Email sai định dạng","preconditions":[],"input":{"mode":"invalidEmail"},"expected":["input type=email","HTML validation chặn submit"],"references":["FR-02","FR-22","EC3"]},
+  {"id":"FR02-TC05","description":"Email không tồn tại","preconditions":[],"input":{"mode":"unknownEmail"},"expected":["HTTP 401","lỗi chung chung"],"references":["FR-02","EC5","EC19"]},
+  {"id":"FR02-TC06","description":"Password rỗng","preconditions":[],"input":{"mode":"emptyPassword"},"expected":["HTML validation chặn submit","input type=password"],"references":["FR-02","FR-22","EC7"]},
+  {"id":"FR02-TC07","description":"Sai lần đầu tăng counter đúng một","preconditions":["counter=0"],"input":{"mode":"wrongAttempts","attempts":1},"expected":["counter=1","chưa khóa"],"references":["FR-02","EC9","EC15","BV1"]},
+  {"id":"FR02-TC08","description":"Sai lần ba kích hoạt khóa","preconditions":["counter=0"],"input":{"mode":"wrongAttempts","attempts":3},"expected":["counter=3","locked_until khoảng 30 giây"],"references":["FR-02","EC11","BV3"]},
+  {"id":"FR02-TC09","description":"Credentials đúng khi đang khóa vẫn bị từ chối","preconditions":["tài khoản đang khóa"],"input":{"mode":"correctWhileLocked"},"expected":["HTTP 403","không có JWT"],"references":["FR-02","EC14"]},
+  {"id":"FR02-TC10","description":"Sai sau khi hết khóa bắt đầu chuỗi mới","preconditions":["đã qua 31 giây"],"input":{"mode":"wrongAfterUnlock","elapsedSeconds":31},"expected":["counter=1","không khóa lại ngay"],"references":["FR-02","EC23"]},
+  {"id":"FR02-TC11","description":"Sai lần hai chuyển counter 1 sang 2","preconditions":["counter=0"],"input":{"mode":"wrongAttempts","attempts":2},"expected":["counter=2","chưa khóa"],"references":["FR-02","EC15","BV2"]},
+  {"id":"FR02-TC12","description":"Yêu cầu thứ tư trong thời gian khóa vẫn bị từ chối","preconditions":["đã gửi 3 password sai"],"input":{"mode":"fourthAttempt"},"expected":["HTTP 403","vẫn khóa"],"references":["FR-02","EC14","BV5"]},
+  {"id":"FR02-TC13","description":"Đăng nhập tại 29 giây vẫn khóa","preconditions":["tài khoản khóa"],"input":{"mode":"boundary","elapsedSeconds":29},"expected":["HTTP 403"],"references":["FR-02","BV6"]},
+  {"id":"FR02-TC14","description":"Đăng nhập tại 30 giây được mở khóa","preconditions":["tài khoản khóa"],"input":{"mode":"boundary","elapsedSeconds":30},"expected":["HTTP 200"],"references":["FR-02","BV7"]},
+  {"id":"FR02-TC15","description":"Đăng nhập tại 31 giây được mở khóa","preconditions":["tài khoản khóa"],"input":{"mode":"boundary","elapsedSeconds":31},"expected":["HTTP 200"],"references":["FR-02","BV8"]}
+]
