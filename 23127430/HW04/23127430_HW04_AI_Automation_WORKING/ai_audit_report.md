@@ -138,3 +138,64 @@
 > - Không có API cleanup, nên test dùng email riêng theo browser/worker/test nhưng vẫn để lại tài khoản thử nghiệm trong database.
 > - Việc chạy cả ba browser được suy ra từ cấu hình Playwright hiện có và yêu cầu chạy test của bạn.
 > - Cần bạn xác nhận 11 case FAIL là lỗi SUT trước khi lập bug report/GitHub Issue.
+
+## AI Interaction 03
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-09T23:11:51.5440959+07:00
+
+**Your prompt:**
+
+> Hiện tại tôi đang chạy backend và frontend rồi, bạn hãy chạy và review với code Playwright cho FR-01
+> [SKILL.md](23127430_HW04_AI_Automation_WORKING/audit-skill/SKILL.md) 
+
+**The AI output:**
+
+> Mình sẽ dùng `audit-skill` theo yêu cầu để ghi nhận đầy đủ lượt làm việc này. Đồng thời mình sẽ kiểm tra lại script và dữ liệu FR-01, xác nhận frontend/backend đang phản hồi, chạy Playwright, rồi đối chiếu lỗi với code và báo cáo HTML.
+>
+> `audit-skill` yêu cầu giữ nguyên từng thông điệp hiển thị cho người dùng và chỉ ghi audit sau khi công việc hoàn tất. Mình đã bắt đầu transcript; tiếp theo mình đang kiểm tra cấu hình Playwright, test case/test data/spec FR-01 và trạng thái hai dịch vụ trước khi chạy.
+>
+> Frontend trả `200`. Backend không có route `/` nên phép kiểm tra root nhận lỗi HTTP; mình sẽ xác minh trực tiếp qua API thay vì xem đó là backend “down”. Sau đó mình chạy trọn bộ 18 case trên Chromium, Firefox và WebKit vào một report mới để không ghi đè report cũ.
+>
+> API `/api/products` trả `200`, nên cả hai dịch vụ đều đang hoạt động. Playwright hiện đang chạy 54 lượt kiểm thử (18 case × 3 browser); mình sẽ dùng trace/screenshot của các case thất bại để phân biệt lỗi test script với hành vi sai của SUT.
+>
+> Lần chạy đầu bị sandbox chặn quyền tạo thư mục artifact; sau khi được cấp quyền phù hợp, test đã chạy bình thường. Bộ test vẫn đang xử lý các case có assertion timeout; đây thường là các case đang chờ thông báo validation mà giao diện không hiển thị.
+>
+> Lệnh tổng hợp bị giới hạn thời gian ở mức 124 giây trước khi hoàn tất, nên kết quả đó không hợp lệ. Mình sẽ chạy lại đủ ba browser với 3 worker (script đã tạo email theo browser/worker/test nên vẫn giữ isolation) và giới hạn assertion/test ở 15 giây, phù hợp với SUT local để tránh chờ 30 giây cho mỗi thông báo không tồn tại.
+>
+> Lần chạy lại đang tiến triển bình thường và ghi artifact vào thư mục `review-20260809-v2`. Sau khi hoàn tất, mình sẽ kiểm tra trực tiếp `report.json`/artifact thay vì chỉ dựa vào dòng tổng kết console, rồi review những điểm có thể gây false positive hoặc false negative trong spec.
+>
+> Các case timeout tập trung ở nhóm validation UI/API, đúng với mẫu lỗi đã thấy trước đây chứ không phải browser bị treo. Mình vẫn để cả ba browser hoàn tất để xác nhận tính nhất quán chéo trình duyệt.
+>
+> Kết quả chính đã có: **20 PASS / 34 FAIL** trong 54 lượt. Mẫu ổn định là Chromium 7/11, WebKit 7/11; Firefox có thêm một lỗi timeout ở TC002 khi chạy song song nên mình đang xem đó là khả năng flake của cách chạy 3 worker, không vội quy thành lỗi SUT. Mình đang review sâu các assertion có thể tạo false result, đặc biệt TC017/TC018 và cleanup dữ liệu.
+>
+> Mình đã xác nhận TC002/Firefox thất bại ngay trong `page.goto` vì giới hạn 15 giây khi chạy 3 browser song song; assertion của TC002 chưa hề chạy. Mình sẽ chạy riêng case này với timeout mặc định và 1 worker để xác nhận flake, sau đó chốt review mà không sửa SUT hay test code ngoài phạm vi yêu cầu.
+>
+> TC002 chạy riêng trên Firefox đã **PASS**, xác nhận đây là flake do lần chạy song song bị giới hạn 15 giây, không phải lỗi chức năng. Mình đã hoàn tất review; bước cuối theo `audit-skill` là ghi nguyên văn toàn bộ lượt tương tác này vào audit report và kiểm tra không làm thay đổi hai interaction cũ.
+>
+> Đã chạy và review xong. Kết quả chức năng ổn định của FR-01 là **7 PASS / 11 FAIL trên mỗi browser**, tương đương **21 PASS / 33 FAIL** sau khi loại một lỗi hạ tầng TC002/Firefox.
+>
+> - PASS: `TC002`, `TC004`, `TC006`, `TC008`, `TC009`, `TC015`, `TC017`.
+> - FAIL: `TC001`, `TC003`, `TC005`, `TC007`, `TC010–TC014`, `TC016`, `TC018`.
+> - Report tổng hợp ban đầu ghi `20 PASS / 34 FAIL`; TC002/Firefox timeout trong `page.goto` do mình chạy 3 worker với `--timeout=15000`. Chạy riêng bằng timeout mặc định đã PASS.
+> - TypeScript type-check PASS. Không sửa test code hoặc SUT trong lượt này.
+>
+> ### Nhận định về lỗi SUT
+>
+> - UI thiếu trường xác nhận mật khẩu; email vẫn là `type="text"`; regex mật khẩu yêu cầu khoảng trắng và không cho ký tự đặc biệt. Điều này giải thích TC001, TC003, TC005 và việc TC007 chưa đi tới kiểm tra duplicate trong [Register.jsx](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/src/frontend-web/src/pages/Register.jsx:15).
+> - API đăng ký không validate trường bắt buộc, email, độ mạnh mật khẩu hoặc duplicate theo 4xx; các payload sai vẫn tạo tài khoản. Xem [server.js](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/src/backend/server.js:20).
+> - Tên người dùng được render bằng `dangerouslySetInnerHTML`, nên TC018 phát hiện thẻ `<script>` thực sự xuất hiện trong header. Xem [App.jsx](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/src/frontend-web/src/App.jsx:27).
+>
+> ### Review code Playwright
+>
+> 1. **P1 – TC018 không khớp test data:** data cho phép `rejected` hoặc `escaped-text`, nhưng script bắt buộc API phải trả `200/201`. Một SUT từ chối payload bằng 4xx đúng cách vẫn bị FAIL tại [fr01-registration.spec.ts](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/tests/fr01-registration.spec.ts:371).
+> 2. **P2 – HTTP method trong data bị bỏ qua:** `postRegister()` luôn gọi `request.post`, dù JSON có trường `request.method`. Nên dùng `request.fetch(..., { method })` hoặc validate method chỉ được là POST tại [fr01-registration.spec.ts](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/tests/fr01-registration.spec.ts:130).
+> 3. **P2 – Isolation chưa có cleanup:** email động ngăn va chạm giữa browser/worker/lần chạy, nhưng mọi tài khoản test vẫn được lưu trong database. Cần reset DB, cleanup API hoặc fixture database riêng nếu yêu cầu isolation nghiêm ngặt.
+> 4. **P2 – Selector còn phụ thuộc vị trí:** `nth(0)/nth(1)` là fallback hợp lý với UI hiện tại nhưng dễ gãy khi đổi thứ tự input. SUT nên liên kết `label`–`id` hoặc thêm `data-testid`, sau đó dùng `getByLabel`.
+> 5. **P3 – Assertion đăng nhập quá cứng:** `expectCannotLogin()` bắt buộc đúng `401`; một API hợp lệ trả 400/404/422 cũng gây false failure. Nên assert nhóm 4xx và không có token tại [fr01-registration.spec.ts](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/tests/fr01-registration.spec.ts:150).
+> 6. **P3 – Thư mục report mặc định gây hiểu nhầm:** chạy cả ba project nhưng mặc định ghi vào `html-reports/fr01/chromium`. Nên dùng tên `all-browsers` hoặc script riêng cho từng project trong [playwright.config.ts](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/playwright.config.ts:4).
+>
+> [Mở HTML report tổng hợp](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr01/review-20260809-v2/index.html) · [Report rerun TC002/Firefox](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr01/review-20260809-tc002-firefox/index.html)
+>
+> Giả định cần bạn xác nhận: `README.md` là nguồn chuẩn nên confirm password là bắt buộc; và nếu API chủ động từ chối field `role` bằng 4xx thì TC017 có nên được coi là PASS hay không. Audit interaction này đã được ghi và kiểm tra trong [ai_audit_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/ai_audit_report.md).
