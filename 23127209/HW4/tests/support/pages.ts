@@ -52,10 +52,13 @@ export class CheckoutPage {
 export class CategoryPage {
   constructor(private readonly page: Page) {}
 
-  async loginAsAdmin() {
+  async loginAsAdmin(token?: string) {
+    if (token) {
+      await this.page.addInitScript(adminToken => localStorage.setItem('adminToken', adminToken), token);
+    }
     await this.page.goto(env.adminUrl);
     const email = this.page.getByPlaceholder('Email');
-    if (await email.isVisible()) {
+    if (!token && await email.isVisible()) {
       await email.fill(env.admin.email);
       await this.page.getByPlaceholder('Password').fill(env.admin.password);
       await this.page.getByRole('button', { name: 'Login' }).click();

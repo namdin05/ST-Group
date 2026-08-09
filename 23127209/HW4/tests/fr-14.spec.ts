@@ -27,7 +27,7 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
       try {
         if (['create', 'invalidName', 'unicode', 'list', 'deleteExisting'].includes(mode)) {
           const categories = new CategoryPage(page);
-          await categories.loginAsAdmin();
+          await categories.loginAsAdmin(adminJwt);
 
           if (mode === 'list') {
             const apiResponse = await request.get(`${env.apiUrl}/api/categories`);
