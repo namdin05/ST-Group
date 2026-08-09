@@ -14,13 +14,13 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
       annotateCase(testInfo, record);
       const mode = String(record.input.mode);
       const adminJwt = await adminToken(request);
-      const createdIds: number[] = [];
+      const createdIds = new Set<number>();
       let user: TempUser | undefined;
 
       const createCategory = async (name: string, token = adminJwt) => {
         const response = await categoryApi(request, 'post', '/api/categories', token, { name });
         const body = await response.json().catch(() => ({}));
-        if (body.id) createdIds.push(body.id);
+        if (body.id) createdIds.add(body.id);
         return { response, body };
       };
 
@@ -50,7 +50,7 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
             await categories.table().getByRole('row', { name: new RegExp(targetName) }).getByRole('button', { name: 'Xóa' }).click();
             await expect(categories.table().getByText(targetName, { exact: true })).toHaveCount(0);
             await expect(categories.table().getByText(keepName, { exact: true })).toBeVisible();
-            createdIds.splice(createdIds.indexOf(target.body.id), 1);
+            createdIds.delete(target.body.id);
             return;
           }
 
@@ -63,7 +63,7 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
           if (mode === 'invalidName') {
             const after = await request.get(`${env.apiUrl}/api/categories`).then(r => r.json());
             const beforeIds = new Set(before.map((category: { id: number }) => category.id));
-            for (const category of after) if (!beforeIds.has(category.id)) createdIds.push(category.id);
+            for (const category of after) if (!beforeIds.has(category.id)) createdIds.add(category.id);
             await attachJson(testInfo, 'category-counts', { before: before.length, after: after.length });
             expect(after.length).toBe(before.length);
             return;
@@ -72,7 +72,7 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
           await expect(categories.table().getByText(name, { exact: true })).toBeVisible();
           const after = await request.get(`${env.apiUrl}/api/categories`).then(r => r.json());
           const created = after.find((category: { name: string }) => category.name === name);
-          if (created) createdIds.push(created.id);
+          if (created) createdIds.add(created.id);
           if (mode === 'unicode') {
             await page.reload();
             await page.getByText('Danh mục', { exact: true }).click();
@@ -117,7 +117,7 @@ test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => 
         if (mode === 'userCreate') {
           const response = await categoryApi(request, 'post', '/api/categories', userToken, { name: uniqueName('Forbidden', record.id) });
           const body = await response.json().catch(() => ({}));
-          if (body.id) createdIds.push(body.id);
+          if (body.id) createdIds.add(body.id);
           await attachJson(testInfo, 'user-create-response', { status: response.status(), body });
           expect(response.status()).toBe(403);
           return;
