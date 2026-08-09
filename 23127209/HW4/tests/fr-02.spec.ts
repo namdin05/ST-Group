@@ -42,7 +42,7 @@ async function lockUser(request: APIRequestContext, user: TempUser) {
 test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài khoản`, () => {
   for (const record of cases) {
     test(`${record.id} - ${record.description}`, async ({ page, request }, testInfo) => {
-      annotateCase(testInfo, record);
+      annotateCase(testInfo, record, 'FR-02');
       const mode = String(record.input.mode);
       let tempUser: TempUser | undefined;
 

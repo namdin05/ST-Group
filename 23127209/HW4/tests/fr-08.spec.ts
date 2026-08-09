@@ -10,7 +10,7 @@ const cases = casesJson as CaseRecord[];
 test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
   for (const record of cases) {
     test(`${record.id} - ${record.description}`, async ({ page, request }, testInfo) => {
-      annotateCase(testInfo, record);
+      annotateCase(testInfo, record, 'FR-08');
       const mode = String(record.input.mode);
       let user: TempUser | undefined;
 

@@ -1,4 +1,5 @@
 import { defineConfig, devices } from '@playwright/test';
+import executionMatrix from './tests/data/execution-matrix.json' with { type: 'json' };
 
 const studentId = process.env.STUDENT_ID ?? '23127209';
 const runTimestamp = process.env.RUN_TIMESTAMP ?? new Date().toISOString();
@@ -32,9 +33,8 @@ export default defineConfig({
     screenshot: 'only-on-failure',
     video: 'retain-on-failure'
   },
-  projects: [
-    { name: 'chromium', use: { ...devices['Desktop Chrome'] } },
-    { name: 'firefox', use: { ...devices['Desktop Firefox'] } },
-    { name: 'webkit', use: { ...devices['Desktop Safari'] } }
-  ]
+  projects: executionMatrix.browsers.map(browser => ({
+    name: browser.name,
+    use: { ...devices[browser.device as keyof typeof devices] }
+  }))
 });

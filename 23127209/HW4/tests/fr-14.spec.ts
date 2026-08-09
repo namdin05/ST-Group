@@ -11,7 +11,7 @@ const uniqueName = (base: string, id: string) => `${base} ${id}-${Date.now()}-${
 test.describe(`Run by: ${env.studentId} | FR-14 - Quản lý danh mục`, () => {
   for (const record of cases) {
     test(`${record.id} - ${record.description}`, async ({ page, request }, testInfo) => {
-      annotateCase(testInfo, record);
+      annotateCase(testInfo, record, 'FR-14');
       const mode = String(record.input.mode);
       const adminJwt = await adminToken(request);
       const createdIds = new Set<number>();
