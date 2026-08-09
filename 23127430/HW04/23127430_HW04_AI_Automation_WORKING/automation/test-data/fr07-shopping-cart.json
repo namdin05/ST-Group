@@ -1,4 +1,110 @@
 {
   "feature": "FR-07",
-  "testCases": []
+  "featureName": "Shopping Cart",
+  "source": "../test-cases/fr07.md",
+  "products": {
+    "productA": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000 },
+    "productB": { "id": 2, "name": "Wireless Mouse", "price": 50000 },
+    "boundaryProduct": { "id": 3, "name": "Mechanical Keyboard", "price": 125000 }
+  },
+  "testCases": [
+    {
+      "id": "TC001",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 2 }],
+      "expected": { "columnLabels": ["Sản phẩm", "Đơn giá", "Số lượng", "Thành tiền", "Thao tác"] }
+    },
+    {
+      "id": "TC002",
+      "layer": "UI",
+      "cart": [],
+      "expected": { "message": "Giỏ hàng của bạn đang trống", "illustrationVisible": true, "continuePath": "/" }
+    },
+    {
+      "id": "TC003",
+      "layer": "UI",
+      "actions": [{ "type": "add", "productRef": "productA", "quantity": 1 }, { "type": "add", "productRef": "productA", "quantity": 1 }],
+      "expected": { "lineCount": 1, "productId": 1, "quantity": 2 }
+    },
+    {
+      "id": "TC004",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 1 }],
+      "action": { "type": "increment", "productId": 1, "times": 1 },
+      "expected": { "quantity": 2, "lineTotal": 200000, "grandTotal": 200000 }
+    },
+    {
+      "id": "TC005",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 1 }],
+      "action": { "type": "decrement", "productId": 1, "times": 1 },
+      "expected": { "minimumQuantity": 1, "invalidQuantityStored": false }
+    },
+    {
+      "id": "TC006",
+      "layer": "UI",
+      "cart": [{ "productRef": "boundaryProduct", "quantity": 3 }],
+      "expected": { "lineTotal": 375000, "currency": "₫" }
+    },
+    {
+      "id": "TC007",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 2 }, { "productRef": "productB", "quantity": 3 }],
+      "expected": { "totalLabel": "Tổng cộng", "grandTotal": 350000, "currency": "₫" }
+    },
+    {
+      "id": "TC008",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 1 }],
+      "action": { "type": "remove", "productId": 1, "dialogDecision": "cancel" },
+      "expected": { "confirmationVisible": true, "lineCount": 1 }
+    },
+    {
+      "id": "TC009",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 1 }],
+      "action": { "type": "remove", "productId": 1, "dialogDecision": "confirm" },
+      "expected": { "confirmationVisible": true, "lineCount": 0, "emptyStateVisible": true }
+    },
+    {
+      "id": "TC010",
+      "layer": "UI",
+      "cart": [{ "productRef": "productA", "quantity": 1 }],
+      "action": { "type": "continue-shopping" },
+      "expected": { "path": "/" }
+    },
+    {
+      "id": "TC011",
+      "layer": "API",
+      "authFixture": "user",
+      "request": { "method": "GET", "path": "/api/cart" },
+      "expected": { "status": 200, "bodyType": "array", "owner": "authenticated-user" }
+    },
+    {
+      "id": "TC012",
+      "layer": "API",
+      "authFixture": "user",
+      "requests": [
+        { "method": "POST", "path": "/api/cart", "body": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000, "quantity": 1 } },
+        { "method": "POST", "path": "/api/cart", "body": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000, "quantity": 1 } }
+      ],
+      "expected": { "lineCount": 1, "productId": 1, "quantity": 2 }
+    },
+    {
+      "id": "TC013",
+      "layer": "API",
+      "request": { "method": "GET", "path": "/api/cart", "authorization": null },
+      "expected": { "status": 401, "cartDataReturned": false }
+    },
+    {
+      "id": "TC014",
+      "layer": "API",
+      "authFixture": "user",
+      "requests": [
+        { "method": "POST", "path": "/api/cart", "body": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000, "quantity": 0 } },
+        { "method": "POST", "path": "/api/cart", "body": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000, "quantity": -1 } }
+      ],
+      "expected": { "statusClass": "4xx", "cartUnchanged": true }
+    }
+  ]
 }

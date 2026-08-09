@@ -8,14 +8,133 @@
 
 ## AI Interaction 01
 
-**Name of the AI tool:** TBD
+**Name of the AI tool:** Codex
 
-**Date and time:** TBD
+**Date and time:** 2026-08-09T21:08:02.2066538+07:00
 
 **Your prompt:**
 
-> Paste the complete and verbatim prompt here.
+> [SKILL.md](23127430_HW04_AI_Automation_WORKING/audit-skill/SKILL.md)
+>
+> Bạn hãy dựa vào [test-cases](23127430_HW04_AI_Automation_WORKING/automation/test-cases/) để tạo ra các [test-data](23127430_HW04_AI_Automation_WORKING/automation/test-data/) nhưng trước hết, bạn có thể review qua bộ test case xem có gì cần chỉnh sửa hay không
 
 **The AI output:**
 
-> Paste the complete and verbatim AI output here.
+> Mình sẽ dùng skill `audit-skill` mà bạn đính kèm: trước hết đọc đầy đủ hướng dẫn của skill, rà soát toàn bộ test case và cấu trúc automation, rồi mới quyết định phần nào cần chỉnh trước khi tạo test data. Nếu phát hiện điểm mơ hồ có thể làm sai dữ liệu, mình sẽ nêu rõ thay vì tự suy diễn.
+>
+> Skill yêu cầu lưu nguyên văn toàn bộ phần trao đổi hiển thị trong lần làm việc này vào báo cáo audit sau khi hoàn tất. Mình đã kiểm tra nội dung yêu cầu hiện tại không chứa thông tin nhạy cảm; tiếp theo mình sẽ xác nhận file audit, đọc các test case và các quy ước dự án trước khi sửa hay sinh dữ liệu.
+>
+> Mình đã thấy một lỗi cấu trúc quan trọng trước khi tạo dữ liệu: `fr07.md` hiện chứa test case Dashboard (FR-13), còn `fr13.md` lại chứa Mobile Product Detail (FR-06), trong khi tên JSON/spec đang kỳ vọng FR-07 Shopping Cart và FR-13 Dashboard. Ngoài ra `fr13.md` có TC ID trùng `TC004`, và một số chuỗi bị lỗi mã hóa. Mình đang đối chiếu với requirement và mã nguồn để xác định cách sửa đúng, không chỉ đổi tên theo phỏng đoán.
+>
+> Kết quả đối chiếu requirement/mã nguồn cho thấy cần sửa test case trước: FR-01 không hề yêu cầu trường xác nhận mật khẩu nên case mismatch là sai requirement; mật khẩu “8 ký tự” đang dùng thực tế dài 9 ký tự; FR-07 đang thiếu hoàn toàn bộ Shopping Cart; còn bộ Dashboard cần chuyển về đúng `fr13.md`. Mình sẽ chuẩn hóa ba file theo đúng FR được chọn, giữ các kết quả chạy đã có khi còn hợp lệ, rồi tạo JSON có ánh xạ 1–1 theo TC ID.
+>
+> Ba bộ test case và test data đã được đồng bộ theo đúng FR. Mình đang chạy kiểm tra chéo tự động: JSON phải parse được, số lượng/TC ID giữa Markdown và JSON phải khớp tuyệt đối, không còn ID trùng, và Playwright phải nạp được các file dữ liệu TypeScript mà không lỗi.
+>
+> Đã hoàn tất review và tạo test data cho 46 test case (FR-01: 18, FR-07: 14, FR-13: 14).
+>
+> Các chỉnh sửa chính:
+>
+> - FR-01: bỏ case xác nhận mật khẩu vì requirement không yêu cầu; sửa dữ liệu biên 8 ký tự thành `Passw0d!`; hoàn thiện case XSS và mass assignment.
+> - FR-07: thay bộ Dashboard bị đặt nhầm bằng bộ Shopping Cart đúng requirement.
+> - FR-13: thay bộ FR-06 Mobile Product Detail bị đặt nhầm bằng bộ Dashboard; chuẩn hóa ID, header và UTF-8.
+>
+> File đã cập nhật: [fr01.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-cases/fr01.md), [fr07.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-cases/fr07.md), [fr13.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-cases/fr13.md), [fr01-registration.json](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-data/fr01-registration.json), [fr07-shopping-cart.json](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-data/fr07-shopping-cart.json), và [fr13-dashboard.json](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-data/fr13-dashboard.json).
+>
+> Đã kiểm tra: JSON parse hợp lệ; 46/46 TC ID ánh xạ 1–1; không có ID trùng, data thừa/thiếu hay lỗi mojibake; TypeScript nạp được cả ba JSON. Chưa chạy SUT vì các spec hiện vẫn là TODO và chưa có test thực thi.
+>
+> Review mã nguồn cũng cho thấy bộ test sẽ bắt được các lỗi tiềm năng: regex FR-01 đang yêu cầu khoảng trắng thay vì ký tự đặc biệt và API thiếu validation; FR-07 thiếu nút `+/-`, gộp sản phẩm trùng, dialog xác nhận, illustration và nhãn `Tổng cộng`; FR-13 đang nhân đôi doanh thu delivered và API Admin chưa kiểm tra role.
+>
+> Interaction này đã được ghi và xác minh trong [ai_audit_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/ai_audit_report.md).
+
+## AI Interaction 02
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-09T21:51:38.2647908+07:00
+
+**Your prompt:**
+
+> [SKILL.md](23127430_HW04_AI_Automation_WORKING/agent-skill/SKILL.md)
+>
+> Hãy tạo automation Playwright TypeScript cho FR-01 – Account Registration.
+>
+> Nguồn đầu vào:
+> - Feature specification: [README.md](23127430_HW04_AI_Automation_WORKING/src/README.md)
+> - Selected test cases: [fr01.md](23127430_HW04_AI_Automation_WORKING/automation/test-cases/fr01.md)
+> - Test data: [fr01-registration.json](23127430_HW04_AI_Automation_WORKING/automation/test-data/fr01-registration.json)
+> - Test file cần tạo hoặc cập nhật:  [fr01-registration.spec.ts](23127430_HW04_AI_Automation_WORKING/automation/tests/fr01-registration.spec.ts)
+> - SUT URL: [http://localhost:5173/](http://localhost:5173/)
+>
+> Trong bước này:
+> 1. Chỉ tạo hoặc review script và test data.
+> 2. Kiểm tra selectors, assertions, synchronization và test isolation.
+> 3. Đối chiếu selector với giao diện thật nếu môi trường cho phép.
+> 4. Liệt kê mọi giả định hoặc yêu cầu chưa rõ để tôi review.
+> 5. Chạy test và tạo kết quả PASS/FAIL.
+
+**The AI output:**
+
+> Mình sẽ dùng `agent-skill` được đính kèm để triển khai FR-01. Trước tiên mình đọc đầy đủ workflow của skill và kiểm tra trạng thái hiện tại, sau đó đối chiếu selector với UI thật, cập nhật script/test data trong đúng phạm vi, rồi chạy Playwright để báo PASS/FAIL thực tế.
+>
+> `agent-skill` yêu cầu selector phải được kiểm tra trên giao diện render thật và không được kết luận lỗi SUT khi chưa phân loại nguyên nhân. Vì vậy mình sẽ dùng thêm skill điều khiển trình duyệt trong app để kiểm tra DOM/accessible roles tại `localhost:5173`; việc này chỉ phục vụ xác minh selector và hành vi, không chỉnh sửa mã nguồn SUT.
+>
+> Đối chiếu UI thật xác nhận trang đăng ký đang chạy, nhưng ba `<input>` không có `id`, `name`, `placeholder`, `aria-label` hoặc liên kết `label`, nên chưa thể dùng `getByLabel()` ổn định. Script sẽ dùng heading/button theo role và định vị input trong đúng form theo loại/vị trí, đồng thời ghi rõ đây là giả định cần review. Specification cũng yêu cầu “Xác nhận mật khẩu” nhưng UI và bộ test data hiện thiếu trường này; mình sẽ bổ sung dữ liệu xác nhận cho các case UI và để assertion về trường bắt lỗi đúng theo requirement, không làm yếu expected result.
+>
+> Script đã map đủ 18 case và dùng dữ liệu ngoài JSON; email được tạo riêng theo browser/worker/test để tránh phụ thuộc thứ tự. Mình cũng đã sửa selector đăng nhập của TC018 sau khi kiểm tra UI thật (`Username`, `Mật khẩu`, nút `Sign In`). Tiếp theo mình chạy từng browser riêng để mỗi browser có HTML report độc lập; bắt đầu với Chromium nhằm phát hiện lỗi automation trước khi mở rộng sang Firefox/WebKit.
+>
+> Chromium đang thực thi đủ 18 case; thời gian chủ yếu nằm ở các assertion cố ý chờ UI validation/selector còn thiếu. Mình chưa coi các timeout này là lỗi SUT cho đến khi xem trace/screenshot và loại trừ selector hoặc synchronization.
+>
+> Quyền ghi artifact đã được cấp và Chromium đang chạy lại bình thường; lần chạy trước chưa tạo bằng chứng hợp lệ vì bị sandbox chặn ghi file, nên mình loại nó khỏi kết quả. Sau khi Chromium xong, mình sẽ kiểm tra từng failure trước khi chạy hai browser còn lại.
+>
+> Chromium hoàn tất với 7 PASS và 11 FAIL. Trace/screenshot cho thấy selector đã trỏ đúng: các failure khớp hành vi SUT (thiếu confirm-password, email dùng `type=text`, mật khẩu hợp lệ bị báo yếu, API trả 200 cho payload sai/duplicate, và tên XSS trở thành thẻ `<script>`). Mình giữ nguyên expected result và sẽ chạy Firefox/WebKit song song; mọi kết luận “SUT bug” vẫn được ghi là chưa xác nhận cho đến khi bạn review theo yêu cầu của skill.
+>
+> Firefox và WebKit vẫn đang ở pha cuối; hai run dùng email/fixture khác nhau nên không tranh chấp dữ liệu dù chạy song song. Sau khi nhận kết quả, mình sẽ kiểm tra report metadata (`Run by: 23127430` và timestamp thật), đếm PASS/FAIL từ artifact, rồi rà soát diff cuối.
+>
+> WebKit hoàn tất 7 PASS / 11 FAIL giống Chromium. Firefox tạo được một phần artifact nhưng thiếu `.last-run.json` và HTML report, nên run đó không đủ bằng chứng và không được tính. Mình sẽ chạy lại Firefox riêng; đây là vấn đề thực thi/report của môi trường, không phải kết quả test FR-01.
+>
+> Firefox rerun đang hoàn tất các case cuối; không có hardcoded wait, mọi chờ đợi đều là Playwright auto-wait hoặc assertion theo trạng thái. Nếu report được ghi đầy đủ, mình sẽ dùng run này thay thế hoàn toàn lần Firefox dang dở.
+>
+> Ba report và kết quả đều tồn tại, nhưng chuỗi metadata không xuất hiện dạng plain text trong `index.html` vì Playwright đóng gói report JSON vào archive nhúng. Mình đang giải nén phần nhúng để xác minh tiêu đề/timestamp thật thay vì suy luận từ config. Nếu metadata không có trong dữ liệu report, mình sẽ sửa config và chạy lại—không tuyên bố đạt chỉ vì code có đặt `title`.
+>
+> Đã hoàn tất automation FR-01 với 18 test case data-driven trên Chromium, Firefox và WebKit.
+>
+> ### Kết quả thực thi
+>
+> | Browser | PASS | FAIL | Tổng |
+> | --- | ---: | ---: | ---: |
+> | Chromium | 7 | 11 | 18 |
+> | Firefox | 7 | 11 | 18 |
+> | WebKit | 7 | 11 | 18 |
+> | **Tổng** | **21** | **33** | **54** |
+>
+> PASS: `TC002`, `TC004`, `TC006`, `TC008`, `TC009`, `TC015`, `TC017`.
+>
+> FAIL: `TC001`, `TC003`, `TC005`, `TC007`, `TC010–TC014`, `TC016`, `TC018`.
+>
+> Các failure đều lặp lại trên ba browser. Phân loại chính hiện tại là **SUT bug – chưa xác nhận, chờ human review**:
+>
+> - UI thiếu trường xác nhận mật khẩu.
+> - Email dùng `type="text"` và không báo sai định dạng.
+> - Regex từ chối mật khẩu hợp lệ có ký tự đặc biệt.
+> - API trả `200` và tạo tài khoản cho payload thiếu trường, email sai, mật khẩu ngắn và email trùng.
+> - Tên XSS trở thành phần tử `<script>` thay vì bị từ chối hoặc escape.
+>
+> Không phát hiện automation script bug, authentication issue hay browser-specific issue trong các failure đã điều tra.
+>
+> ### File và report
+>
+> - [Playwright spec](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/tests/fr01-registration.spec.ts)
+> - [Test data](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-data/fr01-registration.json)
+> - [Chromium report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr01/chromium/index.html)
+> - [Firefox report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr01/firefox/index.html)
+> - [WebKit report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr01/webkit/index.html)
+>
+> Đã xác minh từng report chứa `Run by: 23127430`, timestamp ISO thực, screenshot và trace cho failure. TypeScript compile thành công và không có hardcoded wait.
+>
+> ### Điểm cần bạn review
+>
+> - `README.md` yêu cầu trường xác nhận mật khẩu, nhưng ghi chú trong `fr01.md` lại nói FR-01 không yêu cầu. Automation ưu tiên feature specification; nên khôi phục test case confirm-password mismatch.
+> - Input đăng ký không có accessible name, `id`, `name`, placeholder hoặc liên kết label. Script phải dùng selector theo loại/vị trí trong form; nên bổ sung `htmlFor/id` hoặc `data-testid`.
+> - Không có API cleanup, nên test dùng email riêng theo browser/worker/test nhưng vẫn để lại tài khoản thử nghiệm trong database.
+> - Việc chạy cả ba browser được suy ra từ cấu hình Playwright hiện có và yêu cầu chạy test của bạn.
+> - Cần bạn xác nhận 11 case FAIL là lỗi SUT trước khi lập bug report/GitHub Issue.

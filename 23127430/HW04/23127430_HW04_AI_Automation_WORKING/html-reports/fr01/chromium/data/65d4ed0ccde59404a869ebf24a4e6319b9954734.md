@@ -1,0 +1,303 @@
+# Instructions
+
+- Following Playwright test failed.
+- Explain why, be concise, respect Playwright best practices.
+- Provide a snippet of code with the fix, if possible.
+
+# Test info
+
+- Name: fr01-registration.spec.ts >> FR-01 – Account Registration >> UI cases >> TC005 – valid eight-character password is accepted
+- Location: tests\fr01-registration.spec.ts:216:9
+
+# Error details
+
+```
+Error: FR-01 requires a visible confirm-password field
+
+expect(locator).toBeVisible() failed
+
+Locator: locator('form').filter({ has: getByRole('button', { name: 'Đăng Ký', exact: true }) }).locator('input[type="password"]').nth(1)
+Expected: visible
+Timeout: 5000ms
+Error: element(s) not found
+
+Call log:
+  - FR-01 requires a visible confirm-password field with timeout 5000ms
+  - waiting for locator('form').filter({ has: getByRole('button', { name: 'Đăng Ký', exact: true }) }).locator('input[type="password"]').nth(1)
+
+```
+
+```yaml
+- banner:
+  - link "EShop":
+    - /url: /
+  - navigation:
+    - link "Giỏ hàng":
+      - /url: /cart
+    - link "Đăng nhập":
+      - /url: /login
+    - link "Đăng ký":
+      - /url: /register
+- main:
+  - heading "Đăng Ký Tài Khoản" [level=2]
+  - text: Họ Tên
+  - textbox: Nguyen Van A
+  - text: Email
+  - textbox: fr01.tc005+chromium-2-0-tc005-valid-eight-character-password-is-accepted-1786285901923@example.com
+  - text: Mật khẩu
+  - textbox: Passw0d!
+  - paragraph: "Yêu cầu: Tối thiểu 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt."
+  - button "Đăng Ký"
+  - text: Đã có tài khoản?
+  - link "Đăng nhập":
+    - /url: /login
+- contentinfo: © 2026 EShop SUT. Dành cho mục đích kiểm thử.
+```
+
+```
+Error: expect(page).toHaveURL(expected) failed
+
+Expected: "http://localhost:5173/login"
+Received: "http://localhost:5173/register"
+Timeout:  5000ms
+
+Call log:
+  - Expect "toHaveURL" with timeout 5000ms
+    14 × locator resolved to <html lang="en">…</html>
+       - unexpected value "http://localhost:5173/register"
+
+```
+
+```yaml
+- banner:
+  - link "EShop":
+    - /url: /
+  - navigation:
+    - link "Giỏ hàng":
+      - /url: /cart
+    - link "Đăng nhập":
+      - /url: /login
+    - link "Đăng ký":
+      - /url: /register
+- main:
+  - heading "Đăng Ký Tài Khoản" [level=2]
+  - text: Mật khẩu quá yếu! Phải dài tối thiểu 8 ký tự, gồm chữ hoa, chữ thường, số và KÝ TỰ ĐẶC BIỆT. Họ Tên
+  - textbox: Nguyen Van A
+  - text: Email
+  - textbox: fr01.tc005+chromium-2-0-tc005-valid-eight-character-password-is-accepted-1786285901923@example.com
+  - text: Mật khẩu
+  - textbox: Passw0d!
+  - paragraph: "Yêu cầu: Tối thiểu 8 ký tự, có chữ hoa, chữ thường, số và ký tự đặc biệt."
+  - button "Đăng Ký"
+  - text: Đã có tài khoản?
+  - link "Đăng nhập":
+    - /url: /login
+- contentinfo: © 2026 EShop SUT. Dành cho mục đích kiểm thử.
+```
+
+# Test source
+
+```ts
+  124 | 
+  125 |   async submit(): Promise<void> {
+  126 |     await this.submitButton.click();
+  127 |   }
+  128 | }
+  129 | 
+  130 | async function postRegister(
+  131 |   request: APIRequestContext,
+  132 |   testCase: RegistrationCase,
+  133 |   id: string,
+  134 | ) {
+  135 |   if (!testCase.request) throw new Error(`${testCase.id} has no API request data.`);
+  136 |   const body = resolveTemplates(testCase.request.body, id);
+  137 |   return {
+  138 |     body,
+  139 |     response: await request.post(`${dataFile.urls.apiBase}${testCase.request.path}`, {
+  140 |       data: body,
+  141 |     }),
+  142 |   };
+  143 | }
+  144 | 
+  145 | async function expectFourXx(responseStatus: number, testCaseId: string): Promise<void> {
+  146 |   expect.soft(responseStatus, `${testCaseId} should return a client error`).toBeGreaterThanOrEqual(400);
+  147 |   expect.soft(responseStatus, `${testCaseId} should return a client error`).toBeLessThan(500);
+  148 | }
+  149 | 
+  150 | async function expectCannotLogin(
+  151 |   request: APIRequestContext,
+  152 |   email: string,
+  153 |   password: string,
+  154 |   testCaseId: string,
+  155 | ): Promise<void> {
+  156 |   const loginResponse = await request.post(`${dataFile.urls.apiBase}/api/login`, {
+  157 |     data: { email, password },
+  158 |   });
+  159 |   expect.soft(loginResponse.status(), `${testCaseId} must not create a login-capable account`).toBe(401);
+  160 | }
+  161 | 
+  162 | test.describe('FR-01 – Account Registration', () => {
+  163 |   test.describe('UI cases', () => {
+  164 |     test.beforeEach(async ({ page }) => {
+  165 |       await new RegistrationPage(page).goto();
+  166 |     });
+  167 | 
+  168 |     test('TC001 – valid registration redirects to login', async ({ page }, testInfo) => {
+  169 |       const testCase = caseById('TC001');
+  170 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  171 |       const registration = new RegistrationPage(page);
+  172 | 
+  173 |       await registration.fill(input, true);
+  174 |       await registration.submit();
+  175 | 
+  176 |       await expect(page).toHaveURL(`${dataFile.urls.webBase}${String(testCase.expected.path)}`);
+  177 |     });
+  178 | 
+  179 |     test('TC002 – empty name is rejected by required-field validation', async ({ page }, testInfo) => {
+  180 |       const testCase = caseById('TC002');
+  181 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  182 |       const registration = new RegistrationPage(page);
+  183 | 
+  184 |       await registration.fill(input);
+  185 |       await registration.submit();
+  186 | 
+  187 |       expect(await registration.nameInput.evaluate((element: HTMLInputElement) => element.validity.valueMissing)).toBe(true);
+  188 |       await expect(page).toHaveURL(/\/register\/?$/);
+  189 |     });
+  190 | 
+  191 |     test('TC003 – invalid email format is rejected', async ({ page }, testInfo) => {
+  192 |       const testCase = caseById('TC003');
+  193 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  194 |       const registration = new RegistrationPage(page);
+  195 | 
+  196 |       await registration.fill(input);
+  197 |       await expect.soft(registration.emailInput, 'Email should use native email semantics').toHaveAttribute('type', 'email');
+  198 |       await registration.submit();
+  199 | 
+  200 |       await expect(page.getByText(/email.*(?:không hợp lệ|invalid)|(?:không hợp lệ|invalid).*email/i)).toBeVisible();
+  201 |       await expect(page).toHaveURL(/\/register\/?$/);
+  202 |     });
+  203 | 
+  204 |     test('TC004 – seven-character password is rejected', async ({ page }, testInfo) => {
+  205 |       const testCase = caseById('TC004');
+  206 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  207 |       const registration = new RegistrationPage(page);
+  208 | 
+  209 |       await registration.fill(input);
+  210 |       await registration.submit();
+  211 | 
+  212 |       await expect(page.getByText(/Mật khẩu quá yếu/i)).toBeVisible();
+  213 |       await expect(page).toHaveURL(/\/register\/?$/);
+  214 |     });
+  215 | 
+  216 |     test('TC005 – valid eight-character password is accepted', async ({ page }, testInfo) => {
+  217 |       const testCase = caseById('TC005');
+  218 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  219 |       const registration = new RegistrationPage(page);
+  220 | 
+  221 |       await registration.fill(input, true);
+  222 |       await registration.submit();
+  223 | 
+> 224 |       await expect(page).toHaveURL(`${dataFile.urls.webBase}${String(testCase.expected.path)}`);
+      |                          ^ Error: expect(page).toHaveURL(expected) failed
+  225 |     });
+  226 | 
+  227 |     test('TC006 – password without a special character is rejected', async ({ page }, testInfo) => {
+  228 |       const testCase = caseById('TC006');
+  229 |       const input = resolveTemplates(testCase.data as RegistrationInput, runId(testInfo));
+  230 |       const registration = new RegistrationPage(page);
+  231 | 
+  232 |       await registration.fill(input);
+  233 |       await registration.submit();
+  234 | 
+  235 |       await expect(page.getByText(/Mật khẩu quá yếu/i)).toBeVisible();
+  236 |       await expect(page).toHaveURL(/\/register\/?$/);
+  237 |     });
+  238 | 
+  239 |     test('TC007 – duplicate email is rejected in the UI flow', async ({ page, request }, testInfo) => {
+  240 |       const testCase = caseById('TC007');
+  241 |       const id = runId(testInfo);
+  242 |       const existingUser = resolveTemplates(dataFile.fixtures.existingUser, id);
+  243 |       const seedResponse = await request.post(`${dataFile.urls.apiBase}/api/register`, {
+  244 |         data: existingUser,
+  245 |       });
+  246 |       expect(seedResponse.status()).toBe(200);
+  247 | 
+  248 |       const input = resolveTemplates(testCase.data as RegistrationInput, id);
+  249 |       const registration = new RegistrationPage(page);
+  250 |       await registration.fill(input);
+  251 |       await registration.submit();
+  252 | 
+  253 |       await expect(page.getByText(/email.*(?:tồn tại|đã đăng ký|duplicate|unique)|(?:tồn tại|đã đăng ký|duplicate|unique).*email/i)).toBeVisible();
+  254 |       await expect(page).toHaveURL(/\/register\/?$/);
+  255 |     });
+  256 | 
+  257 |     test('TC008 – unusually long input does not crash the registration page', async ({ page }, testInfo) => {
+  258 |       const testCase = caseById('TC008');
+  259 |       const generator = resolveTemplates(testCase.data as GeneratorInput, runId(testInfo));
+  260 |       const password =
+  261 |         generator.passwordGenerator.prefix +
+  262 |         generator.passwordGenerator.character.repeat(
+  263 |           generator.passwordGenerator.totalLength - generator.passwordGenerator.prefix.length,
+  264 |         );
+  265 |       const input: RegistrationInput = {
+  266 |         name: generator.nameGenerator.character.repeat(generator.nameGenerator.length),
+  267 |         email: generator.email,
+  268 |         password,
+  269 |         confirmPassword: password,
+  270 |       };
+  271 |       const registration = new RegistrationPage(page);
+  272 | 
+  273 |       await registration.fill(input);
+  274 |       await registration.submit();
+  275 | 
+  276 |       await expect(registration.heading).toBeVisible();
+  277 |       await expect(page.locator('form script')).toHaveCount(0);
+  278 |       testInfo.annotations.push({
+  279 |         type: 'observed-behavior',
+  280 |         description: `Registration page remained responsive at ${page.url()}`,
+  281 |       });
+  282 |     });
+  283 |   });
+  284 | 
+  285 |   test.describe('API cases', () => {
+  286 |     test('TC009 – complete valid payload is accepted', async ({ request }, testInfo) => {
+  287 |       const testCase = caseById('TC009');
+  288 |       const { response } = await postRegister(request, testCase, runId(testInfo));
+  289 |       expect(response.status()).toBe(Number(testCase.expected.status));
+  290 |       const responseBody = await response.json();
+  291 |       for (const key of testCase.expected.bodyIncludes as string[]) {
+  292 |         expect(responseBody).toHaveProperty(key);
+  293 |       }
+  294 |     });
+  295 | 
+  296 |     test('TC010 – missing name is rejected and creates no account', async ({ request }, testInfo) => {
+  297 |       const testCase = caseById('TC010');
+  298 |       const { body, response } = await postRegister(request, testCase, runId(testInfo));
+  299 |       await expectFourXx(response.status(), testCase.id);
+  300 |       await expectCannotLogin(request, String(body.email), String(body.password), testCase.id);
+  301 |     });
+  302 | 
+  303 |     test('TC011 – missing email is rejected', async ({ request }, testInfo) => {
+  304 |       const testCase = caseById('TC011');
+  305 |       const { response } = await postRegister(request, testCase, runId(testInfo));
+  306 |       await expectFourXx(response.status(), testCase.id);
+  307 |     });
+  308 | 
+  309 |     test('TC012 – missing password is rejected', async ({ request }, testInfo) => {
+  310 |       const testCase = caseById('TC012');
+  311 |       const { response } = await postRegister(request, testCase, runId(testInfo));
+  312 |       await expectFourXx(response.status(), testCase.id);
+  313 |     });
+  314 | 
+  315 |     test('TC013 – invalid email format is rejected and creates no account', async ({ request }, testInfo) => {
+  316 |       const testCase = caseById('TC013');
+  317 |       const { body, response } = await postRegister(request, testCase, runId(testInfo));
+  318 |       await expectFourXx(response.status(), testCase.id);
+  319 |       await expectCannotLogin(request, String(body.email), String(body.password), testCase.id);
+  320 |     });
+  321 | 
+  322 |     test('TC014 – seven-character password is rejected and creates no account', async ({ request }, testInfo) => {
+  323 |       const testCase = caseById('TC014');
+  324 |       const { body, response } = await postRegister(request, testCase, runId(testInfo));
+```

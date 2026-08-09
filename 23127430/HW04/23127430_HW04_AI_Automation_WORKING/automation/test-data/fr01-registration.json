@@ -1,4 +1,135 @@
 {
   "feature": "FR-01",
-  "testCases": []
+  "featureName": "Account Registration",
+  "source": "../test-cases/fr01.md",
+  "runIdToken": "{{runId}}",
+  "urls": {
+    "webBase": "http://localhost:5173",
+    "apiBase": "http://localhost:3000"
+  },
+  "fixtures": {
+    "existingUser": {
+      "name": "Existing User",
+      "email": "fr01.existing+{{runId}}@example.com",
+      "password": "Existing123!",
+      "role": "user"
+    }
+  },
+  "testCases": [
+    {
+      "id": "TC001",
+      "layer": "UI",
+      "data": { "name": "Nguyen Van A", "email": "fr01.tc001+{{runId}}@example.com", "password": "Password123!", "confirmPassword": "Password123!" },
+      "expected": { "submitted": true, "path": "/login" }
+    },
+    {
+      "id": "TC002",
+      "layer": "UI",
+      "data": { "name": "", "email": "fr01.tc002+{{runId}}@example.com", "password": "Password123!", "confirmPassword": "Password123!" },
+      "expected": { "submitted": false, "validation": "required" }
+    },
+    {
+      "id": "TC003",
+      "layer": "UI",
+      "data": { "name": "Nguyen Van A", "email": "newuser.example.com", "password": "Password123!", "confirmPassword": "Password123!" },
+      "expected": { "submitted": false, "validation": "invalid-email" }
+    },
+    {
+      "id": "TC004",
+      "layer": "UI",
+      "data": { "name": "Nguyen Van A", "email": "fr01.tc004+{{runId}}@example.com", "password": "Passw1!", "confirmPassword": "Passw1!" },
+      "expected": { "submitted": false, "validation": "weak-password" }
+    },
+    {
+      "id": "TC005",
+      "layer": "UI",
+      "data": { "name": "Nguyen Van A", "email": "fr01.tc005+{{runId}}@example.com", "password": "Passw0d!", "confirmPassword": "Passw0d!" },
+      "expected": { "submitted": true, "path": "/login" }
+    },
+    {
+      "id": "TC006",
+      "layer": "UI",
+      "data": { "name": "Nguyen Van A", "email": "fr01.tc006+{{runId}}@example.com", "password": "Password123", "confirmPassword": "Password123" },
+      "expected": { "submitted": false, "validation": "weak-password" }
+    },
+    {
+      "id": "TC007",
+      "layer": "UI",
+      "fixtureRefs": ["existingUser"],
+      "data": { "name": "Nguyen Van A", "email": "fr01.existing+{{runId}}@example.com", "password": "Password123!", "confirmPassword": "Password123!" },
+      "expected": { "submitted": false, "validation": "duplicate-email" }
+    },
+    {
+      "id": "TC008",
+      "layer": "UI",
+      "data": {
+        "nameGenerator": { "character": "A", "length": 300 },
+        "email": "fr01.tc008.long-local-part+{{runId}}@example.com",
+        "passwordGenerator": { "prefix": "Aa1!", "character": "x", "totalLength": 128 },
+        "confirmPasswordFrom": "passwordGenerator"
+      },
+      "expected": { "pageCrash": false, "scriptExecuted": false, "recordObservedBehavior": true }
+    },
+    {
+      "id": "TC009",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.tc009+{{runId}}@example.com", "password": "Password123!" } },
+      "expected": { "status": 200, "bodyIncludes": ["message", "id"] }
+    },
+    {
+      "id": "TC010",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "email": "fr01.tc010+{{runId}}@example.com", "password": "Password123!" } },
+      "expected": { "statusClass": "4xx", "accountCreated": false }
+    },
+    {
+      "id": "TC011",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "password": "Password123!" } },
+      "expected": { "statusClass": "4xx", "accountCreated": false }
+    },
+    {
+      "id": "TC012",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.tc012+{{runId}}@example.com" } },
+      "expected": { "statusClass": "4xx", "accountCreated": false }
+    },
+    {
+      "id": "TC013",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "newuser.example.com", "password": "Password123!" } },
+      "expected": { "statusClass": "4xx", "accountCreated": false }
+    },
+    {
+      "id": "TC014",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.tc014+{{runId}}@example.com", "password": "Passw1!" } },
+      "expected": { "statusClass": "4xx", "accountCreated": false }
+    },
+    {
+      "id": "TC015",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.tc015+{{runId}}@example.com", "password": "Passw0d!" } },
+      "expected": { "status": 200, "bodyIncludes": ["message", "id"] }
+    },
+    {
+      "id": "TC016",
+      "layer": "API",
+      "fixtureRefs": ["existingUser"],
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.existing+{{runId}}@example.com", "password": "Password123!" } },
+      "expected": { "statusClass": "4xx", "existingAccountOverwritten": false }
+    },
+    {
+      "id": "TC017",
+      "layer": "API",
+      "request": { "method": "POST", "path": "/api/register", "body": { "name": "Nguyen Van A", "email": "fr01.tc017+{{runId}}@example.com", "password": "Password123!", "role": "admin" } },
+      "expected": { "allowedStatus": [200, 201], "createdRole": "user" }
+    },
+    {
+      "id": "TC018",
+      "layer": "UI+API",
+      "data": { "name": "<script>alert(1)</script>", "email": "fr01.tc018+{{runId}}@example.com", "password": "Password123!", "confirmPassword": "Password123!" },
+      "expected": { "scriptExecuted": false, "allowedHandling": ["rejected", "escaped-text"] }
+    }
+  ]
 }
