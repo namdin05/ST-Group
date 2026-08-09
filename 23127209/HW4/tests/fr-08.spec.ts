@@ -37,6 +37,7 @@ test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
 
         if (mode === 'emptyCart') {
           await page.goto(`${env.webUrl}/checkout`);
+          await expect(page).toHaveURL(/\/checkout$/);
           await expect(checkout.confirm()).toHaveCount(0);
           return;
         }
@@ -99,7 +100,10 @@ test.describe(`Run by: ${env.studentId} | FR-08 - Thanh toán`, () => {
           await expect(page.getByText(/giỏ hàng.*trống/i)).toBeVisible();
           const token = await page.evaluate(() => localStorage.getItem('token'));
           const cart = await request.get(`${env.apiUrl}/api/cart`, { headers: { Authorization: `Bearer ${token}` } });
+          expect(cart.status()).toBe(200);
           expect(await cart.json()).toEqual([]);
+          await page.goto(env.webUrl);
+          await expect(page.getByRole('link', { name: /Giỏ hàng \(0\)/ })).toBeVisible();
         }
       } finally {
         await deleteTempUser(request, user);
