@@ -14,7 +14,16 @@ async function userState(request: APIRequestContext, user: TempUser) {
   });
   expect(response.ok()).toBeTruthy();
   const users = await response.json();
-  return users.find((candidate: { id: number }) => candidate.id === user.id);
+  const state = users.find((candidate: { id: number }) => candidate.id === user.id);
+  expect(state, `Temporary user ${user.id} must exist while the case runs`).toBeTruthy();
+  return state;
+}
+
+function expectThirtySecondLock(state: { locked_until?: string | null }) {
+  expect(state.locked_until).toBeTruthy();
+  const remaining = new Date(state.locked_until!).getTime() - Date.now();
+  expect(remaining).toBeGreaterThanOrEqual(25_000);
+  expect(remaining).toBeLessThanOrEqual(35_000);
 }
 
 async function wrongAttempts(request: APIRequestContext, user: TempUser, count: number) {
@@ -84,14 +93,11 @@ test.describe(`Run by: ${env.studentId} | FR-02 - Đăng nhập và khóa tài k
           const statuses = await wrongAttempts(request, tempUser, attempts);
           const state = await userState(request, tempUser);
           await attachJson(testInfo, 'login-state', { statuses, state });
+          expect(statuses).toHaveLength(attempts);
+          expect(statuses.every(status => status === 401)).toBeTruthy();
           expect(state.login_attempts).toBe(attempts);
           if (attempts < 3) expect(state.locked_until).toBeNull();
-          if (attempts === 3) {
-            expect(state.locked_until).toBeTruthy();
-            const remaining = new Date(state.locked_until).getTime() - Date.now();
-            expect(remaining).toBeGreaterThanOrEqual(25_000);
-            expect(remaining).toBeLessThanOrEqual(35_000);
-          }
+          if (attempts === 3) expectThirtySecondLock(state);
           return;
         }
 
