@@ -2,10 +2,41 @@
   "feature": "FR-07",
   "featureName": "Shopping Cart",
   "source": "../test-cases/fr07.md",
+  "runIdToken": "{{runId}}",
+  "urls": {
+    "webBase": "http://localhost:5173",
+    "apiBase": "http://localhost:3000"
+  },
+  "auth": {
+    "name": "FR07 Automation User",
+    "email": "fr07.{{runId}}@example.com",
+    "password": "CartTest123!"
+  },
   "products": {
-    "productA": { "id": 1, "name": "Laptop Gaming Pro", "price": 100000 },
-    "productB": { "id": 2, "name": "Wireless Mouse", "price": 50000 },
-    "boundaryProduct": { "id": 3, "name": "Mechanical Keyboard", "price": 125000 }
+    "productA": {
+      "id": 1,
+      "name": "Laptop Gaming Pro",
+      "price": 100000,
+      "description": "Controlled FR-07 product fixture A",
+      "imageUrl": "/images/fr07-product-a.png",
+      "category_id": 1
+    },
+    "productB": {
+      "id": 2,
+      "name": "Wireless Mouse",
+      "price": 50000,
+      "description": "Controlled FR-07 product fixture B",
+      "imageUrl": "/images/fr07-product-b.png",
+      "category_id": 1
+    },
+    "boundaryProduct": {
+      "id": 3,
+      "name": "Mechanical Keyboard",
+      "price": 125000,
+      "description": "Controlled FR-07 boundary product fixture",
+      "imageUrl": "/images/fr07-boundary-product.png",
+      "category_id": 1
+    }
   },
   "testCases": [
     {
