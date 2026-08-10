@@ -24,7 +24,7 @@ Timeout:  5000ms
 Call log:
   - Email should use native email semantics with timeout 5000ms
   - waiting for locator('form').filter({ has: getByRole('button', { name: 'Đăng Ký', exact: true }) }).locator('input[type="text"]').nth(1)
-    14 × locator resolved to <input required="" type="text" value="newuser.example.com" class="w-full border p-2 rounded"/>
+    13 × locator resolved to <input required="" type="text" value="newuser.example.com" class="w-full border p-2 rounded"/>
        - unexpected value "text"
 
 ```

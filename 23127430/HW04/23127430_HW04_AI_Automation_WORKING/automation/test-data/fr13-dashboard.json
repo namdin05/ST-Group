@@ -2,6 +2,9 @@
   "feature": "FR-13",
   "featureName": "Dashboard",
   "source": "../test-cases/fr13.md",
+  "urls": {
+    "adminBase": "http://localhost:5174"
+  },
   "datasets": {
     "mixed": [
       { "id": 101, "total_amount": 100000, "status": "delivered" },
@@ -49,7 +52,7 @@
       "id": "TC004",
       "layer": "UI",
       "datasetRef": "largeDelivered",
-      "expected": { "revenue": 1000000000, "formattedRevenue": "1.000.000.000 ₫", "orderCount": 1 }
+      "expected": { "revenue": 1000000000, "thousandsGrouped": true, "orderCount": 1 }
     },
     {
       "id": "TC005",

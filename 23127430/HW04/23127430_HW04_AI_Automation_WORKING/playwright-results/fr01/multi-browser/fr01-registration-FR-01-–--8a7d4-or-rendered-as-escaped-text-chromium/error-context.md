@@ -24,7 +24,7 @@ Timeout:  5000ms
 Call log:
   - The name must not become executable markup with timeout 5000ms
   - waiting for locator('header').locator('script')
-    14 × locator resolved to 1 element
+    13 × locator resolved to 1 element
        - unexpected value "1"
 
 ```
@@ -42,7 +42,7 @@ Timeout: 5000ms
 Call log:
   - The name should be rendered as escaped text with timeout 5000ms
   - waiting for locator('header')
-    14 × locator resolved to <header class="bg-blue-600 text-white p-4 flex justify-between items-center">…</header>
+    13 × locator resolved to <header class="bg-blue-600 text-white p-4 flex justify-between items-center">…</header>
        - unexpected value "EShopGiỏ hàngChào, Thoát"
 
 ```

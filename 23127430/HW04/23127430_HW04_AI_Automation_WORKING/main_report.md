@@ -30,12 +30,12 @@ I use AI tools for the following tasks:
 | Automation framework | Playwright + TypeScript |
 | Reporting tool | Playwright HTML Reporter |
 | Browsers | Chromium, Firefox, WebKit |
-| SUT environment | Local web `http://localhost:5173`; API `http://localhost:3000` |
-| Execution environment | Windows / PowerShell; execution date 2026-08-10 (Asia/Saigon) |
+| SUT environment | Web `http://localhost:5173`; Web Admin `http://localhost:5174`; API `http://localhost:3000` |
+| Execution environment | Windows / PowerShell; latest execution date 2026-08-11 (Asia/Saigon) |
 
 ## 5. Automation Approach
 
-Each feature reads reviewed input and expected results from a dedicated JSON file. UI tests prefer semantic Playwright locators and use state-based synchronization. FR-07 UI tests control only the product API response with reviewed fixtures so that price/quantity preconditions are deterministic; cart behavior itself runs in the real React application. API tests create a unique user per browser/test run to avoid ordering dependencies.
+Each feature reads reviewed input and expected results from a dedicated JSON file. UI tests prefer semantic Playwright locators and use state-based synchronization. FR-07 UI tests control only the product API response with reviewed fixtures so that price/quantity preconditions are deterministic; cart behavior itself runs in the real React application. FR-13 UI tests control Admin API responses with reviewed order fixtures while exercising the real React Dashboard. FR-13 API cases run a temporary copy of the reviewed backend source with a private SQLite database and generated users. These strategies avoid ordering dependencies and leave the source SUT unchanged.
 
 ## 6. FR-01 Automation Report
 
@@ -197,7 +197,7 @@ No genuine SUT bug has been human-confirmed yet. The final runs produced 11 repr
 
 ### 8.2 Test Cases Selected for Automation
 
-TBD
+All 14 reviewed cases in `automation/test-cases/fr13.md` were automated: UI cases `TC001`–`TC004` and `TC009`–`TC011`, API cases `TC005`–`TC008` and `TC012`–`TC013`, and UI + API consistency case `TC014`.
 
 ### 8.3 Test Data File
 
@@ -209,37 +209,59 @@ TBD
 
 ### 8.5 Assertions Used
 
-TBD
+Assertions cover delivered-only revenue aggregation, total order count, zero/one/large-number boundaries, currency and locale-independent thousands grouping, login-only unauthenticated state, complete Admin order fixtures, missing-token/user-role authorization, numeric precision, empty API responses, and equality between the API response consumed by the UI and the rendered metrics. Money values use state-based polling so the assertion cannot pass or fail against React's initial `0 ₫` render.
 
 ### 8.6 Browser Execution Results
 
-| Browser | Result |
-| ------- | ------ |
-| Chromium | NOT RUN |
-| Firefox | NOT RUN |
-| WebKit | NOT RUN |
+| Browser | PASS | FAIL | Total | HTML report |
+| ------- | ---: | ---: | ---: | ----------- |
+| Chromium | 8 | 6 | 14 | `html-reports/fr13/chromium/index.html` |
+| Firefox | 8 | 6 | 14 | `html-reports/fr13/firefox/index.html` |
+| WebKit | 8 | 6 | 14 | `html-reports/fr13/webkit/index.html` |
+| **Total** | **24** | **18** | **42** |  |
+
+PASS on all browsers: `TC002`, `TC003`, `TC005`–`TC008`, `TC011`, `TC013`.
+
+FAIL on all browsers: `TC001`, `TC004`, `TC009`, `TC010`, `TC012`, `TC014`.
+
+Each canonical report contains `Run by: 23127430`, a real ISO execution timestamp, 8 expected / 6 unexpected results, and retained traces for all six failures. Five UI failures also contain screenshots; the API-only `TC012` failure has a trace and error context.
 
 ### 8.7 AI-generated Problems Found
 
-TBD
+Three automation/data problems were found and corrected before the canonical runs:
+
+1. `TC004` test data hard-coded `1.000.000.000 ₫`, although the reviewed case requires thousands grouping but does not prescribe a locale. It now records a grouping requirement and accepts standard dot, comma, regular-space, non-breaking-space, or narrow-space separators.
+2. The first money helper verified `₫` and then read the number once. Because React initially renders `0 ₫`, a conforming non-zero result could race with the asynchronous state update. It now polls the numeric UI state until the expected value or assertion timeout.
+3. The first API assertions checked only response length and delivered sum, which could miss wrong non-delivered rows. They now compare the complete reviewed order projection; negative authorization cases explicitly reject an order array.
+
+The pre-synchronization Chromium run is excluded. The final Chromium rerun and the Firefox/WebKit runs use the corrected script.
 
 ### 8.8 Human Revisions
 
-TBD
+Pending human review. The three problems above were AI self-review corrections before the final recorded execution; no human revision is claimed.
 
 ### 8.9 Genuine SUT Bugs, if any
 
-TBD – Only confirmed SUT defects will be reported here.
+No genuine SUT bug has been human-confirmed yet. Six cases provide reproducible **SUT bug candidates (unconfirmed)** on all three browsers, representing two underlying behaviors:
+
+- `TC001`, `TC004`, `TC009`, `TC010`, and `TC014`: the Dashboard doubles every delivered `total_amount`. Examples include expected/actual `350,000/700,000 ₫`, `1/2 ₫`, and `1,000,000,000/2,000,000,000 ₫`. Order counts and exclusion of non-delivered statuses are otherwise consistent with the controlled response.
+- `TC012`: a valid normal-user JWT receives `200` and the Admin orders array instead of `403` with no Admin data.
+
+Human confirmation is required before these candidates are promoted to genuine defects or GitHub Issues.
 
 ### 8.10 Limitations, if any
 
-TBD
+- Dashboard metric values have no test ID or ARIA relationship. The page object anchors on the verified semantic heading and scopes to the sibling value paragraph in the same card.
+- UI metric tests mock the Admin API with the human-reviewed fixtures. They exercise the real React rendering and calculation but do not mutate the live database.
+- API data-boundary tests run the reviewed backend source from a temporary directory with a private SQLite database. Bootstrap deliberately fails if the source anchors change, so the harness must be reviewed after backend refactoring.
+- `TC014` compares the UI with the exact controlled response consumed by that page; it is not an end-to-end comparison against the deployed live database.
+- `fr13.md` contains stale manual Actual Result/Status values relative to these canonical runs. The source test-case file was not changed in this script/test-data-only step.
 
 ## 9. Data-driven Testing
 
 Each selected feature will read reviewed test data from its own JSON file. Credentials, tokens, personal data, and unreviewed expected results must not be stored in these files.
 
-Status: implemented for FR-01 and FR-07; FR-13 remains pending.
+Status: implemented for FR-01, FR-07, and FR-13.
 
 ## 10. Assertion Patterns
 
@@ -255,7 +277,7 @@ Status: implemented for FR-01 and FR-07; FR-13 remains pending.
 | ------- | -------- | ------- | ------ |
 | FR-01 | 7 PASS / 11 FAIL | 7 PASS / 11 FAIL | 7 PASS / 11 FAIL |
 | FR-07 | 3 PASS / 11 FAIL | 3 PASS / 11 FAIL | 3 PASS / 11 FAIL |
-| FR-13 | NOT RUN | NOT RUN | NOT RUN |
+| FR-13 | 8 PASS / 6 FAIL | 8 PASS / 6 FAIL | 8 PASS / 6 FAIL |
 
 ## 12. Human Review and AI Gap Analysis
 
@@ -266,14 +288,17 @@ Status: implemented for FR-01 and FR-07; FR-13 remains pending.
 | GAP-03 | FR-01 | Case note says confirmation password is out of scope | Contradicts the explicit FR-01 requirement and removes the mismatch scenario | Required behavior is not covered by any selected case | Pending human review | Not retested |
 | GAP-04 | FR-01 | `TC018` allows rejection or escaped text in JSON | Script requires `200`/`201` before checking the allowed handling | A correct 4xx rejection would be a false failure | Pending human review | Not retested |
 | GAP-05 | FR-01 | `TC007` expects a duplicate-email message after UI submission | Valid test password is rejected before the duplicate request is made | Failure cannot establish duplicate-email behavior | Pending human review | Not retested |
+| GAP-06 | FR-13 | `TC004` data fixed the separator to `.` | `toLocaleString()` is browser-locale dependent, while the reviewed case requires grouping rather than one separator glyph | A valid comma/space-formatted value would be a false failure | None; AI replaced the literal with a locale-independent grouping contract | Corrected assertion executed in all three canonical runs |
+| GAP-07 | FR-13 | Money helper read the number once after finding `₫` | Initial `0 ₫` render could race with the Admin orders state update | Could produce a false result before the UI settled | None; AI changed the numeric assertion to state-based polling | Stable expected/actual values reproduced on all three browsers |
+| GAP-08 | FR-13 | API cases checked only row count and delivered sum | Wrong non-delivered rows could still pass | Source-data assertions were weaker than the reviewed fixtures | None; AI compares the complete order projection | All positive API fixture cases passed on all three runs |
 
 ## 13. Test Cases That Could Not Be Automated
 
-All 18 selected FR-01 cases and all 14 reviewed FR-07 cases were automated. FR-01 confirmation-password mismatch behavior could not be automated from the selected set because no such test case exists; it requires a reviewed case/data addition. Feasibility for FR-13 is not concluded here.
+All selected cases were automated: 18 for FR-01, 14 for FR-07, and 14 for FR-13. FR-01 confirmation-password mismatch behavior could not be automated from the selected set because no such test case exists; it requires a reviewed case/data addition.
 
 ## 14. Genuine Bug Reports
 
-No human-confirmed bug report or GitHub Issue was created. FR-01 has 10 reproducible candidate failure cases plus one inconclusive failure (`TC007`); FR-07 has 11 reproducible candidates. All remain pending human confirmation.
+No human-confirmed bug report or GitHub Issue was created. FR-01 has 10 reproducible candidate failure cases plus one inconclusive failure (`TC007`); FR-07 has 11 reproducible candidates; FR-13 has six reproducible candidate cases representing two underlying behaviors. All remain pending human confirmation.
 
 ## 15. Demo Video
 
@@ -283,7 +308,7 @@ TBD
 
 - **Automation skill:** `agent-skill/SKILL.md`
 - **AI audit skill:** `audit-skill/SKILL.md`
-- **Demonstration:** FR-07 interaction records script generation, selector validation, two AI self-review corrections, multi-browser execution, report verification, and audit logging.
+- **Demonstration:** FR-07 and FR-13 interactions record script generation, selector validation, AI self-review corrections, multi-browser execution, report verification, and audit logging.
 
 ## 17. Git Commit History
 
@@ -295,14 +320,14 @@ TBD – Export directly from Git only after a qualifying real commit history exi
 | ------ | ----- |
 | Number of features | 3 |
 | Designed test cases | 46 |
-| Automated test cases | 32 (FR-01: 18; FR-07: 14) |
-| Executed test cases | 32 unique cases / 96 primary browser executions |
-| Passed executions | 30 (FR-01: 21; FR-07: 9) |
-| Failed executions | 66 (FR-01: 33; FR-07: 33) |
-| Browser runs | 6 primary feature-browser runs; diagnostic reruns excluded |
+| Automated test cases | 46 (FR-01: 18; FR-07: 14; FR-13: 14) |
+| Executed test cases | 46 unique cases / 138 primary browser executions |
+| Passed executions | 54 (FR-01: 21; FR-07: 9; FR-13: 24) |
+| Failed executions | 84 (FR-01: 33; FR-07: 33; FR-13: 18) |
+| Browser runs | 9 primary feature-browser runs; diagnostic/invalid reruns excluded |
 | Genuine SUT bugs | 0 human-confirmed |
 | Demo video | TBD |
 
 ## 19. Conclusion
 
-FR-01 and FR-07 automation is implemented and has canonical HTML evidence for Chromium, Firefox, and WebKit. FR-01 produced 21 PASS / 33 FAIL across 54 primary executions. Its results are consistent across browsers, but the test-case contradiction around confirmation password, stale manual statuses, and several automation assertion gaps must be resolved before the suite can be treated as complete. No SUT defect is promoted beyond candidate status without human confirmation. FR-13 remains pending.
+FR-01, FR-07, and FR-13 automation is implemented and has canonical HTML evidence for Chromium, Firefox, and WebKit. Across 138 primary executions, 54 passed and 84 failed. FR-13 produced a consistent 8 PASS / 6 FAIL per browser after locale, synchronization, and API-assertion corrections. Requirement/test-case contradictions, stale manual statuses, fixture limitations, and candidate failures still require human review. No SUT defect is promoted beyond candidate status without human confirmation.

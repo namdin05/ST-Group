@@ -304,3 +304,110 @@
 > - TC011 xác minh token hợp lệ, status `200` và array cho user mới; empty array chưa đủ để chứng minh ownership một cách độc lập.
 >
 > Audit Interaction 04 đã được ghi và xác minh trong [ai_audit_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/ai_audit_report.md).
+
+## AI Interaction 05
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-11T01:21:28.3630919+07:00
+
+**Your prompt:**
+
+> [SKILL.md](23127430_HW04_AI_Automation_WORKING/agent-skill/SKILL.md) 
+> [SKILL.md](23127430_HW04_AI_Automation_WORKING/audit-skill/SKILL.md) 
+> Hãy tạo automation Playwright TypeScript cho FR-013 – Dashboard Admin. 
+> Nguồn đầu vào:
+> Feature specification: [README.md](23127430_HW04_AI_Automation_WORKING/src/README.md) 
+> Selected test cases: [fr13.md](23127430_HW04_AI_Automation_WORKING/automation/test-cases/fr13.md) 
+> Test data: [fr13-dashboard.json](23127430_HW04_AI_Automation_WORKING/automation/test-data/fr13-dashboard.json)  
+> Test file cần tạo hoặc cập nhật:  [fr13-dashboard.spec.ts](23127430_HW04_AI_Automation_WORKING/automation/tests/fr13-dashboard.spec.ts)  
+> SUT URL: http://localhost:5174/
+>  
+> Trong bước này:
+> Chỉ tạo hoặc review script và test data.
+> Kiểm tra selectors, assertions, synchronization và test isolation.
+> Đối chiếu selector với giao diện thật nếu môi trường cho phép.
+> Liệt kê mọi giả định hoặc yêu cầu chưa rõ để tôi review.
+> Sau đó, chạy script Playwright cho FR013 và xuất report
+>  
+> Ghi nhận lại vào file [main_report.md](23127430_HW04_AI_Automation_WORKING/main_report.md)
+
+**The AI output:**
+
+> Mình sẽ dùng đúng hai skill bạn cung cấp theo thứ tự: `agent-skill` để xây dựng/review automation, rồi `audit-skill` để kiểm tra độc lập selectors, assertions, synchronization, isolation và report. Trước tiên mình sẽ đọc toàn bộ hướng dẫn của cả hai skill và các nguồn FR-013, sau đó mới chỉnh file và chạy Playwright.
+> 
+> Hai skill xác nhận yêu cầu quan trọng: chỉ dùng test case đã chọn và dữ liệu ngoài file spec; không được “làm yếu” expected result; chỉ báo PASS/FAIL từ lần chạy thật; và toàn bộ tương tác này phải được ghi nguyên văn vào `ai_audit_report.md`. Mình đang kiểm tra cấu trúc dự án, cấu hình Playwright, nội dung FR-013 hiện tại và mẫu report trước khi sửa.
+> 
+> `agent-skill` yêu cầu đối chiếu selector trên UI render thật, nên mình sẽ dùng thêm skill điều khiển trình duyệt trong app cho đúng phần này. Việc kiểm tra chỉ đọc trạng thái DOM/accessible roles tại `http://localhost:5174/`; mình không chỉnh SUT hay test case nguồn.
+> 
+> Đối chiếu UI thật đã thành công: trang đăng nhập có đúng accessible name `Admin Login`, `Email`, `Password`, `Login`; sau đăng nhập, các heading `Dashboard`, `Tổng doanh thu (Delivered)`, `Tổng số đơn hàng` và hai giá trị metric đều khớp selector hiện tại. Mình đang rà tiếp mapping đủ 14 case và cách cô lập dữ liệu trước khi quyết định có cần chỉnh spec/test data hay chỉ cập nhật report.
+> 
+> Review tĩnh phát hiện hai điểm cần sửa trước khi chạy: `TC004` đang khóa cứng dấu chấm làm phân cách hàng nghìn dù test case chỉ yêu cầu “có phân cách” và `toLocaleString()` phụ thuộc locale; `TC014` đọc metric ngay sau response nên có nguy cơ race với React render. Mình sẽ sửa hai điểm này, đồng thời tăng độ mạnh của assertion API để xác nhận đúng toàn bộ fixture chứ không chỉ chiều dài/tổng. Đây là ảnh hưởng trực tiếp của `agent-skill` lên script và test data.
+> 
+> Playwright nhận đúng 14 case × 3 browser. Bước discovery bị sandbox chặn khi reporter tạo thư mục artifact (`EPERM`), không phải lỗi script; theo quy tắc môi trường mình sẽ chạy lại ngoài sandbox với thư mục FR-13 riêng. Bắt đầu Chromium để kiểm tra automation trước, rồi mới chạy Firefox/WebKit nếu kết quả không cho thấy lỗi setup.
+> 
+> Chromium chạy thật cho kết quả ban đầu 8 PASS / 6 FAIL, đúng hai hành vi sai đã thấy trong source/UI: doanh thu delivered bị nhân đôi và API Admin không chặn token user. Tuy nhiên review artifact cũng chỉ ra `expectMoney()` còn có race tiềm ẩn: assertion ký hiệu `₫` có thể pass ở lần render `0 ₫` trước khi React cập nhật dữ liệu. Mình sẽ chuyển phần số sang `expect.poll` theo trạng thái rồi rerun Chromium; lần vừa rồi chưa được dùng làm kết quả chính thức.
+> 
+> Chromium rerun đã ổn định ở **8 PASS / 6 FAIL**; năm UI failure đều chờ đúng metric cuối cùng rồi nhận giá trị gấp đôi, còn `TC012` nhận `200` và cả mảng đơn hàng với token user. Không còn dấu hiệu failure do selector, setup hay synchronization, nên mình tiếp tục Firefox và WebKit với report/artifact tách riêng. Các failure vẫn chỉ được ghi là ứng viên lỗi SUT, chờ bạn xác nhận.
+> 
+> Firefox và WebKit vẫn đang hoàn tất các assertion metric cố ý chờ trạng thái mong đợi tối đa 5 giây; đây là thời gian của các case tái hiện doanh thu sai, không phải browser bị treo. Hai run dùng process backend tạm và SQLite riêng nên không chia sẻ dữ liệu hay phụ thuộc thứ tự.
+> 
+> Cả ba browser đã hoàn tất với cùng kết quả **8 PASS / 6 FAIL**. Mẫu failure hoàn toàn nhất quán: `TC001`, `TC004`, `TC009`, `TC010`, `TC014` nhận doanh thu gấp đôi; `TC012` cho user thường truy cập API Admin. Mình đang xác minh trực tiếp ba HTML report (tiêu đề, timestamp, thống kê và failure artifacts), rồi mới cập nhật `main_report.md`.
+> 
+> `main_report.md` đã được cập nhật bằng số liệu thật và các giới hạn fixture/isolation. Bước cuối theo `audit-skill` đang gặp một bất thường lịch sử cần xử lý cẩn thận: working tree hiện đã xóa sẵn `AI Interaction 04`, trong khi bản Git hiện hành vẫn chứa interaction FR-07 đó. Mình đang hoàn tất kiểm tra file/report trước khi chốt cách ghi audit mà không ghi đè lịch sử.
+> 
+> Đã hoàn tất automation và report FR-13:
+> 
+> | Browser | PASS | FAIL |
+> | --- | ---: | ---: |
+> | Chromium | 8 | 6 |
+> | Firefox | 8 | 6 |
+> | WebKit | 8 | 6 |
+> | **Tổng** | **24** | **18** |
+> 
+> FAIL nhất quán: `TC001`, `TC004`, `TC009`, `TC010`, `TC012`, `TC014`.
+> 
+> Hai ứng viên lỗi SUT, chưa human-confirmed:
+> 
+> - Dashboard nhân đôi doanh thu delivered.
+> - Token user thường vẫn nhận `200` và dữ liệu Admin orders thay vì `403`.
+> 
+> Đã kiểm tra selector với UI thật, sửa synchronization race, assertion fixture API và định dạng tiền không phụ thuộc locale. TypeScript và JSON đều hợp lệ; không có hardcoded wait.
+> 
+> Các file chính:
+> 
+> - [Playwright spec](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/tests/fr13-dashboard.spec.ts)
+> - [Test data](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/automation/test-data/fr13-dashboard.json)
+> - [Main report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/main_report.md)
+> - [Chromium report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr13/chromium/index.html)
+> - [Firefox report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr13/firefox/index.html)
+> - [WebKit report](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/html-reports/fr13/webkit/index.html)
+> 
+> Audit chưa thể ghi vì working tree đã xóa sẵn `AI Interaction 04`, nhưng bản Git vẫn chứa interaction FR-07 đó. Để không ghi đè lịch sử, bạn xác nhận giúp: mình có nên khôi phục Interaction 04 từ Git và ghi lượt FR-13 này thành Interaction 05 không?
+
+## AI Interaction 06
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-11T01:21:28.3641068+07:00
+
+**Your prompt:**
+
+> bạn hãy audit lại phần hoạt động vừa làm [SKILL.md](23127430_HW04_AI_Automation_WORKING/audit-skill/SKILL.md) 
+
+**The AI output:**
+
+> Mình sẽ dùng lại `audit-skill` để ghi đầy đủ phần FR-13 vừa thực hiện. Để giữ lịch sử tuần tự và không ghi đè interaction cũ, mình sẽ đọc lại skill, khôi phục Interaction 04 nguyên văn từ Git, ghi lượt FR-13 trước thành Interaction 05, rồi ghi yêu cầu audit hiện tại thành Interaction 06 và xác minh lại toàn bộ các mục.
+> 
+> `audit-skill` xác nhận mỗi lần gọi rõ ràng phải có một record riêng. Vì vậy file sẽ có: Interaction 04 được khôi phục nguyên văn, Interaction 05 cho toàn bộ lượt xây dựng/chạy FR-13, và Interaction 06 cho yêu cầu audit hiện tại. Không có credential/token hay dữ liệu cá nhân mới trong hai prompt cần ghi.
+> 
+> Lần chèn đầu tiên đặt Interaction 04 sai vị trí đầu file do file cũ không có newline kết thúc. Mình chưa coi đó là bản audit hợp lệ; đang khôi phục toàn bộ báo cáo đúng nguyên trạng Git bằng patch rồi mới append 05–06 ở cuối và kiểm tra thứ tự `01 → 06`.
+> 
+> Đã audit lại thành công trong [ai_audit_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW04/23127430_HW04_AI_Automation_WORKING/ai_audit_report.md).
+> 
+> - Khôi phục nguyên vẹn Interaction 04 từ Git.
+> - Ghi toàn bộ lượt tạo, review và chạy FR-13 thành Interaction 05.
+> - Ghi yêu cầu audit hiện tại thành Interaction 06.
+> - Đã xác minh thứ tự `01 → 06`, bốn trường bắt buộc, timestamp ISO có timezone và nội dung nguyên văn.
+> 
+> Không thay đổi script, test data, HTML report hoặc kết quả trong `main_report.md`.
