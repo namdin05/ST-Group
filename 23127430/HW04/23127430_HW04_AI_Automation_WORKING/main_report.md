@@ -5,6 +5,8 @@
 - **Student ID:** 23127430
 - **Student name:** Đinh Hoàng Nam
 - **Assignment:** HW04 – AI Automation Testing
+- **Public repository:** [namdin05/ST-Group - branch `23127430-HW04`](https://github.com/namdin05/ST-Group/tree/23127430-HW04/23127430/HW04/23127430_HW04_AI_Automation_WORKING)
+- **Self-assessed grade:** 90/100
 
 ## 2. AI Use Declaration
 
@@ -93,7 +95,9 @@ The source cases are marked `Reviewed`/`Revised`, but the abnormalities identifi
 
 ### 6.9 Genuine SUT Bugs, if any
 
-No genuine SUT bug has been human-confirmed yet. Ten failing cases provide reproducible **SUT bug candidates (unconfirmed)** on all three browsers:
+Nine FR-01 defects have been human-reviewed and documented in `bug_report.md` with public GitHub Issues: [#18](https://github.com/namdin05/ST-Group/issues/18), [#19](https://github.com/namdin05/ST-Group/issues/19), [#38](https://github.com/namdin05/ST-Group/issues/38), [#39](https://github.com/namdin05/ST-Group/issues/39), [#40](https://github.com/namdin05/ST-Group/issues/40), [#41](https://github.com/namdin05/ST-Group/issues/41), [#42](https://github.com/namdin05/ST-Group/issues/42), [#43](https://github.com/namdin05/ST-Group/issues/43), and [#46](https://github.com/namdin05/ST-Group/issues/46).
+
+The canonical automation also provides the following reproducible evidence across all three browsers:
 
 - `TC001` and `TC005`: the confirmation-password field is absent, and valid strong passwords containing an allowed special character are rejected by the UI.
 - `TC003`: the email control uses `type="text"`, and no invalid-email message is shown.
@@ -104,7 +108,7 @@ No genuine SUT bug has been human-confirmed yet. Ten failing cases provide repro
 - `TC016`: the API returns `200` for a duplicate email.
 - `TC018`: a script-like name is accepted and rendered in the header as a `<script>` element rather than inert text.
 
-`TC007` is not counted as a duplicate-email SUT candidate because the upstream password-validation failure prevents that behavior from being exercised. Human confirmation is still required before any candidate is reported as a genuine defect.
+`TC007` is not counted as separate duplicate-email automation evidence because the upstream password-validation failure prevents that UI behavior from being exercised. Any failing behavior not represented by one of the nine reviewed issues remains a candidate.
 
 ### 6.10 Limitations, if any
 
@@ -169,7 +173,9 @@ Pending human review. The two problems above were AI self-review corrections bef
 
 ### 7.9 Genuine SUT Bugs, if any
 
-No genuine SUT bug has been human-confirmed yet. The final runs produced 11 reproducible **SUT bug candidates (unconfirmed)**:
+Seven FR-07 defects have been human-reviewed and documented in `bug_report.md` with public GitHub Issues: [#20](https://github.com/namdin05/ST-Group/issues/20), [#21](https://github.com/namdin05/ST-Group/issues/21), [#22](https://github.com/namdin05/ST-Group/issues/22), [#44](https://github.com/namdin05/ST-Group/issues/44), [#45](https://github.com/namdin05/ST-Group/issues/45), [#50](https://github.com/namdin05/ST-Group/issues/50), and [#51](https://github.com/namdin05/ST-Group/issues/51).
+
+The final runs produced the following 11 reproducible failure cases; behaviors without a matching reviewed issue remain candidates:
 
 - `TC001`: header is `Giá`, not required `Đơn giá`.
 - `TC002`: empty cart has no illustration.
@@ -242,12 +248,12 @@ Pending human review. The three problems above were AI self-review corrections b
 
 ### 8.9 Genuine SUT Bugs, if any
 
-No genuine SUT bug has been human-confirmed yet. Six cases provide reproducible **SUT bug candidates (unconfirmed)** on all three browsers, representing two underlying behaviors:
+The doubled-revenue behavior is human-reviewed and documented as [GitHub Issue #23](https://github.com/namdin05/ST-Group/issues/23). Six cases provide reproducible evidence on all three browsers, representing one confirmed defect and one remaining candidate:
 
 - `TC001`, `TC004`, `TC009`, `TC010`, and `TC014`: the Dashboard doubles every delivered `total_amount`. Examples include expected/actual `350,000/700,000 ₫`, `1/2 ₫`, and `1,000,000,000/2,000,000,000 ₫`. Order counts and exclusion of non-delivered statuses are otherwise consistent with the controlled response.
-- `TC012`: a valid normal-user JWT receives `200` and the Admin orders array instead of `403` with no Admin data.
+- `TC012`: a valid normal-user JWT receives `200` and the Admin orders array instead of `403` with no Admin data. This remains a candidate because no matching human-reviewed issue is recorded in `bug_report.md`.
 
-Human confirmation is required before these candidates are promoted to genuine defects or GitHub Issues.
+The confirmed revenue defect and unconfirmed authorization candidate are kept distinct in the totals.
 
 ### 8.10 Limitations, if any
 
@@ -298,21 +304,26 @@ All selected cases were automated: 18 for FR-01, 14 for FR-07, and 14 for FR-13.
 
 ## 14. Genuine Bug Reports
 
-No human-confirmed bug report or GitHub Issue was created. FR-01 has 10 reproducible candidate failure cases plus one inconclusive failure (`TC007`); FR-07 has 11 reproducible candidates; FR-13 has six reproducible candidate cases representing two underlying behaviors. All remain pending human confirmation.
+The selected features have **17 human-reviewed GitHub Issues** documented in [`bug_report.md`](bug_report.md): FR-01 has 9, FR-07 has 7, and FR-13 has 1. The report includes reproduction steps, expected/actual results, severity/priority, environment, and direct issue links. Remaining failing behaviors are not counted as genuine bugs until a matching human-reviewed issue exists.
 
 ## 15. Demo Video
 
-TBD
+- **Task 2 - end-to-end automation demonstration:** [https://youtu.be/8xCs55BQZdI](https://youtu.be/8xCs55BQZdI)
+- The link was supplied by the student. Duration, narration, and the required authorship evidence should be checked during submission review.
 
 ## 16. Agent Skill
 
 - **Automation skill:** `agent-skill/SKILL.md`
 - **AI audit skill:** `audit-skill/SKILL.md`
 - **Demonstration:** FR-07 and FR-13 interactions record script generation, selector validation, AI self-review corrections, multi-browser execution, report verification, and audit logging.
+- **Agent Skill video:** [https://youtu.be/s8mPdyEnvX8](https://youtu.be/s8mPdyEnvX8)
 
 ## 17. Git Commit History
 
-TBD – Export directly from Git only after a qualifying real commit history exists.
+- **Repository:** [namdin05/ST-Group](https://github.com/namdin05/ST-Group)
+- **Branch:** [`23127430-HW04`](https://github.com/namdin05/ST-Group/tree/23127430-HW04)
+- **Export:** [`git_commit_log.txt`](git_commit_log.txt)
+- The real history contains qualifying `.spec.ts` commits on four distinct days but only 4 qualifying commits. It does not yet meet the required minimum of 8; documentation-only commits do not count.
 
 ## 18. Test Summary
 
@@ -325,9 +336,10 @@ TBD – Export directly from Git only after a qualifying real commit history exi
 | Passed executions | 54 (FR-01: 21; FR-07: 9; FR-13: 24) |
 | Failed executions | 84 (FR-01: 33; FR-07: 33; FR-13: 18) |
 | Browser runs | 9 primary feature-browser runs; diagnostic/invalid reruns excluded |
-| Genuine SUT bugs | 0 human-confirmed |
-| Demo video | TBD |
+| Human-confirmed issues | 17 (FR-01: 9; FR-07: 7; FR-13: 1) |
+| Task 2 demo video | [YouTube](https://youtu.be/8xCs55BQZdI) |
+| Agent Skill video | [YouTube](https://youtu.be/s8mPdyEnvX8) |
 
 ## 19. Conclusion
 
-FR-01, FR-07, and FR-13 automation is implemented and has canonical HTML evidence for Chromium, Firefox, and WebKit. Across 138 primary executions, 54 passed and 84 failed. FR-13 produced a consistent 8 PASS / 6 FAIL per browser after locale, synchronization, and API-assertion corrections. Requirement/test-case contradictions, stale manual statuses, fixture limitations, and candidate failures still require human review. No SUT defect is promoted beyond candidate status without human confirmation.
+FR-01, FR-07, and FR-13 automation is implemented and has canonical HTML evidence for Chromium, Firefox, and WebKit. Across 138 primary executions, 54 passed and 84 failed. Seventeen selected-feature issues have human-reviewed GitHub records, while unmatched failing behaviors remain candidates. Both required video links and the public repository are documented. Requirement/test-case contradictions, fixture limitations, and the shortfall of four qualifying test-script commits still require attention before submission.
