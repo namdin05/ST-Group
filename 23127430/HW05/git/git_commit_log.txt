@@ -1,0 +1,2 @@
+TODO: Export the genuine Git commit log before submission.
+No Git history was fabricated during project scaffolding, and Codex did not commit changes.
