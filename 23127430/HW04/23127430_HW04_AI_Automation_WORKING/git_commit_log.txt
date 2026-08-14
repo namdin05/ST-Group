@@ -1,0 +1,88 @@
+HW04 - GIT COMMIT LOG
+=====================
+
+Student ID : 23127430
+Student    : Dinh Hoang Nam
+Repository : https://github.com/namdin05/ST-Group
+Branch     : 23127430-HW04
+Scope      : 23127430/HW04/23127430_HW04_AI_Automation_WORKING
+Exported   : 2026-08-11 (Asia/Saigon)
+
+CURRENT REQUIREMENT
+-------------------
+
+- At least 8 meaningful commits are required.
+- A commit counts only when it changes a test-script file such as .spec.ts,
+  .spec.js, or an equivalent executable test script.
+- README, PDF, HTML report, screenshot, trace, and other documentation-only
+  commits do not count.
+- There is no distinct-day requirement.
+
+QUALIFYING TEST-SCRIPT COMMITS
+------------------------------
+
+1. 52c1d531c8811ae814fa629e4b53e2e4df4e8212
+   Date    : 2026-08-11T01:25:56+07:00
+   Author  : Nam
+   Subject : feat: Create scripts for FR-13
+   Files   : automation/tests/fr13-dashboard.spec.ts
+
+2. f006fc8037757461eec4f593344a2b0ce050e297
+   Date    : 2026-08-10T12:35:45+07:00
+   Author  : Nam
+   Subject : feat: Generate scripts for FR07
+   Files   : automation/tests/fr07-shopping-cart.spec.ts
+
+3. d535d8b3efa5550f5ffe7595e110368054c018e1
+   Date    : 2026-08-09T22:36:22+07:00
+   Author  : Nam
+   Subject : feat: Automation for FR01
+   Files   : automation/tests/fr01-registration.spec.ts
+
+4. 2c051132f3d88a40e1113ab98d6b3d76376a1daa
+   Date    : 2026-08-08T22:17:03+07:00
+   Author  : Nam
+   Subject : feat: Create structure and modify test cases
+   Files   : automation/tests/fr01-registration.spec.ts
+             automation/tests/fr07-shopping-cart.spec.ts
+             automation/tests/fr13-dashboard.spec.ts
+
+NON-QUALIFYING HW04 COMMITS
+---------------------------
+
+1. ce012de916842e6227c722ca7268b0674faaa0e0
+   Date    : 2026-08-11T01:47:25+07:00
+   Subject : feat: Review scripts generate for FR13
+   Reason  : Documentation, evidence, and PDF files only; no test script changed.
+
+2. 2fd816d66f6a8e116e207308fd68f11a27c883de
+   Date    : 2026-08-10T23:29:32+07:00
+   Subject : test: Run test all browser for FR01
+   Reason  : Generated Playwright reports/results only; no test script changed.
+
+3. 5387f444503d0dcddc2dca4dd866610ca1188a68
+   Date    : 2026-08-10T12:36:33+07:00
+   Subject : feat: Generate scripts for FR07
+   Reason  : Generated reports/results only; no test script changed.
+
+4. b87e5d10fc96354439dfb7b44788f0d30a802622
+   Date    : 2026-08-09T23:51:30+07:00
+   Subject : feat: Review code Playwright
+   Reason  : Review evidence and reports only; no test script changed.
+
+COMPLIANCE SUMMARY
+------------------
+
+Total HW04 commits reviewed       : 8
+Qualifying test-script commits    : 4
+Required qualifying commits       : 8
+Current result                    : NOT MET (4/8)
+Additional qualifying commits need: 4
+
+VERIFICATION COMMAND
+--------------------
+
+git log --date=iso-strict --pretty=format:"%H%x09%ad%x09%an%x09%s" -- "23127430_HW04_AI_Automation_WORKING/automation/tests/*.spec.ts" "23127430_HW04_AI_Automation_WORKING/automation/tests/*.spec.js"
+
+This export reports the real branch history. It does not count documentation or
+generated evidence commits and does not infer compliance from commit dates.

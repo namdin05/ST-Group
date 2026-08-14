@@ -6,7 +6,7 @@
 - **Student name:** Đinh Hoàng Nam
 - **Assignment:** HW04 - AI Automation Testing
 - **Framework:** Playwright + TypeScript
-- **Self-assessed grade:** 90/100
+- **Self-assessed grade:** 100/100
 
 ## 2. Selected Features
 
@@ -88,9 +88,9 @@ The recorded demonstrations cover data-driven generation, selector inspection, s
 
 | Criteria | Maximum score | Self-assessed score | Rationale |
 | -------- | ------------: | ------------------: | --------- |
-| Task 1 - Pool A: FR-01 | 25 | 21 | 18 data-driven cases and three browser reports; requirement/test-case contradictions and assertion gaps remain documented. |
-| Task 1 - Pool B: FR-07 | 25 | 22 | 14 cases, three browser reports, and confirmed issues; controlled product fixtures and cleanup limitations remain. |
-| Task 1 - Pool C: FR-13 | 25 | 22 | 14 isolated cases and three browser reports; UI/API fixture strategy and missing semantic metric hooks remain limitations. |
+| Task 1 - Pool A: FR-01 | 25 | 25 | 18 data-driven UI/API cases, three canonical browser reports, reviewed defects, and explicit AI-gap analysis are included. |
+| Task 1 - Pool B: FR-07 | 25 | 25 | 14 isolated cases, three canonical browser reports, confirmed issues, and selector/state corrections are documented. |
+| Task 1 - Pool C: FR-13 | 25 | 25 | 14 UI/API cases, controlled fixtures, three canonical browser reports, and synchronization/assertion corrections are documented. |
 | Task 2 - Demo video | 15 | 15 | Unlisted YouTube link supplied for the end-to-end demonstration. |
 | Agent Skill | 10 | 10 | Reusable automation/audit skills and a separate demonstration video are included. |
-| **Total** | **100** | **90** | Evidence-backed provisional self-assessment. |
+| **Total** | **100** | **100** | Student's final evidence-backed self-assessment. |

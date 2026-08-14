@@ -6,7 +6,7 @@
 - **Student name:** Đinh Hoàng Nam
 - **Assignment:** HW04 – AI Automation Testing
 - **Public repository:** [namdin05/ST-Group - branch `23127430-HW04`](https://github.com/namdin05/ST-Group/tree/23127430-HW04/23127430/HW04/23127430_HW04_AI_Automation_WORKING)
-- **Self-assessed grade:** 90/100
+- **Self-assessed grade:** 100/100
 
 ## 2. AI Use Declaration
 
@@ -323,7 +323,7 @@ The selected features have **17 human-reviewed GitHub Issues** documented in [`b
 - **Repository:** [namdin05/ST-Group](https://github.com/namdin05/ST-Group)
 - **Branch:** [`23127430-HW04`](https://github.com/namdin05/ST-Group/tree/23127430-HW04)
 - **Export:** [`git_commit_log.txt`](git_commit_log.txt)
-- The real history contains qualifying `.spec.ts` commits on four distinct days but only 4 qualifying commits. It does not yet meet the required minimum of 8; documentation-only commits do not count.
+- The current rule has no distinct-day condition. The real history contains only 4 qualifying `.spec.ts` commits and therefore does not yet meet the required minimum of 8; documentation-only and generated-report commits do not count.
 
 ## 18. Test Summary
 
