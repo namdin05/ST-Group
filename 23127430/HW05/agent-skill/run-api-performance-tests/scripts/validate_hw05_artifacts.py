@@ -222,7 +222,12 @@ def check_artifacts(root: Path, requested_student: str | None) -> list[Finding]:
             field in text
             for field in ("Name of the AI tool", "Date and time", "Your prompt", "The AI output")
         )
-        if fields_present and not re.search(r"\bTBD\b", text, re.IGNORECASE):
+        # Reject an untouched placeholder field, but allow genuine verbatim
+        # prompts/outputs to discuss the literal word `TBD` in context.
+        has_tbd_placeholder = re.search(
+            r"^\s*>?\s*TBD\s*$", text, re.IGNORECASE | re.MULTILINE
+        )
+        if fields_present and not has_tbd_placeholder:
             real_audits.append(path)
     add(
         findings,
