@@ -450,3 +450,47 @@
 > ## M. Readiness
 >
 > **NOT READY FOR OPTION A LOAD TEST EXECUTION.** Human Review và thiết kế đã hoàn tất; còn thiếu tool selection, tool-specific script, xác nhận load-generator topology, hardware screenshots và technical dry run đạt yêu cầu.
+
+## AI Interaction 05
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-15T20:20:11.1845950+07:00
+
+**Your prompt:**
+
+> [SKILL.md](audit-skill/SKILL.md) 
+> Bạn hãy kiểm tra xem còn phần nào tôi chưa hoàn thiện và cần bổ sung
+
+**The AI output:**
+
+> Tôi sẽ dùng trực tiếp `audit-skill/SKILL.md` như bạn yêu cầu. Trước hết tôi sẽ đọc đầy đủ quy trình audit, sau đó đối chiếu repository với đề bài, validator và trạng thái artifact thực tế để chỉ ra chính xác phần còn thiếu, phần chỉ mới có placeholder và phần cần xác minh thủ công.
+>
+> Theo skill, toàn bộ prompt và các thông báo hiển thị trong lượt này phải được ghi nguyên văn vào `ai-audit/AI_Audit.md` bằng timestamp thật sau khi việc kiểm tra hoàn tất. Tôi sẽ chỉ ghi một interaction mới, không sửa các interaction lịch sử; nếu phát hiện dữ liệu nhạy cảm hoặc số thứ tự audit mâu thuẫn, tôi sẽ dừng trước khi ghi.
+>
+> Audit hiện hợp lệ, có bốn interaction tuần tự và không có mẫu `TBD`; lượt này sẽ là Interaction 05. Tôi đang đối chiếu ba lớp bằng chứng: yêu cầu gốc của HW05, các tuyên bố trong README/main report, và file thực tế trên đĩa—đặc biệt là PDF, video, Git history, ảnh evidence và phạm vi AI Audit.
+>
+> Kết quả sơ bộ cho thấy ba blocker chắc chắn trước khi nộp: chưa có các PDF bắt buộc, chưa có video/YouTube link, và Git history mới chỉ có hai commit HW05 trong khi phần lớn Stress/Spike/Endurance/report hiện vẫn chưa commit. Ngoài ra tôi đang kiểm tra hai rủi ro dễ bị trừ điểm dù validator không bắt được: bằng chứng “k6 + resource monitor trong cùng frame” và ba loại report view k6 thực sự khác nhau.
+>
+> Tôi vừa phát hiện một điểm cần sửa trong `bug_report.md`: ba lỗi không phải chưa có GitHub Issue. Repository công khai đã có đúng các issue tương ứng (#50, #32, #31), đều đang mở và có tham chiếu ảnh. Vì vậy bạn không cần tạo issue mới; chỉ cần liên kết ba issue hiện có vào bug report/main report và bỏ câu “No GitHub issue was created”.
+>
+> Chưa sẵn sàng để nộp. Phần performance cốt lõi đã khá đầy đủ, nhưng còn 6 hạng mục bắt buộc và 3 rủi ro cần xử lý. Validator hiện đạt **24 PASS / 3 FAIL / 1 WARN**.
+>
+> ### Bắt buộc hoàn thiện
+>
+> 1. **Xuất ba PDF:** `main_report.pdf`, `AI_Critique.pdf` và `AI_Audit.pdf`. Hiện repository không có file PDF nào; đề bài cảnh báo thiếu tài liệu bắt buộc có thể bị 0 điểm.
+> 2. **Quay và tải video:** [video/README.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/video/README.md) vẫn ghi chưa quay/upload. Video cần ít nhất 6 phút, thuyết minh tiếng Việt, k6 và resource monitor trong cùng frame, đồng thời demo `$run-api-performance-tests` end-to-end. Một video được thiết kế đầy đủ có thể đáp ứng cả demo bài và demo Agent Skill.
+> 3. **Hoàn thiện AI Audit:** sau lượt này audit có 5 interaction, nhưng vẫn thiếu các interaction Load/Stress/Spike/Endurance/reporting trước đó. Chỉ bổ sung từ transcript gốc trong lịch sử Codex; không được tái dựng từ trí nhớ. Sau đó cập nhật số lượng trong [main_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/main_report.md:293) và xuất PDF.
+> 4. **Commit và push:** hiện chỉ có 2 commit HW05, trong khi còn **22 file modified, 13 deleted và 50 untracked entry**. Branch GitHub truy cập công khai được nhưng vẫn dừng ở commit `4a2ac40`, nên chưa chứa phần lớn Stress/Spike/Endurance/report. Hãy tạo các commit logic theo từng bước, cập nhật [git_commit_log.txt](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/git/git_commit_log.txt), push rồi kiểm tra lại bằng cửa sổ không đăng nhập.
+> 5. **Liên kết bug với GitHub Issues:** [bug_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/docs/bug-reports/bug_report.md:107) đang nói chưa tạo issue, nhưng ba issue tương ứng đã tồn tại và có ảnh: [#50 duplicate cart](https://github.com/namdin05/ST-Group/issues/50), [#32 client-controlled total](https://github.com/namdin05/ST-Group/issues/32), [#31 cart not cleared](https://github.com/namdin05/ST-Group/issues/31). Không tạo issue trùng; hãy link chúng và bổ sung screenshot trang issue vào evidence/report.
+> 6. **Tạo file ZIP cuối:** chưa có `23127430_HW05_AI_Performance_090.zip`. Chỉ đóng gói sau khi hoàn tất các mục trên. Không đưa `src/node_modules` vào ZIP—`src` hiện khoảng 420 MB. `results` khoảng 100 MB và có các bản raw Stress/Spike/Endurance trùng hash giữa canonical và evidence-rerun, nên nên lập manifest gói nộp để tránh nhân đôi không cần thiết.
+>
+> ### Rủi ro cần xử lý hoặc xác nhận với giảng viên
+>
+> - **Evidence cùng frame:** ảnh Load hiện Task Manager che gần hết k6; Stress/Spike tách ảnh resource và ảnh k6 progress. Để an toàn, nên có ảnh side-by-side k6 + backend resource monitor cho từng scenario; video bắt buộc phải thể hiện rõ cùng frame.
+> - **Ba report view khác nhau:** [results/views/README.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/results/views/README.md:3) thừa nhận cả ba dùng cùng HTML shell và chỉ khác “analytical perspective”. Đây vẫn là grading risk. Nên chỉ định ba output thực sự khác loại cho Load/Stress/Spike hoặc xin xác nhận cách diễn giải k6 từ giảng viên.
+> - **Human Review Endurance:** [main_report.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/main_report.md:24) vẫn ghi Endurance đang chờ final student acceptance. Sau khi bạn tự xem raw metrics và evidence, hãy ghi rõ quyết định chấp nhận và ngày review trong README/main report.
+>
+> Các phần đã hoàn tất tốt gồm bốn test plan và raw/HTML result, test data CSV, screenshot/hardware evidence, Endurance 12 phút, AI analysis/misinterpretation hunt, Continuous Performance Testing proposal, AI Critique 290 từ và Agent Skill. Ưu tiên nên là: **Human Review Endurance → video → bổ sung audit/PDF → sửa liên kết bug → xử lý report-view/evidence risk → commit/push/log → tạo ZIP → chạy validator lần cuối**.
+>
+> Lượt kiểm tra này đã được ghi nguyên văn và xác minh trong [AI_Audit.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/ai-audit/AI_Audit.md).

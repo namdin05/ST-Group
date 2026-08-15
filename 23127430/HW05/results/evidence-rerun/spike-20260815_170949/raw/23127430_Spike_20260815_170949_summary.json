@@ -1,0 +1,310 @@
+{
+    "metrics": {
+        "http_req_duration": {
+            "avg": 10.902093296703296,
+            "min": 0,
+            "med": 7.56995,
+            "max": 73.4915,
+            "p(90)": 24.98853,
+            "p(95)": 30.216434999999993,
+            "thresholds": {
+                "p(95)<500": false
+            }
+        },
+        "http_req_receiving": {
+            "min": 0,
+            "med": 0,
+            "max": 16.4093,
+            "p(90)": 4.7245800000000004,
+            "p(95)": 6.622374999999993,
+            "avg": 1.4128249450549435
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 25
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 910,
+            "thresholds": {
+                "rate<0.01": false
+            },
+            "value": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "max": 73.4915,
+            "p(90)": 24.98853,
+            "p(95)": 30.216434999999993,
+            "avg": 10.902093296703296,
+            "min": 0,
+            "med": 7.56995
+        },
+        "http_req_waiting": {
+            "p(90)": 21.85995,
+            "p(95)": 28.934859999999993,
+            "avg": 9.451756153846155,
+            "min": 0,
+            "med": 6.2875,
+            "max": 70.5454
+        },
+        "http_req_blocked": {
+            "p(95)": 0,
+            "avg": 0.03062648351648352,
+            "min": 0,
+            "med": 0,
+            "max": 2.2555,
+            "p(90)": 0
+        },
+        "wf01_completed_iterations": {
+            "count": 130,
+            "rate": 0.90136264406012
+        },
+        "iteration_duration": {
+            "p(90)": 16485.13953,
+            "p(95)": 16787.673985,
+            "avg": 14599.497763076926,
+            "min": 11007.3037,
+            "med": 14544.53445,
+            "max": 19071.0484
+        },
+        "functional_failures": {
+            "passes": 0,
+            "fails": 130,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "wf01_iteration_duration": {
+            "avg": 10087.753846153846,
+            "min": 7093,
+            "med": 10255,
+            "max": 13347,
+            "p(90)": 11446.4,
+            "p(95)": 11916.199999999999
+        },
+        "data_received": {
+            "count": 445357,
+            "rate": 3087.90894669756
+        },
+        "iterations": {
+            "count": 130,
+            "rate": 0.90136264406012
+        },
+        "http_req_sending": {
+            "avg": 0.03751219780219781,
+            "min": 0,
+            "med": 0,
+            "max": 10.4952,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "vus_max": {
+            "value": 25,
+            "min": 25,
+            "max": 25
+        },
+        "http_req_tls_handshaking": {
+            "avg": 0,
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0
+        },
+        "data_sent": {
+            "rate": 1484.0727927685862,
+            "count": 214042
+        },
+        "checks": {
+            "passes": 2990,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_reqs": {
+            "count": 910,
+            "rate": 6.3095385084208395
+        },
+        "http_req_connecting": {
+            "avg": 0.028864505494505494,
+            "min": 0,
+            "med": 0,
+            "max": 2.2555,
+            "p(90)": 0,
+            "p(95)": 0
+        }
+    },
+    "root_group": {
+        "groups": {},
+        "checks": {
+                "Login: HTTP 200": {
+                    "name": "Login: HTTP 200",
+                    "path": "::Login: HTTP 200",
+                    "id": "4410b61c77b4d114ce6aec347541d300",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Login: success message": {
+                    "name": "Login: success message",
+                    "path": "::Login: success message",
+                    "id": "f22127b3673c740afe1b3f2259264d5b",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Login: non-empty JWT": {
+                    "name": "Login: non-empty JWT",
+                    "path": "::Login: non-empty JWT",
+                    "id": "007e6003f59a57984fd4a6aec29dc9dc",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Login: numeric user id": {
+                    "fails": 0,
+                    "name": "Login: numeric user id",
+                    "path": "::Login: numeric user id",
+                    "id": "35001b998338dde35177329bfe05a614",
+                    "passes": 130
+                },
+                "Login: no error field": {
+                    "fails": 0,
+                    "name": "Login: no error field",
+                    "path": "::Login: no error field",
+                    "id": "99e9c1870efabf2308649d9027ac0d02",
+                    "passes": 130
+                },
+                "Search: HTTP 200": {
+                    "name": "Search: HTTP 200",
+                    "path": "::Search: HTTP 200",
+                    "id": "80b3b2e3a1c57d6c44f7d37d9733e17c",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Search: non-empty array": {
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Search: non-empty array",
+                    "path": "::Search: non-empty array",
+                    "id": "86a081d711fba188a5c8718bb2a26acc"
+                },
+                "Search: product id": {
+                    "name": "Search: product id",
+                    "path": "::Search: product id",
+                    "id": "e193d45056eaf2415066079bbd8248e2",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Search: product name": {
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Search: product name",
+                    "path": "::Search: product name",
+                    "id": "545d0f66e07b62a222f636ee4b083b6c"
+                },
+                "Search: numeric price": {
+                    "id": "ca8455ac661c62930dc9645d7c2e4dd0",
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Search: numeric price",
+                    "path": "::Search: numeric price"
+                },
+                "Detail: HTTP 200": {
+                    "name": "Detail: HTTP 200",
+                    "path": "::Detail: HTTP 200",
+                    "id": "edb7729054471e17ef87b0f126abc971",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Detail: non-empty object": {
+                    "fails": 0,
+                    "name": "Detail: non-empty object",
+                    "path": "::Detail: non-empty object",
+                    "id": "a33ce16ffeddcd511f253fa4a8b9001f",
+                    "passes": 130
+                },
+                "Detail: correlated product id": {
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Detail: correlated product id",
+                    "path": "::Detail: correlated product id",
+                    "id": "5bb1fce61765a83d9611362ba0d6f66f"
+                },
+                "Detail: numeric price": {
+                    "name": "Detail: numeric price",
+                    "path": "::Detail: numeric price",
+                    "id": "f831a88833855b9f106c4db5972812bd",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Cart POST: HTTP 200": {
+                    "name": "Cart POST: HTTP 200",
+                    "path": "::Cart POST: HTTP 200",
+                    "id": "fa42102cd11daf5ecb9a78951c1aeabd",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Cart POST: success message": {
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Cart POST: success message",
+                    "path": "::Cart POST: success message",
+                    "id": "3333929ae5e5286804bacc31ec237938"
+                },
+                "Cart GET: HTTP 200": {
+                    "id": "d7cfefa6aa63e757cd4a28f8cf596277",
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Cart GET: HTTP 200",
+                    "path": "::Cart GET: HTTP 200"
+                },
+                "Cart GET: correlated item and quantity": {
+                    "name": "Cart GET: correlated item and quantity",
+                    "path": "::Cart GET: correlated item and quantity",
+                    "id": "a4c8fea9f2577e9f19055a5dcf941359",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Checkout: HTTP 200": {
+                    "fails": 0,
+                    "name": "Checkout: HTTP 200",
+                    "path": "::Checkout: HTTP 200",
+                    "id": "e6b12d7d10b44d7c85e109cf82f01c97",
+                    "passes": 130
+                },
+                "Checkout: success message": {
+                    "name": "Checkout: success message",
+                    "path": "::Checkout: success message",
+                    "id": "19ca8f151f086fb387e045793b832c47",
+                    "passes": 130,
+                    "fails": 0
+                },
+                "Checkout: positive order id": {
+                    "id": "a39240f363e41e7b098490f68f6e5ea2",
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Checkout: positive order id",
+                    "path": "::Checkout: positive order id"
+                },
+                "Orders GET: HTTP 200": {
+                    "path": "::Orders GET: HTTP 200",
+                    "id": "22cb064fdd65e313fc579233a4162647",
+                    "passes": 130,
+                    "fails": 0,
+                    "name": "Orders GET: HTTP 200"
+                },
+                "Orders GET: correlated order id": {
+                    "name": "Orders GET: correlated order id",
+                    "path": "::Orders GET: correlated order id",
+                    "id": "f1bef06ba9dd6c87577d023389339460",
+                    "passes": 130,
+                    "fails": 0
+                }
+            },
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e"
+    }
+}

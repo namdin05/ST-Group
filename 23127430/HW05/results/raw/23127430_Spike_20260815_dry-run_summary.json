@@ -1,0 +1,310 @@
+{
+    "root_group": {
+        "checks": {
+            "Login: HTTP 200": {
+                "name": "Login: HTTP 200",
+                "path": "::Login: HTTP 200",
+                "id": "4410b61c77b4d114ce6aec347541d300",
+                "passes": 1,
+                "fails": 0
+            },
+            "Login: success message": {
+                "name": "Login: success message",
+                "path": "::Login: success message",
+                "id": "f22127b3673c740afe1b3f2259264d5b",
+                "passes": 1,
+                "fails": 0
+            },
+            "Login: non-empty JWT": {
+                "name": "Login: non-empty JWT",
+                "path": "::Login: non-empty JWT",
+                "id": "007e6003f59a57984fd4a6aec29dc9dc",
+                "passes": 1,
+                "fails": 0
+            },
+            "Login: numeric user id": {
+                "name": "Login: numeric user id",
+                "path": "::Login: numeric user id",
+                "id": "35001b998338dde35177329bfe05a614",
+                "passes": 1,
+                "fails": 0
+            },
+            "Login: no error field": {
+                "name": "Login: no error field",
+                "path": "::Login: no error field",
+                "id": "99e9c1870efabf2308649d9027ac0d02",
+                "passes": 1,
+                "fails": 0
+            },
+            "Search: HTTP 200": {
+                "id": "80b3b2e3a1c57d6c44f7d37d9733e17c",
+                "passes": 1,
+                "fails": 0,
+                "name": "Search: HTTP 200",
+                "path": "::Search: HTTP 200"
+            },
+            "Search: non-empty array": {
+                "name": "Search: non-empty array",
+                "path": "::Search: non-empty array",
+                "id": "86a081d711fba188a5c8718bb2a26acc",
+                "passes": 1,
+                "fails": 0
+            },
+            "Search: product id": {
+                "fails": 0,
+                "name": "Search: product id",
+                "path": "::Search: product id",
+                "id": "e193d45056eaf2415066079bbd8248e2",
+                "passes": 1
+            },
+            "Search: product name": {
+                "name": "Search: product name",
+                "path": "::Search: product name",
+                "id": "545d0f66e07b62a222f636ee4b083b6c",
+                "passes": 1,
+                "fails": 0
+            },
+            "Search: numeric price": {
+                "name": "Search: numeric price",
+                "path": "::Search: numeric price",
+                "id": "ca8455ac661c62930dc9645d7c2e4dd0",
+                "passes": 1,
+                "fails": 0
+            },
+            "Detail: HTTP 200": {
+                "name": "Detail: HTTP 200",
+                "path": "::Detail: HTTP 200",
+                "id": "edb7729054471e17ef87b0f126abc971",
+                "passes": 1,
+                "fails": 0
+            },
+            "Detail: non-empty object": {
+                "id": "a33ce16ffeddcd511f253fa4a8b9001f",
+                "passes": 1,
+                "fails": 0,
+                "name": "Detail: non-empty object",
+                "path": "::Detail: non-empty object"
+            },
+            "Detail: correlated product id": {
+                "passes": 1,
+                "fails": 0,
+                "name": "Detail: correlated product id",
+                "path": "::Detail: correlated product id",
+                "id": "5bb1fce61765a83d9611362ba0d6f66f"
+            },
+            "Detail: numeric price": {
+                "passes": 1,
+                "fails": 0,
+                "name": "Detail: numeric price",
+                "path": "::Detail: numeric price",
+                "id": "f831a88833855b9f106c4db5972812bd"
+            },
+            "Cart POST: HTTP 200": {
+                "name": "Cart POST: HTTP 200",
+                "path": "::Cart POST: HTTP 200",
+                "id": "fa42102cd11daf5ecb9a78951c1aeabd",
+                "passes": 1,
+                "fails": 0
+            },
+            "Cart POST: success message": {
+                "name": "Cart POST: success message",
+                "path": "::Cart POST: success message",
+                "id": "3333929ae5e5286804bacc31ec237938",
+                "passes": 1,
+                "fails": 0
+            },
+            "Cart GET: HTTP 200": {
+                "name": "Cart GET: HTTP 200",
+                "path": "::Cart GET: HTTP 200",
+                "id": "d7cfefa6aa63e757cd4a28f8cf596277",
+                "passes": 1,
+                "fails": 0
+            },
+            "Cart GET: correlated item and quantity": {
+                "name": "Cart GET: correlated item and quantity",
+                "path": "::Cart GET: correlated item and quantity",
+                "id": "a4c8fea9f2577e9f19055a5dcf941359",
+                "passes": 1,
+                "fails": 0
+            },
+            "Checkout: HTTP 200": {
+                "path": "::Checkout: HTTP 200",
+                "id": "e6b12d7d10b44d7c85e109cf82f01c97",
+                "passes": 1,
+                "fails": 0,
+                "name": "Checkout: HTTP 200"
+            },
+            "Checkout: success message": {
+                "passes": 1,
+                "fails": 0,
+                "name": "Checkout: success message",
+                "path": "::Checkout: success message",
+                "id": "19ca8f151f086fb387e045793b832c47"
+            },
+            "Checkout: positive order id": {
+                "name": "Checkout: positive order id",
+                "path": "::Checkout: positive order id",
+                "id": "a39240f363e41e7b098490f68f6e5ea2",
+                "passes": 1,
+                "fails": 0
+            },
+            "Orders GET: HTTP 200": {
+                "name": "Orders GET: HTTP 200",
+                "path": "::Orders GET: HTTP 200",
+                "id": "22cb064fdd65e313fc579233a4162647",
+                "passes": 1,
+                "fails": 0
+            },
+            "Orders GET: correlated order id": {
+                "name": "Orders GET: correlated order id",
+                "path": "::Orders GET: correlated order id",
+                "id": "f1bef06ba9dd6c87577d023389339460",
+                "passes": 1,
+                "fails": 0
+            }
+        },
+        "name": "",
+        "path": "",
+        "id": "d41d8cd98f00b204e9800998ecf8427e",
+        "groups": {}
+    },
+    "metrics": {
+        "data_received": {
+            "count": 2929,
+            "rate": 235.18716518198312
+        },
+        "checks": {
+            "passes": 23,
+            "fails": 0,
+            "thresholds": {
+                "rate==1": false
+            },
+            "value": 1
+        },
+        "http_req_sending": {
+            "min": 0,
+            "med": 0,
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0
+        },
+        "http_req_failed": {
+            "passes": 0,
+            "fails": 7,
+            "thresholds": {
+                "rate<0.01": false
+            },
+            "value": 0
+        },
+        "http_req_duration{expected_response:true}": {
+            "p(90)": 33.88894000000002,
+            "p(95)": 48.798819999999964,
+            "avg": 16.34802857142857,
+            "min": 0.6866,
+            "med": 9.2606,
+            "max": 63.7087
+        },
+        "http_req_connecting": {
+            "max": 1.5562,
+            "p(90)": 0.6224800000000006,
+            "p(95)": 1.0893399999999989,
+            "avg": 0.22231428571428571,
+            "min": 0,
+            "med": 0
+        },
+        "iteration_duration": {
+            "avg": 12453.9109,
+            "min": 12453.9109,
+            "med": 12453.9109,
+            "max": 12453.9109,
+            "p(90)": 12453.9109,
+            "p(95)": 12453.9109
+        },
+        "http_req_tls_handshaking": {
+            "max": 0,
+            "p(90)": 0,
+            "p(95)": 0,
+            "avg": 0,
+            "min": 0,
+            "med": 0
+        },
+        "iterations": {
+            "count": 1,
+            "rate": 0.08029606185796624
+        },
+        "vus_max": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "functional_failures": {
+            "fails": 1,
+            "passes": 0,
+            "thresholds": {
+                "rate==0": false
+            },
+            "value": 0
+        },
+        "http_req_blocked": {
+            "p(95)": 1.0893399999999989,
+            "avg": 0.22231428571428571,
+            "min": 0,
+            "med": 0,
+            "max": 1.5562,
+            "p(90)": 0.6224800000000006
+        },
+        "wf01_iteration_duration": {
+            "avg": 9318,
+            "min": 9318,
+            "med": 9318,
+            "max": 9318,
+            "p(90)": 9318,
+            "p(95)": 9318
+        },
+        "http_req_receiving": {
+            "p(90)": 6.260220000000002,
+            "p(95)": 7.479059999999998,
+            "avg": 2.953842857142857,
+            "min": 0,
+            "med": 3.2371,
+            "max": 8.6979
+        },
+        "data_sent": {
+            "count": 1636,
+            "rate": 131.36435719963276
+        },
+        "vus": {
+            "value": 1,
+            "min": 1,
+            "max": 1
+        },
+        "http_reqs": {
+            "rate": 0.5620724330057637,
+            "count": 7
+        },
+        "http_req_waiting": {
+            "avg": 13.394185714285715,
+            "min": 0.5627,
+            "med": 3.5608,
+            "max": 63.7087,
+            "p(90)": 33.66412000000002,
+            "p(95)": 48.68640999999997
+        },
+        "wf01_completed_iterations": {
+            "count": 1,
+            "rate": 0.08029606185796624
+        },
+        "http_req_duration": {
+            "p(95)": 48.798819999999964,
+            "avg": 16.34802857142857,
+            "min": 0.6866,
+            "med": 9.2606,
+            "max": 63.7087,
+            "p(90)": 33.88894000000002,
+            "thresholds": {
+                "p(95)<500": false
+            }
+        }
+    }
+}

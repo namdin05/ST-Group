@@ -14,5 +14,5 @@ Write-Host 'Original source database: NOT USED FOR WRITES' -ForegroundColor Gree
 Write-Host ''
 
 Set-Location -LiteralPath $state.runtime
+$env:NODE_PATH = Join-Path $state.repo 'src\backend\node_modules'
 node.exe .\server.js
-

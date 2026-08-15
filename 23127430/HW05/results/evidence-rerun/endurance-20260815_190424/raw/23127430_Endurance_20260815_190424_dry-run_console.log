@@ -1,0 +1,130 @@
+
+         /\      Grafana   /‾‾/  
+    /\  /  \     |\  __   /  /   
+   /  \/    \    | |/ /  /   ‾‾\ 
+  /          \   |   (  |  (‾)  |
+ / __________ \  |_|\_\  \_____/ 
+
+
+     execution: local
+        script: test-plans/endurance/23127430_Endurance_20260815.js
+        output: json (C:\Code\SoftwareTesting\ST-Group\23127430\HW05\results\evidence-rerun\endurance-20260815_190424\raw\23127430_Endurance_20260815_190424_dry-run.json)
+
+     scenarios: (100.00%) 1 scenario, 1 max VUs, 2m30s max duration (incl. graceful stop):
+              * wf01_endurance_dry_run: 1 iterations shared among 1 VUs (maxDuration: 2m0s, gracefulStop: 30s)
+
+
+running (0m01.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m01.0s/2m0s  0/1 shared iters
+
+running (0m02.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m02.0s/2m0s  0/1 shared iters
+
+running (0m03.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m03.0s/2m0s  0/1 shared iters
+
+running (0m04.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m04.0s/2m0s  0/1 shared iters
+
+running (0m05.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m05.0s/2m0s  0/1 shared iters
+
+running (0m06.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m06.0s/2m0s  0/1 shared iters
+
+running (0m07.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m07.0s/2m0s  0/1 shared iters
+
+running (0m08.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m08.0s/2m0s  0/1 shared iters
+
+running (0m09.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m09.0s/2m0s  0/1 shared iters
+
+running (0m10.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m10.0s/2m0s  0/1 shared iters
+
+running (0m11.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m11.0s/2m0s  0/1 shared iters
+
+running (0m12.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m12.0s/2m0s  0/1 shared iters
+
+running (0m13.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m13.0s/2m0s  0/1 shared iters
+
+running (0m14.0s), 1/1 VUs, 0 complete and 0 interrupted iterations
+wf01_endurance_dry_run   [   0% ] 1 VUs  0m14.0s/2m0s  0/1 shared iters
+
+
+  █ THRESHOLDS 
+
+    checks
+    ✓ 'rate==1' rate=100.00%
+
+    functional_failures
+    ✓ 'rate==0' rate=0.00%
+
+    http_req_duration
+    ✓ 'p(95)<500' p(95)=17.19ms
+
+    http_req_failed
+    ✓ 'rate<0.01' rate=0.00%
+
+
+  █ TOTAL RESULTS 
+
+    checks_total.......: 23      1.608208/s
+    checks_succeeded...: 100.00% 23 out of 23
+    checks_failed......: 0.00%   0 out of 23
+
+    ✓ Login: HTTP 200
+    ✓ Login: success message
+    ✓ Login: non-empty JWT
+    ✓ Login: numeric user id
+    ✓ Login: no error field
+    ✓ Search: HTTP 200
+    ✓ Search: non-empty array
+    ✓ Search: product id
+    ✓ Search: product name
+    ✓ Search: numeric price
+    ✓ Detail: HTTP 200
+    ✓ Detail: non-empty object
+    ✓ Detail: correlated product id
+    ✓ Detail: numeric price
+    ✓ Cart POST: HTTP 200
+    ✓ Cart POST: success message
+    ✓ Cart GET: HTTP 200
+    ✓ Cart GET: correlated item and quantity
+    ✓ Checkout: HTTP 200
+    ✓ Checkout: success message
+    ✓ Checkout: positive order id
+    ✓ Orders GET: HTTP 200
+    ✓ Orders GET: correlated order id
+
+    CUSTOM
+    functional_failures............: 0.00%  0 out of 1
+    wf01_completed_iterations......: 1      0.069922/s
+    wf01_iteration_duration........: avg=9.57s  min=9.57s   med=9.57s  max=9.57s   p(90)=9.57s  p(95)=9.57s  
+
+    HTTP
+    http_req_duration..............: avg=9.87ms min=526.4µs med=8.08ms max=17.47ms p(90)=16.9ms p(95)=17.19ms
+      { expected_response:true }...: avg=9.87ms min=526.4µs med=8.08ms max=17.47ms p(90)=16.9ms p(95)=17.19ms
+    http_req_failed................: 0.00%  0 out of 7
+    http_reqs......................: 7      0.489455/s
+
+    EXECUTION
+    iteration_duration.............: avg=14.3s  min=14.3s   med=14.3s  max=14.3s   p(90)=14.3s  p(95)=14.3s  
+    iterations.....................: 1      0.069922/s
+    vus............................: 1      min=1      max=1
+    vus_max........................: 1      min=1      max=1
+
+    NETWORK
+    data_received..................: 2.9 kB 205 B/s
+    data_sent......................: 1.6 kB 114 B/s
+
+
+
+
+running (0m14.3s), 0/1 VUs, 1 complete and 0 interrupted iterations
+wf01_endurance_dry_run ✓ [ 100% ] 1 VUs  0m14.3s/2m0s  1/1 shared iters

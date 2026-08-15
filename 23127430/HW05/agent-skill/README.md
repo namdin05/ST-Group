@@ -1,8 +1,11 @@
 # Performance Testing Agent Skill
 
-This directory contains the initial reusable-skill scaffold for the HW05 performance-testing workflow.
+The compatibility entrypoint is [`SKILL.md`](SKILL.md), and the complete reusable HW05 implementation is located at [`run-api-performance-tests/SKILL.md`](run-api-performance-tests/SKILL.md).
 
-Status: **TODO / NOT IMPLEMENTED**
+Invoke it as `$run-api-performance-tests` for a complete workflow or for a narrower design, execution, analysis, or submission-audit task. It supports k6 and JMeter, requires explicit Human Review before materially changing a load profile, preserves genuine raw/evidence artifacts, and never invents missing executions or external links.
 
-The skill must eventually support API analysis, test design and generation, human review, genuine raw-result analysis, AI misinterpretation hunting, and report assistance. It must never execute tests or invent evidence without explicit, authorized input.
+The skill includes:
 
+- HW05 requirement, scenario/evidence, and analysis/reporting references;
+- a read-only performance-result summarizer for k6 and JMeter artifacts;
+- an HW05 completeness validator whose output remains subject to manual authenticity review.

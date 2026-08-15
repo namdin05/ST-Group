@@ -6,7 +6,7 @@ Evaluate whether WF01 remains functionally stable under a conservative, sustaine
 
 This Load Test is not intended to find the breaking point, create a sudden spike, or establish final capacity. Stress and Spike profiles are explicitly out of scope.
 
-**Hardware context: PROVIDED BY HUMAN REVIEW; screenshot capture remains pending.**
+**Hardware context and screenshots: CAPTURED AND VERIFIED.**
 
 **Selected tool: k6 v2.0.0.** The accepted plan is implemented in `test-plans/load/23127430_Load_20260814.js`.
 
@@ -14,14 +14,14 @@ This Load Test is not intended to find the breaking point, create a sudden spike
 
 | Item | Human-provided value | Evidence status |
 |---|---|---|
-| Device | MSI Thin GF63 12VE | Reported from Windows Settings -> System -> About; repository screenshot pending |
-| Operating system | Windows | Reported; Windows edition/version not provided |
+| Device | MSI Thin GF63 12VE; hostname `NamUS` | Captured in `evidence/hardware/01_system_about.png` and dxdiag |
+| Operating system | Windows 11 Home Single Language 64-bit, version 25H2, OS build 26200.9168 | Captured in System About; dxdiag confirms Windows 11 build 26200 |
 | CPU | 12th Gen Intel(R) Core(TM) i5-12450H | Reported; core/thread counts not inferred |
 | CPU speed displayed by Windows | 2.00 GHz | Recorded exactly as displayed; not treated as measured sustained clock |
 | RAM | 16.0 GB, 3200 MT/s | Reported |
 | Storage capacity shown | 477 GB | Reported; disk model/type and free space not provided |
 | Graphics memory | 6 GB | Reported; GPU model not inferred |
-| Evidence source | Windows Settings -> System -> About | Human-provided source; capture checklist is in `evidence/hardware/README.md` |
+| Evidence source | Windows Settings -> System -> About and DirectX Diagnostic Tool | Genuine screenshots stored under `evidence/hardware/` |
 
 The source-backed default deployment is a Node.js backend on local port `3000` with embedded SQLite. For the measured run, k6, the Node.js backend, and SQLite ran locally on the same Windows host. To protect the original 119-user source database, the exact backend source was executed from an OS temporary directory against a newly created disposable SQLite database. Port `3000` was closed after cleanup.
 
@@ -74,7 +74,7 @@ Checkout does not consume backend cart state in the current source. This design 
 - Read an account once during VU initialization and reuse only that account for the VU's iterations.
 - Do not randomly share accounts and do not recycle one account into another concurrent VU.
 - Fail preflight if requested concurrency exceeds 50; do not silently wrap to the first row.
-- If a tool requires EOF settings, configure user data as non-recycling with stop/fail on insufficient rows. Exact JMeter/k6 mechanics remain pending tool selection.
+- k6 validates the requested maximum VUs against the 50-row account pool and fails preflight rather than recycling concurrent identities.
 - Provision the synthetic pool only after the final backend start and only into an approved disposable database.
 
 ### Product Allocation
@@ -212,7 +212,7 @@ No claim is made that the SUT meets any candidate threshold.
 
 ## 12. Resource Monitoring
 
-The current workspace is Windows. For the future run:
+The completed Windows execution used this capture procedure:
 
 1. Record hardware/hostname evidence before execution.
 2. Run the selected tool in non-GUI/CLI mode for the measured execution when supported.
@@ -221,7 +221,7 @@ The current workspace is Windows. For the future run:
 5. Capture genuine evidence near ramp completion and during the middle of the hold period; record timestamps/load phase.
 6. Retain backend logs and raw tool output for correlation with any error/latency change.
 
-The measured Option A run captured 80 genuine samples in `evidence/hardware/23127430_Load_20260814_resources.csv`. Hardware screenshots remain separate pending evidence and were not fabricated.
+The measured Option A run captured 80 genuine samples in `evidence/hardware/23127430_Load_20260814_resources.csv`. Hardware screenshots are stored as `01_system_about.png` and `02_dxdiag_system.png`.
 
 ## 13. Data and State Risks
 
@@ -306,11 +306,11 @@ The human accepted:
 | Add to Cart to Checkout | Random 1-3 seconds |
 | Inter-iteration pause | Random 3-6 seconds |
 
-### Traceability from Human Decision to Implementation
+### Traceability from Human Decision to Executed Implementation
 
-| Accepted decision | Planned implementation |
+| Accepted decision | Executed implementation |
 |---|---|
-| Option A `1 -> 5 VUs`, `2m/5m/1m` | Encode exactly after JMeter or k6 is selected; no automatic switch to Option B |
+| Option A `1 -> 5 VUs`, `2m/5m/1m` | Encoded exactly in `test-plans/load/23127430_Load_20260814.js`; Option B was not executed |
 | Full WF01 on every iteration | Execute Login, Search, Detail, Cart mutation/read-back, Checkout, and Order read-back |
 | One account per VU | Allocate one unique row from `test-data/users.csv`; fail rather than recycle insufficient user rows |
 | Product input | Rotate `test-data/products.csv` keywords deterministically and correlate the first validated product result |
@@ -318,7 +318,7 @@ The human accepted:
 | Correlation | Extract and validate `userId`, product fields, and `orderId`; do not invent a `cartId` |
 | Functional checks | Apply the accepted status/body/state assertions from Section 7 and stop invalid iterations before Checkout |
 | Think-time | Sample each accepted range independently for every transition/iteration |
-| Initial report view | If JMeter is chosen, use Summary Report only for inspection and run the measurement non-GUI; otherwise document a distinct k6 equivalent |
+| Initial report view | k6 HTML dashboard plus the Load steady-state/per-endpoint aggregate view documented in `results/views/README.md` |
 | Hardware evidence | Capture the provided MSI/Windows context and Task Manager evidence using `evidence/hardware/README.md` |
 
 **EXECUTED / PASS on 2026-08-14.** The k6 script passed a `1 VU / 1 iteration` technical dry run and then executed the accepted Option A profile without switching to Option B.

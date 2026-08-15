@@ -1,0 +1,4 @@
+CSV_VALIDATION_OK users=50 keywords=5
+PROVISION_OK accounts=50 inserted=50 updated=0
+CSV_VALIDATION_OK users=50 keywords=5
+PRODUCT_DB_CHECK_OK keywords=5

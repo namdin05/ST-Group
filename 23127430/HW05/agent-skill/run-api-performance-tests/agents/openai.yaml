@@ -1,0 +1,4 @@
+interface:
+  display_name: "HW05 API Performance Testing"
+  short_description: "Run evidence-based API performance test workflows"
+  default_prompt: "Use $run-api-performance-tests to design, review, execute, analyze, and document an authorized API performance test workflow."

@@ -9,12 +9,33 @@ $state = Get-Content -Raw -LiteralPath $StatePath | ConvertFrom-Json
 $sourceDatabase = Join-Path $state.repo 'src\backend\database.sqlite'
 $runtimeDatabase = Join-Path $state.runtime 'database.sqlite'
 
-$hashAfter = (Get-FileHash -Algorithm SHA256 -LiteralPath $sourceDatabase).Hash
+$sha256 = [Security.Cryptography.SHA256]::Create()
+$sourceStream = [IO.File]::OpenRead($sourceDatabase)
+try {
+    $hashAfter = ([BitConverter]::ToString($sha256.ComputeHash($sourceStream))).Replace('-', '')
+} finally {
+    $sourceStream.Dispose()
+    $sha256.Dispose()
+}
 $hashMatches = $state.sourceDbHashBefore -eq $hashAfter
 $sourceUsers = (& sqlite3 $sourceDatabase 'SELECT COUNT(*) FROM users;').Trim()
 $disposableOrders = (& sqlite3 $runtimeDatabase 'SELECT COUNT(*) FROM orders;').Trim()
-$port3000Closed = -not [bool](Get-NetTCPConnection -State Listen -LocalPort 3000 -ErrorAction SilentlyContinue)
-$port8765Closed = -not [bool](Get-NetTCPConnection -State Listen -LocalPort 8765 -ErrorAction SilentlyContinue)
+
+function Test-LocalPortClosed([int]$Port) {
+    $client = [Net.Sockets.TcpClient]::new()
+    try {
+        $connection = $client.ConnectAsync('127.0.0.1', $Port)
+        if (-not $connection.Wait(1000)) { return $true }
+        return -not $client.Connected
+    } catch {
+        return $true
+    } finally {
+        $client.Dispose()
+    }
+}
+
+$port3000Closed = Test-LocalPortClosed 3000
+$port8765Closed = Test-LocalPortClosed 8765
 $passed = $hashMatches -and $sourceUsers -eq '119' -and $port3000Closed -and $port8765Closed
 
 Clear-Host
@@ -32,4 +53,3 @@ Write-Host "ISOLATION / CLEANUP VERDICT     : $(if ($passed) { 'PASS' } else { '
     -ForegroundColor $(if ($passed) { 'Green' } else { 'Red' })
 Write-Host ''
 Read-Host 'Evidence ready - press Enter to close'
-

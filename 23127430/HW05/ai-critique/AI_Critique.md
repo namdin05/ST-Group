@@ -1,14 +1,9 @@
 # AI Critique
 
-Target length: 200–300 words.
+## Critique
 
-## Questions to Address
+During HW05, AI was useful for turning source analysis into a repeatable seven-request k6 workflow, but its main weakness was incompleteness. In the initial proposal, the performance tool and hardware evidence were still unknown, the report-view mapping was conditional, and latency thresholds had no stakeholder SLO. Without human review, it would have been easy to describe 50 VUs as system capacity, interpret the Stress p95 of 25.10 ms being lower than the Load p95 of 33.01 ms as an optimization, call Checkout a bottleneck merely because its Load p95 was the highest at 49.28 ms, or present the 20-VU Endurance point as maximum capacity. The raw evidence does not support those conclusions. Stress stopped at the 50-account data ceiling, profiles differed, and Endurance proves only its exact 12-minute stable point.
 
-1. Where did AI produce something incorrect, biased, or incomplete?
-2. Why did AI fail to catch the issue?
-3. What did I learn about collaborating with AI in this assignment?
+I checked the final AI values against the k6 summary files and derived the Endurance hold separately from timestamped raw points. Request counts, iteration counts, p95, throughput, HTTP failures, functional failures, and check totals all matched, and the four executions showed no machine-evidenced abnormal behavior. The remaining weakness was interpretation, not arithmetic. AI sees plausible patterns in static source and aggregate output, but it does not automatically understand test-data limits, shared-host noise, business side effects, or whether a measured threshold is a lower bound or an actual requirement.
 
-## Final Critique
-
-TODO — write after completing the experiments.
-
+The main lesson is to treat AI output as a hypothesis rather than evidence. Effective collaboration requires raw-log traceability, explicit separation of HTTP and functional failures, comparable profiles, genuine resource screenshots, source inspection before optimization advice, and Human Review before execution or capacity claims. Endurance is now supported by genuine execution evidence; the missing video must remain visibly incomplete instead of being filled with assumptions.

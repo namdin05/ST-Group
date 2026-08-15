@@ -60,9 +60,11 @@ No cookie, server session, or cart ID was observed.
 
 These are source/behavior observations, not performance-test bug claims.
 
-## Open Questions
+## Resolution After the Performance Phase
 
-- Human approval is required on whether the future performance workflow should benchmark backend cart behavior or mirror the frontend's client-only cart.
-- A disposable-database and state-reset approach is required before repeated execution.
-- Account provisioning, workload, hardware, thresholds, and tool selection remain TODO for the next phase.
-
+- Human Review accepted benchmarking the backend Cart API while documenting the frontend/backend state difference.
+- k6 v2.0.0 was selected and the same verified seven-request workflow was implemented for Load, Stress, Spike, and Endurance.
+- Fifty synthetic accounts were provisioned only into disposable SQLite databases, with one unique account per VU.
+- Hardware screenshots, Task Manager/process evidence, raw JSON, summary, console, and HTML artifacts were captured for the completed scenarios.
+- The original source database was protected and verified unchanged during the evidence reruns.
+- Endurance completed the authorized 20-VU/12-minute hold with 1,081 workflows, zero failures, and exact-hold/result/resource evidence.

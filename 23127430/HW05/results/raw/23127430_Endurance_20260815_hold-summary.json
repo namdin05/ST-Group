@@ -1,0 +1,69 @@
+{
+  "source": {
+    "executionState": "results/evidence-rerun/endurance-20260815_190424/execution-state.json",
+    "rawMetricStream": "results/raw/23127430_Endurance_20260815.json",
+    "resourceSeries": "results/raw/23127430_Endurance_20260815_resources.csv"
+  },
+  "profile": {
+    "targetVus": 20,
+    "rampUpSeconds": 60,
+    "holdSeconds": 720,
+    "rampDownSeconds": 60,
+    "holdStart": "2026-08-15T12:15:07.845Z",
+    "holdEnd": "2026-08-15T12:27:07.845Z"
+  },
+  "holdMetrics": {
+    "httpRequests": 6907,
+    "stableRequestRate": 9.593055555555555,
+    "completedIterations": 985,
+    "iterationRate": 1.3680555555555556,
+    "httpDurationMs": {
+      "samples": 6907,
+      "average": 7.800205834660493,
+      "p50": 5.8117,
+      "p90": 15.891740000000002,
+      "p95": 19.337,
+      "p99": 31.05863599999999,
+      "max": 134.0237
+    },
+    "httpFailureRate": 0,
+    "functionalFailureRate": 0,
+    "checks": {
+      "total": 22687,
+      "passed": 22687,
+      "failed": 0,
+      "passRate": 1
+    }
+  },
+  "holdResources": {
+    "samples": 65,
+    "backendWorkingSetMb": {
+      "first": 53.66,
+      "last": 58.54,
+      "min": 49.5,
+      "max": 58.54,
+      "average": 56.69400000000001,
+      "delta": 4.880000000000003,
+      "slopeMbPerMinute": 0.17676156392399603,
+      "rSquared": 0.13518356151558997
+    },
+    "k6WorkingSetMb": {
+      "first": 39.91,
+      "last": 50.07,
+      "min": 39.91,
+      "max": 50.07,
+      "average": 46.54446153846155,
+      "delta": 10.160000000000004,
+      "slopeMbPerMinute": 0.6280420964596892,
+      "rSquared": 0.9563434296967555
+    },
+    "availableMemoryMb": {
+      "first": 5633,
+      "last": 5676,
+      "min": 5354,
+      "max": 5967,
+      "average": 5678.169230769231,
+      "delta": 43
+    }
+  }
+}

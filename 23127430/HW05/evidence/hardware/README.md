@@ -1,39 +1,38 @@
 # Hardware Evidence Checklist
 
-## Human-Provided Hardware Context
+## Verified Hardware Context
 
-The following values were supplied during Human Review and are recorded exactly without inferring missing specifications:
+The following values were verified from the genuine repository screenshots:
 
 | Field | Supplied value |
 |---|---|
-| Device | MSI Thin GF63 12VE |
-| Operating system | Windows |
+| Device | MSI Thin GF63 12VE; hostname `NamUS` / `NAMUS` as displayed |
+| Operating system | Windows 11 Home Single Language 64-bit; version 25H2; OS build 26200.9168 |
 | CPU | 12th Gen Intel(R) Core(TM) i5-12450H |
 | CPU speed displayed by Windows | 2.00 GHz |
 | RAM | 16.0 GB, 3200 MT/s |
 | Storage capacity shown | 477 GB |
 | Graphics memory | 6 GB |
-| Evidence source | Windows Settings -> System -> About |
+| System manufacturer | Micro-Star International Co., Ltd. |
+| Evidence source | `01_system_about.png` and `02_dxdiag_system.png`, captured 2026-08-14 |
 
-Not provided or verified: GPU model, CPU core/thread count, disk model/type, free disk space, Windows edition/version, and hostname. Do not infer these fields from the model name. The completed Load execution verified that k6 and the local disposable SUT shared this Windows host.
+The screenshots do not establish the GPU model, disk model/type, or sustained CPU frequency, so those fields are not inferred. The completed executions verified that k6 and the local disposable SUT shared this Windows host.
 
 ## Evidence Capture Checklist
 
-- [ ] Capture Windows Settings -> System -> About showing device, CPU, installed RAM, and Windows details required by the assignment.
-- [ ] Capture the relevant Windows display/storage panel if graphics memory or storage capacity must be evidenced separately.
-- [ ] Record the hostname and capture date/time without exposing a personal account, license key, serial number, or unrelated notifications.
-- [ ] Confirm the final execution topology: load generator, Node.js backend, and SQLite database location; state explicitly whether they share one machine.
-- [ ] Before the dry run, capture Task Manager Performance showing overall CPU and memory.
-- [ ] During a measured run, capture Task Manager Details/Processes with the Node.js backend and selected load-generator process identifiable.
-- [ ] Record timestamps and workload phase for every resource screenshot.
-- [ ] Keep original screenshots in this directory with descriptive filenames; do not fabricate or edit measured values.
+- [x] Capture Windows Settings -> System -> About showing hostname, CPU, installed RAM, storage, graphics memory, and Windows details.
+- [x] Capture dxdiag system information with machine model, hostname, OS, processor, memory, and capture time.
+- [x] Confirm that k6, Node.js, and disposable SQLite shared the local machine.
+- [x] Capture Task Manager/process resource evidence at scenario-specific phases.
+- [x] Record timestamps/load phases in each screenshot index.
+- [x] Keep original screenshots with descriptive filenames.
 
-No hardware screenshot has been copied into the repository yet. The table above is documented human-supplied context, not a substitute for the requested visual evidence. The genuine numeric resource samples from the completed Load run are stored in `23127430_Load_20260814_resources.csv`.
+Hardware evidence is stored in `01_system_about.png` and `02_dxdiag_system.png`. Genuine numeric resource samples from the completed Load run are stored in `23127430_Load_20260814_resources.csv`; Spike and Stress phase observations are indexed under their scenario screenshot directories.
 
 ## Resource-Monitoring Plan
 
 1. Start one documented Node.js backend instance and verify its PID and port `3000`.
-2. After JMeter or k6 is selected, record the load-generator process, version, command, host, and PID. Prefer non-GUI/CLI execution for the measured run.
+2. Record the selected k6 v2.0.0 process, command, host, and PID; use CLI execution for measured runs.
 3. Record a pre-run baseline for total CPU, total memory, Node.js CPU/private working set, database-file size, and order count.
 4. For the later Option A execution, observe near the end of ramp-up and the middle of the hold period. Capture total CPU/RAM plus the Node.js and load-generator processes in the same time window.
 5. SQLite is embedded in Node.js and has no separate server process. Correlate SQLite effects using Node.js resource use, backend logs, database-file growth, order count, and request latency/errors.

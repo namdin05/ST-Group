@@ -37,3 +37,23 @@ The Load design decisions below were reviewed and finalized on 2026-08-14. Tool 
 | 12 | Capture Windows/MSI hardware and Task Manager evidence | Load generator may share resources with SUT, but tool/location is not yet known | ACCEPTED | Provided hardware is documented; exact execution topology must be confirmed before measurement |
 
 Human Review is complete. k6 was explicitly selected in the next execution step. The script first passed a `1 VU / 1 iteration` technical dry run, after which the user explicitly requested and authorized the full accepted Option A Load test. Option B was not executed.
+
+## Final Scenario and Result Review — 2026-08-15
+
+The student reviewed the completed Load, Stress, and Spike plans, summaries, reports, and evidence, and stated that **all observed results met expectations and nothing abnormal was found**.
+
+This approval confirms the final plans and measured values for the three completed scenarios. It does not change the following interpretation boundaries:
+
+- Stress reached the prepared 50-account ceiling but did not find the SUT breaking point.
+- A lower Stress p95 than Load p95 is not an optimization result because the profiles and timing differ.
+- Checkout was the slowest Load endpoint, but no stakeholder SLO, saturation, or failure establishes a performance bug.
+- Shared-host CPU samples are not server-only utilization measurements.
+- At review time, Endurance, video, and PDF deliverables still required genuine artifacts.
+
+No correction to the raw numeric values was required. The Human Review corrections are the limits placed on capacity, optimization, and defect claims.
+
+## Endurance Execution Authorization — 2026-08-15
+
+After the review above, the user asked the assistant to select a suitable duration from the completed profiles and execute Endurance. This authorized the conservative `1 → 20 VU / 1m ramp / 12m hold / 1m ramp-down` profile, disposable order side effects, resource sampling, and genuine screenshot capture.
+
+The run passed every guardrail: 1,081 completed and zero interrupted iterations, 7,567 requests, 24,863/24,863 checks, 0% failures, and 19.49 ms full-run p95. The exact hold sustained 9.5931 req/s with 19.34 ms p95 and a 58.54 MB Node working-set ceiling. These artifacts are now ready for final student acceptance; authorization to execute is not recorded as post-run Human Review.

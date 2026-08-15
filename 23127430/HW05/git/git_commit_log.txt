@@ -1,2 +1,24 @@
-TODO: Export the genuine Git commit log before submission.
-No Git history was fabricated during project scaffolding, and Codex did not commit changes.
+HW05 Git Commit Log
+===================
+
+Student ID: 23127430
+Student name: Đinh Hoàng Nam
+Repository remote: https://github.com/namdin05/ST-Group.git
+Branch at export: 23127430-HW05
+Export date: 2026-08-15 (Asia/Saigon)
+
+This file records genuine commits currently reachable for 23127430/HW05.
+Uncommitted working-tree changes are not commits and are not represented below.
+Re-export this log after the final reviewed changes are committed.
+
+commit 4a2ac401a12c7853557c8a735f1711d4d94c5b50
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date:   2026-08-15 16:46:40 +0700
+
+    feat: Complete Load test E2E
+
+commit 39fe48c40d9e77f7552fc44bc07604d29d8afa56
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date:   2026-08-14 14:46:00 +0700
+
+    faet: Create folder structure + validate workflow & test data
