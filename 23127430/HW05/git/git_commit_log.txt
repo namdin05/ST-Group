@@ -7,9 +7,28 @@ Repository remote: https://github.com/namdin05/ST-Group.git
 Branch at export: 23127430-HW05
 Export date: 2026-08-15 (Asia/Saigon)
 
-This file records genuine commits currently reachable for 23127430/HW05.
-Uncommitted working-tree changes are not commits and are not represented below.
-Re-export this log after the final reviewed changes are committed.
+This file records genuine commits affecting 23127430/HW05 through the final
+substantive documentation commit 022b53eb4d4450ebd96102af3cbc65f31339c147.
+The bookkeeping commit that stores this refreshed export is excluded by
+construction because its commit ID does not exist until after the file is saved.
+
+commit 022b53eb4d4450ebd96102af3cbc65f31339c147
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date:   2026-08-15 21:59:41 +0700
+
+    docs(performance): finalize video and submission evidence
+
+commit 80e1e58d4fdc962cb75d9f301a72b34998d59702
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date:   2026-08-15 21:59:19 +0700
+
+    fix(skill): validate verbatim audit placeholder mentions
+
+commit facad34ff2ceda97072acb0f1e519a5c681adafe
+Author: Nam <dhnam23@clc.fitus.edu.vn>
+Date:   2026-08-15 20:46:03 +0700
+
+    feat: Spike, Stress, Endurance test is completed
 
 commit 4a2ac401a12c7853557c8a735f1711d4d94c5b50
 Author: Nam <dhnam23@clc.fitus.edu.vn>
