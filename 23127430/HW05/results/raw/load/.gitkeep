@@ -1,1 +1,1 @@
-Placeholder only. Load Test: NOT RUN.
+Load raw artifacts are stored in the parent `results/raw` directory using the required scenario basename.

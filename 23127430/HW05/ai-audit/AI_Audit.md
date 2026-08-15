@@ -221,3 +221,232 @@
 > **READY FOR LOAD TEST DESIGN**
 > 
 > Mapping, auth, correlation, state model, assertions và functional flow đã được xác minh. Chưa sẵn sàng chạy Load Test cho đến khi human duyệt cart scope, account pool, cleanup/isolation, tool, hardware, workload và threshold.
+
+## AI Interaction 03
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-14T15:15:49.4109187+07:00
+
+**Your prompt:**
+
+> [SKILL.md](audit-skill/SKILL.md)
+
+**The AI output:**
+
+> Mình sẽ dùng `audit-skill` cho interaction này: thực hiện đầy đủ bước tiếp theo trong yêu cầu đính kèm, sau đó ghi nguyên văn prompt và toàn bộ output vào entry audit kế tiếp. Trước hết mình đang đọc toàn bộ prompt và đọc lại `audit-skill/SKILL.md` để xác định đúng phạm vi.
+> 
+> Source-of-truth cho thấy một iteration nghiệp vụ có 5 request; để xác minh cart/order thực sự thay đổi, thiết kế nên thêm `GET /api/cart` và `GET /api/orders/my-orders`, thành 7 request/iteration. Repository vẫn chưa chọn JMeter/k6 và chưa có hardware evidence, nên mình sẽ ghi rõ blocker, đưa hai workload candidate chứ không chốt cấu hình cuối; AI recommendation sẽ là Option A để human review trước.
+> 
+> Thiết kế đã qua kiểm tra: đủ 17 section, hai options, 7 request/iteration, tool/hardware blocker, human-review items và không chứa credential. Database vẫn 0 order, hash không đổi, port 3000 không chạy và không có `.jmx`/`.jtl`/result HTML. Bước cuối là ghi `AI Interaction 03` theo đúng bốn field của audit-skill rồi đối chiếu nguyên văn.
+> 
+> Đã hoàn thiện proposal Load Test cho WF01 và Human Review entry. Không tạo test script, không chạy Load Test và không sinh kết quả.
+> 
+> ## A. Load Test Objective
+> 
+> Đánh giá WF01 dưới tải sustained bình thường ở mức thận trọng, đồng thời theo dõi latency theo endpoint/end-to-end, p90/p95, throughput, error rate, functional assertion failures và tài nguyên Windows/Node.js. Mục tiêu không phải tìm breaking point.
+> 
+> **Hardware context: NOT YET AVAILABLE**  
+> **BLOCKER: Performance testing tool has not been selected.**
+> 
+> ## B. Workload Option A
+> 
+> ```text
+> Initial VUs: 1
+> Target VUs: 5
+> Ramp-up: 2 minutes
+> Hold: 5 minutes
+> Ramp-down: 1 minute
+> Think-time: 1–2s / 2–4s / 2–5s / 1–3s theo transition
+> Inter-iteration pause: 3–6s
+> Iteration: full WF01 + GET cart + GET my-orders = 7 requests
+> ```
+> 
+> Option A chỉ dùng 10% pool 50 account, giới hạn cart/order growth và phù hợp lần đo đầu trên hardware chưa biết.
+> 
+> ## C. Workload Option B
+> 
+> ```text
+> Initial VUs: 2
+> Target VUs: 10
+> Ramp-up: 3 minutes
+> Hold: 10 minutes
+> Ramp-down: 2 minutes
+> Think-time: giống Option A
+> Inter-iteration pause: 3–6s
+> Iteration: full WF01 + 2 state read-backs = 7 requests
+> ```
+> 
+> Option B tăng concurrency và sustained window nhưng tạo nhiều cart entries/orders hơn; chỉ cân nhắc sau khi review evidence của Option A.
+> 
+> ## D. AI Recommended Option
+> 
+> AI đề xuất **Option A** cho lần chạy đo đầu tiên, nhưng chưa chọn làm final. Lý do: chưa có hardware/baseline, chưa chọn tool, mỗi iteration tạo order và làm cart trong RAM tăng, còn Option A vẫn cover đầy đủ Auth-heavy + Read-heavy + Transactional.
+> 
+> ## E. CSV Strategy
+> 
+> - Một account cố định, unique cho mỗi VU; cấp tuần tự theo VU index.
+> - Không recycle account sang VU concurrent khác; fail preflight nếu concurrency vượt 50.
+> - Reuse account của chính VU giữa các iteration và Login lại mỗi iteration để giữ auth-heavy coverage.
+> - Năm product keywords được phân phối deterministic theo VU/iteration và có thể recycle.
+> - Không lấy `productId` từ CSV; luôn extract từ Search.
+> - Provision pool sau lần backend start cuối cùng, chỉ trên disposable database đã được duyệt.
+> 
+> ## F. Correlation Strategy
+> 
+> | Data | Produced by | Consumed by | Method |
+> |---|---|---|---|
+> | JWT token | Login | Cart, Checkout, read-backs | Extract `$.token`, assert non-empty |
+> | user ID | Login | Ownership diagnostics | Extract `$.user.id` |
+> | Product ID/name/price | Search | Detail, Cart, Checkout total | Extract `$[0].id/name/price`; cross-check Detail |
+> | Shipping address | Users CSV | Checkout | Row assigned to that VU |
+> | Cart confirmation | POST/GET Cart | Assertion only | Find correlated product/quantity; không có cart ID |
+> | Order ID | Checkout | Order validation | Extract `$.orderId`, find in `my-orders` |
+> 
+> Checkout không consume cart backend, nên không tạo correlation giả giữa cart và checkout.
+> 
+> ## G. Assertions
+> 
+> - Login: HTTP 200, exact success message, token non-empty, `user.id` tồn tại, không có `error`.
+> - Search: JSON array không rỗng; selected row có ID/name/price hợp lệ.
+> - Detail: response không phải `{}`, ID khớp Search, price numeric-coercible.
+> - Cart: exact success message; GET cart xác nhận product ID và quantity 1.
+> - Checkout: exact success message, positive integer `orderId`; `my-orders` chứa order đó.
+> - HTTP 200 nhưng assertion sai được phân loại functional/correlation failure, không tính là business success.
+> 
+> ## H. Side-effect Risks
+> 
+> - Shared account gây cart collision và chung order owner.
+> - Mỗi Add to Cart append vào RAM; cart không được clear và tăng theo iteration.
+> - Mỗi Checkout thêm một SQLite order; database tăng theo thời gian.
+> - Backend restart xóa cart nhưng đồng thời drop/reseed database và xóa account đã provision.
+> - Sai credential có thể khóa account sau lần sai thứ hai khoảng 3 phút.
+> - Frontend dùng cart riêng, còn backend Cart API không được Checkout consume.
+> - Không có stock field/order items; không được invent stock-depletion behavior.
+> - Mitigation: unique accounts, disposable DB, cap workload, start backend rồi provision, ghi before/after order count/database size và recreate environment khi rerun.
+> 
+> ## I. Resource Monitoring Plan
+> 
+> - Trước run: capture hardware/hostname thật.
+> - Measured run: tool ở non-GUI/CLI mode nếu hỗ trợ; Task Manager theo dõi total CPU/RAM và riêng Node backend process.
+> - SQLite embedded trong Node nên không có DB process riêng.
+> - Capture evidence có timestamp/load phase gần cuối ramp và giữa hold.
+> - Retain backend logs và raw tool output để correlate timeout/5xx/latency.
+> - Không capture screenshot ở bước thiết kế này.
+> 
+> ## J. Report View Selected
+> 
+> **PENDING TOOL SELECTION.** Nếu human chọn JMeter, proposal tạm giữ **Summary Report** cho Load Test; measured run vẫn chạy non-GUI và tạo raw/HTML artifacts sau đó. View Results Tree chỉ được dùng cho debug 1 VU, không phải final Load report. Stress/Spike không được reuse Summary Report nếu lựa chọn này được duyệt. Nếu chọn k6, cần duyệt output tương đương trước khi implement.
+> 
+> ## K. Files Modified
+> 
+> - [load_test_design.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/docs/test-design/load_test_design.md)
+> - [ai_test_plan_review.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/docs/human-review/ai_test_plan_review.md)
+> - [AI_Audit.md](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/ai-audit/AI_Audit.md): thêm `AI Interaction 03`, purpose là Design WF01 Load Test, human review **Pending**.
+> 
+> ## L. Human Review Items
+> 
+> - Chọn/revise Option A hoặc B.
+> - Duyệt VUs, ramp/hold/down, think-time và inter-iteration pacing.
+> - Duyệt iteration 7 requests với Cart/Order read-backs.
+> - Duyệt one-account-per-VU và trần 50 VUs.
+> - Quyết định backend Cart API có đúng scope dù frontend dùng cart riêng.
+> - Duyệt checkout payload, disposable DB, side-effect budget và rerun strategy.
+> - Chọn JMeter/k6 và report view/output riêng cho Load.
+> - Duyệt candidate `<1%` server/transport errors, `0%` functional failures; p95/throughput sẽ derive sau baseline.
+> - Cung cấp hardware evidence/context.
+> 
+> ## M. Readiness
+> 
+> **READY FOR HUMAN REVIEW**
+> 
+> Proposal đủ để review, nhưng chưa sẵn sàng generate script hoặc execute cho đến khi các quyết định trên được duyệt.
+
+## AI Interaction 04
+
+**Name of the AI tool:** Codex
+
+**Date and time:** 2026-08-14T15:39:39.9865552+07:00
+
+**Your prompt:**
+
+> [SKILL.md](audit-skill/SKILL.md)
+
+**The AI output:**
+
+> Mình sẽ tiếp tục dùng `audit-skill`: đọc toàn bộ yêu cầu mới, thực hiện đúng giai đoạn được chỉ định, rồi thêm một interaction audit mới mà không sửa ba interaction trước. Mình đang đọc prompt đính kèm và toàn bộ skill trước khi thay đổi repository.
+>
+> Yêu cầu mới đã chốt Human Review và chọn đúng Option A. Mình sẽ áp dụng các quyết định đó, document hardware/topology và final configuration trước; sau đó phải dừng ở tool-selection gate nếu repository vẫn không có bằng chứng JMeter/k6. Trong trường hợp đó mình sẽ không tạo script hay dry-run, đúng quy tắc `STOP / BLOCKER`.
+>
+> Mình đã xác nhận gate quan trọng: repository chưa chọn JMeter hay k6, nên lần này chỉ chốt thiết kế/hardware/Human Review và ghi rõ blocker; sẽ không tạo nhầm script hoặc chạy dry-run. Bây giờ mình đang cập nhật các tài liệu và checklist bằng đúng thông số Option A đã được duyệt.
+>
+> Phần thiết kế và Human Review đã được chốt: Option A là cấu hình initial chính thức, Option B chỉ được giữ như ứng viên sau này; checklist phần cứng và kế hoạch theo dõi tài nguyên cũng đã có. Mình đang kiểm tra tính nhất quán, bảo đảm không xuất hiện script/kết quả performance giả khi tool vẫn chưa được chọn.
+>
+> Kiểm tra nhất quán đã đạt: 50 user, 5 keyword, không có artifact JMeter/k6/Load nào được tạo, port 3000 không lắng nghe và không còn marker Human Review đang chờ. Theo `audit-skill`, mình sẽ ghi nguyên văn interaction mới vào mục 04 và xác minh ba interaction trước không đổi; đây là bước cuối.
+>
+> Đã chốt Human Review và cấu hình Option A, nhưng chưa được phép chạy Load Test vì repository vẫn chưa chọn JMeter hay k6.
+>
+> ## A. Human Review
+>
+> `COMPLETED` ngày 2026-08-14. Option A được chọn làm cấu hình initial chính thức; Option B chỉ là ứng viên tương lai, không bị đánh giá là sai và không được tự động thay thế Option A.
+>
+> ## B. Hardware
+>
+> - MSI Thin GF63 12VE, Windows.
+> - CPU: 12th Gen Intel(R) Core(TM) i5-12450H; Windows hiển thị 2.00 GHz.
+> - RAM: 16.0 GB, 3200 MT/s; storage capacity hiển thị 477 GB; graphics memory 6 GB.
+> - Nguồn: Windows Settings → System → About.
+> - Không suy diễn GPU model, core/thread count, disk model/type hoặc Windows edition/version. Screenshot evidence vẫn cần được bổ sung.
+>
+> ## C. Deployment Topology
+>
+> - Backend: local mặc định tại port `3000`, hiện không chạy.
+> - Database: SQLite embedded, local tại `src/backend/database.sqlite`.
+> - Load generator: `TODO / NOT VERIFIED` vì tool chưa được chọn.
+> - Việc cả ba thành phần cùng chạy trên máy MSI mới chỉ được xác minh một phần; kết quả local sau này không đại diện capacity production.
+>
+> ## D. Final Option A
+>
+> - Initial/target: `1 → 5 VUs`.
+> - Ramp-up/hold/ramp-down: `2m / 5m / 1m`.
+> - Mỗi iteration chạy đủ 7 request WF01, gồm Cart và Order read-back.
+> - Think-time: `1–2s`, `2–4s`, `2–5s`, `1–3s`; inter-iteration `3–6s`.
+>
+> ## E. Load Script
+>
+> `NOT CREATED`. Tool chưa được chọn, vì vậy chưa có filename `23127430_Load_<YYYYMMDD>`, report configuration hoặc artifact JMeter/k6. Không chạy full Option A.
+>
+> ## F. CSV Configuration
+>
+> `users.csv` có 50 account synthetic, cấp một account cố định/duy nhất cho mỗi VU và không recycle khi thiếu row. `products.csv` có 5 keyword, xoay vòng deterministic theo VU/iteration; `productId` luôn lấy từ Search response.
+>
+> ## G. Authentication and Correlation
+>
+> Login lại đầu mỗi iteration; extract JWT rồi gửi `Authorization: Bearer <token>`. Correlate `userId`, `productId`, `productName`, `productPrice`, `shippingAddress` và `orderId`; không tạo `cartId` giả vì backend không trả field này.
+>
+> ## H. Assertions
+>
+> Đã duyệt kiểm tra HTTP 200, message/body hợp lệ, JWT không rỗng, Search có product, Detail khớp product, Cart read-back có đúng item/quantity, Checkout trả positive `orderId`, và Order read-back chứa order tương ứng. Functional/assertion failure được tách khỏi transport/5xx error.
+>
+> ## I. Technical Dry Run
+>
+> `NOT RUN`. Kế hoạch sau khi chọn tool là đúng `1 VU / 1 iteration`; request count, pass/fail và latency hiện là `N/A`, không phải kết quả đo.
+>
+> ## J. Problems and Required Actions
+>
+> Blocker duy nhất để tạo script là phải chọn rõ `JMeter` hoặc `k6`. Sau đó cần tạo script, xác nhận base URL/topology, khởi động disposable SUT, provision data sau lần start cuối, chạy technical dry run, và bổ sung hardware/resource screenshots thật.
+>
+> ## K. File Created
+>
+> - [Hardware evidence checklist](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/evidence/hardware/README.md)
+>
+> ## L. Files Modified
+>
+> - [Load test design](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/docs/test-design/load_test_design.md)
+> - [Human review](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/docs/human-review/ai_test_plan_review.md)
+> - [Main report](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/main_report.md)
+> - [AI audit](C:/Code/SoftwareTesting/ST-Group/23127430/HW05/ai-audit/AI_Audit.md)
+>
+> ## M. Readiness
+>
+> **NOT READY FOR OPTION A LOAD TEST EXECUTION.** Human Review và thiết kế đã hoàn tất; còn thiếu tool selection, tool-specific script, xác nhận load-generator topology, hardware screenshots và technical dry run đạt yêu cầu.

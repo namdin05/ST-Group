@@ -6,28 +6,28 @@ WF01 – Search & Single-item Purchase
 
 ## Scenarios
 
-- [ ] Load Test
+- [x] Load Test
 - [ ] Stress Test
 - [ ] Spike Test
 - [ ] Endurance Test
 
 ## Endpoint Groups
 
-- [ ] Auth-heavy
-- [ ] Read-heavy
-- [ ] Transactional
+- [x] Auth-heavy
+- [x] Read-heavy
+- [x] Transactional
 
 ## Current Status
 
-Project scaffold initialized. WF01 source analysis and one isolated functional API verification are complete. No performance test has been run.
+WF01 source analysis, functional verification, Human Review, technical dry run, and the accepted Option A Load test are complete.
 
-Tool selection: **TODO: Select JMeter or k6.**
+Tool selection: **k6 v2.0.0**.
 
 ## Test Summary
 
 | Scenario | Status | p95 | Throughput | Error Rate |
 |---|---|---:|---:|---:|
-| Load | NOT RUN | N/A | N/A | N/A |
+| Load | PASS | 33.01 ms | 2.0254 requests/s | 0% |
 | Stress | NOT RUN | N/A | N/A | N/A |
 | Spike | NOT RUN | N/A | N/A | N/A |
 | Endurance | NOT RUN | N/A | N/A | N/A |
@@ -48,7 +48,7 @@ Use these names only when the student ID and execution date are known:
 
 ## Bugs / Performance Issues
 
-NOT DETERMINED. Add an issue only after a real test run provides reproducible evidence.
+No reproducible performance failure was found under Option A. Checkout was the slowest endpoint at 49.28 ms p95, but no SLO was violated because none was supplied.
 
 ## Demo Video
 
@@ -60,10 +60,10 @@ TODO
 
 ## Next Steps
 
-1. Human-review the backend-cart/frontend-cart scope and approve an isolated database/reset strategy.
-2. Select JMeter or k6.
-3. Approve a disposable database, then provision the validated 50-account synthetic pool after the final backend start.
-4. Record hardware evidence and have a human approve workload parameters and thresholds.
-5. Design the Load profile around the verified WF01 mapping; do not implement Stress/Spike in the current analysis phase.
+1. Add genuine Windows Settings/Task Manager screenshots if the submission requires visual hardware evidence.
+2. Review the Option A baseline and define stakeholder-backed p95/throughput SLOs.
+3. Decide whether Option B should be tested; do not run it automatically.
+4. Design Stress, Spike, and Endurance only after separate Human Review.
+5. Preserve the disposable-database safety pattern for every future execution.
 
 Do not add fabricated results, screenshots, logs, resource usage, or PASS/FAIL claims.
