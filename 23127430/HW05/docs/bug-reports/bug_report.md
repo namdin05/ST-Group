@@ -6,17 +6,18 @@ The four completed k6 profiles did **not** expose a performance defect: Load, Sp
 
 These defects are source-confirmed requirement mismatches. They were not reported as k6 failures because the current scripts validate successful responses and basic read-back, but do not assert duplicate-line merging, server-side price calculation, or post-checkout cart state.
 
-| ID | Defect | Severity | Confirmation |
-|---|---|---:|---|
-| BUG-01 | Adding the same product creates another cart row | Medium | Requirement/source traceability |
-| BUG-02 | Checkout accepts a client-controlled `total_amount` | High | Requirement/source traceability |
-| BUG-03 | Successful checkout does not clear the cart | Medium | Requirement/source traceability |
+| ID | Defect | Severity | Confirmation | GitHub Issue |
+|---|---|---:|---|---|
+| BUG-01 | Adding the same product creates another cart row | Medium | Requirement/source traceability | [#50](https://github.com/namdin05/ST-Group/issues/50) |
+| BUG-02 | Checkout accepts a client-controlled `total_amount` | High | Requirement/source traceability | [#32](https://github.com/namdin05/ST-Group/issues/32) |
+| BUG-03 | Successful checkout does not clear the cart | Medium | Requirement/source traceability | [#31](https://github.com/namdin05/ST-Group/issues/31) |
 
 ## 2. BUG-01 — Duplicate Cart Rows Instead of Quantity Merge
 
 - **Status:** Confirmed from requirement/source mismatch; API regression execution recommended
 - **Area:** Shopping Cart / `POST /api/cart`
 - **Severity:** Medium
+- **GitHub Issue:** [#50 — API allows duplicate items instead of merging quantity](https://github.com/namdin05/ST-Group/issues/50)
 - **Requirement:** FR-07 states that adding the same product must increase its quantity and must not create another row ([`src/README.md`](../../src/README.md#fr-07-giỏ-hàng-shopping-cart)).
 
 ### Reproduction Steps
@@ -47,6 +48,7 @@ Find an existing item by product ID and increment its quantity; only append when
 - **Status:** Confirmed from requirement/source mismatch; API security regression execution recommended
 - **Area:** Checkout / `POST /api/checkout`
 - **Severity:** High
+- **GitHub Issue:** [#32 — Checkout accepts arbitrary client-provided totals](https://github.com/namdin05/ST-Group/issues/32)
 - **Requirement:** FR-08 requires the backend to recalculate the total and reject the client-provided `total_amount` ([`src/README.md`](../../src/README.md#fr-08-thanh-toán-checkout)).
 
 ### Reproduction Steps
@@ -76,6 +78,7 @@ Load the authenticated user's cart on the server, fetch authoritative prices, va
 - **Status:** Confirmed from requirement/source mismatch; API/UI regression execution recommended
 - **Area:** Checkout state transition
 - **Severity:** Medium
+- **GitHub Issue:** [#31 — Cart is not cleared after successful checkout](https://github.com/namdin05/ST-Group/issues/31)
 - **Requirement:** FR-08 states that the cart must be cleared after successful checkout ([`src/README.md`](../../src/README.md#fr-08-thanh-toán-checkout)).
 
 ### Reproduction Steps
@@ -104,4 +107,4 @@ Clear the server-side cart only after the order transaction commits, then synchr
 
 The current workflow asserts that Add to Cart succeeds and that a matching item exists, but it does not assert uniqueness or accumulated quantity. Checkout asserts order creation and read-back, but it does not send an adversarial total or inspect the cart afterward. Consequently, all performance checks can pass while these functional defects remain present.
 
-No GitHub issue was created because this task requested a local report only. Runtime evidence for the four performance profiles remains in [`results/`](../../results/); this report does not relabel the passing performance results as performance bugs.
+The three functional defects are already tracked in GitHub Issues [#50](https://github.com/namdin05/ST-Group/issues/50), [#32](https://github.com/namdin05/ST-Group/issues/32), and [#31](https://github.com/namdin05/ST-Group/issues/31), where the existing issue bodies include screenshot evidence. No separate performance issue was created because the four measured profiles passed. Runtime evidence for those profiles remains in [`results/`](../../results/); this report does not relabel the passing performance results as performance bugs.

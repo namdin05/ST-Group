@@ -12,7 +12,7 @@
 
 ## Reviewed Outcome
 
-The student completed Human Review on 2026-08-15 and confirmed that the Load, Stress, and Spike results met expectations and showed no abnormal behavior. Endurance was authorized afterward, passed every machine-evaluated guardrail, and is ready for the student's final evidence review. All measured checks passed with zero HTTP and functional failures.
+The student completed final Human Review on 2026-08-15 and confirmed that the Load, Stress, Spike, and Endurance results met expectations and showed no abnormal behavior. All measured checks passed with zero HTTP and functional failures. The Endurance conclusion remains a demonstrated same-profile lower bound, not maximum SUT capacity.
 
 | Scenario | Status | Max VUs | Iterations | Requests | p95 | Throughput | Error rate |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -41,11 +41,11 @@ This is a verified lower bound for this hardware/profile, not maximum SUT capaci
 
 No reproducible performance failure, crash, HTTP error, failed k6 check, or violated stakeholder SLO was found. No GitHub performance issue was created.
 
-A traceability review nevertheless confirmed three functional defects in Cart/Checkout: duplicate rows for repeated products, a client-controlled persisted total, and a cart that is not cleared after successful checkout. See the [local bug report](docs/bug-reports/bug_report.md). These are kept distinct from the passing performance results because the current scripts do not assert those negative/state-transition cases.
+A traceability review nevertheless confirmed three functional defects in Cart/Checkout: duplicate rows for repeated products ([Issue #50](https://github.com/namdin05/ST-Group/issues/50)), a client-controlled persisted total ([Issue #32](https://github.com/namdin05/ST-Group/issues/32)), and a cart that is not cleared after successful checkout ([Issue #31](https://github.com/namdin05/ST-Group/issues/31)). See the [local bug report](docs/bug-reports/bug_report.md). These are kept distinct from the passing performance results because the current scripts do not assert those negative/state-transition cases.
 
 ## Demo Video
 
-**Not recorded/uploaded.** The final submission still needs an unlisted YouTube video of at least six minutes with the student's Vietnamese narration, k6 and the resource monitor in the same frame, and an end-to-end demonstration of `$run-api-performance-tests`. See [video/README.md](video/README.md).
+**Complete.** The unlisted [HW05 Performance Testing and Agent Skill demonstration](https://youtu.be/IkSJTWDu4_U) is `6:03` long and was verified to open without signing in. The evidence checklist and storyboard are in [video/README.md](video/README.md).
 
 ## Repository Structure
 
@@ -91,7 +91,7 @@ Start with [docs/README.md](docs/README.md), [results/README.md](results/README.
 | 6 | Agent Skill | 10 | 10 |
 |  | **Total printed in assignment** | **100** | **90** |
 
-The assignment's six listed criterion rows sum to 90 although its printed total says 100. All six listed rows are self-assessed at their stated maximum, so the provisional archive grade is `090`, yielding `23127430_HW05_AI_Performance_090.zip`. Missing video, PDFs, and complete audit coverage remain submission risks and may affect the instructor's final grade.
+The assignment's six listed criterion rows sum to 90 although its printed total says 100. All six listed rows are self-assessed at their stated maximum, so the provisional archive grade is `090`, yielding `23127430_HW05_AI_Performance_090.zip`. PDF generation, final ZIP packaging, and the documented historical AI-audit coverage gap remain submission responsibilities/risks.
 
 ## Submission Readiness
 
@@ -105,10 +105,10 @@ The assignment's six listed criterion rows sum to 90 although its printed total 
 - [x] Reusable Agent Skill.
 - [x] Git commit log exported for currently committed history.
 - [x] Endurance execution and empirical RPS/memory threshold.
-- [ ] Unlisted YouTube demonstration and Agent Skill demo link.
+- [x] Unlisted YouTube demonstration and Agent Skill demo link (`6:03`).
 - [ ] Main-report, AI-Critique, and AI-Audit PDFs.
 - [ ] Complete AI Audit coverage for later interactions.
-- [ ] Final logical commits and refreshed Git log.
+- [x] Final logical commits and refreshed Git log (completed in the final handoff).
 
 ## Validation
 

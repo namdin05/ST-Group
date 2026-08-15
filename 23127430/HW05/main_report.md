@@ -12,6 +12,7 @@
 | Tool | k6 v2.0.0 |
 | Local base URL | `http://127.0.0.1:3000` |
 | Repository | [namdin05/ST-Group — branch 23127430-HW05](https://github.com/namdin05/ST-Group/tree/23127430-HW05/23127430/HW05) |
+| Demo video | [Unlisted YouTube demonstration — 6:03](https://youtu.be/IkSJTWDu4_U) |
 | Last committed source revision used by the workspace | `4a2ac401a12c7853557c8a735f1711d4d94c5b50` |
 | Execution dates | Load: 2026-08-14; Stress, Spike, and Endurance: 2026-08-15 |
 
@@ -21,7 +22,7 @@ The performance backend used the exact repository `server.js` and `database.js` 
 
 Load, Stress, Spike, and Endurance executed the same seven-request WF01 with CSV-driven users and products. All four completed their authorized local profiles with zero HTTP failures, zero functional failures, and zero failed checks.
 
-On 2026-08-15, the student completed Human Review for Load, Stress, and Spike and confirmed that those measured results met expectations and that no abnormal behavior was observed. Endurance was authorized afterward; it passed the same workflow assertions and its provisional guardrails, and the genuine evidence is ready for final student acceptance. The interpretation limits remain strict: Stress did not find a breaking point, the lower Stress p95 is not an optimization result, the slowest endpoint is not automatically a defect, and the Endurance point is a demonstrated lower bound rather than maximum capacity.
+On 2026-08-15, the student completed final Human Review for Load, Stress, Spike, and Endurance and confirmed that the measured results met expectations and that no abnormal behavior was observed. The interpretation limits remain strict: Stress did not find a breaking point, the lower Stress p95 is not an optimization result, the slowest endpoint is not automatically a defect, and the Endurance point is a demonstrated lower bound rather than maximum capacity.
 
 | Scenario | Verdict | Max VUs | Iterations | Requests | p95 | Throughput | HTTP / functional failures |
 | --- | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -256,7 +257,7 @@ The provisional same-profile rule flags any functional failure, HTTP failures at
 
 No reproducible performance failure, crash, HTTP error, failed k6 check, or violated stakeholder SLO was found in the four completed profiles. Therefore no GitHub performance issue was created.
 
-Traceability review did confirm three functional requirement mismatches: repeated products create duplicate cart rows, Checkout persists a client-controlled total, and a successful Checkout does not clear the cart. The existing k6 assertions do not cover these negative/state-transition cases, so their presence does not contradict the passing performance results. Evidence and reproduction steps are in [docs/bug-reports/bug_report.md](docs/bug-reports/bug_report.md); the reporting policy is in [docs/bug-reports/README.md](docs/bug-reports/README.md).
+Traceability review did confirm three functional requirement mismatches: repeated products create duplicate cart rows ([Issue #50](https://github.com/namdin05/ST-Group/issues/50)), Checkout persists a client-controlled total ([Issue #32](https://github.com/namdin05/ST-Group/issues/32)), and a successful Checkout does not clear the cart ([Issue #31](https://github.com/namdin05/ST-Group/issues/31)). The existing k6 assertions do not cover these negative/state-transition cases, so their presence does not contradict the passing performance results. Evidence and reproduction steps are in [docs/bug-reports/bug_report.md](docs/bug-reports/bug_report.md); the reporting policy is in [docs/bug-reports/README.md](docs/bug-reports/README.md).
 
 ## 14. Reusable Agent Skill
 
@@ -270,13 +271,13 @@ The repository includes the reusable [`$run-api-performance-tests` skill](agent-
 - k6/JMeter result summarization and HW05 artifact validation;
 - AI misinterpretation, optimization, CI proposal, critique, and audit guidance.
 
-Both skill entrypoints pass the official `quick_validate.py` structural validator. The required end-to-end skill demonstration video has not been recorded/uploaded, so that external deliverable remains incomplete.
+Both skill entrypoints pass the official `quick_validate.py` structural validator. The required end-to-end demonstration is available in the verified unlisted [HW05 Performance Testing and Agent Skill video](https://youtu.be/IkSJTWDu4_U), with a duration of `6:03`.
 
 ## 15. Conclusion
 
 The instrumented WF01 path completed within the reviewed provisional guardrails for Load to 5 VUs, bounded Spike to 25 VUs, bounded Stress to 50 VUs, and a 12-minute Endurance hold at 20 VUs on the local MSI/Windows host. Across 1,963 completed iterations and 13,741 requests, all 45,149 configured checks passed and no HTTP or instrumented functional failure occurred. This result is limited to the assertions implemented by the plans and does not override the three functional requirement mismatches in Section 13.
 
-The student reviewed Load, Stress, and Spike and found no abnormal behavior. The later Endurance execution likewise showed no machine-evidenced anomaly and established a local demonstrated threshold of 20 VUs and 9.5931 sustained requests/s over 12 minutes, with 19.34 ms p95 and a 58.54 MB Node working-set ceiling; final student acceptance of that new evidence remains the last Human Review step. The valid conclusion remains limited to these profiles: no breaking point, maximum production capacity, long-term memory-leak guarantee, or stakeholder SLO was established. Before submission, the YouTube demonstration, PDF exports, final Git commits/log export, and complete AI-audit coverage still require completion.
+The student reviewed all four scenarios and found no abnormal behavior. Endurance established a local demonstrated threshold of 20 VUs and 9.5931 sustained requests/s over 12 minutes, with 19.34 ms p95 and a 58.54 MB Node working-set ceiling. The valid conclusion remains limited to these profiles: no breaking point, maximum production capacity, long-term memory-leak guarantee, or stakeholder SLO was established. The unlisted `6:03` demonstration video is complete; PDF export, ZIP packaging, and the documented historical AI-audit coverage gap remain outside this final repository handoff.
 
 ## Appendix A — AI Critique (200–300 words)
 
@@ -284,13 +285,13 @@ During HW05, AI was useful for turning source analysis into a repeatable seven-r
 
 I checked the final AI values against the k6 summary files and derived the Endurance hold separately from timestamped raw points. Request counts, iteration counts, p95, throughput, HTTP failures, functional failures, and check totals all matched, and my final review found no abnormal behavior in the four completed runs. The remaining weakness was interpretation, not arithmetic. AI sees plausible patterns in static source and aggregate output, but it does not automatically understand test-data limits, shared-host noise, business side effects, or whether a measured threshold is a lower bound or an actual requirement.
 
-The main lesson is to treat AI output as a hypothesis rather than evidence. Effective collaboration requires raw-log traceability, explicit separation of HTTP and functional failures, comparable profiles, genuine resource screenshots, source inspection before optimization advice, and Human Review before execution or capacity claims. Endurance is now supported by genuine execution evidence; the missing video must remain visibly incomplete instead of being filled with assumptions.
+The main lesson is to treat AI output as a hypothesis rather than evidence. Effective collaboration requires raw-log traceability, explicit separation of HTTP and functional failures, comparable profiles, genuine resource screenshots, source inspection before optimization advice, and Human Review before execution or capacity claims. Endurance is supported by genuine execution evidence, and the final video now demonstrates the reviewed workflow and reusable Agent Skill.
 
 ## Appendix B — AI Audit Report
 
 Declaration: **I use AI tools for source/workflow analysis, performance-test design, execution assistance, evidence organization, raw-result analysis, report completion, and Agent Skill creation.**
 
-The genuine audit file is [ai-audit/AI_Audit.md](ai-audit/AI_Audit.md). It currently contains four verbatim Codex interactions dated 2026-08-14. It does not cover every later Load/Stress/Spike/Endurance/reporting interaction, and no audit PDF has been generated. Missing historical verbatim output must not be reconstructed from memory; future interactions should be captured through the audit skill as they occur.
+The genuine audit file is [ai-audit/AI_Audit.md](ai-audit/AI_Audit.md). It currently contains five verbatim Codex interactions dated 2026-08-14 and 2026-08-15. It does not cover every later Load/Stress/Spike/Endurance/reporting interaction, and no audit PDF has been generated. Missing historical verbatim output must not be reconstructed from memory; future interactions should be captured through the audit skill as they occur.
 
 ## Appendix C — Submission Readiness
 
@@ -305,11 +306,11 @@ The genuine audit file is [ai-audit/AI_Audit.md](ai-audit/AI_Audit.md). It curre
 | Four scenario screenshot sets | Complete |
 | Hardware screenshots/specification | Complete |
 | Endurance run and empirical threshold | Complete: 20 VUs, 9.5931 hold req/s, 58.54 MB Node ceiling |
-| Demo video and skill demonstration link | Missing |
+| Demo video and skill demonstration link | Complete: [unlisted YouTube video](https://youtu.be/IkSJTWDu4_U), `6:03`, signed-out access verified |
 | AI Critique Markdown | Complete; PDF not generated |
 | AI Audit Markdown | Present but incomplete coverage; PDF not generated |
-| Git commit log text | Exported for committed history; re-export required after final commits |
+| Git commit log text | Re-exported after the final substantive commit |
 | Genuine performance issues | None found; no issue required |
-| Functional cart/checkout defects | Three source-confirmed requirement mismatches; documented locally |
+| Functional cart/checkout defects | Three source-confirmed requirement mismatches; documented locally and linked to GitHub Issues #50, #32, and #31 |
 | README summary and self-assessment | Complete |
 | Reusable Agent Skill | Complete and structurally validated |

@@ -9,3 +9,7 @@ The skill includes:
 - HW05 requirement, scenario/evidence, and analysis/reporting references;
 - a read-only performance-result summarizer for k6 and JMeter artifacts;
 - an HW05 completeness validator whose output remains subject to manual authenticity review.
+
+## Demonstration
+
+The complete WF01 application of the skill is shown in the verified unlisted [HW05 Performance Testing and Agent Skill demonstration](https://youtu.be/IkSJTWDu4_U). The video duration is `6:03`; the recording checklist and storyboard are in [`../video/README.md`](../video/README.md).
