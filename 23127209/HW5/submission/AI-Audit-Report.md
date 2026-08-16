@@ -156,3 +156,16 @@ http_request_throughput_rps claimed=44.5661 actual=38.2188 difference=6.3473
 | Add Redis, shard the database, or deploy Kubernetes autoscaling | Hallucinated/out of scope; no architecture or bottleneck evidence supports these changes |
 
 **Human verdict:** Accepted. Recommendations are not implementation claims. Conditional items require a controlled before/after benchmark; speculative infrastructure changes are rejected.
+
+## Interaction 7 — Same-frame execution evidence retry
+
+**Timestamp:** 2026-08-16 11:58:57 +07:00  
+**User prompt (verbatim):**
+
+> làm lại thử cái này Ba ảnh JMeter và Task Manager cùng khung.
+
+**AI output (verbatim execution result):**
+
+> Re-ran all three final JMX plans to completion and captured the live JMeter terminal, backend terminal, and Task Manager in the same desktop frame. Load ran 240.349 seconds with 2,135 HTTP requests at 8.8829 HTTP RPS. Stress ran 480.474 seconds with 15,087 HTTP requests at 31.4002 HTTP RPS. Spike ran 250.453 seconds with 4,203 HTTP requests at 16.7816 HTTP RPS. Every confirmation rerun had 0 HTTP failures and 0 assertion failures.
+
+**Human review:** Inspected all three PNG files at original resolution. The plan name is visible in each JMeter terminal; Load shows 20 active threads, Spike shows 100 active threads during surge, Stress is captured after six minutes in the high-load/hold region, and Task Manager shows live CPU/memory or the Java/Node processes. The earlier smoke screenshot was overwritten and is not part of the submission.

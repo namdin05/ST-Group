@@ -18,6 +18,8 @@ CSV cung cấp `search_keyword`, `expected_category`, `quantity` và `shipping_a
 
 Official test chạy non-GUI để listener không làm méo kết quả. JMX vẫn chứa ba listener riêng biệt và tắt mặc định: Load–Summary Report, Stress–Aggregate Report, Spike–View Results Tree. Backend/database được reset từ baseline trước từng run. Do official workload chỉ dùng credential hợp lệ và tài khoản cô lập, lockout ba lần không bị kích hoạt; reset runtime vẫn loại bỏ state contamination giữa các run. Bản SUT gốc chỉ được đọc, mọi thực thi diễn ra trên bản sao trong HW5.
 
+Ba ảnh same-frame được chụp từ các complete confirmation rerun dùng đúng final JMX và workload: Load 240.349 giây, Stress 480.474 giây và Spike 250.453 giây. Cả ba rerun có 0 HTTP failure và 0 assertion failure; ảnh hiển thị JMeter terminal, backend terminal và Task Manager trong cùng khung. Metrics chính của báo cáo vẫn lấy từ raw JTL official đính kèm, không trộn với confirmation rerun.
+
 Máy chạy là `DESKTOP-DIFF80D`, Windows 11, Ryzen 7 6800H (16 logical processors), RAM 16 GB, Java 25.0.3, JMeter 5.6.3. Load generator và backend ở cùng máy; vì vậy số CPU là phần trăm trên toàn bộ 16 logical processors và không đại diện production capacity.
 
 ### Acceptance gates

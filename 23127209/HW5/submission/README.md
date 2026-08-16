@@ -23,7 +23,7 @@ Ngưỡng ổn định thực nghiệm là **ít nhất 100 VU và 49.40 HTTP re
 - `Main-Report.md` và `Main-Report.pdf`: thiết kế, thực thi, phân tích và continuous performance proposal.
 - `AI-Audit-Report.md/.pdf` và `AI-Critique.md/.pdf`: khai báo AI, ground truth, misinterpretation hunt và đánh giá optimization.
 - Ba JMX, ba raw JTL, một endurance JTL, `test-data.csv`, `Resource-Monitoring.csv`.
-- Ba thư mục HTML dashboard và ba ảnh dashboard chính thức.
+- Ba thư mục HTML dashboard, ba ảnh dashboard và ba ảnh complete rerun với JMeter/backend/Task Manager cùng khung.
 - `Hardware-Spec.txt`, `Hardware-DxDiag.png`, `Git-Commit-Log.txt`.
 - `jmeter-performance-analyzer/`: Agent Skill hợp lệ và script phân tích độc lập.
 
