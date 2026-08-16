@@ -1,0 +1,4 @@
+interface:
+  display_name: "JMeter Performance Analyzer"
+  short_description: "Analyze JMeter JTL metrics and AI claims"
+  default_prompt: "Use $jmeter-performance-analyzer to verify these JTL metrics and compare them with an AI analysis."
