@@ -324,6 +324,162 @@
             "url": "{{baseUrl}}/api/login",
             "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
           }
+        },
+        {
+          "name": "SETUP ONLY — Prime cart item 1",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "const item = (row.setupCartItems || [])[0];",
+                  "if (!item) pm.execution.skipRequest();",
+                  "const token = item.owner === \"userB\" ? pm.collectionVariables.get(\"userBToken\") : pm.environment.get(\"userToken\");",
+                  "if (!token) throw new Error(\"Cart setup token is missing\");",
+                  "pm.request.headers.upsert({ key: \"Authorization\", value: \"Bearer \" + token });",
+                  "pm.variables.set(\"setupCartBody\", JSON.stringify({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{setupCartBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/cart",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Prime cart item 2",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "const item = (row.setupCartItems || [])[1];",
+                  "if (!item) pm.execution.skipRequest();",
+                  "const token = item.owner === \"userB\" ? pm.collectionVariables.get(\"userBToken\") : pm.environment.get(\"userToken\");",
+                  "if (!token) throw new Error(\"Cart setup token is missing\");",
+                  "pm.request.headers.upsert({ key: \"Authorization\", value: \"Bearer \" + token });",
+                  "pm.variables.set(\"setupCartBody\", JSON.stringify({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{setupCartBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/cart",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Prime cart item 3",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "const item = (row.setupCartItems || [])[2];",
+                  "if (!item) pm.execution.skipRequest();",
+                  "const token = item.owner === \"userB\" ? pm.collectionVariables.get(\"userBToken\") : pm.environment.get(\"userToken\");",
+                  "if (!token) throw new Error(\"Cart setup token is missing\");",
+                  "pm.request.headers.upsert({ key: \"Authorization\", value: \"Bearer \" + token });",
+                  "pm.variables.set(\"setupCartBody\", JSON.stringify({ id: item.id, name: item.name, price: item.price, quantity: item.quantity }));"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{{setupCartBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/cart",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
         }
       ]
     },
@@ -482,8 +638,149 @@
     },
     {
       "name": "FR-07 Shopping Cart",
-      "description": "Suite is added in the FR-07 commit.",
-      "item": []
+      "description": "Run with data/fr07_shopping_cart_data.json. Setup provisions isolated users and cart state per iteration.",
+      "item": [
+        {
+          "name": "Execute FR-07 iteration",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (row.featureId !== \"FR-07\") pm.execution.skipRequest();",
+                  "pm.request.method = row.method;",
+                  "pm.variables.set(\"requestPath\", row.requestPath);",
+                  "const raw = row.rawBody || (row.body == null ? \"\" : JSON.stringify(row.body));",
+                  "pm.variables.set(\"requestBody\", pm.variables.replaceIn(raw));",
+                  "pm.request.headers.remove(\"Authorization\");",
+                  "pm.request.headers.remove(\"Content-Type\");",
+                  "pm.request.headers.remove(\"Accept\");",
+                  "pm.request.headers.remove(\"X-Role\");",
+                  "pm.request.headers.remove(\"X-HTTP-Method-Override\");",
+                  "if (row.contentType) pm.request.headers.upsert({ key: \"Content-Type\", value: row.contentType });",
+                  "const authTokens = {",
+                  "  user: pm.environment.get(\"userToken\"),",
+                  "  admin: pm.environment.get(\"adminToken\"),",
+                  "  userB: pm.collectionVariables.get(\"userBToken\"),",
+                  "  expiredUser: pm.environment.get(\"expiredUserToken\"),",
+                  "  expiredAdmin: pm.environment.get(\"expiredAdminToken\"),",
+                  "  tokenWithoutRole: pm.environment.get(\"tokenWithoutRole\")",
+                  "};",
+                  "let authValue = \"\";",
+                  "if (row.authMode === \"user\" || row.authMode === \"admin\" || row.authMode === \"userB\" || row.authMode === \"expiredUser\" || row.authMode === \"expiredAdmin\" || row.authMode === \"tokenWithoutRole\") {",
+                  "  const token = authTokens[row.authMode];",
+                  "  if (!token) throw new Error(row.authMode + \" token prerequisite is missing\");",
+                  "  authValue = \"Bearer \" + token;",
+                  "} else if (row.authMode === \"emptyBearer\") authValue = \"Bearer \";",
+                  "else if (row.authMode === \"malformed\") authValue = \"Bearer not-a-jwt\";",
+                  "else if (row.authMode === \"tamperedUser\" || row.authMode === \"tamperedAdmin\") {",
+                  "  const source = row.authMode === \"tamperedUser\" ? pm.environment.get(\"userToken\") : pm.environment.get(\"adminToken\");",
+                  "  if (!source) throw new Error(\"Source token for tampering is missing\");",
+                  "  authValue = \"Bearer \" + source.slice(0, -1) + (source.endsWith(\"a\") ? \"b\" : \"a\");",
+                  "} else if (row.authMode === \"tamperedUserRole\") {",
+                  "  const source = pm.environment.get(\"userToken\");",
+                  "  if (!source) throw new Error(\"userToken is required for role-tamper probe\");",
+                  "  const parts = source.split(\".\");",
+                  "  if (parts.length !== 3) throw new Error(\"userToken must be a three-part JWT\");",
+                  "  const payload = JSON.parse(atob(parts[1].replace(/-/g, \"+\").replace(/_/g, \"/\")));",
+                  "  payload.role = \"admin\";",
+                  "  const changed = btoa(JSON.stringify(payload)).replace(/=/g, \"\").replace(/+/g, \"-\").replace(///g, \"_\");",
+                  "  authValue = \"Bearer \" + parts[0] + \".\" + changed + \".\" + parts[2];",
+                  "}",
+                  "if (authValue) pm.request.headers.upsert({ key: \"Authorization\", value: authValue });",
+                  "for (const [key, value] of Object.entries(row.extraHeaders || {})) pm.request.headers.upsert({ key, value });",
+                  "console.log(\"Executing\", row.testCaseId, row.method, row.requestPath);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "const code = pm.response.code;",
+                  "pm.test(\"[\" + row.testCaseId + \"] status oracle\", function () {",
+                  "  const rule = row.statusRule;",
+                  "  if (rule.mode === \"exact\") pm.expect(code).to.eql(rule.value);",
+                  "  else if (rule.mode === \"oneOf\") pm.expect(rule.values).to.include(code);",
+                  "  else if (rule.mode === \"class\") pm.expect(Math.floor(code / 100)).to.eql(rule.value);",
+                  "  else if (rule.mode === \"classes\") pm.expect(rule.values).to.include(Math.floor(code / 100));",
+                  "  else throw new Error(\"Unknown status rule for \" + row.testCaseId);",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] Content-Type oracle\", function () {",
+                  "  const contentType = pm.response.headers.get(\"Content-Type\");",
+                  "  pm.expect(contentType, \"Content-Type header is required for auditability\").to.be.a(\"string\").and.not.empty;",
+                  "  if (row.contentTypeOracle === \"json\") pm.expect(contentType.toLowerCase()).to.include(\"application/json\");",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] response redacts secrets\", function () {",
+                  "  const text = pm.response.text().toLowerCase();",
+                  "  for (const forbidden of [\"password_hash\", \"jwt_secret\", \"signing secret\", \"stack trace\", \"sqlite_error\"]) pm.expect(text).not.to.include(forbidden);",
+                  "});",
+                  "",
+                  "const success = code >= 200 && code < 300;",
+                  "pm.test(\"[\" + row.testCaseId + \"] response oracle\", function () {",
+                  "  if (row.responseOracle === \"authorizationError\") pm.expect(success).to.eql(false);",
+                  "  else if (pm.response.headers.get(\"Content-Type\").toLowerCase().includes(\"application/json\")) pm.expect(pm.response.json()).to.satisfy((value) => Array.isArray(value) || (value && typeof value === \"object\"));",
+                  "  else pm.expect(pm.response.text()).to.be.a(\"string\");",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] schema oracle\", function () {",
+                  "  if (row.schemaOracle === \"safeError\") {",
+                  "    pm.expect(pm.response.text().toLowerCase()).not.to.include(\"password\");",
+                  "  } else if (row.method === \"GET\" && success) {",
+                  "    const cartPayload = pm.response.json();",
+                  "    pm.expect(cartPayload).to.be.an(\"array\");",
+                  "    for (const item of cartPayload) {",
+                  "      pm.expect(item).to.be.an(\"object\");",
+                  "      pm.expect(item).to.have.property(\"quantity\");",
+                  "    }",
+                  "  } else pm.expect(pm.response.text()).to.be.a(\"string\");",
+                  "});",
+                  "const verificationToken = row.verificationToken === \"userBToken\" ? pm.collectionVariables.get(\"userBToken\") : pm.environment.get(\"userToken\");",
+                  "if (verificationToken) {",
+                  "  pm.sendRequest({",
+                  "    url: pm.environment.get(\"baseUrl\") + \"/api/cart\",",
+                  "    method: \"GET\",",
+                  "    header: { Authorization: \"Bearer \" + verificationToken, \"X-Student-Id\": pm.environment.get(\"studentId\") }",
+                  "  }, function (error, response) {",
+                  "    pm.expect(error).to.equal(null);",
+                  "    pm.expect(response.code).to.be.within(200, 299);",
+                  "    const actual = response.json();",
+                  "    pm.expect(actual).to.be.an(\"array\");",
+                  "    const expected = success ? row.successCart : row.failureCart;",
+                  "    pm.test(\"[\" + row.testCaseId + \"] cart business/state oracle\", function () {",
+                  "      for (const expectedItem of expected) {",
+                  "        const matches = actual.filter((item) => String(item.id) === String(expectedItem.id));",
+                  "        pm.expect(matches.length, \"one row per product id\").to.eql(1);",
+                  "        pm.expect(Number(matches[0].quantity)).to.eql(Number(expectedItem.quantity));",
+                  "      }",
+                  "      if (row.businessOracle === \"crossUserIsolation\") pm.expect(actual.some((item) => String(item.id) === \"3301\")).to.eql(false);",
+                  "    });",
+                  "  });",
+                  "} else pm.test(\"[\" + row.testCaseId + \"] business rejection oracle\", function () { pm.expect(success).to.eql(false); });"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{{requestBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}{{requestPath}}",
+            "description": "DATA-DRIVEN SELECTED TARGET. Run this collection with the FR-07 data file. One iteration row equals one Test Case ID."
+          }
+        }
+      ]
     },
     {
       "name": "FR-13 Dashboard Data",

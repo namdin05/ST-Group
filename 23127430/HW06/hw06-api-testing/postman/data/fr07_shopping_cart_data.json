@@ -1,0 +1,1940 @@
+[
+  {
+    "testCaseId": "FR07-API-TC001",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Retrieve a known-empty cart with a valid JWT and no request body",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Retrieve a known-empty cart with a valid JWT and no request body"
+  },
+  {
+    "testCaseId": "FR07-API-TC002",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an unexpected query parameter on cart retrieval",
+    "method": "GET",
+    "requestPath": "/api/cart?page=1",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize an unexpected query parameter on cart retrieval"
+  },
+  {
+    "testCaseId": "FR07-API-TC003",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a JSON request body sent with GET /api/cart",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "probe": "unexpected-get-body"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a JSON request body sent with GET /api/cart"
+  },
+  {
+    "testCaseId": "FR07-API-TC004",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Add a typical product at the documented minimum quantity 1",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Add a typical product at the documented minimum quantity 1"
+  },
+  {
+    "testCaseId": "FR07-API-TC005",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Add a product with positive integer quantity 2 from the request example domain",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 2
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Add a product with positive integer quantity 2 from the request example domain"
+  },
+  {
+    "testCaseId": "FR07-API-TC006",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject quantity 0 immediately below the documented minimum",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 0
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Reject quantity 0 immediately below the documented minimum"
+  },
+  {
+    "testCaseId": "FR07-API-TC007",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a negative integer quantity",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": -1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Reject a negative integer quantity"
+  },
+  {
+    "testCaseId": "FR07-API-TC008",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a fractional quantity",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1.5
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Reject a fractional quantity"
+  },
+  {
+    "testCaseId": "FR07-API-TC009",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a numeric-string quantity instead of a JSON number",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": "2"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a numeric-string quantity instead of a JSON number"
+  },
+  {
+    "testCaseId": "FR07-API-TC010",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a null quantity",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": null
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a null quantity"
+  },
+  {
+    "testCaseId": "FR07-API-TC011",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a POST body with quantity omitted",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a POST body with quantity omitted"
+  },
+  {
+    "testCaseId": "FR07-API-TC012",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize product id supplied as a JSON string",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": "1",
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": "1",
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize product id supplied as a JSON string"
+  },
+  {
+    "testCaseId": "FR07-API-TC013",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a null product id",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": null,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a null product id"
+  },
+  {
+    "testCaseId": "FR07-API-TC014",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Preserve a Vietnamese Unicode product name without inventing normalization rules",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 14,
+      "name": "Cà phê sữa đá – phiên bản đặc biệt",
+      "price": 85000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 14,
+        "name": "Cà phê sữa đá – phiên bản đặc biệt",
+        "price": 85000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Preserve a Vietnamese Unicode product name without inventing normalization rules"
+  },
+  {
+    "testCaseId": "FR07-API-TC015",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an empty product name",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize an empty product name"
+  },
+  {
+    "testCaseId": "FR07-API-TC016",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize price supplied as a numeric string",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": "100000",
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": "100000",
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize price supplied as a numeric string"
+  },
+  {
+    "testCaseId": "FR07-API-TC017",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a benign extra POST property",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1,
+      "client_note": "domain-extra"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a benign extra POST property"
+  },
+  {
+    "testCaseId": "FR07-API-TC018",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a JSON-shaped body sent with text/plain Content-Type",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "text/plain",
+    "body": {
+      "id": 1,
+      "name": "Sản phẩm A",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Sản phẩm A",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize a JSON-shaped body sent with text/plain Content-Type"
+  },
+  {
+    "testCaseId": "FR07-API-TC019",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize malformed JSON without creating a cart mutation",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": null,
+    "rawBody": "{\"id\":1,\"name\":\"Sản phẩm A\",\"price\":100000,\"quantity\":1",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize malformed JSON without creating a cart mutation"
+  },
+  {
+    "testCaseId": "FR07-API-TC020",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Transition from empty S0 to one product row S1 and verify with GET",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 20,
+      "name": "State P",
+      "price": 120000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 20,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "State: Transition from empty S0 to one product row S1 and verify with GET"
+  },
+  {
+    "testCaseId": "FR07-API-TC021",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve S0 when retrieving an empty cart",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "State: Preserve S0 when retrieving an empty cart"
+  },
+  {
+    "testCaseId": "FR07-API-TC022",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve a known one-product state S1(P,q) during retrieval",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 2201,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 2201,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 2201,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Preserve a known one-product state S1(P,q) during retrieval"
+  },
+  {
+    "testCaseId": "FR07-API-TC023",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Add the same product with minimum increment and keep one row",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 23,
+      "name": "Duplicate P",
+      "price": 130000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 23,
+        "name": "Duplicate P",
+        "price": 130000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 23,
+        "name": "Duplicate P",
+        "price": 130000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 23,
+        "name": "Duplicate P",
+        "price": 130000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Add the same product with minimum increment and keep one row"
+  },
+  {
+    "testCaseId": "FR07-API-TC024",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Increase an existing product by a multi-unit quantity without a duplicate row",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 24,
+      "name": "Duplicate Multi P",
+      "price": 140000,
+      "quantity": 3
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 24,
+        "name": "Duplicate Multi P",
+        "price": 140000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 24,
+        "name": "Duplicate Multi P",
+        "price": 140000,
+        "quantity": 5,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 24,
+        "name": "Duplicate Multi P",
+        "price": 140000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Increase an existing product by a multi-unit quantity without a duplicate row"
+  },
+  {
+    "testCaseId": "FR07-API-TC025",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Add a clearly different product to transition from S1 to S2",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 2502,
+      "name": "Distinct Q",
+      "price": 220000,
+      "quantity": 2
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 2501,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 2501,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      },
+      {
+        "id": 2502,
+        "name": "Distinct Q",
+        "price": 220000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 2501,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Add a clearly different product to transition from S1 to S2"
+  },
+  {
+    "testCaseId": "FR07-API-TC026",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Increase one existing product inside a multi-item cart without changing others",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 2601,
+      "name": "Multi P",
+      "price": 150000,
+      "quantity": 2
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 2601,
+        "name": "Multi P",
+        "price": 150000,
+        "quantity": 1,
+        "owner": "user"
+      },
+      {
+        "id": 2602,
+        "name": "Multi Q",
+        "price": 180000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 2601,
+        "name": "Multi P",
+        "price": 150000,
+        "quantity": 3,
+        "owner": "user"
+      },
+      {
+        "id": 2602,
+        "name": "Multi Q",
+        "price": 180000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 2601,
+        "name": "Multi P",
+        "price": 150000,
+        "quantity": 1,
+        "owner": "user"
+      },
+      {
+        "id": 2602,
+        "name": "Multi Q",
+        "price": 180000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Increase one existing product inside a multi-item cart without changing others"
+  },
+  {
+    "testCaseId": "FR07-API-TC027",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve S1 when a zero-quantity add event is invalid",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 2702,
+      "name": "Invalid Q",
+      "price": 170000,
+      "quantity": 0
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 2701,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 2701,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 2701,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "State: Preserve S1 when a zero-quantity add event is invalid"
+  },
+  {
+    "testCaseId": "FR07-API-TC028",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent cart disclosure when Authorization is missing",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "missing",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "cartUnchanged",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Prevent cart disclosure when Authorization is missing"
+  },
+  {
+    "testCaseId": "FR07-API-TC029",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent cart mutation when Authorization is missing",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "missing",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Unauthorized Add",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "cartUnchanged",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Unauthorized Add",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Prevent cart mutation when Authorization is missing"
+  },
+  {
+    "testCaseId": "FR07-API-TC030",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent disclosure with a signature-tampered JWT",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "tamperedUser",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "cartUnchanged",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Prevent disclosure with a signature-tampered JWT"
+  },
+  {
+    "testCaseId": "FR07-API-TC031",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent mutation with an expired JWT",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "expiredUser",
+    "contentType": "application/json",
+    "body": {
+      "id": 1,
+      "name": "Expired Token Add",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "cartUnchanged",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 1,
+        "name": "Expired Token Add",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Prevent mutation with an expired JWT"
+  },
+  {
+    "testCaseId": "FR07-API-TC032",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Characterize admin-token behavior without inventing cart role semantics",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": true,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Characterize admin-token behavior without inventing cart role semantics"
+  },
+  {
+    "testCaseId": "FR07-API-TC033",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe cross-user cart isolation with two user tokens",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "userB",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "crossUserIsolation",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": true,
+    "setupLoginSecondary": true,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 3301,
+        "name": "User A Product",
+        "price": 111000,
+        "quantity": 1,
+        "owner": "user"
+      },
+      {
+        "id": 3302,
+        "name": "User B Product",
+        "price": 222000,
+        "quantity": 1,
+        "owner": "userB"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 3302,
+        "name": "User B Product",
+        "price": 222000,
+        "quantity": 1,
+        "owner": "userB"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 3302,
+        "name": "User B Product",
+        "price": 222000,
+        "quantity": 1,
+        "owner": "userB"
+      }
+    ],
+    "verificationToken": "userBToken",
+    "trace": "Security: Probe cross-user cart isolation with two user tokens"
+  },
+  {
+    "testCaseId": "FR07-API-TC034",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe SQL injection without treating API behavior as proof of parameterization",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 34,
+      "name": "x' OR 1=1 --",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 34,
+        "name": "x' OR 1=1 --",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Probe SQL injection without treating API behavior as proof of parameterization"
+  },
+  {
+    "testCaseId": "FR07-API-TC035",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe stored XSS safety through a client-supplied product name",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 35,
+      "name": "<img src=x onerror=alert(1)>",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 35,
+        "name": "<img src=x onerror=alert(1)>",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Probe stored XSS safety through a client-supplied product name"
+  },
+  {
+    "testCaseId": "FR07-API-TC036",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe mass assignment with owner, role, and derived-total fields",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 36,
+      "name": "Mass Assignment",
+      "price": 100000,
+      "quantity": 1,
+      "user_id": 999,
+      "role": "admin",
+      "total_amount": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 36,
+        "name": "Mass Assignment",
+        "price": 100000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Probe mass assignment with owner, role, and derived-total fields"
+  },
+  {
+    "testCaseId": "FR07-API-TC037",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Ensure a wrong HTTP method does not perform the add transition",
+    "method": "PUT",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 37,
+      "name": "Wrong Method",
+      "price": 100000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        404,
+        405
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Security: Ensure a wrong HTTP method does not perform the add transition"
+  },
+  {
+    "testCaseId": "FR07-API-TC038",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Characterize GET success top-level representation and Content-Type",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 3801,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 3801,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 3801,
+        "name": "State P",
+        "price": 120000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize GET success top-level representation and Content-Type"
+  },
+  {
+    "testCaseId": "FR07-API-TC039",
+    "featureId": "FR-07",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize GET item required properties and property types",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [
+      {
+        "id": 39,
+        "name": "Schema P",
+        "price": 190000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "successCart": [
+      {
+        "id": 39,
+        "name": "Schema P",
+        "price": 190000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [
+      {
+        "id": 39,
+        "name": "Schema P",
+        "price": 190000,
+        "quantity": 2,
+        "owner": "user"
+      }
+    ],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize GET item required properties and property types"
+  },
+  {
+    "testCaseId": "FR07-API-TC040",
+    "featureId": "FR-07",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize empty-cart representation without assuming [] or 204",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize empty-cart representation without assuming [] or 204"
+  },
+  {
+    "testCaseId": "FR07-API-TC041",
+    "featureId": "FR-07",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize POST success response without requiring a message field",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": {
+      "id": 41,
+      "name": "Schema POST P",
+      "price": 210000,
+      "quantity": 1
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [
+      {
+        "id": 41,
+        "name": "Schema POST P",
+        "price": 210000,
+        "quantity": 1,
+        "owner": "user"
+      }
+    ],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize POST success response without requiring a message field"
+  },
+  {
+    "testCaseId": "FR07-API-TC042",
+    "featureId": "FR-07",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize authentication error Content-Type and shape",
+    "method": "GET",
+    "requestPath": "/api/cart",
+    "authMode": "malformed",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "cartUnchanged",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize authentication error Content-Type and shape"
+  },
+  {
+    "testCaseId": "FR07-API-TC043",
+    "featureId": "FR-07",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize malformed-request error fields and sensitive-data policy",
+    "method": "POST",
+    "requestPath": "/api/cart",
+    "authMode": "user",
+    "contentType": "application/json",
+    "body": null,
+    "rawBody": "{\"id\":43,\"quantity\":1",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Schema: Characterize malformed-request error fields and sensitive-data policy"
+  }
+]
