@@ -1810,10 +1810,10 @@
         4
       ]
     },
-    "contentTypeOracle": "json",
-    "responseOracle": "cartResponse",
-    "schemaOracle": "cart",
-    "businessOracle": "cartState",
+    "contentTypeOracle": "optionalEmpty",
+    "responseOracle": "emptyCartCharacterization",
+    "schemaOracle": "emptyCartUnspecified",
+    "businessOracle": "emptyCartSemantic",
     "setupRegisterPrimary": true,
     "setupLoginPrimary": true,
     "setupRegisterSecondary": false,

@@ -621,7 +621,7 @@
     "contentTypeOracle": "present",
     "responseOracle": "registrationError",
     "schemaOracle": "safeError",
-    "businessOracle": "registrationRejected",
+    "businessOracle": "unicodeNamePreserved",
     "setupRegisterPrimary": false,
     "setupLoginPrimary": false,
     "setupPassword": "Valid1@a",
