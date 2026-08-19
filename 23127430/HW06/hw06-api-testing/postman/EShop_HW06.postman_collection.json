@@ -1,0 +1,494 @@
+{
+  "info": {
+    "_postman_id": "23127430-eshop-hw06-collection",
+    "name": "EShop HW06 API Testing",
+    "description": "Data-driven suites traceable 1:1 to the audited workbook. Setup requests are prerequisites only and are never counted as selected target cases. Tests have not been executed.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "event": [
+    {
+      "listen": "prerequest",
+      "script": {
+        "type": "text/javascript",
+        "exec": [
+          "const testCaseId = pm.iterationData.get(\"testCaseId\");",
+          "const featureId = pm.iterationData.get(\"featureId\");",
+          "if (testCaseId && featureId) {",
+          "  const contextKey = featureId + \":\" + testCaseId + \":\" + pm.info.iteration;",
+          "  if (pm.collectionVariables.get(\"contextKey\") !== contextKey) {",
+          "    const studentId = pm.variables.replaceIn(\"{{studentId}}\");",
+          "    const safeId = String(testCaseId).toLowerCase().replace(/[^a-z0-9]+/g, \".\");",
+          "    const suffix = studentId + \".\" + Date.now() + \".\" + pm.info.iteration + \".\" + Math.random().toString(36).slice(2, 8);",
+          "    const dynamicEmail = \"hw06.\" + safeId + \".\" + suffix + \"@example.test\";",
+          "    pm.collectionVariables.set(\"contextKey\", contextKey);",
+          "    pm.collectionVariables.set(\"caseSuffix\", suffix);",
+          "    pm.environment.set(\"dynamicEmail\", dynamicEmail);",
+          "    pm.collectionVariables.set(\"setupEmail\", dynamicEmail);",
+          "    pm.collectionVariables.set(\"secondaryEmail\", \"hw06.secondary.\" + safeId + \".\" + suffix + \"@example.test\");",
+          "    pm.environment.unset(\"userToken\");",
+          "    pm.environment.unset(\"adminToken\");",
+          "    pm.environment.unset(\"orderId\");",
+          "    pm.collectionVariables.unset(\"userBToken\");",
+          "    pm.collectionVariables.unset(\"baselineRevenue\");",
+          "    pm.collectionVariables.unset(\"baselineOrderCount\");",
+          "  }",
+          "}",
+          "const actualStudentId = pm.variables.replaceIn(\"{{studentId}}\");",
+          "pm.request.headers.upsert({ key: \"X-Student-Id\", value: actualStudentId });",
+          "console.log(\"X-Student-Id:\", actualStudentId);"
+        ]
+      }
+    }
+  ],
+  "variable": [
+    {
+      "key": "contextKey",
+      "value": ""
+    },
+    {
+      "key": "caseSuffix",
+      "value": ""
+    },
+    {
+      "key": "setupEmail",
+      "value": ""
+    },
+    {
+      "key": "secondaryEmail",
+      "value": ""
+    },
+    {
+      "key": "userBToken",
+      "value": ""
+    },
+    {
+      "key": "baselineRevenue",
+      "value": ""
+    },
+    {
+      "key": "baselineOrderCount",
+      "value": ""
+    }
+  ],
+  "item": [
+    {
+      "name": "Setup",
+      "description": "Prerequisite-only requests. They do not map to or count as selected FR test cases.",
+      "item": [
+        {
+          "name": "SETUP ONLY — Register isolated primary user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (!row.setupRegisterPrimary) pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"HW06 Isolated User\",\"email\":\"{{setupEmail}}\",\"password\":\"{{userPassword}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/register",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Login isolated primary user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (!row.setupLoginPrimary) pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});",
+                  "",
+                  "const payload = pm.response.json();",
+                  "const token = payload.token || (payload.data && payload.data.token);",
+                  "pm.test(\"Setup captures primary user JWT\", function () { pm.expect(token).to.be.a(\"string\").and.not.empty; });",
+                  "pm.environment.set(\"userToken\", token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{setupEmail}}\",\"password\":\"{{userPassword}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/login",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Register isolated secondary user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (!row.setupRegisterSecondary) pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"name\":\"HW06 Secondary User\",\"email\":\"{{secondaryEmail}}\",\"password\":\"{{userPassword}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/register",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Login isolated secondary user",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (!row.setupLoginSecondary) pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});",
+                  "",
+                  "const payload = pm.response.json();",
+                  "const token = payload.token || (payload.data && payload.data.token);",
+                  "pm.test(\"Setup captures secondary user JWT\", function () { pm.expect(token).to.be.a(\"string\").and.not.empty; });",
+                  "pm.collectionVariables.set(\"userBToken\", token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{secondaryEmail}}\",\"password\":\"{{userPassword}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/login",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        },
+        {
+          "name": "SETUP ONLY — Login admin",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (!row.setupLoginAdmin) pm.execution.skipRequest();"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "pm.test(\"Setup request succeeds\", function () {",
+                  "  pm.expect(pm.response.code).to.be.within(200, 299);",
+                  "});",
+                  "",
+                  "const payload = pm.response.json();",
+                  "const token = payload.token || (payload.data && payload.data.token);",
+                  "pm.test(\"Setup captures admin JWT\", function () { pm.expect(token).to.be.a(\"string\").and.not.empty; });",
+                  "pm.environment.set(\"adminToken\", token);"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "POST",
+            "header": [
+              {
+                "key": "Content-Type",
+                "value": "application/json",
+                "type": "text"
+              }
+            ],
+            "body": {
+              "mode": "raw",
+              "raw": "{\"email\":\"{{adminEmail}}\",\"password\":\"{{adminPassword}}\"}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}/api/login",
+            "description": "SETUP ONLY. This request is not a selected FR test case and is skipped unless the iteration data requires it."
+          }
+        }
+      ]
+    },
+    {
+      "name": "FR-01 Registration",
+      "description": "Run with data/fr01_registration_data.json. Dynamic email is regenerated for every iteration.",
+      "item": [
+        {
+          "name": "Execute FR-01 iteration",
+          "event": [
+            {
+              "listen": "prerequest",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "if (row.featureId !== \"FR-01\") pm.execution.skipRequest();",
+                  "pm.request.method = row.method;",
+                  "pm.variables.set(\"requestPath\", row.requestPath);",
+                  "const raw = row.rawBody || (row.body == null ? \"\" : JSON.stringify(row.body));",
+                  "pm.variables.set(\"requestBody\", pm.variables.replaceIn(raw));",
+                  "pm.request.headers.remove(\"Authorization\");",
+                  "pm.request.headers.remove(\"Content-Type\");",
+                  "pm.request.headers.remove(\"Accept\");",
+                  "pm.request.headers.remove(\"X-Role\");",
+                  "pm.request.headers.remove(\"X-HTTP-Method-Override\");",
+                  "if (row.contentType) pm.request.headers.upsert({ key: \"Content-Type\", value: row.contentType });",
+                  "const authTokens = {",
+                  "  user: pm.environment.get(\"userToken\"),",
+                  "  admin: pm.environment.get(\"adminToken\"),",
+                  "  userB: pm.collectionVariables.get(\"userBToken\"),",
+                  "  expiredUser: pm.environment.get(\"expiredUserToken\"),",
+                  "  expiredAdmin: pm.environment.get(\"expiredAdminToken\"),",
+                  "  tokenWithoutRole: pm.environment.get(\"tokenWithoutRole\")",
+                  "};",
+                  "let authValue = \"\";",
+                  "if (row.authMode === \"user\" || row.authMode === \"admin\" || row.authMode === \"userB\" || row.authMode === \"expiredUser\" || row.authMode === \"expiredAdmin\" || row.authMode === \"tokenWithoutRole\") {",
+                  "  const token = authTokens[row.authMode];",
+                  "  if (!token) throw new Error(row.authMode + \" token prerequisite is missing\");",
+                  "  authValue = \"Bearer \" + token;",
+                  "} else if (row.authMode === \"emptyBearer\") authValue = \"Bearer \";",
+                  "else if (row.authMode === \"malformed\") authValue = \"Bearer not-a-jwt\";",
+                  "else if (row.authMode === \"tamperedUser\" || row.authMode === \"tamperedAdmin\") {",
+                  "  const source = row.authMode === \"tamperedUser\" ? pm.environment.get(\"userToken\") : pm.environment.get(\"adminToken\");",
+                  "  if (!source) throw new Error(\"Source token for tampering is missing\");",
+                  "  authValue = \"Bearer \" + source.slice(0, -1) + (source.endsWith(\"a\") ? \"b\" : \"a\");",
+                  "} else if (row.authMode === \"tamperedUserRole\") {",
+                  "  const source = pm.environment.get(\"userToken\");",
+                  "  if (!source) throw new Error(\"userToken is required for role-tamper probe\");",
+                  "  const parts = source.split(\".\");",
+                  "  if (parts.length !== 3) throw new Error(\"userToken must be a three-part JWT\");",
+                  "  const payload = JSON.parse(atob(parts[1].replace(/-/g, \"+\").replace(/_/g, \"/\")));",
+                  "  payload.role = \"admin\";",
+                  "  const changed = btoa(JSON.stringify(payload)).replace(/=/g, \"\").replace(/+/g, \"-\").replace(///g, \"_\");",
+                  "  authValue = \"Bearer \" + parts[0] + \".\" + changed + \".\" + parts[2];",
+                  "}",
+                  "if (authValue) pm.request.headers.upsert({ key: \"Authorization\", value: authValue });",
+                  "for (const [key, value] of Object.entries(row.extraHeaders || {})) pm.request.headers.upsert({ key, value });",
+                  "console.log(\"Executing\", row.testCaseId, row.method, row.requestPath);"
+                ]
+              }
+            },
+            {
+              "listen": "test",
+              "script": {
+                "type": "text/javascript",
+                "exec": [
+                  "const row = pm.iterationData.toObject();",
+                  "const code = pm.response.code;",
+                  "pm.test(\"[\" + row.testCaseId + \"] status oracle\", function () {",
+                  "  const rule = row.statusRule;",
+                  "  if (rule.mode === \"exact\") pm.expect(code).to.eql(rule.value);",
+                  "  else if (rule.mode === \"oneOf\") pm.expect(rule.values).to.include(code);",
+                  "  else if (rule.mode === \"class\") pm.expect(Math.floor(code / 100)).to.eql(rule.value);",
+                  "  else if (rule.mode === \"classes\") pm.expect(rule.values).to.include(Math.floor(code / 100));",
+                  "  else throw new Error(\"Unknown status rule for \" + row.testCaseId);",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] Content-Type oracle\", function () {",
+                  "  const contentType = pm.response.headers.get(\"Content-Type\");",
+                  "  pm.expect(contentType, \"Content-Type header is required for auditability\").to.be.a(\"string\").and.not.empty;",
+                  "  if (row.contentTypeOracle === \"json\") pm.expect(contentType.toLowerCase()).to.include(\"application/json\");",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] response redacts secrets\", function () {",
+                  "  const text = pm.response.text().toLowerCase();",
+                  "  for (const forbidden of [\"password_hash\", \"jwt_secret\", \"signing secret\", \"stack trace\", \"sqlite_error\"]) pm.expect(text).not.to.include(forbidden);",
+                  "});",
+                  "",
+                  "const success = code >= 200 && code < 300;",
+                  "pm.test(\"[\" + row.testCaseId + \"] response oracle\", function () {",
+                  "  if (success) {",
+                  "    const payload = pm.response.json();",
+                  "    pm.expect(payload).to.be.an(\"object\");",
+                  "    pm.expect(payload.message).to.eql(\"User registered successfully\");",
+                  "  } else pm.expect(pm.response.text()).not.to.include(row.verificationPassword || \"__never__\");",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] schema oracle\", function () {",
+                  "  if (success) {",
+                  "    const payload = pm.response.json();",
+                  "    pm.expect(payload).to.have.property(\"message\").that.is.a(\"string\");",
+                  "    pm.expect(payload).to.have.property(\"id\");",
+                  "    pm.expect(payload).not.to.have.any.keys(\"password\", \"password_hash\", \"token\", \"role\");",
+                  "  } else {",
+                  "    const contentType = pm.response.headers.get(\"Content-Type\").toLowerCase();",
+                  "    if (contentType.includes(\"application/json\")) pm.expect(pm.response.json()).to.be.an(\"object\");",
+                  "  }",
+                  "});",
+                  "pm.test(\"[\" + row.testCaseId + \"] registration business rule\", function () {",
+                  "  if (row.businessOracle === \"registrationSuccess\") pm.expect(success).to.eql(true);",
+                  "  else if ([\"duplicateRejected\", \"registrationRejected\", \"wrongMethodNoAccount\"].includes(row.businessOracle)) pm.expect(success).to.eql(false);",
+                  "  else pm.expect([2, 4]).to.include(Math.floor(code / 100));",
+                  "});",
+                  "if (row.businessOracle === \"noRoleEscalation\" && success) {",
+                  "  pm.sendRequest({",
+                  "    url: pm.environment.get(\"baseUrl\") + \"/api/login\",",
+                  "    method: \"POST\",",
+                  "    header: { \"Content-Type\": \"application/json\", \"X-Student-Id\": pm.environment.get(\"studentId\") },",
+                  "    body: { mode: \"raw\", raw: JSON.stringify({ email: pm.variables.replaceIn(row.verificationEmail), password: row.verificationPassword }) }",
+                  "  }, function (loginError, loginResponse) {",
+                  "    pm.expect(loginError).to.equal(null);",
+                  "    pm.expect(loginResponse.code).to.eql(200);",
+                  "    const loginPayload = loginResponse.json();",
+                  "    const token = loginPayload.token || (loginPayload.data && loginPayload.data.token);",
+                  "    pm.expect(token).to.be.a(\"string\").and.not.empty;",
+                  "    pm.sendRequest({",
+                  "      url: pm.environment.get(\"baseUrl\") + \"/api/users/me\",",
+                  "      method: \"GET\",",
+                  "      header: { Authorization: \"Bearer \" + token, \"X-Student-Id\": pm.environment.get(\"studentId\") }",
+                  "    }, function (meError, meResponse) {",
+                  "      pm.expect(meError).to.equal(null);",
+                  "      pm.expect(meResponse.code).to.be.within(200, 299);",
+                  "      pm.expect(meResponse.json().role).not.to.eql(\"admin\");",
+                  "    });",
+                  "  });",
+                  "}"
+                ]
+              }
+            }
+          ],
+          "request": {
+            "method": "GET",
+            "header": [],
+            "body": {
+              "mode": "raw",
+              "raw": "{{requestBody}}",
+              "options": {
+                "raw": {
+                  "language": "json"
+                }
+              }
+            },
+            "url": "{{baseUrl}}{{requestPath}}",
+            "description": "DATA-DRIVEN SELECTED TARGET. Run this collection with the FR-01 data file. One iteration row equals one Test Case ID."
+          }
+        }
+      ]
+    },
+    {
+      "name": "FR-07 Shopping Cart",
+      "description": "Suite is added in the FR-07 commit.",
+      "item": []
+    },
+    {
+      "name": "FR-13 Dashboard Data",
+      "description": "Suite is added in the FR-13 commit.",
+      "item": []
+    }
+  ]
+}

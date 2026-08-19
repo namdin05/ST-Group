@@ -1,0 +1,1266 @@
+[
+  {
+    "testCaseId": "FR01-API-TC001",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Register with a typical valid name, unique email, and compliant password",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Register with a typical valid name, unique email, and compliant password"
+  },
+  {
+    "testCaseId": "FR01-API-TC002",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Accept a password at the documented minimum length of exactly 8 characters",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa1@aaaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa1@aaaa",
+    "trace": "Domain: Accept a password at the documented minimum length of exactly 8 characters"
+  },
+  {
+    "testCaseId": "FR01-API-TC003",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a password one character below the documented minimum",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa1@aaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa1@aaa",
+    "trace": "Domain: Reject a password one character below the documented minimum"
+  },
+  {
+    "testCaseId": "FR01-API-TC004",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an 8-character password with no uppercase letter",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "aa1@aaaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "aa1@aaaa",
+    "trace": "Domain: Reject an 8-character password with no uppercase letter"
+  },
+  {
+    "testCaseId": "FR01-API-TC005",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an 8-character password with no lowercase letter",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "AA1@AAAA"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "AA1@AAAA",
+    "trace": "Domain: Reject an 8-character password with no lowercase letter"
+  },
+  {
+    "testCaseId": "FR01-API-TC006",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an 8-character password with no digit",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa@aaaaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa@aaaaa",
+    "trace": "Domain: Reject an 8-character password with no digit"
+  },
+  {
+    "testCaseId": "FR01-API-TC007",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an 8-character password with no special character",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa1aaaaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa1aaaaa",
+    "trace": "Domain: Reject an 8-character password with no special character"
+  },
+  {
+    "testCaseId": "FR01-API-TC008",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a password whose only punctuation is outside the documented @ $ ! % * ? & set",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa1#aaaa"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa1#aaaa",
+    "trace": "Domain: Reject a password whose only punctuation is outside the documented @ $ ! % * ? & set"
+  },
+  {
+    "testCaseId": "FR01-API-TC009",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an email address with no at-sign",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "invalid.{{caseSuffix}}.example.test",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "invalid.{{caseSuffix}}.example.test",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject an email address with no at-sign"
+  },
+  {
+    "testCaseId": "FR01-API-TC010",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an email address with an empty local part",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "@example.test",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "@example.test",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject an email address with an empty local part"
+  },
+  {
+    "testCaseId": "FR01-API-TC011",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an email address with an empty domain part",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "fr01.tc011@",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "fr01.tc011@",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject an email address with an empty domain part"
+  },
+  {
+    "testCaseId": "FR01-API-TC012",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a request with the required name field missing",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject a request with the required name field missing"
+  },
+  {
+    "testCaseId": "FR01-API-TC013",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a request with the required email field missing",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject a request with the required email field missing"
+  },
+  {
+    "testCaseId": "FR01-API-TC014",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a request with the required password field missing",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject a request with the required password field missing"
+  },
+  {
+    "testCaseId": "FR01-API-TC015",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize null handling for the required name field without inventing an oracle",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": null,
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Characterize null handling for the required name field without inventing an oracle"
+  },
+  {
+    "testCaseId": "FR01-API-TC016",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject a numeric email value as the wrong JSON type",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": 23127430,
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": 23127430,
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject a numeric email value as the wrong JSON type"
+  },
+  {
+    "testCaseId": "FR01-API-TC017",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an array-valued password as the wrong JSON type",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": [
+        "Valid1@a"
+      ]
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": [
+      "Valid1@a"
+    ],
+    "trace": "Domain: Reject an array-valued password as the wrong JSON type"
+  },
+  {
+    "testCaseId": "FR01-API-TC018",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize empty-string handling for the required name field",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Characterize empty-string handling for the required name field"
+  },
+  {
+    "testCaseId": "FR01-API-TC019",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Reject an empty-string email value",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Reject an empty-string email value"
+  },
+  {
+    "testCaseId": "FR01-API-TC020",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize UTF-8 Vietnamese name acceptance while preserving the exact Unicode value",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam – Nguyễn Ái Quốc",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Characterize UTF-8 Vietnamese name acceptance while preserving the exact Unicode value"
+  },
+  {
+    "testCaseId": "FR01-API-TC021",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Transition from email-absent state S0 to registered state S1",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "State: Transition from email-absent state S0 to registered state S1"
+  },
+  {
+    "testCaseId": "FR01-API-TC022",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Reject registration when the email already exists and preserve state S1",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Duplicate Attempt",
+      "email": "{{dynamicEmail}}",
+      "password": "Other1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "duplicateRejected",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Other1@a",
+    "trace": "State: Reject registration when the email already exists and preserve state S1"
+  },
+  {
+    "testCaseId": "FR01-API-TC023",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve email-absent state S0 after invalid email syntax",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "invalid-{{caseSuffix}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "invalid-{{caseSuffix}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "State: Preserve email-absent state S0 after invalid email syntax"
+  },
+  {
+    "testCaseId": "FR01-API-TC024",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve email-absent state S0 after weak-password rejection",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "weak"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "weak",
+    "trace": "State: Preserve email-absent state S0 after weak-password rejection"
+  },
+  {
+    "testCaseId": "FR01-API-TC025",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Characterize password-confirmation mismatch without assuming an undocumented API field",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a",
+      "passwordConfirmation": "Different1@"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "safeCharacterization",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "State: Characterize password-confirmation mismatch without assuming an undocumented API field"
+  },
+  {
+    "testCaseId": "FR01-API-TC026",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve S0 when a mandatory value is omitted from an otherwise valid request",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "State: Preserve S0 when a mandatory value is omitted from an otherwise valid request"
+  },
+  {
+    "testCaseId": "FR01-API-TC027",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe SQL injection handling in the name field without treating implementation behavior as the oracle",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Nam'); DROP TABLE users;--",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "safeCharacterization",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Probe SQL injection handling in the name field without treating implementation behavior as the oracle"
+  },
+  {
+    "testCaseId": "FR01-API-TC028",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Accept a standards-compliant password containing SQL-like text as opaque credential data",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Aa1@'OR1=1--"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Aa1@'OR1=1--",
+    "trace": "Security: Accept a standards-compliant password containing SQL-like text as opaque credential data"
+  },
+  {
+    "testCaseId": "FR01-API-TC029",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject a SQL-injection-shaped value that is not a valid email and preserve database integrity",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "' OR 1=1--",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "' OR 1=1--",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Reject a SQL-injection-shaped value that is not a valid email and preserve database integrity"
+  },
+  {
+    "testCaseId": "FR01-API-TC030",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Characterize stored-XSS handling for a script-bearing name and define a downstream safety oracle",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "<script>alert(23127430)</script>",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "safeCharacterization",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Characterize stored-XSS handling for a script-bearing name and define a downstream safety oracle"
+  },
+  {
+    "testCaseId": "FR01-API-TC031",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe reflected-XSS safety in an invalid email error path",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "<img src=x onerror=alert(23127430)>",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "<img src=x onerror=alert(23127430)>",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Probe reflected-XSS safety in an invalid email error path"
+  },
+  {
+    "testCaseId": "FR01-API-TC032",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent privilege escalation through an unexpected role field",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a",
+      "role": "admin"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noRoleEscalation",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Prevent privilege escalation through an unexpected role field"
+  },
+  {
+    "testCaseId": "FR01-API-TC033",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject or route a wrong HTTP method without creating an account",
+    "method": "GET",
+    "requestPath": "/api/register?email={{dynamicEmail}}",
+    "authMode": "none",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        404,
+        405
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "wrongMethodNoAccount",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Security: Reject or route a wrong HTTP method without creating an account"
+  },
+  {
+    "testCaseId": "FR01-API-TC034",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Validate the documented success response object for a valid registration",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Validate the documented success response object for a valid registration"
+  },
+  {
+    "testCaseId": "FR01-API-TC035",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Validate the exact documented success message text",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Validate the exact documented success message text"
+  },
+  {
+    "testCaseId": "FR01-API-TC036",
+    "featureId": "FR-01",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Validate that the returned id is generated rather than fixed to the example value",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Validate that the returned id is generated rather than fixed to the example value"
+  },
+  {
+    "testCaseId": "FR01-API-TC037",
+    "featureId": "FR-01",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Capture and assess the success response Content-Type without inventing an exact header oracle",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Capture and assess the success response Content-Type without inventing an exact header oracle"
+  },
+  {
+    "testCaseId": "FR01-API-TC038",
+    "featureId": "FR-01",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Detect unexpected or sensitive properties in a successful registration response",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Detect unexpected or sensitive properties in a successful registration response"
+  },
+  {
+    "testCaseId": "FR01-API-TC039",
+    "featureId": "FR-01",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize duplicate-email error status, content type, and schema",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Duplicate Schema Probe",
+      "email": "{{dynamicEmail}}",
+      "password": "Other1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "duplicateRejected",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Other1@a",
+    "trace": "Schema: Characterize duplicate-email error status, content type, and schema"
+  },
+  {
+    "testCaseId": "FR01-API-TC040",
+    "featureId": "FR-01",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize malformed-JSON error handling and response schema",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": null,
+    "rawBody": "{\"name\":\"Đinh Hoàng Nam\",\"email\":\"{{dynamicEmail}}\",\"password\":\"Valid1@a\"",
+    "statusRule": {
+      "mode": "class",
+      "value": 4
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "registrationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "registrationRejected",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Schema: Characterize malformed-JSON error handling and response schema"
+  }
+]
