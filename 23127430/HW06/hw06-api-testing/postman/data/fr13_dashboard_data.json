@@ -1,0 +1,2001 @@
+[
+  {
+    "testCaseId": "FR13-API-TC001",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Retrieve a controlled mixed-status all-order dataset with a valid admin JWT",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 120000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 50000,
+        "statusSteps": []
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "canceled"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Retrieve a controlled mixed-status all-order dataset with a valid admin JWT"
+  },
+  {
+    "testCaseId": "FR13-API-TC002",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Retrieve a controlled empty all-order dataset",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": true,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Retrieve a controlled empty all-order dataset"
+  },
+  {
+    "testCaseId": "FR13-API-TC003",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Derive revenue from a delivered-only dataset",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 100000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "delivered",
+        "totalAmount": 250000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Derive revenue from a delivered-only dataset"
+  },
+  {
+    "testCaseId": "FR13-API-TC004",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Exclude every documented non-delivered status from revenue while counting all orders",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "pending",
+        "totalAmount": 10000,
+        "statusSteps": []
+      },
+      {
+        "status": "confirmed",
+        "totalAmount": 20000,
+        "statusSteps": [
+          "confirmed"
+        ]
+      },
+      {
+        "status": "shipping",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "confirmed",
+          "shipping"
+        ]
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 40000,
+        "statusSteps": [
+          "canceled"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Exclude every documented non-delivered status from revenue while counting all orders"
+  },
+  {
+    "testCaseId": "FR13-API-TC005",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Cover all five documented statuses in one complete dataset",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "pending",
+        "totalAmount": 10000,
+        "statusSteps": []
+      },
+      {
+        "status": "confirmed",
+        "totalAmount": 20000,
+        "statusSteps": [
+          "confirmed"
+        ]
+      },
+      {
+        "status": "shipping",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "confirmed",
+          "shipping"
+        ]
+      },
+      {
+        "status": "delivered",
+        "totalAmount": 70000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 50000,
+        "statusSteps": [
+          "canceled"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Cover all five documented statuses in one complete dataset"
+  },
+  {
+    "testCaseId": "FR13-API-TC006",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an unknown case-variant status without inventing normalization",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "status": "Delivered",
+      "total_amount": 100000
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize an unknown case-variant status without inventing normalization"
+  },
+  {
+    "testCaseId": "FR13-API-TC007",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize missing and null status values as indeterminate Dashboard input",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "statusNullOrMissing": true
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize missing and null status values as indeterminate Dashboard input"
+  },
+  {
+    "testCaseId": "FR13-API-TC008",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize missing and null total_amount on delivered orders",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "status": "delivered",
+      "amountNullOrMissing": true
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize missing and null total_amount on delivered orders"
+  },
+  {
+    "testCaseId": "FR13-API-TC009",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize numeric-string total_amount without coercion",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "status": "delivered",
+      "total_amount": "100000"
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize numeric-string total_amount without coercion"
+  },
+  {
+    "testCaseId": "FR13-API-TC010",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a negative delivered total_amount without inventing a lower boundary",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "status": "delivered",
+      "total_amount": -1
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize a negative delivered total_amount without inventing a lower boundary"
+  },
+  {
+    "testCaseId": "FR13-API-TC011",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize a fractional delivered total_amount without inventing precision rules",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": {
+      "status": "delivered",
+      "total_amount": 1.5
+    },
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize a fractional delivered total_amount without inventing precision rules"
+  },
+  {
+    "testCaseId": "FR13-API-TC012",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an undocumented status query without replacing the all-order oracle",
+    "method": "GET",
+    "requestPath": "/api/admin/orders?status=delivered",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize an undocumented status query without replacing the all-order oracle"
+  },
+  {
+    "testCaseId": "FR13-API-TC013",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize undocumented pagination parameters and completeness risk",
+    "method": "GET",
+    "requestPath": "/api/admin/orders?page=1&limit=1",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize undocumented pagination parameters and completeness risk"
+  },
+  {
+    "testCaseId": "FR13-API-TC014",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an aggregate-shaped JSON body on the bodyless GET",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "application/json",
+    "body": {
+      "aggregate": true,
+      "status": "delivered"
+    },
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Characterize an aggregate-shaped JSON body on the bodyless GET"
+  },
+  {
+    "testCaseId": "FR13-API-TC015",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Exercise the documented bodyless GET header partition without requiring Content-Type",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Exercise the documented bodyless GET header partition without requiring Content-Type"
+  },
+  {
+    "testCaseId": "FR13-API-TC016",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve empty state S0 across the selected GET",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": true,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Preserve empty state S0 across the selected GET"
+  },
+  {
+    "testCaseId": "FR13-API-TC017",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Transition from S0 to S1 through pending-order setup and observe with the selected GET",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "pending",
+        "totalAmount": 90000,
+        "statusSteps": []
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Transition from S0 to S1 through pending-order setup and observe with the selected GET"
+  },
+  {
+    "testCaseId": "FR13-API-TC018",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve a non-delivered-only S1 dataset during retrieval",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "pending",
+        "totalAmount": 10000,
+        "statusSteps": []
+      },
+      {
+        "status": "confirmed",
+        "totalAmount": 20000,
+        "statusSteps": [
+          "confirmed"
+        ]
+      },
+      {
+        "status": "shipping",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "confirmed",
+          "shipping"
+        ]
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 40000,
+        "statusSteps": [
+          "canceled"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Preserve a non-delivered-only S1 dataset during retrieval"
+  },
+  {
+    "testCaseId": "FR13-API-TC019",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Keep Dashboard aggregates unchanged for pending to confirmed setup transition",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "confirmed",
+        "totalAmount": 50000,
+        "statusSteps": [
+          "confirmed"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Keep Dashboard aggregates unchanged for pending to confirmed setup transition"
+  },
+  {
+    "testCaseId": "FR13-API-TC020",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Keep Dashboard aggregates unchanged for confirmed to shipping setup transition",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "shipping",
+        "totalAmount": 60000,
+        "statusSteps": [
+          "confirmed",
+          "shipping"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Keep Dashboard aggregates unchanged for confirmed to shipping setup transition"
+  },
+  {
+    "testCaseId": "FR13-API-TC021",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Increase revenue but not order count when shipping becomes delivered",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 80000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Increase revenue but not order count when shipping becomes delivered"
+  },
+  {
+    "testCaseId": "FR13-API-TC022",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Increase order count without revenue when pending order is added to delivered-only S2",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 100000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 40000,
+        "statusSteps": []
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Increase order count without revenue when pending order is added to delivered-only S2"
+  },
+  {
+    "testCaseId": "FR13-API-TC023",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Increase both revenue and count when a newly created order reaches delivered",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 100000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 20000,
+        "statusSteps": []
+      },
+      {
+        "status": "delivered",
+        "totalAmount": 70000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Increase both revenue and count when a newly created order reaches delivered"
+  },
+  {
+    "testCaseId": "FR13-API-TC024",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve aggregates when a permitted non-delivered order becomes canceled",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "canceled",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "canceled"
+        ]
+      },
+      {
+        "status": "delivered",
+        "totalAmount": 90000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Preserve aggregates when a permitted non-delivered order becomes canceled"
+  },
+  {
+    "testCaseId": "FR13-API-TC025",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "State",
+    "objective": "Preserve terminal order and Dashboard tuple after a forbidden status transition setup",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 110000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": {
+      "slot": 1,
+      "status": "pending"
+    },
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "State: Preserve terminal order and Dashboard tuple after a forbidden status transition setup"
+  },
+  {
+    "testCaseId": "FR13-API-TC026",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent all-system order disclosure when Authorization is missing",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "missing",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Prevent all-system order disclosure when Authorization is missing"
+  },
+  {
+    "testCaseId": "FR13-API-TC027",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject an empty Bearer credential without disclosing orders",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "emptyBearer",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Reject an empty Bearer credential without disclosing orders"
+  },
+  {
+    "testCaseId": "FR13-API-TC028",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject a malformed JWT serialization",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "malformed",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Reject a malformed JWT serialization"
+  },
+  {
+    "testCaseId": "FR13-API-TC029",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject a signature-tampered JWT",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "tamperedAdmin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Reject a signature-tampered JWT"
+  },
+  {
+    "testCaseId": "FR13-API-TC030",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject an expired admin JWT",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "expiredAdmin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Reject an expired admin JWT"
+  },
+  {
+    "testCaseId": "FR13-API-TC031",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Enforce admin role against a valid normal-user JWT",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Enforce admin role against a valid normal-user JWT"
+  },
+  {
+    "testCaseId": "FR13-API-TC032",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Reject a valid JWT whose role claim is missing",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "tokenWithoutRole",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Reject a valid JWT whose role claim is missing"
+  },
+  {
+    "testCaseId": "FR13-API-TC033",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent role escalation through an unsigned role-claim change",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "tamperedUserRole",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Prevent role escalation through an unsigned role-claim change"
+  },
+  {
+    "testCaseId": "FR13-API-TC034",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Ensure a wrong HTTP method cannot retrieve or mutate the protected dataset",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {
+      "X-HTTP-Method-Override": "POST"
+    },
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": true,
+    "constraintNote": "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization.",
+    "trace": "Security: Ensure a wrong HTTP method cannot retrieve or mutate the protected dataset"
+  },
+  {
+    "testCaseId": "FR13-API-TC035",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe SQL-injection-like text in an undocumented query without claiming parameterization proof",
+    "method": "GET",
+    "requestPath": "/api/admin/orders?sort=id%20DESC%3B%20DROP%20TABLE%20orders--",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Probe SQL-injection-like text in an undocumented query without claiming parameterization proof"
+  },
+  {
+    "testCaseId": "FR13-API-TC036",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Capture API evidence for a stored-XSS fixture without claiming SEC-04 proof",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "pending",
+        "totalAmount": 45000,
+        "shippingAddress": "<img src=x onerror=alert(1)>",
+        "statusSteps": []
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Capture API evidence for a stored-XSS fixture without claiming SEC-04 proof"
+  },
+  {
+    "testCaseId": "FR13-API-TC037",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Probe reflected-XSS-like query input without inventing an echo schema",
+    "method": "GET",
+    "requestPath": "/api/admin/orders?q=%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Probe reflected-XSS-like query input without inventing an echo schema"
+  },
+  {
+    "testCaseId": "FR13-API-TC038",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Detect unexpected credential, secret, or internal-data exposure in an authorized response",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": true,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Detect unexpected credential, secret, or internal-data exposure in an authorized response"
+  },
+  {
+    "testCaseId": "FR13-API-TC039",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Characterize mass-assignment-shaped fields in a GET body while preserving state",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "application/json",
+    "body": {
+      "role": "admin",
+      "user_id": 999,
+      "status": "delivered",
+      "total_amount": 1
+    },
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Characterize mass-assignment-shaped fields in a GET body while preserving state"
+  },
+  {
+    "testCaseId": "FR13-API-TC040",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Security",
+    "objective": "Prevent a client-supplied admin header from replacing the JWT admin-role claim",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {
+      "X-Role": "admin"
+    },
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Security: Prevent a client-supplied admin header from replacing the JWT admin-role claim"
+  },
+  {
+    "testCaseId": "FR13-API-TC041",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Characterize the undocumented success HTTP status without fixing it to 200",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize the undocumented success HTTP status without fixing it to 200"
+  },
+  {
+    "testCaseId": "FR13-API-TC042",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Characterize success Content-Type and charset without requiring JSON",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 50000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize success Content-Type and charset without requiring JSON"
+  },
+  {
+    "testCaseId": "FR13-API-TC043",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Schema",
+    "objective": "Characterize the success top-level collection representation",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 30000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 20000,
+        "statusSteps": []
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize the success top-level collection representation"
+  },
+  {
+    "testCaseId": "FR13-API-TC044",
+    "featureId": "FR-13",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize the empty-dataset response representation",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": true,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize the empty-dataset response representation"
+  },
+  {
+    "testCaseId": "FR13-API-TC045",
+    "featureId": "FR-13",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize item properties and types without promoting source fields into schema",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 75000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize item properties and types without promoting source fields into schema"
+  },
+  {
+    "testCaseId": "FR13-API-TC046",
+    "featureId": "FR-13",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize item ordering, duplicates, completeness, and additional properties",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 40000,
+        "statusSteps": [
+          "confirmed",
+          "shipping",
+          "delivered"
+        ]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 20000,
+        "statusSteps": []
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 10000,
+        "statusSteps": [
+          "canceled"
+        ]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize item ordering, duplicates, completeness, and additional properties"
+  },
+  {
+    "testCaseId": "FR13-API-TC047",
+    "featureId": "FR-13",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize authentication-error status, Content-Type, and body shape",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "malformed",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "oneOf",
+      "values": [
+        401,
+        403
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "authorizationError",
+    "schemaOracle": "safeError",
+    "businessOracle": "noDisclosure",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": false,
+    "captureAdminBaseline": false,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Schema: Characterize authentication-error status, Content-Type, and body shape"
+  },
+  {
+    "testCaseId": "FR13-API-TC048",
+    "featureId": "FR-13",
+    "source": "HUMAN",
+    "coverageType": "Schema",
+    "objective": "Characterize wrong-method error shape and sensitive-data redaction",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {
+      "X-HTTP-Method-Override": "DELETE"
+    },
+    "statusRule": {
+      "mode": "classes",
+      "values": [
+        2,
+        4
+      ]
+    },
+    "contentTypeOracle": "present",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": true,
+    "constraintNote": "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization.",
+    "trace": "Schema: Characterize wrong-method error shape and sensitive-data redaction"
+  }
+]
