@@ -1,0 +1,2609 @@
+{
+  "generatedAt": "2026-08-22T04:55:00.522Z",
+  "environment": {
+    "baseUrl": "http://127.0.0.1:3000",
+    "nodeVersion": "v22.17.1",
+    "newmanVersion": "6.2.2",
+    "databaseReset": true,
+    "reporters": [
+      "cli",
+      "json",
+      "htmlextra"
+    ]
+  },
+  "totals": {
+    "executed": 131,
+    "passed": 82,
+    "failed": 37,
+    "blocked": 12
+  },
+  "features": [
+    {
+      "featureId": "FR-01",
+      "reports": {
+        "json": "hw06-api-testing/reports/newman/fr01-registration.json",
+        "html": "hw06-api-testing/reports/newman/fr01-registration.html"
+      },
+      "summary": {
+        "executed": 40,
+        "passed": 16,
+        "failed": 24,
+        "blocked": 0
+      },
+      "environmentFailures": []
+    },
+    {
+      "featureId": "FR-07",
+      "reports": {
+        "json": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+        "html": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+      },
+      "summary": {
+        "executed": 43,
+        "passed": 30,
+        "failed": 11,
+        "blocked": 2
+      },
+      "environmentFailures": [
+        {
+          "testCaseId": "FR07-API-TC018",
+          "reasons": [
+            "Cannot read properties of null (reading 'id')"
+          ]
+        },
+        {
+          "testCaseId": "FR07-API-TC031",
+          "reasons": [
+            "expiredUser token prerequisite is missing"
+          ]
+        }
+      ]
+    },
+    {
+      "featureId": "FR-13",
+      "reports": {
+        "json": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+        "html": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+      },
+      "summary": {
+        "executed": 48,
+        "passed": 36,
+        "failed": 2,
+        "blocked": 10
+      },
+      "environmentFailures": [
+        {
+          "testCaseId": "FR13-API-TC006",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC007",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC008",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC009",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC010",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC011",
+          "reasons": [
+            "declared test-data dependency must be provisioned: expected false to deeply equal true"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC030",
+          "reasons": [
+            "expiredAdmin token prerequisite is missing"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC032",
+          "reasons": [
+            "tokenWithoutRole token prerequisite is missing"
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC034",
+          "reasons": [
+            "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required."
+          ]
+        },
+        {
+          "testCaseId": "FR13-API-TC048",
+          "reasons": [
+            "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required."
+          ]
+        }
+      ]
+    }
+  ],
+  "cases": [
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC001",
+      "iteration": 0,
+      "objective": "Register with a typical valid name, unique email, and compliant password",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC002",
+      "iteration": 1,
+      "objective": "Accept a password at the documented minimum length of exactly 8 characters",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC003",
+      "iteration": 2,
+      "objective": "Reject a password one character below the documented minimum",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC003] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC003] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC003] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC003] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC003] registration business rule: expected true to deeply equal false | [FR01-API-TC003] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC004",
+      "iteration": 3,
+      "objective": "Reject an 8-character password with no uppercase letter",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC004] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC004] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC004] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC004] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC004] registration business rule: expected true to deeply equal false | [FR01-API-TC004] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC005",
+      "iteration": 4,
+      "objective": "Reject an 8-character password with no lowercase letter",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC005] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC005] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC005] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC005] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC005] registration business rule: expected true to deeply equal false | [FR01-API-TC005] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC006",
+      "iteration": 5,
+      "objective": "Reject an 8-character password with no digit",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC006] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC006] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC006] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC006] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC006] registration business rule: expected true to deeply equal false | [FR01-API-TC006] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC007",
+      "iteration": 6,
+      "objective": "Reject an 8-character password with no special character",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC007] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC007] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC007] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC007] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC007] registration business rule: expected true to deeply equal false | [FR01-API-TC007] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC008",
+      "iteration": 7,
+      "objective": "Reject a password whose only punctuation is outside the documented @ $ ! % * ? & set",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC008] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC008] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC008] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC008] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC008] registration business rule: expected true to deeply equal false | [FR01-API-TC008] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC009",
+      "iteration": 8,
+      "objective": "Reject an email address with no at-sign",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC009] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC009] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC009] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC009] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC009] registration business rule: expected true to deeply equal false | [FR01-API-TC009] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC010",
+      "iteration": 9,
+      "objective": "Reject an email address with an empty local part",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC010] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC010] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC010] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC010] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC010] registration business rule: expected true to deeply equal false | [FR01-API-TC010] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC011",
+      "iteration": 10,
+      "objective": "Reject an email address with an empty domain part",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC011] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC011] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC011] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC011] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC011] registration business rule: expected true to deeply equal false | [FR01-API-TC011] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC012",
+      "iteration": 11,
+      "objective": "Reject a request with the required name field missing",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC012] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC012] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC012] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC012] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC012] registration business rule: expected true to deeply equal false | [FR01-API-TC012] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC013",
+      "iteration": 12,
+      "objective": "Reject a request with the required email field missing",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC013] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC013] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC013] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC013] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC014",
+      "iteration": 13,
+      "objective": "Reject a request with the required password field missing",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC014] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC014] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC014] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC014] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC015",
+      "iteration": 14,
+      "objective": "Characterize null handling for the required name field without inventing an oracle",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC015] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC015] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC015] registration business rule: expected true to deeply equal false | [FR01-API-TC015] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC016",
+      "iteration": 15,
+      "objective": "Reject a numeric email value as the wrong JSON type",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC016] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC016] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC016] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC016] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC016] registration business rule: expected true to deeply equal false | [FR01-API-TC016] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC017",
+      "iteration": 16,
+      "objective": "Reject an array-valued password as the wrong JSON type",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC017] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC017] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC017] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC017] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC018",
+      "iteration": 17,
+      "objective": "Characterize empty-string handling for the required name field",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC018] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC018] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC018] registration business rule: expected true to deeply equal false | [FR01-API-TC018] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC019",
+      "iteration": 18,
+      "objective": "Reject an empty-string email value",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC019] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC019] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC019] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC019] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC019] registration business rule: expected true to deeply equal false | [FR01-API-TC019] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC020",
+      "iteration": 19,
+      "objective": "Characterize UTF-8 Vietnamese name acceptance while preserving the exact Unicode value",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 8,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 8 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC021",
+      "iteration": 20,
+      "objective": "Transition from email-absent state S0 to registered state S1",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC022",
+      "iteration": 21,
+      "objective": "Reject registration when the email already exists and preserve state S1",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 8,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC022] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC022] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC022] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC022] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC023",
+      "iteration": 22,
+      "objective": "Preserve email-absent state S0 after invalid email syntax",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC023] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC023] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC023] registration business rule: expected true to deeply equal false | [FR01-API-TC023] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC024",
+      "iteration": 23,
+      "objective": "Preserve email-absent state S0 after weak-password rejection",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC024] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC024] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC024] registration business rule: expected true to deeply equal false | [FR01-API-TC024] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC025",
+      "iteration": 24,
+      "objective": "Characterize password-confirmation mismatch without assuming an undocumented API field",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC026",
+      "iteration": 25,
+      "objective": "Preserve S0 when a mandatory value is omitted from an otherwise valid request",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC026] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC026] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC027",
+      "iteration": 26,
+      "objective": "Probe SQL injection handling in the name field without treating implementation behavior as the oracle",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC028",
+      "iteration": 27,
+      "objective": "Accept a standards-compliant password containing SQL-like text as opaque credential data",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC029",
+      "iteration": 28,
+      "objective": "Reject a SQL-injection-shaped value that is not a valid email and preserve database integrity",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC029] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR01-API-TC029] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC029] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC029] status oracle: expected 2 to deeply equal 4 | [FR01-API-TC029] registration business rule: expected true to deeply equal false | [FR01-API-TC029] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC030",
+      "iteration": 29,
+      "objective": "Characterize stored-XSS handling for a script-bearing name and define a downstream safety oracle",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC031",
+      "iteration": 30,
+      "objective": "Probe reflected-XSS safety in an invalid email error path",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC031] registration business rule",
+          "message": "expected true to deeply equal false"
+        },
+        {
+          "name": "[FR01-API-TC031] rejected registration preserves absent account state",
+          "message": "expected 200 to not be within 200..299"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC031] registration business rule: expected true to deeply equal false | [FR01-API-TC031] rejected registration preserves absent account state: expected 200 to not be within 200..299 Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC032",
+      "iteration": 31,
+      "objective": "Prevent privilege escalation through an unexpected role field",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 8,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 8 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC033",
+      "iteration": 32,
+      "objective": "Reject or route a wrong HTTP method without creating an account",
+      "method": "GET",
+      "requestPath": "/api/register?email={{dynamicEmail}}",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/register?email={{dynamicEmail}} executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC034",
+      "iteration": 33,
+      "objective": "Validate the documented success response object for a valid registration",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC035",
+      "iteration": 34,
+      "objective": "Validate the exact documented success message text",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC036",
+      "iteration": 35,
+      "objective": "Validate that the returned id is generated rather than fixed to the example value",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC037",
+      "iteration": 36,
+      "objective": "Capture and assess the success response Content-Type without inventing an exact header oracle",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC038",
+      "iteration": 37,
+      "objective": "Detect unexpected or sensitive properties in a successful registration response",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC039",
+      "iteration": 38,
+      "objective": "Characterize duplicate-email error status, content type, and schema",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 8,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR01-API-TC039] registration business rule",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR01-API-TC039] registration business rule: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-01",
+      "testCaseId": "FR01-API-TC040",
+      "iteration": 39,
+      "objective": "Characterize malformed-JSON error handling and response schema",
+      "method": "POST",
+      "requestPath": "/api/register",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/register executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr01-registration.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr01-registration.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr01-registration.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC001",
+      "iteration": 0,
+      "objective": "Retrieve a known-empty cart with a valid JWT and no request body",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC001] status oracle",
+          "message": "expected [ 401, 403 ] to include 200"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. Failed: [FR07-API-TC001] status oracle: expected [ 401, 403 ] to include 200 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC002",
+      "iteration": 1,
+      "objective": "Characterize an unexpected query parameter on cart retrieval",
+      "method": "GET",
+      "requestPath": "/api/cart?page=1",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart?page=1 returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC003",
+      "iteration": 2,
+      "objective": "Characterize a JSON request body sent with GET /api/cart",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC004",
+      "iteration": 3,
+      "objective": "Add a typical product at the documented minimum quantity 1",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC005",
+      "iteration": 4,
+      "objective": "Add a product with positive integer quantity 2 from the request example domain",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC006",
+      "iteration": 5,
+      "objective": "Reject quantity 0 immediately below the documented minimum",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC006] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR07-API-TC006] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC006] status oracle: expected 2 to deeply equal 4 | [FR07-API-TC006] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC007",
+      "iteration": 6,
+      "objective": "Reject a negative integer quantity",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC007] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR07-API-TC007] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC007] status oracle: expected 2 to deeply equal 4 | [FR07-API-TC007] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC008",
+      "iteration": 7,
+      "objective": "Reject a fractional quantity",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC008] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR07-API-TC008] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC008] status oracle: expected 2 to deeply equal 4 | [FR07-API-TC008] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC009",
+      "iteration": 8,
+      "objective": "Characterize a numeric-string quantity instead of a JSON number",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC010",
+      "iteration": 9,
+      "objective": "Characterize a null quantity",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC010] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC010] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC011",
+      "iteration": 10,
+      "objective": "Characterize a POST body with quantity omitted",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC011] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC011] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC012",
+      "iteration": 11,
+      "objective": "Characterize product id supplied as a JSON string",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC013",
+      "iteration": 12,
+      "objective": "Characterize a null product id",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC013] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 1 to deeply equal +0"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC013] cart business/state oracle: cart row count must match the isolated expected state: expected 1 to deeply equal +0 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC014",
+      "iteration": 13,
+      "objective": "Preserve a Vietnamese Unicode product name without inventing normalization rules",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC015",
+      "iteration": 14,
+      "objective": "Characterize an empty product name",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC016",
+      "iteration": 15,
+      "objective": "Characterize price supplied as a numeric string",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC017",
+      "iteration": 16,
+      "objective": "Characterize a benign extra POST property",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC018",
+      "iteration": 17,
+      "objective": "Characterize a JSON-shaped body sent with text/plain Content-Type",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "Cannot read properties of null (reading 'id')"
+      ],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. BLOCKED: Cannot read properties of null (reading 'id') Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC019",
+      "iteration": 18,
+      "objective": "Characterize malformed JSON without creating a cart mutation",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC020",
+      "iteration": 19,
+      "objective": "Transition from empty S0 to one product row S1 and verify with GET",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC021",
+      "iteration": 20,
+      "objective": "Preserve S0 when retrieving an empty cart",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC022",
+      "iteration": 21,
+      "objective": "Preserve a known one-product state S1(P,q) during retrieval",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC023",
+      "iteration": 22,
+      "objective": "Add the same product with minimum increment and keep one row",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC023] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 2 to deeply equal 1"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC023] cart business/state oracle: cart row count must match the isolated expected state: expected 2 to deeply equal 1 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC024",
+      "iteration": 23,
+      "objective": "Increase an existing product by a multi-unit quantity without a duplicate row",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC024] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 2 to deeply equal 1"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC024] cart business/state oracle: cart row count must match the isolated expected state: expected 2 to deeply equal 1 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC025",
+      "iteration": 24,
+      "objective": "Add a clearly different product to transition from S1 to S2",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC026",
+      "iteration": 25,
+      "objective": "Increase one existing product inside a multi-item cart without changing others",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC026] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 3 to deeply equal 2"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC026] cart business/state oracle: cart row count must match the isolated expected state: expected 3 to deeply equal 2 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC027",
+      "iteration": 26,
+      "objective": "Preserve S1 when a zero-quantity add event is invalid",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR07-API-TC027] status oracle",
+          "message": "expected 2 to deeply equal 4"
+        },
+        {
+          "name": "[FR07-API-TC027] cart business/state oracle",
+          "message": "cart row count must match the isolated expected state: expected 2 to deeply equal 1"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. Failed: [FR07-API-TC027] status oracle: expected 2 to deeply equal 4 | [FR07-API-TC027] cart business/state oracle: cart row count must match the isolated expected state: expected 2 to deeply equal 1 Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC028",
+      "iteration": 27,
+      "objective": "Prevent cart disclosure when Authorization is missing",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC029",
+      "iteration": 28,
+      "objective": "Prevent cart mutation when Authorization is missing",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC030",
+      "iteration": 29,
+      "objective": "Prevent disclosure with a signature-tampered JWT",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC031",
+      "iteration": 30,
+      "objective": "Prevent mutation with an expired JWT",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "expiredUser token prerequisite is missing"
+      ],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. BLOCKED: expiredUser token prerequisite is missing Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC032",
+      "iteration": 31,
+      "objective": "Characterize admin-token behavior without inventing cart role semantics",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC033",
+      "iteration": 32,
+      "objective": "Probe cross-user cart isolation with two user tokens",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC034",
+      "iteration": 33,
+      "objective": "Probe SQL injection without treating API behavior as proof of parameterization",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC035",
+      "iteration": 34,
+      "objective": "Probe stored XSS safety through a client-supplied product name",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC036",
+      "iteration": 35,
+      "objective": "Probe mass assignment with owner, role, and derived-total fields",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC037",
+      "iteration": 36,
+      "objective": "Ensure a wrong HTTP method does not perform the add transition",
+      "method": "PUT",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "PUT /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC038",
+      "iteration": 37,
+      "objective": "Characterize GET success top-level representation and Content-Type",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC039",
+      "iteration": 38,
+      "objective": "Characterize GET item required properties and property types",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC040",
+      "iteration": 39,
+      "objective": "Characterize empty-cart representation without assuming [] or 204",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC041",
+      "iteration": 40,
+      "objective": "Characterize POST success response without requiring a message field",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC042",
+      "iteration": 41,
+      "objective": "Characterize authentication error Content-Type and shape",
+      "method": "GET",
+      "requestPath": "/api/cart",
+      "httpStatus": 200,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/cart returned HTTP 200. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-07",
+      "testCaseId": "FR07-API-TC043",
+      "iteration": 42,
+      "objective": "Characterize malformed-request error fields and sensitive-data policy",
+      "method": "POST",
+      "requestPath": "/api/cart",
+      "httpStatus": null,
+      "assertionCount": 7,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "POST /api/cart executed; Newman JSON retained only supporting pm.sendRequest response(s), so the exact target status remains in CLI/HTML evidence. All 7 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr07-shopping-cart.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr07-shopping-cart.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr07-shopping-cart.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC002",
+      "iteration": 0,
+      "objective": "Retrieve a controlled empty all-order dataset",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC016",
+      "iteration": 1,
+      "objective": "Preserve empty state S0 across the selected GET",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC044",
+      "iteration": 2,
+      "objective": "Characterize the empty-dataset response representation",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC001",
+      "iteration": 3,
+      "objective": "Retrieve a controlled mixed-status all-order dataset with a valid admin JWT",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC003",
+      "iteration": 4,
+      "objective": "Derive revenue from a delivered-only dataset",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC004",
+      "iteration": 5,
+      "objective": "Exclude every documented non-delivered status from revenue while counting all orders",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC005",
+      "iteration": 6,
+      "objective": "Cover all five documented statuses in one complete dataset",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC006",
+      "iteration": 7,
+      "objective": "Characterize an unknown case-variant status without inventing normalization",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC007",
+      "iteration": 8,
+      "objective": "Characterize missing and null status values as indeterminate Dashboard input",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC008",
+      "iteration": 9,
+      "objective": "Characterize missing and null total_amount on delivered orders",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC009",
+      "iteration": 10,
+      "objective": "Characterize numeric-string total_amount without coercion",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC010",
+      "iteration": 11,
+      "objective": "Characterize a negative delivered total_amount without inventing a lower boundary",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC011",
+      "iteration": 12,
+      "objective": "Characterize a fractional delivered total_amount without inventing precision rules",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "declared test-data dependency must be provisioned: expected false to deeply equal true"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. BLOCKED: declared test-data dependency must be provisioned: expected false to deeply equal true Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC012",
+      "iteration": 13,
+      "objective": "Characterize an undocumented status query without replacing the all-order oracle",
+      "method": "GET",
+      "requestPath": "/api/admin/orders?status=delivered",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders?status=delivered returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC013",
+      "iteration": 14,
+      "objective": "Characterize undocumented pagination parameters and completeness risk",
+      "method": "GET",
+      "requestPath": "/api/admin/orders?page=1&limit=1",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders?page=1&limit=1 returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC014",
+      "iteration": 15,
+      "objective": "Characterize an aggregate-shaped JSON body on the bodyless GET",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC015",
+      "iteration": 16,
+      "objective": "Exercise the documented bodyless GET header partition without requiring Content-Type",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC017",
+      "iteration": 17,
+      "objective": "Transition from S0 to S1 through pending-order setup and observe with the selected GET",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC018",
+      "iteration": 18,
+      "objective": "Preserve a non-delivered-only S1 dataset during retrieval",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC019",
+      "iteration": 19,
+      "objective": "Keep Dashboard aggregates unchanged for pending to confirmed setup transition",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC020",
+      "iteration": 20,
+      "objective": "Keep Dashboard aggregates unchanged for confirmed to shipping setup transition",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC021",
+      "iteration": 21,
+      "objective": "Increase revenue but not order count when shipping becomes delivered",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC022",
+      "iteration": 22,
+      "objective": "Increase order count without revenue when pending order is added to delivered-only S2",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC023",
+      "iteration": 23,
+      "objective": "Increase both revenue and count when a newly created order reaches delivered",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC024",
+      "iteration": 24,
+      "objective": "Preserve aggregates when a permitted non-delivered order becomes canceled",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC025",
+      "iteration": 25,
+      "objective": "Preserve terminal order and Dashboard tuple after a forbidden status transition setup",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC026",
+      "iteration": 26,
+      "objective": "Prevent all-system order disclosure when Authorization is missing",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC027",
+      "iteration": 27,
+      "objective": "Reject an empty Bearer credential without disclosing orders",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC028",
+      "iteration": 28,
+      "objective": "Reject a malformed JWT serialization",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 403,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 403. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC029",
+      "iteration": 29,
+      "objective": "Reject a signature-tampered JWT",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 403,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 403. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC030",
+      "iteration": 30,
+      "objective": "Reject an expired admin JWT",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "expiredAdmin token prerequisite is missing"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. BLOCKED: expiredAdmin token prerequisite is missing Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC031",
+      "iteration": 31,
+      "objective": "Enforce admin role against a valid normal-user JWT",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 5,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR13-API-TC031] status oracle",
+          "message": "expected [ 401, 403 ] to include 200"
+        },
+        {
+          "name": "[FR13-API-TC031] response oracle",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. Failed: [FR13-API-TC031] status oracle: expected [ 401, 403 ] to include 200 | [FR13-API-TC031] response oracle: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC032",
+      "iteration": 32,
+      "objective": "Reject a valid JWT whose role claim is missing",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "tokenWithoutRole token prerequisite is missing"
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. BLOCKED: tokenWithoutRole token prerequisite is missing Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC033",
+      "iteration": 33,
+      "objective": "Prevent role escalation through an unsigned role-claim change",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 403,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 403. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC034",
+      "iteration": 34,
+      "objective": "Ensure a wrong HTTP method cannot retrieve or mutate the protected dataset",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required."
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. BLOCKED: HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC035",
+      "iteration": 35,
+      "objective": "Probe SQL-injection-like text in an undocumented query without claiming parameterization proof",
+      "method": "GET",
+      "requestPath": "/api/admin/orders?sort=id%20DESC%3B%20DROP%20TABLE%20orders--",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders?sort=id%20DESC%3B%20DROP%20TABLE%20orders-- returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC036",
+      "iteration": 36,
+      "objective": "Capture API evidence for a stored-XSS fixture without claiming SEC-04 proof",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC037",
+      "iteration": 37,
+      "objective": "Probe reflected-XSS-like query input without inventing an echo schema",
+      "method": "GET",
+      "requestPath": "/api/admin/orders?q=%3Cscript%3Ealert(1)%3C%2Fscript%3E",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders?q=%3Cscript%3Ealert(1)%3C%2Fscript%3E returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC038",
+      "iteration": 38,
+      "objective": "Detect unexpected credential, secret, or internal-data exposure in an authorized response",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC039",
+      "iteration": 39,
+      "objective": "Characterize mass-assignment-shaped fields in a GET body while preserving state",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC040",
+      "iteration": 40,
+      "objective": "Prevent a client-supplied admin header from replacing the JWT admin-role claim",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 5,
+      "status": "FAIL",
+      "failedAssertions": [
+        {
+          "name": "[FR13-API-TC040] status oracle",
+          "message": "expected [ 401, 403 ] to include 200"
+        },
+        {
+          "name": "[FR13-API-TC040] response oracle",
+          "message": "expected true to deeply equal false"
+        }
+      ],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. Failed: [FR13-API-TC040] status oracle: expected [ 401, 403 ] to include 200 | [FR13-API-TC040] response oracle: expected true to deeply equal false Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC041",
+      "iteration": 41,
+      "objective": "Characterize the undocumented success HTTP status without fixing it to 200",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC042",
+      "iteration": 42,
+      "objective": "Characterize success Content-Type and charset without requiring JSON",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC043",
+      "iteration": 43,
+      "objective": "Characterize the success top-level collection representation",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC045",
+      "iteration": 44,
+      "objective": "Characterize item properties and types without promoting source fields into schema",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC046",
+      "iteration": 45,
+      "objective": "Characterize item ordering, duplicates, completeness, and additional properties",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 200,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 200. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC047",
+      "iteration": 46,
+      "objective": "Characterize authentication-error status, Content-Type, and body shape",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 403,
+      "assertionCount": 6,
+      "status": "PASS",
+      "failedAssertions": [],
+      "blockedReasons": [],
+      "actualResult": "GET /api/admin/orders returned HTTP 403. All 6 target assertion(s) passed. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    },
+    {
+      "featureId": "FR-13",
+      "testCaseId": "FR13-API-TC048",
+      "iteration": 47,
+      "objective": "Characterize wrong-method error shape and sensitive-data redaction",
+      "method": "GET",
+      "requestPath": "/api/admin/orders",
+      "httpStatus": 401,
+      "assertionCount": 6,
+      "status": "BLOCKED",
+      "failedAssertions": [],
+      "blockedReasons": [
+        "HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required."
+      ],
+      "actualResult": "GET /api/admin/orders returned HTTP 401. BLOCKED: HTTP method remains GET per FR-13 target-only rule; method override header must not mutate or bypass authorization. Approved case requires an actual non-GET method, but the FR-13 suite is constrained to GET /api/admin/orders only; human resolution is required. Evidence: hw06-api-testing/reports/newman/fr13-dashboard.json.",
+      "reportJson": "hw06-api-testing/reports/newman/fr13-dashboard.json",
+      "reportHtml": "hw06-api-testing/reports/newman/fr13-dashboard.html"
+    }
+  ]
+}
