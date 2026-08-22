@@ -17,7 +17,7 @@
     "rawBody": "",
     "statusRule": {
       "mode": "exact",
-      "value": 200
+      "value": 201
     },
     "contentTypeOracle": "json",
     "responseOracle": "registrationSuccess",
