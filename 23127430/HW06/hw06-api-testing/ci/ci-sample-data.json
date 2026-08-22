@@ -1,0 +1,114 @@
+[
+  {
+    "testCaseId": "FR01-API-TC001",
+    "featureId": "FR-01",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Register with a typical valid name, unique email, and compliant password",
+    "method": "POST",
+    "requestPath": "/api/register",
+    "authMode": "none",
+    "contentType": "application/json",
+    "body": {
+      "name": "Đinh Hoàng Nam",
+      "email": "{{dynamicEmail}}",
+      "password": "Valid1@a"
+    },
+    "rawBody": "",
+    "statusRule": {
+      "mode": "exact",
+      "value": 200
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "registrationSuccess",
+    "schemaOracle": "registrationSuccess",
+    "businessOracle": "registrationSuccess",
+    "setupRegisterPrimary": false,
+    "setupLoginPrimary": false,
+    "setupPassword": "Valid1@a",
+    "verificationEmail": "{{dynamicEmail}}",
+    "verificationPassword": "Valid1@a",
+    "trace": "Domain: Register with a typical valid name, unique email, and compliant password"
+  },
+  {
+    "testCaseId": "FR07-API-TC002",
+    "featureId": "FR-07",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Characterize an unexpected query parameter on cart retrieval",
+    "method": "GET",
+    "requestPath": "/api/cart?page=1",
+    "authMode": "user",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "statusRule": {
+      "mode": "classes",
+      "values": [2, 4]
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "cartResponse",
+    "schemaOracle": "cart",
+    "businessOracle": "cartState",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupRegisterSecondary": false,
+    "setupLoginSecondary": false,
+    "setupLoginAdmin": false,
+    "setupCartItems": [],
+    "successCart": [],
+    "failureCart": [],
+    "verificationToken": "userToken",
+    "trace": "Domain: Characterize an unexpected query parameter on cart retrieval"
+  },
+  {
+    "testCaseId": "FR13-API-TC001",
+    "featureId": "FR-13",
+    "source": "AI",
+    "coverageType": "Domain",
+    "objective": "Retrieve a controlled mixed-status all-order dataset with a valid admin JWT",
+    "method": "GET",
+    "requestPath": "/api/admin/orders",
+    "authMode": "admin",
+    "contentType": "",
+    "body": null,
+    "rawBody": "",
+    "extraHeaders": {},
+    "statusRule": {
+      "mode": "class",
+      "value": 2
+    },
+    "contentTypeOracle": "json",
+    "responseOracle": "orders",
+    "schemaOracle": "orders",
+    "businessOracle": "dashboardDerived",
+    "setupRegisterPrimary": true,
+    "setupLoginPrimary": true,
+    "setupLoginAdmin": true,
+    "captureAdminBaseline": true,
+    "seedOrders": [
+      {
+        "status": "delivered",
+        "totalAmount": 120000,
+        "statusSteps": ["confirmed", "shipping", "delivered"]
+      },
+      {
+        "status": "pending",
+        "totalAmount": 50000,
+        "statusSteps": []
+      },
+      {
+        "status": "canceled",
+        "totalAmount": 30000,
+        "statusSteps": ["canceled"]
+      }
+    ],
+    "requireEmptyBaseline": false,
+    "fixtureRequirement": null,
+    "forbiddenTransition": null,
+    "sensitiveFieldOracle": false,
+    "constrainedWrongMethod": false,
+    "constraintNote": "",
+    "trace": "Domain: Retrieve a controlled mixed-status all-order dataset with a valid admin JWT"
+  }
+]

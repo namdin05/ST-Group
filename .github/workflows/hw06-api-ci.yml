@@ -1,0 +1,79 @@
+name: HW06 API CI Sample
+
+on:
+  push:
+    branches:
+      - 23127430-HW06
+      - ci-failure-demo
+    paths-ignore:
+      - 23127430/HW06/hw06-api-testing/ci/ci_report.md
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  newman:
+    name: Newman API sample
+    runs-on: ubuntu-latest
+    timeout-minutes: 15
+
+    steps:
+      - name: Check out repository
+        uses: actions/checkout@v6
+
+      - name: Set up Node.js
+        uses: actions/setup-node@v6
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: 23127430/HW06/src/backend/package-lock.json
+
+      - name: Install backend dependencies
+        run: npm ci --prefix 23127430/HW06/src/backend
+
+      - name: Start backend and verify health
+        shell: bash
+        run: |
+          cd 23127430/HW06/src/backend
+          nohup npm start > /tmp/hw06-backend.log 2>&1 &
+          echo $! > /tmp/hw06-backend.pid
+          for attempt in {1..30}; do
+            if curl --fail --silent http://127.0.0.1:3000/api/products > /dev/null; then
+              sleep 1
+              exit 0
+            fi
+            sleep 1
+          done
+          cat /tmp/hw06-backend.log
+          exit 1
+
+      - name: Run Newman sample
+        shell: bash
+        run: |
+          mkdir -p 23127430/HW06/hw06-api-testing/reports/ci
+          set +e
+          npx --yes newman@6.2.2 run \
+            23127430/HW06/hw06-api-testing/postman/EShop_HW06.postman_collection.json \
+            --environment 23127430/HW06/hw06-api-testing/postman/EShop_Local.postman_environment.json \
+            --iteration-data 23127430/HW06/hw06-api-testing/ci/ci-sample-data.json \
+            --folder "Setup" \
+            --folder "FR-01 Registration" \
+            --folder "FR-07 Shopping Cart" \
+            --folder "FR-13 Dashboard Data" \
+            --reporters cli,json \
+            --reporter-json-export 23127430/HW06/hw06-api-testing/reports/ci/newman-result.json
+          echo $? > 23127430/HW06/hw06-api-testing/reports/ci/newman-exit-code.txt
+          exit 0
+
+      - name: Publish Newman summary and enforce result
+        if: always()
+        run: node 23127430/HW06/hw06-api-testing/ci/summarize-newman.mjs
+
+      - name: Upload Newman evidence
+        if: always()
+        uses: actions/upload-artifact@v7
+        with:
+          name: hw06-newman-${{ github.run_id }}
+          path: 23127430/HW06/hw06-api-testing/reports/ci/
+          if-no-files-found: error
